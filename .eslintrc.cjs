@@ -11,7 +11,6 @@ module.exports = {
   plugins: [
     'react-refresh',
     'simple-import-sort',
-    'import',
   ],
   rules: {
     'react-refresh/only-export-components': [
