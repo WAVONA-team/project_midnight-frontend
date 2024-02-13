@@ -38,11 +38,15 @@ module.exports = {
       {
         'groups': [
           ['^react'],
+          ['^node_modules/.*$'],
           ['^@?shared/helpers', '^@?shared/types'],
+          ['^@?pages/.*$'],
           ['^@?modules/.*$'],
           ['^@?components/.*$'],
           ['^@?ui/.*$'],
           ['^@?assets/.*$'],
+          ['.*\\.tsx$'],
+          ['.*\\.css$']
         ],
       }
     ],
