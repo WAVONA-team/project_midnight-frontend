@@ -39,14 +39,15 @@ module.exports = {
         'groups': [
           ['^react'],
           ['^node_modules/.*$'],
-          ['^@?shared/helpers', '^@?shared/types'],
-          ['^@?pages/.*$'],
-          ['^@?modules/.*$'],
-          ['^@?components/.*$'],
-          ['^@?ui/.*$'],
-          ['^@?assets/.*$'],
+          ['^@/shared/helpers', '^@/shared/types', '^@/shared/.*$'],
+          ['^@/pages/.*$'],
+          ['^@/modules/.*$'],
+          ['^@/components/.*$'],
+          ['^@/ui/.*$'],
+          ['^@/assets/.*$'],
           ['.*\\.tsx$'],
-          ['.*\\.css$']
+          ['.*\\.css$'],
+          ['^./'],
         ],
       }
     ],
