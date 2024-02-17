@@ -44,6 +44,8 @@ const LoginForm: React.FC = React.memo(() => {
 
   return (
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
+      {errors.root && <p>{errors.root.message}</p>}
+
       <Controller
         name="email"
         control={control}
