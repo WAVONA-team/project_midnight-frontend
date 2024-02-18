@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import './App.css';
 
 import { AuthContext } from './components/AuthProvider/AuthProvider';
+import Loader from './ui/Loader/Loader';
 
 const App: React.FC = React.memo(() => {
   const { checkAuth, isChecked } = useContext(AuthContext);
@@ -13,7 +14,7 @@ const App: React.FC = React.memo(() => {
   }, []);
 
   if (!isChecked) {
-    return <p>Checking...</p>;
+    return <Loader heightValue="5" widthValue="5" />;
   }
 
   return (
