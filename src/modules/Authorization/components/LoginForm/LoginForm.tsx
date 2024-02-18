@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '@/components/AuthProvider/AuthProvider';
+
 import Input from '@/ui/Input/Input';
 
-import { authClientActions } from '../../api/authClient';
 import { LoginInputs, ServerErrors } from '../../types';
 
 const LoginForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const {
     formState: { errors },
     handleSubmit,
@@ -24,8 +26,7 @@ const LoginForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<LoginInputs> = (formData) => {
     const { email, password } = formData;
 
-    authClientActions
-      .login(email, password)
+    login(email, password)
       .then(() => navigate('/', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {

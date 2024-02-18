@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '@/components/AuthProvider/AuthProvider';
+
 import Input from '@/ui/Input/Input';
 
-import { authClientActions } from '../../api/authClient';
 import { RegistrationInputs, ServerErrors } from '../../types';
 
 const RegistrationForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
+  const { register } = useContext(AuthContext);
   const {
     formState: { errors },
     handleSubmit,
@@ -24,8 +26,7 @@ const RegistrationForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<RegistrationInputs> = (formData) => {
     const { email, password } = formData;
 
-    authClientActions
-      .register(email, password)
+    register(email, password)
       .then(() => navigate('/verify', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
@@ -44,6 +45,8 @@ const RegistrationForm: React.FC = React.memo(() => {
 
   return (
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
+      {errors.root && <p>{errors.root.message}</p>}
+
       <Controller
         name="email"
         control={control}
