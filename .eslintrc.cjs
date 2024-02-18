@@ -33,23 +33,5 @@ module.exports = {
       'error',
       'always'
     ],
-    'simple-import-sort/imports': [
-      'error',
-      {
-        'groups': [
-          ['^react'],
-          ['^node_modules/.*$'],
-          ['^@/shared/helpers', '^@/shared/types', '^@/shared/.*$'],
-          ['^@/pages/.*$'],
-          ['^@/modules/.*$'],
-          ['^@/components/.*$'],
-          ['^@/ui/.*$'],
-          ['^@/assets/.*$'],
-          ['.*\\.tsx$'],
-          ['.*\\.css$'],
-          ['^./'],
-        ],
-      }
-    ],
   },
 }
