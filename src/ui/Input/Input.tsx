@@ -27,7 +27,7 @@ const Input: React.FC<Props> = React.memo(
         {error && <p>{error}</p>}
 
         <input
-          className={`${className}`}
+          className={`${className} border border-red-500 m-2`}
           type={type}
           value={value}
           onChange={onChange}
