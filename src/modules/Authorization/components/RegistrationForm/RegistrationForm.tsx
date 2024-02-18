@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '@/components/AuthProvider/AuthProvider';
 
@@ -45,6 +45,8 @@ const RegistrationForm: React.FC = React.memo(() => {
 
   return (
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
+      <Link to={'/login'}>Already have an account? Sign in</Link>
+
       {errors.root && <p>{errors.root.message}</p>}
 
       <Controller

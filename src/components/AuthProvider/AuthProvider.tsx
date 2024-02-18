@@ -96,8 +96,5 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     [user, isChecked],
   );
 
-  console.log('AuthProvider User:', user);
-  console.log('AuthProvider isChecked:', isChecked);
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
