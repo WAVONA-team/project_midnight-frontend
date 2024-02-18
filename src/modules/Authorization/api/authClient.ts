@@ -43,8 +43,18 @@ const login = async (email: string, password: string) => {
     });
 };
 
+const refresh = async () => {
+  return authClient.get('/refresh');
+};
+
+const logout = async () => {
+  return await authClient.post('/logout');
+};
+
 export const authClientActions = {
   register,
   verify,
   login,
+  refresh,
+  logout,
 };

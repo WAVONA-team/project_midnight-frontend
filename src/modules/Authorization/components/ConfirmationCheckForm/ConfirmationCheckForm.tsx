@@ -1,14 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '@/components/AuthProvider/AuthProvider';
+
 import Input from '@/ui/Input/Input';
 
-import { authClientActions } from '../../api/authClient';
 import { ServerErrors, VerifyInputs } from '../../types';
 
 const ConfirmationCheckForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
+  const { verify } = useContext(AuthContext);
 
   const symbol2Ref = useRef<HTMLInputElement>(null);
   const symbol3Ref = useRef<HTMLInputElement>(null);
@@ -36,8 +38,7 @@ const ConfirmationCheckForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<VerifyInputs> = (formData) => {
     const confirmationCode = Object.values(formData).join('');
 
-    authClientActions
-      .verify(confirmationCode)
+    verify(confirmationCode)
       .then(() => navigate('/', { replace: true }))
       .catch(({ formErrors }: ServerErrors) => {
         if (formErrors) {
