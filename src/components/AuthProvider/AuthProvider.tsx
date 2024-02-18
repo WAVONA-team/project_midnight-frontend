@@ -96,5 +96,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     [user, isChecked],
   );
 
+<<<<<<< HEAD
+=======
+  console.log('AuthProvider User:', user);
+  console.log('AuthProvider isChecked:', isChecked);
+
+>>>>>>> 5402b7d (feat(TAS-233): inegrating auth backend)
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
