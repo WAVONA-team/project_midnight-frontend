@@ -1,6 +1,7 @@
 import { User } from 'project_midnight';
 
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { httpClient } from '@/shared/api/httpClient';
 
@@ -31,6 +32,8 @@ const TestPage: React.FC = React.memo(() => {
       <button type="button" onClick={() => logout()}>
         Logout
       </button>
+
+      <Link to={'/'}>To main page (protected)</Link>
     </>
   );
 });
