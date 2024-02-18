@@ -7,27 +7,28 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import RequireAuthPage from './pages/RequireAuthPage/RequireAuthPage';
+import TestPage from './pages/Test/Test';
 
 export const Root: React.FC = React.memo(() => {
   return (
     <BrowserRouter>
-      <React.StrictMode>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<RequireAuthPage />}>
-              <Route index element={<HomePage />} />
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="register" element={<RegistrationPage />} />
 
-              <Route path="home" element={<Navigate to="/" replace />} />
+          <Route path="verify" element={<ConfirmationCheckPage />} />
 
-              <Route path="register" element={<RegistrationPage />} />
+          <Route path="login" element={<LoginPage />} />
 
-              <Route path="verify" element={<ConfirmationCheckPage />} />
+          <Route path="/" element={<RequireAuthPage />}>
+            <Route index element={<HomePage />} />
 
-              <Route path="login" element={<LoginPage />} />
-            </Route>
+            <Route path="home" element={<Navigate to="/" replace />} />
+
+            <Route path="test" element={<TestPage />} />
           </Route>
-        </Routes>
-      </React.StrictMode>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 });
