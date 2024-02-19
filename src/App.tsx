@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import './App.css';
-
 import { AuthContext } from './components/AuthProvider/AuthProvider';
 import Loader from './ui/Loader/Loader';
 
@@ -14,7 +12,7 @@ const App: React.FC = React.memo(() => {
   }, []);
 
   if (!isChecked) {
-    return <Loader heightValue="5" widthValue="5" />;
+    return <Loader size={{ height: 'h-8', width: 'w-8' }} />;
   }
 
   return (
