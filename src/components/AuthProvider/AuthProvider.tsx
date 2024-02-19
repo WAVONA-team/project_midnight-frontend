@@ -65,15 +65,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   const register = async (email: string, password: string) => {
-    try {
-      const { data: user } = await authClientActions.register(email, password);
-
-      setUser(user);
-    } catch {
-      console.log('registration error');
-    } finally {
-      setChecked(true);
-    }
+    await authClientActions
+      .register(email, password)
+      .then(({ data: user }) => setUser(user))
+      .catch(() => console.log('registration error'))
+      .finally(() => setChecked(true));
   };
 
   const logout = async () => {
