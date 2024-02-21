@@ -11,6 +11,7 @@ type AuthContext = {
   checkAuth: () => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
+  registerSpotify: () => void;
   logout: () => Promise<void>;
 };
 
@@ -21,6 +22,7 @@ export const AuthContext = React.createContext<AuthContext>({
   checkAuth: async () => {},
   login: async () => {},
   register: async () => {},
+  registerSpotify: () => {},
   logout: async () => {},
 });
 
@@ -72,6 +74,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       .finally(() => setChecked(true));
   };
 
+  const registerSpotify = () => {
+    authClientActions.registerSpotify();
+  };
+
   const logout = async () => {
     await authClientActions.logout();
 
@@ -87,6 +93,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       verify,
       login,
       register,
+      registerSpotify,
       logout,
     }),
     [user, isChecked],

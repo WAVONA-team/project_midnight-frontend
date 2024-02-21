@@ -18,6 +18,10 @@ const register = async (email: string, password: string) => {
     });
 };
 
+const registerSpotify = () => {
+  window.open(`${import.meta.env.VITE_API_BASE_URL}/auth/spotify`, '_self');
+};
+
 const verify = async (activationToken: string) => {
   return await authClient
     .get(`/verify/${activationToken}`)
@@ -53,6 +57,7 @@ const logout = async () => {
 
 export const authClientActions = {
   register,
+  registerSpotify,
   verify,
   login,
   refresh,

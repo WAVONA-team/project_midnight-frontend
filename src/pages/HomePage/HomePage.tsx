@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '@/components/AuthProvider/AuthProvider';
 
 const HomePage: React.FC = React.memo(() => {
-  const { user } = useContext(AuthContext);
+  const { user, registerSpotify } = useContext(AuthContext);
 
   return (
     <>
       <p>{user?.id}</p>
 
       <Link to={'/test'}>Test page (protected)</Link>
+
+      <button type="button" onClick={registerSpotify}>
+        Spotify
+      </button>
     </>
   );
 });
