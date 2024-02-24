@@ -1,14 +1,16 @@
+import { useStore } from '@/store';
 import { User } from 'project_midnight';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { httpClient } from '@/shared/api/httpClient';
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider';
-
 const TestPage: React.FC = React.memo(() => {
-  const { user, logout } = useContext(AuthContext);
+  const { logout, user } = useStore(({ logout, user }) => ({
+    logout,
+    user,
+  }));
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {

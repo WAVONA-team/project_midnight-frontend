@@ -1,11 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import { useStore } from '@/store';
+
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { AuthContext } from './components/AuthProvider/AuthProvider';
 import Loader from './ui/Loader/Loader';
 
 const App: React.FC = React.memo(() => {
-  const { checkAuth, isChecked } = useContext(AuthContext);
+  const { isChecked, checkAuth } = useStore(({ isChecked, checkAuth }) => ({
+    isChecked,
+    checkAuth,
+  }));
 
   useEffect(() => {
     checkAuth();

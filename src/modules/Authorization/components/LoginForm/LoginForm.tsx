@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
+import { useStore } from '@/store';
+
+import React from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider';
+import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import Input from '@/ui/Input/Input';
 
-import { LoginInputs, ServerErrors } from '../../types';
+import { LoginInputs } from '../../types';
 
 const LoginForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login } = useStore(({ login }) => ({
+    login,
+  }));
   const {
     formState: { errors },
     handleSubmit,
@@ -23,10 +27,10 @@ const LoginForm: React.FC = React.memo(() => {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginInputs> = (formData) => {
+  const onSubmit: SubmitHandler<LoginInputs> = async (formData) => {
     const { email, password } = formData;
 
-    login(email, password)
+    await login(email, password)
       .then(() => navigate('/', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {

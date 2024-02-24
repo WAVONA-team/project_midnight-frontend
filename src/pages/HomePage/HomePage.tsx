@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import { useStore } from '@/store';
+
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider';
-
 const HomePage: React.FC = React.memo(() => {
-  const { user, registerSpotify } = useContext(AuthContext);
+  const { user, registerSpotify } = useStore(({ user, registerSpotify }) => ({
+    user,
+    registerSpotify,
+  }));
 
   return (
     <>
