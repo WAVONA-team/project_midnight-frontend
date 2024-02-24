@@ -4,8 +4,6 @@ import {
   type InternalAxiosRequestConfig,
 } from 'axios';
 
-import { authClientActions } from '@/modules/Authorization/api/authClient';
-
 import { createClient } from '../http';
 
 export const httpClient = createClient();
@@ -31,7 +29,7 @@ const onResponseError = async (error: AxiosError) => {
     throw error;
   }
 
-  const { accessToken } = (await authClientActions.refresh()).data;
+  const { accessToken } = (await httpClient.get('/refresh')).data;
 
   localStorage.save('accessToken', accessToken);
 

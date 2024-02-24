@@ -1,16 +1,20 @@
-import React, { useContext, useRef } from 'react';
+import { useStore } from '@/store';
+
+import React, { useRef } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider';
+import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import Input from '@/ui/Input/Input';
 
-import { ServerErrors, VerifyInputs } from '../../types';
+import { VerifyInputs } from '../../types';
 
 const ConfirmationCheckForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
-  const { verify } = useContext(AuthContext);
+  const { verify } = useStore(({ verify }) => ({
+    verify,
+  }));
 
   const symbol2Ref = useRef<HTMLInputElement>(null);
   const symbol3Ref = useRef<HTMLInputElement>(null);

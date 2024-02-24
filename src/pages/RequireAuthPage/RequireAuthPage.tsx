@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import { useStore } from '@/store';
+
+import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { AuthContext } from '@/components/AuthProvider/AuthProvider';
-
 const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useStore(({ user }) => ({
+    user,
+  }));
 
   if (!user) {
     return <Navigate to="/login" replace />;
