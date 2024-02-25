@@ -1,14 +1,14 @@
-import { useStore } from '@/store';
-
 import React from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useStore } from '@/store';
+
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import Input from '@/ui/Input/Input';
+import { LoginInputs } from '@/modules/Authorization/types';
 
-import { LoginInputs } from '../../types';
+import Input from '@/ui/Input/Input';
 
 const LoginForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -42,7 +42,10 @@ const LoginForm: React.FC = React.memo(() => {
         }
 
         if (formErrors) {
-          setError('root.formErrors', { type: 'server side', message: formErrors });
+          setError('root.formErrors', {
+            type: 'server side',
+            message: formErrors,
+          });
         }
       });
   };
