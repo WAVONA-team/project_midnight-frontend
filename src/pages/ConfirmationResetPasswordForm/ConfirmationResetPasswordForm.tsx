@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ConfirmationResetPasswordForm } from '@/modules/Authorization';
+
 export const ConfirmationResetPasswordPage: React.FC = React.memo(() => {
-  return <p>form</p>;
+  return <ConfirmationResetPasswordForm />;
 });
