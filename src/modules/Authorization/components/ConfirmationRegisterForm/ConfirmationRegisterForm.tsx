@@ -1,13 +1,13 @@
-import { useStore } from '@/store';
-
 import React from 'react';
 import AuthCode from 'react-auth-code-input';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { useStore } from '@/store';
+
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import { VerifyInputs } from '../../types';
+import { VerifyInputs } from '@/modules/Authorization/types';
 
 const ConfirmationRegisterForm: React.FC = React.memo(() => {
   const navigate = useNavigate();

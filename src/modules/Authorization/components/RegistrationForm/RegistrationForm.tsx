@@ -1,14 +1,14 @@
-import { useStore } from '@/store';
-
 import React from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useStore } from '@/store';
+
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import Input from '@/ui/Input/Input';
+import { RegistrationInputs } from '@/modules/Authorization/types';
 
-import { RegistrationInputs } from '../../types';
+import Input from '@/ui/Input/Input';
 
 const RegistrationForm: React.FC = React.memo(() => {
   const navigate = useNavigate();

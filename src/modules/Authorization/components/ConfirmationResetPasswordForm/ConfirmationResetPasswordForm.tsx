@@ -1,15 +1,15 @@
-import { useStore } from '@/store';
-
 import React from 'react';
 import AuthCode from 'react-auth-code-input';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { useStore } from '@/store';
+
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import Input from '@/ui/Input/Input';
+import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 
-import { ResetPasswordConfirmationInputs } from '../../types';
+import Input from '@/ui/Input/Input';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();

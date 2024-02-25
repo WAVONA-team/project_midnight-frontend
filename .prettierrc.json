@@ -12,17 +12,14 @@
   "importOrderSortSpecifiers": true,
   "importOrder": [
     "^react",
-    "^node_modules/.*$",
-    "^@/shared/helpers",
-    "^@/shared/types",
-    "^@/shared/.*$",
-    "^@/pages/.*$",
-    "^@/modules/.*$",
-    "^@/components/.*$",
-    "^@/ui/.*$",
-    "^@/assets/.*$",
-    ".*\\.tsx$",
-    ".*\\.css$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/shared/(.*)$",
+    "^@/store/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/modules/(.*)$",
+    "^@/components/(.*)$",
+    "^@/ui/(.*)$",
+    "^@/assets/(.*)$",
     "^[./]"
   ]
 }
