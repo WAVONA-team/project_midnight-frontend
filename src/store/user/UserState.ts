@@ -12,7 +12,7 @@ export type UserState = {
   checkAuth: () => Promise<UserWithAccessToken | void>;
   reset: (email: string) => Promise<NormalizedUser>;
   resetVerify: (
-    resetToken: string,
+    resetToken: string | null,
     newPassword: string,
     confirmationPassword: string,
   ) => Promise<NormalizedUser>;
