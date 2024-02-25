@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HomePage: React.FC = React.memo(() => {
+export const HomePage: React.FC = React.memo(() => {
   const { user, registerSpotify } = useStore(({ user, registerSpotify }) => ({
     user,
     registerSpotify,
@@ -21,5 +21,3 @@ const HomePage: React.FC = React.memo(() => {
     </>
   );
 });
-
-export default HomePage;

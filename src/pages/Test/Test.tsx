@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { httpClient } from '@/shared/api/httpClient';
 
-const TestPage: React.FC = React.memo(() => {
+export const TestPage: React.FC = React.memo(() => {
   const { logout, user } = useStore(({ logout, user }) => ({
     logout,
     user,
@@ -39,5 +39,3 @@ const TestPage: React.FC = React.memo(() => {
     </>
   );
 });
-
-export default TestPage;

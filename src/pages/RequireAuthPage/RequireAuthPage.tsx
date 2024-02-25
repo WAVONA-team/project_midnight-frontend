@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { user } = useStore(({ user }) => ({
     user,
   }));
@@ -14,5 +14,3 @@ const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return children || <Outlet />;
 };
-
-export default RequireAuthPage;
