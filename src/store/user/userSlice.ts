@@ -112,7 +112,7 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
     confirmationPassword: string,
   ) => {
     return await authClient
-      .post<NormalizedUser>(`/reset/${resetToken}`, {
+      .patch<NormalizedUser>(`/reset/${resetToken}`, {
         newPassword,
         confirmationPassword,
       })

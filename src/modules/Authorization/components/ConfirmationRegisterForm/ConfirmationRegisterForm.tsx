@@ -27,8 +27,6 @@ const ConfirmationRegisterForm: React.FC = React.memo(() => {
   });
 
   const onSubmit: SubmitHandler<VerifyInputs> = (formData) => {
-    console.log(formData);
-
     const { otp } = formData;
 
     registerVerify(otp)
