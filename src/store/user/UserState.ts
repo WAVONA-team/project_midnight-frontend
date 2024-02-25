@@ -5,9 +5,15 @@ export type UserState = {
   user: NormalizedUser | null;
   isChecked: boolean;
   register: (email: string, password: string) => Promise<NormalizedUser>;
-  verify: (activationToken: string) => Promise<UserWithAccessToken>;
+  registerVerify: (activationToken: string) => Promise<UserWithAccessToken>;
   registerSpotify: () => Window | null;
   login: (email: string, password: string) => Promise<UserWithAccessToken>;
   logout: () => Promise<AxiosResponse>;
   checkAuth: () => Promise<UserWithAccessToken | void>;
+  reset: (email: string) => Promise<NormalizedUser>;
+  resetVerify: (
+    resetToken: string,
+    newPassword: string,
+    confirmationPassword: string,
+  ) => Promise<NormalizedUser>;
 };

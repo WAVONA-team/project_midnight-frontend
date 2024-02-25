@@ -1,11 +1,14 @@
-import { NormalizedUser, UserWithAccessToken } from 'project_midnight';
+import {
+  type NormalizedUser,
+  type UserWithAccessToken,
+} from 'project_midnight';
 import { StateCreator } from 'zustand';
 
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { createClient } from '@/shared/http';
 
-import { UserState } from './UserState';
+import { type UserState } from './UserState';
 
 const authClient = createClient();
 
@@ -22,13 +25,14 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
         return user;
       })
       .catch((serverErrors) => {
-        const { fieldErrors, formErrors }: ServerErrors = serverErrors.response.data;
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
 
         throw { fieldErrors, formErrors };
       })
       .finally(() => set({ isChecked: true }));
   },
-  verify: async (activationToken: string) => {
+  registerVerify: async (activationToken: string) => {
     return await authClient
       .get<UserWithAccessToken>(`/verify/${activationToken}`)
       .then(({ data }) => {
@@ -88,6 +92,37 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
       })
       .catch(() => console.log('User is not authorized'))
       .finally(() => set({ isChecked: true }));
+  },
+  reset: async (email: string) => {
+    return await authClient
+      .post<NormalizedUser>('/reset', {
+        email,
+      })
+      .then(({ data: user }) => user)
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
+  resetVerify: async (
+    resetToken: string,
+    newPassword: string,
+    confirmationPassword: string,
+  ) => {
+    return await authClient
+      .post<NormalizedUser>(`/reset/${resetToken}`, {
+        newPassword,
+        confirmationPassword,
+      })
+      .then(({ data: user }) => user)
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
   },
 });
 

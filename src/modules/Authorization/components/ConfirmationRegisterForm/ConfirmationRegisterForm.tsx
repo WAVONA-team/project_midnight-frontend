@@ -10,10 +10,10 @@ import Input from '@/ui/Input/Input';
 
 import { VerifyInputs } from '../../types';
 
-const ConfirmationCheckForm: React.FC = React.memo(() => {
+const ConfirmationRegisterForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
-  const { verify } = useStore(({ verify }) => ({
-    verify,
+  const { registerVerify } = useStore(({ registerVerify }) => ({
+    registerVerify,
   }));
 
   const symbol2Ref = useRef<HTMLInputElement>(null);
@@ -42,18 +42,21 @@ const ConfirmationCheckForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<VerifyInputs> = (formData) => {
     const confirmationCode = Object.values(formData).join('');
 
-    verify(confirmationCode)
+    registerVerify(confirmationCode)
       .then(() => navigate('/', { replace: true }))
       .catch(({ formErrors }: ServerErrors) => {
         if (formErrors) {
-          setError('root', { type: 'server side', message: formErrors });
+          setError('root.formErrors', {
+            type: 'server side',
+            message: formErrors,
+          });
         }
       });
   };
 
   return (
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
-      <p>{errors.root?.message}</p>
+      {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
 
       <Controller
         name="symbol1"
@@ -167,4 +170,4 @@ const ConfirmationCheckForm: React.FC = React.memo(() => {
   );
 });
 
-export default ConfirmationCheckForm;
+export default ConfirmationRegisterForm;

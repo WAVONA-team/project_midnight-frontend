@@ -38,12 +38,15 @@ const RegistrationForm: React.FC = React.memo(() => {
           fieldErrors.forEach((serverError) => {
             const { name, message } = serverError;
 
-            setError(name, { type: 'server side', message });
+            setError(`root.${name}`, { type: 'server side', message });
           });
         }
 
         if (formErrors) {
-          setError('root', { type: 'server side', message: formErrors });
+          setError('root.formErrors', {
+            type: 'server side',
+            message: formErrors,
+          });
         }
       });
   };
@@ -52,7 +55,7 @@ const RegistrationForm: React.FC = React.memo(() => {
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
       <Link to={'/login'}>Already have an account? Sign in</Link>
 
-      {errors.root && <p>{errors.root.message}</p>}
+      {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
 
       <Controller
         name="email"
@@ -62,7 +65,7 @@ const RegistrationForm: React.FC = React.memo(() => {
             type="text"
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
-            error={errors.email?.message}
+            error={errors.root?.email?.message}
           />
         )}
       />
@@ -75,7 +78,7 @@ const RegistrationForm: React.FC = React.memo(() => {
             type="password"
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
-            error={errors.password?.message}
+            error={errors.root?.password?.message}
           />
         )}
       />

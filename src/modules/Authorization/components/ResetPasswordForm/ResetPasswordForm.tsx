@@ -2,36 +2,35 @@ import { useStore } from '@/store';
 
 import React from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import Input from '@/ui/Input/Input';
 
-import { LoginInputs } from '../../types';
+import { ResetPasswordInputs } from '../../types';
 
-const LoginForm: React.FC = React.memo(() => {
+const ResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
-  const { login } = useStore(({ login }) => ({
-    login,
+  const { reset } = useStore(({ reset }) => ({
+    reset,
   }));
   const {
     formState: { errors },
     handleSubmit,
     control,
     setError,
-  } = useForm<LoginInputs>({
+  } = useForm<ResetPasswordInputs>({
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<LoginInputs> = async (formData) => {
-    const { email, password } = formData;
+  const onSubmit: SubmitHandler<ResetPasswordInputs> = async (formData) => {
+    const { email } = formData;
 
-    await login(email, password)
-      .then(() => navigate('/', { replace: true }))
+    await reset(email)
+      .then(() => navigate('/reset-verify', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
@@ -42,16 +41,16 @@ const LoginForm: React.FC = React.memo(() => {
         }
 
         if (formErrors) {
-          setError('root.formErrors', { type: 'server side', message: formErrors });
+          setError('root.formErrors', {
+            type: 'server side',
+            message: formErrors,
+          });
         }
       });
   };
 
   return (
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
-      <Link to={'/register'}>Dont have an account? Sign up</Link>
-      <Link to={'/reset'}>Forgot password? Reset</Link>
-
       {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
 
       <Controller
@@ -67,22 +66,9 @@ const LoginForm: React.FC = React.memo(() => {
         )}
       />
 
-      <Controller
-        name="password"
-        control={control}
-        render={({ field }) => (
-          <Input
-            type="password"
-            value={field.value}
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.password?.message}
-          />
-        )}
-      />
-
       <button>Submit</button>
     </form>
   );
 });
 
-export default LoginForm;
+export default ResetPasswordForm;

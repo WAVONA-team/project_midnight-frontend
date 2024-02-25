@@ -1,7 +1,5 @@
-type RegistrationNames = 'email' | 'password' | 'root' | `root.${string}`;
-
 type FieldError = {
-  name: RegistrationNames;
+  name: string;
   message: string;
 };
 
