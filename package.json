@@ -13,6 +13,7 @@
     "axios": "^1.6.7",
     "project_midnight": "^0.0.27",
     "react": "^18.2.0",
+    "react-auth-code-input": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
     "react-router-dom": "^6.22.0",
