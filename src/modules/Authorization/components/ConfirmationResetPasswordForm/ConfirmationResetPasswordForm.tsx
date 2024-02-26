@@ -1,5 +1,4 @@
 import React from 'react';
-import AuthCode from 'react-auth-code-input';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +9,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 
 import Input from '@/ui/Input/Input';
+import OTPInput from '@/ui/OTPInput/OtpInput';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -64,21 +64,16 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
     <form action="#" onSubmit={handleSubmit(onSubmit)}>
       {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
 
-      <label>
-        {errors.root?.resetToken && <p>{errors.root.resetToken.message}</p>}
-
-        <Controller
-          name="otp"
-          control={control}
-          render={({ field }) => (
-            <AuthCode
-              onChange={(value) => field.onChange(value)}
-              autoFocus={false}
-              inputClassName="border border-red-500"
-            />
-          )}
-        />
-      </label>
+      <Controller
+        name="otp"
+        control={control}
+        render={({ field }) => (
+          <OTPInput
+            onChange={(value) => field.onChange(value)}
+            error={errors.root?.resetToken.message}
+          />
+        )}
+      />
 
       <Controller
         name="newPassword"
