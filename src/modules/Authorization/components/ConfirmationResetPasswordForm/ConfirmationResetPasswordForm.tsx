@@ -8,7 +8,6 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 
-import Input from '@/ui/Input/Input';
 import OTPInput from '@/ui/OTPInput/OtpInput';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
@@ -26,22 +25,16 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   } = useForm<ResetPasswordConfirmationInputs>({
     defaultValues: {
       otp: '',
-      newPassword: '',
-      confirmationPassword: '',
     },
   });
 
   const onSubmit: SubmitHandler<ResetPasswordConfirmationInputs> = async (
     formData,
   ) => {
-    const { otp, newPassword, confirmationPassword } = formData;
+    const { otp } = formData;
 
-    await resetVerify(
-      otp.length ? otp : null,
-      newPassword,
-      confirmationPassword,
-    )
-      .then(() => navigate('/login', { replace: true }))
+    await resetVerify(otp.length ? otp : null)
+      .then(() => navigate('/reset-update', { replace: true, state: { otp } }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
@@ -70,33 +63,7 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
         render={({ field }) => (
           <OTPInput
             onChange={(value) => field.onChange(value)}
-            error={errors.root?.resetToken.message}
-          />
-        )}
-      />
-
-      <Controller
-        name="newPassword"
-        control={control}
-        render={({ field }) => (
-          <Input
-            value={field.value}
-            type="password"
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.newPassword?.message}
-          />
-        )}
-      />
-
-      <Controller
-        name="confirmationPassword"
-        control={control}
-        render={({ field }) => (
-          <Input
-            value={field.value}
-            type="password"
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.confirmationPassword?.message}
+            error={errors.root?.resetToken?.message}
           />
         )}
       />

@@ -3,6 +3,7 @@ import ConfirmationResetPasswordForm from './components/ConfirmationResetPasswor
 import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import ResetPasswordForm from './components/ResetPasswordForm/ResetPasswordForm';
+import UpdateResetPasswordForm from './components/UpdateResetPasswordForm/UpdateResetPasswordForm';
 
 export {
   ConfirmationRegisterForm,
@@ -10,4 +11,5 @@ export {
   RegistrationForm,
   ResetPasswordForm,
   ConfirmationResetPasswordForm,
+  UpdateResetPasswordForm,
 };
