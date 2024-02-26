@@ -5,4 +5,5 @@ export { RequireAuthPage } from './RequireAuthPage/RequireAuthPage';
 export { ConfirmationRegisterPage } from './ConfirmationRegisterPage/ConfirmationRegisterPage';
 export { TestPage } from './Test/Test';
 export { ResetPasswordPage } from './ResetPasswordPage/ResetPasswordPage';
-export { ConfirmationResetPasswordPage } from './ConfirmationResetPasswordForm/ConfirmationResetPasswordForm';
+export { ConfirmationResetPasswordPage } from './ConfirmationResetPasswordPage/ConfirmationResetPasswordPage';
+export { UpdateResetPasswordPage } from './UpdateResetPasswordPage/UpdateResetPasswordPage';

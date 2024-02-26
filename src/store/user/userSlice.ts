@@ -4,9 +4,8 @@ import {
 } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
-import { ServerErrors } from '@/shared/types/ServerErrors';
-
 import { createClient } from '@/shared/http';
+import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { type UserState } from './UserState';
 
@@ -106,7 +105,18 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
-  resetVerify: async (
+  resetVerify: async (resetToken: string | null) => {
+    return await authClient
+      .get<NormalizedUser>(`/reset/${resetToken}`)
+      .then(({ data: user }) => user)
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
+  resetActivate: async (
     resetToken: string,
     newPassword: string,
     confirmationPassword: string,

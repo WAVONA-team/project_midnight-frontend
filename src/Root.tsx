@@ -1,3 +1,6 @@
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
 import {
   ConfirmationRegisterPage,
   ConfirmationResetPasswordPage,
@@ -7,10 +10,8 @@ import {
   RequireAuthPage,
   ResetPasswordPage,
   TestPage,
+  UpdateResetPasswordPage,
 } from '@/pages';
-
-import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import App from './App';
 
@@ -31,6 +32,8 @@ export const Root: React.FC = React.memo(() => {
             path="reset-verify"
             element={<ConfirmationResetPasswordPage />}
           />
+
+          <Route path="reset-update" element={<UpdateResetPasswordPage />} />
 
           <Route path="/" element={<RequireAuthPage />}>
             <Route index element={<HomePage />} />

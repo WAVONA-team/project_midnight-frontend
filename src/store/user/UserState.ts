@@ -11,8 +11,9 @@ export type UserState = {
   logout: () => Promise<AxiosResponse>;
   checkAuth: () => Promise<UserWithAccessToken | void>;
   reset: (email: string) => Promise<NormalizedUser>;
-  resetVerify: (
-    resetToken: string | null,
+  resetVerify: (resetToken: string | null) => Promise<NormalizedUser>,
+  resetActivate: (
+    resetToken: string,
     newPassword: string,
     confirmationPassword: string,
   ) => Promise<NormalizedUser>;
