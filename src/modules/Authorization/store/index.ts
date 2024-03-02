@@ -7,7 +7,7 @@ import { StateCreator } from 'zustand';
 import { createClient } from '@/shared/http';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import { type UserState } from './UserState';
+import { UserState } from '@/modules/Authorization/store/types/UserState';
 
 const authClient = createClient();
 
@@ -136,4 +136,4 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
   },
 });
 
-export { type UserState } from './UserState';
+export { type UserState };
