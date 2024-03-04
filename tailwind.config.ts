@@ -41,6 +41,7 @@ export default {
         0: '0%',
       },
     },
+
     fontFamily: {
       rubik: ['Rubik', 'sans-serif'],
     },
