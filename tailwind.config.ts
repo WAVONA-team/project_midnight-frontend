@@ -3,35 +3,34 @@ export default {
   content: ['./src/**/*.tsx', './src/**/*.ts'],
   theme: {
     colors: {
-      'background' : {
-        'hight': '#0B0D0B',
+      background: {
+        hight: '#0B0D0B',
       },
-      'error': {
+      error: {
         'turkey-red': '#A90000',
       },
-      'primary': {
-        'poppy': '#DA2F37',
+      primary: {
+        poppy: '#DA2F37',
         'fire-brick': '#BF222A',
-        'madder': '#9C1C22',
+        madder: '#9C1C22',
       },
       'on-primary': {
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
-      'surface': {
-        'eerie_black': '#171916',
-        'black': '#0B0D0B',
+      surface: {
+        eerie_black: '#171916',
+        black: '#0B0D0B',
       },
-      'secondary': {
+      secondary: {
         'cadet-gray': '#A09F9F',
         'eerie-black-light': '#1D1F1C',
       },
       'on-secondary': {
         'dim-gray': '#696969',
-        'platinum': '#E1E1E1'
+        platinum: '#E1E1E1',
       },
     },
-
     extend: {
       gradientColorStopPositions: {
         100: '100%',
@@ -40,7 +39,10 @@ export default {
         20: '20%',
         5: '5%',
         0: '0%',
-      }
+      },
+    },
+    fontFamily: {
+      rubik: ['Rubik', 'sans-serif'],
     },
   },
   plugins: [],
