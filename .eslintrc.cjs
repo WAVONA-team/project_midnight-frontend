@@ -8,35 +8,17 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: [
-    'react-refresh',
-    'simple-import-sort',
-  ],
+  plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'windows'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
     'simple-import-sort/imports': [
       'error',
       {
-        'groups': [
+        groups: [
           ['^react'],
           ['^@?shared/helpers', '^@?shared/types'],
           ['^@?modules/.*$'],
@@ -44,7 +26,7 @@ module.exports = {
           ['^@?ui/.*$'],
           ['^@?assets/.*$'],
         ],
-      }
+      },
     ],
   },
-}
+};
