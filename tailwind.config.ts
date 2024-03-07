@@ -2,12 +2,17 @@
 export default {
   content: ['./src/**/*.tsx', './src/**/*.ts'],
   theme: {
+    fontFamily: {
+      rubik: ['Rubik', 'sans-serif']
+    },
+
     colors: {
       'background' : {
         'hight': '#0B0D0B',
       },
       'error': {
         'turkey-red': '#A90000',
+        'imperial-red': '#EF4444',
       },
       'primary': {
         'poppy': '#DA2F37',
@@ -29,7 +34,8 @@ export default {
       },
       'on-secondary': {
         'dim-gray': '#696969',
-        'platinum': '#E1E1E1'
+        'platinum': '#E1E1E1',
+        'davys-gray': '#5F5F5F',
       },
     },
 
@@ -41,7 +47,7 @@ export default {
         20: '20%',
         5: '5%',
         0: '0%',
-      }
+      },
     },
   },
   plugins: [],

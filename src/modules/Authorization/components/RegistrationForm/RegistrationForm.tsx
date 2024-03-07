@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { RegistrationInputs } from '@/modules/Authorization/types';
 
-import Input from '@/ui/Input/Input';
+import { DefaultInput } from '@/ui/Input';
 
 const RegistrationForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -61,8 +61,7 @@ const RegistrationForm: React.FC = React.memo(() => {
         name="email"
         control={control}
         render={({ field }) => (
-          <Input
-            type="text"
+          <DefaultInput
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
             error={errors.root?.email?.message}
@@ -74,8 +73,7 @@ const RegistrationForm: React.FC = React.memo(() => {
         name="password"
         control={control}
         render={({ field }) => (
-          <Input
-            type="password"
+          <DefaultInput
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
             error={errors.root?.password?.message}
