@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { LoginInputs } from '@/modules/Authorization/types';
 
-import { DefaultInput } from '@/ui/Input';
+import { DefaultInput, PasswordInput } from '@/ui/Input';
 
 const LoginForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ const LoginForm: React.FC = React.memo(() => {
         name="password"
         control={control}
         render={({ field }) => (
-          <DefaultInput
+          <PasswordInput
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
             error={errors.root?.password?.message}
