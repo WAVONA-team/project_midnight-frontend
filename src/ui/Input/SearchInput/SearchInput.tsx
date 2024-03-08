@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { classNames as inputClassnames } from '@/ui/Input/classNames';
 
-import passwordHideIcon from '@/assets/inputs/passwordHide.svg';
-import passwordShowIcon from '@/assets/inputs/passwordShowed.svg';
+import searchIcon from '@/assets/inputs/search.svg';
 
 type Props = {
   value: string;
@@ -19,7 +18,7 @@ type Props = {
   inputRef?: React.RefObject<HTMLInputElement>;
 };
 
-const PasswordInput: React.FC<Props> = React.memo(
+const SearchInput: React.FC<Props> = React.memo(
   ({
     value,
     onChange,
@@ -29,41 +28,33 @@ const PasswordInput: React.FC<Props> = React.memo(
     maxLength,
     inputRef,
   }) => {
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
     return (
       <label className="relative block">
         {error && (
           <p className="absolute top-0 text-error-imperial-red">{error}</p>
         )}
 
-        <button
-          type="button"
-          onClick={() => setIsPasswordVisible((prev) => !prev)}
-          className={`${inputClassnames.icon} right-4`}
-        >
-          {isPasswordVisible ? (
-            <img src={passwordShowIcon} alt="Show password" />
-          ) : (
-            <img src={passwordHideIcon} alt="Hide password" />
-          )}
-        </button>
+        <img
+          src={searchIcon}
+          alt="search"
+          className={`${inputClassnames.icon} left-4`}
+        />
 
         <input
           className={classNames(
             `${className}
             mt-7
-            px-4
+            pr-4
+            pl-11
             py-2
             ${inputClassnames.input}
-            disabled:placeholder:bg-secondary-cadet-gray
-            disabled:placeholder:text-on-secondary-dim-gray`,
+            `,
             {
               'border-error-imperial-red': error,
               'border-on-secondary-platinum': !error,
             },
           )}
-          type={isPasswordVisible ? 'text' : 'password'}
+          type="search"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -75,4 +66,4 @@ const PasswordInput: React.FC<Props> = React.memo(
   },
 );
 
-export default PasswordInput;
+export default SearchInput;

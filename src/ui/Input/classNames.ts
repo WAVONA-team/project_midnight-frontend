@@ -12,4 +12,9 @@ export const classNames = {
     focus:placeholder:text-on-secondary-davys-gray
     active:placeholder:text-on-secondary-dim-gray
   `,
+  icon: `
+    absolute
+    top-1/2
+    translate-y-0.5
+  `,
 };
