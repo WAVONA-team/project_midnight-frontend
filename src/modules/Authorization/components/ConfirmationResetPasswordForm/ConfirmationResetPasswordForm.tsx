@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 
-import OTPInput from '@/ui/OTPInput/OTPInput';
+import { OTPInput } from '@/ui/Input';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -63,7 +63,6 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
         render={({ field }) => (
           <OTPInput
             onChange={(value) => field.onChange(value)}
-            error={errors.root?.resetToken?.message}
           />
         )}
       />
