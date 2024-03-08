@@ -28,7 +28,9 @@ const DefaultInput: React.FC<Props> = React.memo(
   }) => {
     return (
       <label className="relative block">
-        {error && <p className="absolute top-0">{error}</p>}
+        {error && (
+          <p className="absolute top-0 text-error-imperial-red">{error}</p>
+        )}
 
         <input
           className={classNames(
@@ -38,7 +40,8 @@ const DefaultInput: React.FC<Props> = React.memo(
             disabled:placeholder:bg-secondary-cadet-gray
             disabled:placeholder:text-on-secondary-dim-gray`,
             {
-              'border-2 border-error-imperial-red': error,
+              'border-error-imperial-red': error,
+              'border-on-secondary-platinum': !error,
             },
           )}
           type="text"
