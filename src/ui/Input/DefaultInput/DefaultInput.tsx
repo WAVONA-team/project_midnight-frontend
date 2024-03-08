@@ -11,10 +11,7 @@ type Props = {
   className?: string;
   placeholder?: string;
   error?: string;
-  maxLength?: number;
   disabled?: boolean;
-
-  inputRef?: React.RefObject<HTMLInputElement>;
 };
 
 const DefaultInput: React.FC<Props> = React.memo(
@@ -24,9 +21,7 @@ const DefaultInput: React.FC<Props> = React.memo(
     className = '',
     placeholder = '',
     error,
-    maxLength,
     disabled = false,
-    inputRef,
   }) => {
     return (
       <label className="relative block">
@@ -52,8 +47,6 @@ const DefaultInput: React.FC<Props> = React.memo(
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          maxLength={maxLength}
-          ref={inputRef}
           disabled={disabled}
         />
       </label>

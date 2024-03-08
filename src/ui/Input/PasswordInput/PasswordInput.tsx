@@ -14,21 +14,10 @@ type Props = {
   className?: string;
   placeholder?: string;
   error?: string;
-  maxLength?: number;
-
-  inputRef?: React.RefObject<HTMLInputElement>;
 };
 
 const PasswordInput: React.FC<Props> = React.memo(
-  ({
-    value,
-    onChange,
-    className = '',
-    placeholder = '',
-    error,
-    maxLength,
-    inputRef,
-  }) => {
+  ({ value, onChange, className = '', placeholder = '', error }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     return (
@@ -67,8 +56,6 @@ const PasswordInput: React.FC<Props> = React.memo(
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          maxLength={maxLength}
-          ref={inputRef}
         />
       </label>
     );
