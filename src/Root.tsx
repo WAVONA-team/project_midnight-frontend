@@ -2,18 +2,21 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import {
+  AddNewTrackPage,
   ConfirmationRegisterPage,
-  ConfirmationResetPasswordPage,
+  ConfirmationResetPasswordPage, ConnectedAppsSettings,
   HomePage,
-  LoginPage,
+  LoginPage, PlaylistPage, PlaylistsPage,
   RegistrationPage,
   RequireAuthPage,
-  ResetPasswordPage,
-  TestPage,
-  UpdateResetPasswordPage,
+  ResetPasswordPage, SettingsPage,
+  TestPage, TrackQueuePage,
+  UpdateResetPasswordPage
 } from '@/pages';
 
 import App from './App';
+import { PreloaderPage } from '@/pages/PreloaderPage/PreloaderPage.tsx';
+import { TrackPage } from '@/pages/TrackPage/TrackPage.tsx';
 
 export const Root: React.FC = React.memo(() => {
   return (
@@ -39,6 +42,22 @@ export const Root: React.FC = React.memo(() => {
             <Route index element={<HomePage />} />
 
             <Route path="home" element={<Navigate to="/" replace />} />
+
+            <Route path="new-track" element={<AddNewTrackPage />} />
+
+            <Route path="connected-apps" element={<ConnectedAppsSettings />} />
+
+            <Route path="playlist" element={<PlaylistPage />} />
+
+            <Route path="playlists" element={<PlaylistsPage />} />
+
+            <Route path="preload" element={<PreloaderPage />} />
+
+            <Route path="settings" element={<SettingsPage />} />
+
+            <Route path="track" element={<TrackPage />} />
+
+            <Route path="track-queue" element={<TrackQueuePage />} />
 
             <Route path="test" element={<TestPage />} />
           </Route>
