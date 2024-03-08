@@ -3,8 +3,6 @@ export const classNames = {
     w-full
     font-rubik
     text-base
-    px-4
-    py-2
     placeholder:text-on-secondary-dim-gray
     bg-on-secondary-platinum
     rounded-[10px]

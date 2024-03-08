@@ -38,6 +38,8 @@ const DefaultInput: React.FC<Props> = React.memo(
           className={classNames(
             `${className}
             mt-7
+            px-4
+            py-2
             ${inputClassnames.input}
             disabled:placeholder:bg-secondary-cadet-gray
             disabled:placeholder:text-on-secondary-dim-gray`,
