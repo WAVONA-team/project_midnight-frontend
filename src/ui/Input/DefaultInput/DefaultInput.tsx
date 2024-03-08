@@ -12,6 +12,7 @@ type Props = {
   placeholder?: string;
   error?: string;
   maxLength?: number;
+  disabled?: boolean;
 
   inputRef?: React.RefObject<HTMLInputElement>;
 };
@@ -24,6 +25,7 @@ const DefaultInput: React.FC<Props> = React.memo(
     placeholder = '',
     error,
     maxLength,
+    disabled = false,
     inputRef,
   }) => {
     return (
@@ -50,6 +52,7 @@ const DefaultInput: React.FC<Props> = React.memo(
           placeholder={placeholder}
           maxLength={maxLength}
           ref={inputRef}
+          disabled={disabled}
         />
       </label>
     );
