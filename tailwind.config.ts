@@ -15,6 +15,7 @@ export default {
         'madder': '#9C1C22',
       },
       'on-primary': {
+        'misty_rose': '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -25,7 +26,8 @@ export default {
       'secondary': {
         'cadet-gray': '#A09F9F',
         'eerie-black-light': '#212320',
-        'glaocous': '#70799A'
+        'glaocous': '#70799A',
+        'jet': '#1E201D'
       },
       'on-secondary': {
         'dim-gray': '#696969',
