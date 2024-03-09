@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 
-import OTPInput from '@/ui/OTPInput/OtpInput';
+import OTPInput from '@/ui/OTPInput/OTPInput';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
