@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { PreloaderPage } from '@/pages';
+import { LoadingPage } from '@/pages';
 
 const App: React.FC = React.memo(() => {
   const { isChecked, checkAuth } = useStore(({ isChecked, checkAuth }) => ({
@@ -16,7 +16,7 @@ const App: React.FC = React.memo(() => {
   }, []);
 
   if (!isChecked) {
-    return <PreloaderPage />;
+    return <LoadingPage />;
   }
 
   return (

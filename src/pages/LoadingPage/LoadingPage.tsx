@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const PreloaderPage: React.FC = React.memo(() => {
+export const LoadingPage: React.FC = React.memo(() => {
 
   return (
     <div>

@@ -2,21 +2,27 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import {
-  AddNewTrackPage,
   ConfirmationRegisterPage,
-  ConfirmationResetPasswordPage, ConnectedAppsSettings,
+  ConfirmationResetPasswordPage,
+  ConnectedAppsSettings,
   HomePage,
-  LoginPage, PlaylistPage, PlaylistsPage,
+  LoginPage,
+  PlaylistPage,
+  PlaylistsPage,
+  CreateNewPlaylistPage,
   RegistrationPage,
   RequireAuthPage,
-  ResetPasswordPage, SettingsPage,
-  TestPage, TrackQueuePage,
+  ResetPasswordPage,
+  SettingsPage,
+  TestPage,
+  TracksPage,
+  TrackPage,
+  CreateNewTrackPage,
+  TrackQueuePage,
   UpdateResetPasswordPage
 } from '@/pages';
 
 import App from './App';
-import { PreloaderPage } from '@/pages/PreloaderPage/PreloaderPage.tsx';
-import { TrackPage } from '@/pages/TrackPage/TrackPage.tsx';
 
 export const Root: React.FC = React.memo(() => {
   return (
@@ -43,21 +49,23 @@ export const Root: React.FC = React.memo(() => {
 
             <Route path="home" element={<Navigate to="/" replace />} />
 
-            <Route path="new-track" element={<AddNewTrackPage />} />
+            <Route path="playlists">
+              <Route index element={<PlaylistsPage />} />
+              <Route path="new" element={<CreateNewPlaylistPage />} />
+              <Route path=":playlistId" element={<PlaylistPage />} />
+            </Route>
 
-            <Route path="connected-apps" element={<ConnectedAppsSettings />} />
+            <Route path="tracks">
+              <Route index element={<TracksPage />} />
+              <Route path="queue" element={<TrackQueuePage />} />
+              <Route path="new" element={<CreateNewTrackPage />} />
+              <Route path=":trackId" element={<TrackPage />} />
+            </Route>
 
-            <Route path="playlist" element={<PlaylistPage />} />
-
-            <Route path="playlists" element={<PlaylistsPage />} />
-
-            <Route path="preload" element={<PreloaderPage />} />
-
-            <Route path="settings" element={<SettingsPage />} />
-
-            <Route path="track" element={<TrackPage />} />
-
-            <Route path="track-queue" element={<TrackQueuePage />} />
+            <Route path="settings">
+              <Route index element={<SettingsPage />} />
+              <Route path="connected-apps" element={<ConnectedAppsSettings />} />
+            </Route>
 
             <Route path="test" element={<TestPage />} />
           </Route>
