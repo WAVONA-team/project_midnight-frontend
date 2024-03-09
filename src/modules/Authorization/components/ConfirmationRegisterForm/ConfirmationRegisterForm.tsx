@@ -8,7 +8,11 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { VerifyInputs } from '@/modules/Authorization/types';
 
+<<<<<<< HEAD
 import OTPInput from '@/ui/OTPInput/OtpInput';
+=======
+import OTPInput from '@/ui/OTPInput/OTPInput';
+>>>>>>> 6b275f0845018e12de7ae9b86e4c5365620d9381
 
 const ConfirmationRegisterForm: React.FC = React.memo(() => {
   const navigate = useNavigate();

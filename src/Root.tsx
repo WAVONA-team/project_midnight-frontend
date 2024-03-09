@@ -4,13 +4,22 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import {
   ConfirmationRegisterPage,
   ConfirmationResetPasswordPage,
+  ConnectedAppsSettings,
   HomePage,
   LoginPage,
+  PlaylistPage,
+  PlaylistsPage,
+  CreateNewPlaylistPage,
   RegistrationPage,
   RequireAuthPage,
   ResetPasswordPage,
+  SettingsPage,
   TestPage,
-  UpdateResetPasswordPage,
+  TracksPage,
+  TrackPage,
+  CreateNewTrackPage,
+  TrackQueuePage,
+  UpdateResetPasswordPage
 } from '@/pages';
 
 import App from './App';
@@ -39,6 +48,24 @@ export const Root: React.FC = React.memo(() => {
             <Route index element={<HomePage />} />
 
             <Route path="home" element={<Navigate to="/" replace />} />
+
+            <Route path="playlists">
+              <Route index element={<PlaylistsPage />} />
+              <Route path="new" element={<CreateNewPlaylistPage />} />
+              <Route path=":playlistId" element={<PlaylistPage />} />
+            </Route>
+
+            <Route path="tracks">
+              <Route index element={<TracksPage />} />
+              <Route path="queue" element={<TrackQueuePage />} />
+              <Route path="new" element={<CreateNewTrackPage />} />
+              <Route path=":trackId" element={<TrackPage />} />
+            </Route>
+
+            <Route path="settings">
+              <Route index element={<SettingsPage />} />
+              <Route path="connected-apps" element={<ConnectedAppsSettings />} />
+            </Route>
 
             <Route path="test" element={<TestPage />} />
           </Route>
