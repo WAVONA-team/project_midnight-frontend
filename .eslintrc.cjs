@@ -10,23 +10,13 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
     indent: ['error', 2],
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    'simple-import-sort/imports': [
-      'error',
-      {
-        groups: [
-          ['^react'],
-          ['^@?shared/helpers', '^@?shared/types'],
-          ['^@?modules/.*$'],
-          ['^@?components/.*$'],
-          ['^@?ui/.*$'],
-          ['^@?assets/.*$'],
-        ],
-      },
-    ],
   },
 };

@@ -31,6 +31,9 @@ export default {
         'dim-gray': '#696969',
         platinum: '#E1E1E1',
       },
+      'sub-colors': {
+        inherit: 'inherit',
+      },
     },
 
     extend: {
@@ -42,9 +45,9 @@ export default {
         5: '5%',
         0: '0%',
       },
-    },
-    fontFamily: {
-      rubik: ['Rubik', 'sans-serif'],
+      fontFamily: {
+        rubik: ['Rubik', 'sans-serif'],
+      },
     },
   },
   plugins: [],
