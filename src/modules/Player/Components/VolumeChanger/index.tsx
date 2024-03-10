@@ -1,15 +1,14 @@
-// VolumeChanger.tsx
 import React from 'react';
+import { useStore } from '../../store/index.ts'
 
-type Props = {
-  volume: number;
-  onVolumeChange: React.Dispatch<React.SetStateAction<number>>;
-};
+const VolumeChanger: React.FC = React.memo(() => {
 
-const VolumeChanger: React.FC<Props> = React.memo(({volume, onVolumeChange}) => {
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeVolume = useStore((state) => state.changeVolume)
+  const volume = useStore((state) => state.volume)
+
+  const VolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(event.target.value);
-    onVolumeChange(newVolume);
+    changeVolume(newVolume);
   };
 
   return (
@@ -20,7 +19,7 @@ const VolumeChanger: React.FC<Props> = React.memo(({volume, onVolumeChange}) => 
         max={1}
         step={0.01}
         value={volume}
-        onChange={handleVolumeChange}
+        onChange={VolumeChange}
       />
     </div>
   );

@@ -1,26 +1,21 @@
 import React from 'react';
+import { useStore } from '../../store/index.ts'
 
-type Props = {
-  playerState: boolean;
-  setPlayerState: React.Dispatch<React.SetStateAction<boolean>>;
-};
+const PlayButton: React.FC = React.memo(() => {
 
-const PlayButton: React.FC<Props> = React.memo(({playerState, setPlayerState}) => {
+  const changePlayerState = useStore((state) => state.changePlayerState)
+  const playerState = useStore((state) => state.playerState)
 
-  const Play = () => {
-    setPlayerState(true);
-  };
-
-  const Pause = () => {
-    setPlayerState(false);
+  const changeState = () => {
+    changePlayerState(!playerState);
   };
 
   return (
     <div>
       {playerState ? (
-        <button onClick={Pause}>Pause</button>
+        <button onClick={changeState}>Pause</button>
       ) : (
-        <button onClick={Play}>Play</button>
+        <button onClick={changeState}>Play</button>
       )}
     </div>
   );
