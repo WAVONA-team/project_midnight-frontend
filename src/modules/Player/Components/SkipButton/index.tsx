@@ -1,34 +1,39 @@
 import React from 'react';
+import { useStore } from '../../store/index.ts'
 
 type Props = {
   children: React.ReactNode;
-  trackNumber: number;
   tracks: number;
-  setTrackNumber: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const SkipButton: React.FC<Props> = React.memo(({ children, trackNumber, tracks, setTrackNumber }) => {
+const SkipButton: React.FC<Props> = React.memo(({ children, tracks}) => {
+
+  const changeTrackNumber = useStore((state) => state.changeTrackNumber)
+  var trackNumber = useStore((state) => state.trackNumber)
+
   const NextTrack = () => {
-    if (trackNumber == tracks - 1) {
-      return trackNumber
+    if (trackNumber === tracks - 1) {
+      return changeTrackNumber(trackNumber = 0)
     }
     else {
-      setTrackNumber(trackNumber + 1)
+      changeTrackNumber(trackNumber + 1)
     }
   };
+
   const PreviosTrack = () => {
-    if (trackNumber == 0) {
-      return trackNumber
+    if (trackNumber === 0) {
+      return changeTrackNumber(trackNumber)
     }
     else {
-      setTrackNumber(trackNumber - 1)
+      changeTrackNumber(trackNumber - 1)
     }
   };
+
   return (
-    <div className=' flex gap-2'>
-      <button onClick={NextTrack}>Next</button>
+    <div className='flex gap-2'>
+      <button type='button' onClick={NextTrack}>Next</button>
         {children}
-      <button onClick={PreviosTrack}>Previos</button>
+      <button type='button' onClick={PreviosTrack}>Previos</button>
     </div>
   );
 });
