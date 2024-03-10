@@ -1,9 +1,11 @@
-import { useStore } from '@/store';
-
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children }) => {
+import { useStore } from '@/store';
+
+export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const { user } = useStore(({ user }) => ({
     user,
   }));
@@ -12,5 +14,13 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({ children })
     return <Navigate to="/login" replace />;
   }
 
-  return children || <Outlet />;
+  return (
+    <>
+      <header>header</header>
+
+      <main>{children || <Outlet />}</main>
+
+      <footer>footer</footer>
+    </>
+  );
 };

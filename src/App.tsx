@@ -1,9 +1,8 @@
-import { useStore } from '@/store';
-
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { LoadingPage } from '@/pages';
+import { useStore } from '@/store';
 
 const App: React.FC = React.memo(() => {
   const { isChecked, checkAuth } = useStore(({ isChecked, checkAuth }) => ({
@@ -15,21 +14,7 @@ const App: React.FC = React.memo(() => {
     checkAuth();
   }, []);
 
-  if (!isChecked) {
-    return <LoadingPage />;
-  }
-
-  return (
-    <>
-      <header>Header</header>
-
-      <main>
-        <Outlet />
-      </main>
-
-      <footer>Footer</footer>
-    </>
-  );
+  return isChecked ? <Outlet /> : <LoadingPage />;
 });
 
 export default App;
