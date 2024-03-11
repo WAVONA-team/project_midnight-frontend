@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { VerifyInputs } from '@/modules/Authorization/types';
 
-import OTPInput from '@/ui/OTPInput/OTPInput';
+import { OTPInput } from '@/ui/Input';
 
 const ConfirmationRegisterForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const ConfirmationRegisterForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<VerifyInputs> = (formData) => {
     const { otp } = formData;
 
-    registerVerify(otp)
+    registerVerify(otp.length ? otp : null)
       .then(() => navigate('/', { replace: true }))
       .catch(({ formErrors }: ServerErrors) => {
         if (formErrors) {

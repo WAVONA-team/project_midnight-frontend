@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { UpdateResetPasswordInputs } from '@/modules/Authorization/types';
 
-import Input from '@/ui/Input/Input';
+import { PasswordInput } from '@/ui/Input';
 
 const UpdateResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -64,10 +64,9 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
         name="newPassword"
         control={control}
         render={({ field }) => (
-          <Input
+          <PasswordInput
             onChange={(value) => field.onChange(value)}
             value={field.value}
-            type="password"
             error={errors.root?.newPassword?.message}
           />
         )}
@@ -77,10 +76,9 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
         name="confirmationPassword"
         control={control}
         render={({ field }) => (
-          <Input
+          <PasswordInput
             onChange={(value) => field.onChange(value)}
             value={field.value}
-            type="password"
             error={errors.root?.confirmationPassword?.message}
           />
         )}

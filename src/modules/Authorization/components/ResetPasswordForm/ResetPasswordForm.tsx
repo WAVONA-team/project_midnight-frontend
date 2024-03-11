@@ -8,7 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordInputs } from '@/modules/Authorization/types';
 
-import Input from '@/ui/Input/Input';
+import { DefaultInput } from '@/ui/Input';
 
 const ResetPasswordForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
@@ -57,8 +57,7 @@ const ResetPasswordForm: React.FC = React.memo(() => {
         name="email"
         control={control}
         render={({ field }) => (
-          <Input
-            type="text"
+          <DefaultInput
             value={field.value}
             onChange={(event) => field.onChange(event.target.value)}
             error={errors.root?.email?.message}

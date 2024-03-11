@@ -31,7 +31,7 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
       })
       .finally(() => set({ isChecked: true }));
   },
-  registerVerify: async (activationToken: string) => {
+  registerVerify: async (activationToken: string | null) => {
     return await authClient
       .get<UserWithAccessToken>(`/verify/${activationToken}`)
       .then(({ data }) => {
