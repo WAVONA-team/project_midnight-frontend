@@ -1,19 +1,19 @@
 export const classNamesBase = {
   outlineButton: `
-  relative 
+  relative
   block
   px-11
   py-7
-  w-full 
-  border-none 
-  rounded 
+  w-full
+  border-none
+  rounded
   transition-all
   duration-290
   outline outline-1 outline-primary-poppy
   bg-inherit
   text-primary-poppy
-  hover:outline hover:outline-1 hover:outline-primary-fire-brick 
-  hover:text-primary-fire-brick 
+  hover:outline hover:outline-1 hover:outline-primary-fire-brick
+  hover:text-primary-fire-brick
   hover:border-none
   focus:outline focus:outline-1 focus:outline-primary-madder
   focus:text-primary-madder

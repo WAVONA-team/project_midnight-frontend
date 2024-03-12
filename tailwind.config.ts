@@ -32,10 +32,6 @@ export default {
         'dim-gray': '#696969',
         platinum: '#E1E1E1',
       },
-      'sub-colors': {
-        inherit: 'inherit',
-        transparent: 'transparent',
-      },
     },
 
     extend: {
