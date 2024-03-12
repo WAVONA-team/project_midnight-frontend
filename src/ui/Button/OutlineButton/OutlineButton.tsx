@@ -19,7 +19,9 @@ const OutlineButton: React.FC<Props> = React.memo(
         type={type}
         className={`${classNamesBase.outlineButton} ${className}`}
       >
-        <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded"> {title}</div>
+        <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded">
+          {title}
+        </div>
       </button>
     );
   },

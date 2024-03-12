@@ -24,7 +24,6 @@ const OutlineButtonLink: React.FC<Props> = React.memo(
     return (
       <Link to={path} className={baseClass}>
         <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded">
-          {' '}
           {title}
         </div>
       </Link>

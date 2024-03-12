@@ -30,7 +30,7 @@ const TextButtonLink: React.FC<Props> = React.memo(
               height="8"
               viewBox="0 0 14 8"
               xmlns="http://www.w3.org/2000/svg"
-              fill="transparent"
+              className="fill-sub-colors-transparent"
             >
               <path
                 d="M13 1.00005C13 1.00005 8.58107 6.99999 6.99995 7C5.41884 7.00001 1 1 1 1"

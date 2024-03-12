@@ -19,7 +19,7 @@ export const classNamesBase = {
   focus:text-primary-madder
   disabled:outline disabled:outline-1 disabled:outline-secondary-cadet-gray
   disabled:text-secondary-cadet-gray
-  tracking-wider font-rubik text-xs font-normal leading-6
+  tracking-wider font-rubik text-base font-normal leading-6
       `,
   outlineButtonLinkDisabled: `
   outline outline-1 outline-secondary-cadet-gray

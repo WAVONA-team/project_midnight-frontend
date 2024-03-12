@@ -32,7 +32,7 @@ export const classNamesBase = {
   outline outline-1 outline-primary-poppy
   bg-primary-poppy
   text-on-primary-lavender-blush
-  tracking-wider font-rubik text-xs font-normal leading-6
+  tracking-wider font-rubik text-base font-normal leading-6
 
   hover:text-on-primary-lavender-blush
   hover:outline hover:outline-1 hover:outline-primary-fire-brick 
