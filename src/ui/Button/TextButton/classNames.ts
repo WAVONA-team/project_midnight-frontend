@@ -1,26 +1,35 @@
 export const classNamesBase = {
   textButton: `
   relative 
-  py-0
-  px-1
+  py-1
+  px-2
   w-full 
+  flex
+  justify-center
+  items-center
   border-none 
   rounded 
 
-  tracking-wider font-rubik text-xs font-normal leading-6
+  tracking-wider font-rubik text-sm font-normal leading-6
   transition
   duration-290
-  text-primary-madder
-  hover:text-primary-fire-brick 
-  focus:text-primary-fire-brick 
+  text-primary-misty-rose
+  hover:text-on-primary-anti-flash-white
+  focus:text-primary-poppy 
   disabled:text-secondary-cadet-gray
+  stroke-primary-misty-rose
+  hover:stroke-on-primary-anti-flash-white
+  focus:stroke-primary-poppy 
+  disabled:stroke-secondary-cadet-gray
   bg-inherit
   hover:border-none
   hover:outline-none
   focus:outline-none
+
   `,
   textButtonLinkDisabled: `
   text-secondary-cadet-gray
+  stroke-secondary-cadet-gray
   pointer-events-none
   `,
 };

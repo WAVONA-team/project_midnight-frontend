@@ -3,27 +3,19 @@ import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 
-import Spinner from '../../Spinner';
+import { Spinner } from '../../Spinner';
 import { classNamesBase } from './classNames';
 
 type Props = {
   path: string;
   title: string;
-  handler?: React.MouseEventHandler<HTMLAnchorElement>;
   className?: string;
   isLoading?: boolean;
   disabled?: boolean;
 };
 
 const MainButtonLink: React.FC<Props> = React.memo(
-  ({
-    path,
-    title,
-    handler,
-    className = '',
-    disabled = false,
-    isLoading = false,
-  }) => {
+  ({ path, title, className = '', disabled = false, isLoading = false }) => {
     const baseClass = classNames({
       [classNamesBase.mainButtonLink]: !isLoading,
       [classNamesBase.mainButtonLinkDisabled]: disabled,
@@ -32,7 +24,7 @@ const MainButtonLink: React.FC<Props> = React.memo(
     });
 
     return (
-      <Link to={path} className={baseClass} onClick={handler}>
+      <Link to={path} className={baseClass}>
         {isLoading ? (
           <Spinner />
         ) : (

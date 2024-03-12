@@ -8,13 +8,13 @@ import { classNamesBase } from './classNames';
 type Props = {
   path: string;
   title: string;
-  handler?: React.MouseEventHandler<HTMLAnchorElement>;
+
   className?: string;
   disabled?: boolean;
 };
 
 const OutlineButtonLink: React.FC<Props> = React.memo(
-  ({ path, title, handler, className = '', disabled = true }) => {
+  ({ path, title, className = '', disabled = false }) => {
     const baseClass = classNames({
       [classNamesBase.outlineButton]: true,
       [classNamesBase.outlineButtonLinkDisabled]: disabled,
@@ -22,8 +22,11 @@ const OutlineButtonLink: React.FC<Props> = React.memo(
     });
 
     return (
-      <Link to={path} className={baseClass} onClick={handler}>
-        {title}
+      <Link to={path} className={baseClass}>
+        <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded">
+          {' '}
+          {title}
+        </div>
       </Link>
     );
   },

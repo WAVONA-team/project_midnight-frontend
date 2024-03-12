@@ -4,7 +4,7 @@ import { classNamesBase } from './classNames';
 
 type Props = {
   title: string;
-  handler?: React.MouseEventHandler<HTMLButtonElement>;
+  handler: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
@@ -19,7 +19,7 @@ const OutlineButton: React.FC<Props> = React.memo(
         type={type}
         className={`${classNamesBase.outlineButton} ${className}`}
       >
-        {title}
+        <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded"> {title}</div>
       </button>
     );
   },

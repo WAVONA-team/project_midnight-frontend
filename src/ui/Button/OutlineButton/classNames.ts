@@ -2,7 +2,8 @@ export const classNamesBase = {
   outlineButton: `
   relative 
   block
-  p-4
+  px-11
+  py-7
   w-full 
   border-none 
   rounded 

@@ -2,12 +2,12 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import Spinner from '../../Spinner';
+import { Spinner } from '../../Spinner';
 import { classNamesBase } from './classNames';
 
 type Props = {
   title: string;
-  handler?: React.MouseEventHandler<HTMLButtonElement>;
+  handler: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
   type?: 'button' | 'submit';
   isLoading?: boolean;

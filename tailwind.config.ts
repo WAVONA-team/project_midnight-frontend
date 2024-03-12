@@ -13,6 +13,7 @@ export default {
         poppy: '#DA2F37',
         'fire-brick': '#BF222A',
         madder: '#9C1C22',
+        'misty-rose': '#F4D5D5',
       },
       'on-primary': {
         'lavender-blush': '#FCEEEE',
@@ -33,6 +34,7 @@ export default {
       },
       'sub-colors': {
         inherit: 'inherit',
+        transparent: 'transparent',
       },
     },
 
