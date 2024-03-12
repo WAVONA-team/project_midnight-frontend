@@ -7,30 +7,31 @@ export default {
     },
 
     colors: {
-      'background' : {
-        'hight': '#0B0D0B',
+      background: {
+        hight: '#0B0D0B',
       },
-      'error': {
+      error: {
         'turkey-red': '#A90000',
         'imperial-red': '#EF4444',
       },
-      'primary': {
-        'poppy': '#DA2F37',
+      primary: {
+        poppy: '#DA2F37',
         'fire-brick': '#BF222A',
-        'madder': '#9C1C22',
+        madder: '#9C1C22',
+        'misty-rose': '#F4D5D5',
       },
       'on-primary': {
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
-      'surface': {
-        'eerie_black': '#171916',
-        'black': '#0B0D0B',
+      surface: {
+        eerie_black: '#171916',
+        black: '#0B0D0B',
       },
-      'secondary': {
+      secondary: {
         'cadet-gray': '#A09F9F',
         'eerie-black-light': '#212320',
-        'glaocous': '#70799A'
+        glaocous: '#70799A',
       },
       'on-secondary': {
         'dim-gray': '#696969',
@@ -48,6 +49,12 @@ export default {
         5: '5%',
         0: '0%',
       },
+<<<<<<< HEAD
+=======
+      fontFamily: {
+        rubik: ['Rubik', 'sans-serif'],
+      },
+>>>>>>> tas-269
     },
   },
   plugins: [],
