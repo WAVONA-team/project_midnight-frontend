@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import { classNamesBase } from './classNames';
 
 type Props = {
@@ -20,12 +22,18 @@ const TextButton: React.FC<Props> = React.memo(
     disabled = false,
     withArrow = false,
   }) => {
+    const baseClass = classNames({
+      [classNamesBase.textButton]: !withArrow,
+      [classNamesBase.withArrow]: withArrow,
+      [className]: true,
+    });
+
     return (
       <button
         onClick={handler}
         disabled={disabled}
         type={type}
-        className={`${classNamesBase.textButton} ${className}`}
+        className={baseClass}
       >
         {title}
         {withArrow && (

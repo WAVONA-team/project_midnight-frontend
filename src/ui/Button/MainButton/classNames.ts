@@ -18,6 +18,8 @@ export const classNamesBase = {
   disabled:outline disabled:outline-1 disabled:outline-secondary-cadet-gray
   disabled:bg-secondary-cadet-gray
   tracking-wider font-rubik text-base font-normal leading-6
+
+  lg:text-sm
     `,
   mainButtonLink: `
   relative
@@ -40,6 +42,8 @@ export const classNamesBase = {
   hover:border-none
   focus:outline focus:outline-1 focus:outline-primary-madder
   focus:bg-primary-madder
+
+  lg:text-sm
     `,
   mainButtonLinkDisabled: `
   outline outline-1 outline-secondary-cadet-gray

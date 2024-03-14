@@ -8,7 +8,9 @@
   font-weight: 400;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -28,7 +30,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-img, picture, svg, video {
+img,
+picture,
+svg,
+video {
   display: block;
   max-width: 100%;
 }

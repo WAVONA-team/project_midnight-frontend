@@ -3,7 +3,7 @@ export default {
   content: ['./src/**/*.tsx', './src/**/*.ts'],
   theme: {
     fontFamily: {
-      rubik: ['Rubik', 'sans-serif']
+      rubik: ['Rubik', 'sans-serif'],
     },
 
     colors: {
@@ -35,7 +35,7 @@ export default {
       },
       'on-secondary': {
         'dim-gray': '#696969',
-        'platinum': '#E1E1E1',
+        platinum: '#E1E1E1',
         'davys-gray': '#5F5F5F',
       },
     },
@@ -49,12 +49,9 @@ export default {
         5: '5%',
         0: '0%',
       },
-<<<<<<< HEAD
-=======
       fontFamily: {
         rubik: ['Rubik', 'sans-serif'],
       },
->>>>>>> tas-269
     },
   },
   plugins: [],

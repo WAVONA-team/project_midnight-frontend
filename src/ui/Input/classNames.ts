@@ -11,6 +11,8 @@ export const classNames = {
     focus:border-secondary-glaocous
     focus:placeholder:text-on-secondary-davys-gray
     active:placeholder:text-on-secondary-dim-gray
+
+    lg:text-sm
   `,
   icon: `
     absolute
