@@ -4,6 +4,8 @@ export default {
   theme: {
     fontFamily: {
       rubik: ['Rubik', 'sans-serif'],
+      openSans: ['Open Sans', 'sans-serif'],
+      ubuntu: ['Ubuntu', 'sans-serif'],
     },
 
     colors: {
@@ -48,9 +50,6 @@ export default {
         20: '20%',
         5: '5%',
         0: '0%',
-      },
-      fontFamily: {
-        rubik: ['Rubik', 'sans-serif'],
       },
     },
   },
