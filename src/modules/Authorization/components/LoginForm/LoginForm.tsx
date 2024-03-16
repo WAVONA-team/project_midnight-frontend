@@ -7,7 +7,9 @@ import { useStore } from '@/store';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { LoginInputs } from '@/modules/Authorization/types';
+import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
 
+import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput, PasswordInput } from '@/ui/Input';
 
 const LoginForm: React.FC = React.memo(() => {
@@ -51,38 +53,78 @@ const LoginForm: React.FC = React.memo(() => {
   };
 
   return (
-    <form action="#" onSubmit={handleSubmit(onSubmit)}>
-      <Link to={'/register'}>Dont have an account? Sign up</Link>
-      <Link to={'/reset'}>Forgot password? Reset</Link>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer>
+        <Link
+          to="/"
+          className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
+        >
+          Отменить
+        </Link>
 
-      {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
+          Войдите в аккаунт
+        </h2>
 
-      <Controller
-        name="email"
-        control={control}
-        render={({ field }) => (
-          <DefaultInput
-            placeholder="Email"
-            value={field.value}
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.email?.message}
+        <div className="flex items-center mt-5">
+          <p className="text-on-primary-anti-flash-white text-sm flex items-center">
+            Еще нет аккаунта?
+          </p>
+
+          <TextButtonLink
+            title="Зарегистрироваться"
+            path="/register"
+            className="w-min"
           />
-        )}
-      />
+        </div>
 
-      <Controller
-        name="password"
-        control={control}
-        render={({ field }) => (
-          <PasswordInput
-            value={field.value}
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.password?.message}
+        {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <DefaultInput
+              className="mt-10"
+              labelText="Введите email"
+              placeholder="Email"
+              value={field.value}
+              onChange={(event) => field.onChange(event.target.value)}
+              error={errors.root?.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              className="mt-7"
+              labelText="Введите пароль"
+              placeholder="Введите пароль"
+              value={field.value}
+              onChange={(event) => field.onChange(event.target.value)}
+              error={errors.root?.password?.message}
+            />
+          )}
+        />
+
+        <TextButtonLink
+          title="Забыли пароль?"
+          path="/reset"
+          className="w-fit mt-4"
+        />
+
+        <div className="mt-16 grid grid-cols-3">
+          <MainButton
+            type="submit"
+            title="Продолжить"
+            handler={() => {}}
+            className="col-start-1 col-end-4 lg:col-start-3"
           />
-        )}
-      />
-
-      <button>Submit</button>
+        </div>
+      </FormContainer>
     </form>
   );
 });

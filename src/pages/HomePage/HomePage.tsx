@@ -11,20 +11,20 @@ export const HomePage: React.FC = React.memo(() => {
         app
         h-screen
         bg-[url('/src/assets/home_bg_mobile.webp')]
-        md:bg-[url('/src/assets/home_bg_desktop.webp')]
+        lg:bg-[url('/src/assets/home_bg_desktop.webp')]
         bg-no-repeat
         bg-center
         bg-cover
         pb-12
-        md:pt-12
+        lg:pt-12
         flex
         flex-col-reverse
-        md:flex-col
+        lg:flex-col
       "
     >
       <Container className="grid grid-rows-[auto] gap-y-10">
-        <header className="row-start-2 md:row-start-1 md:flex md:justify-end">
-          <MainButtonLink path="/login" title="Войти" className="md:w-min" />
+        <header className="row-start-2 lg:row-start-1 lg:flex lg:justify-end">
+          <MainButtonLink path="/login" title="Войти" className="lg:w-min" />
         </header>
 
         <main
@@ -34,10 +34,10 @@ export const HomePage: React.FC = React.memo(() => {
             flex
             flex-col
             gap-8
-            md:row-start-2
-            md:grid
-            md:grid-cols-2
-            md:mt-60
+            lg:row-start-2
+            lg:grid
+            lg:grid-cols-2
+            lg:mt-60
           "
         >
           <Logo />

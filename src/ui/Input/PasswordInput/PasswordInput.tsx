@@ -10,6 +10,7 @@ import passwordShowIcon from '@/assets/inputs/passwordShowed.svg';
 type Props = {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  labelText: string;
 
   className?: string;
   placeholder?: string;
@@ -17,13 +18,19 @@ type Props = {
 };
 
 const PasswordInput: React.FC<Props> = React.memo(
-  ({ value, onChange, className = '', placeholder = '', error }) => {
+  ({ value, onChange, labelText, className = '', placeholder = '', error }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     return (
-      <label className="relative block">
+      <label className={`${className} relative block`}>
+        <p className="text-base text-on-primary-anti-flash-white font-bold">
+          {labelText}
+        </p>
+
         {error && (
-          <p className="absolute top-0 text-error-imperial-red">{error}</p>
+          <p className="absolute top-8 text-xs text-error-imperial-red">
+            {error}
+          </p>
         )}
 
         <button
@@ -40,13 +47,14 @@ const PasswordInput: React.FC<Props> = React.memo(
 
         <input
           className={classNames(
-            `${className}
-            mt-7
-            px-4
-            py-2
-            ${inputClassnames.input}
-            disabled:placeholder:bg-secondary-cadet-gray
-            disabled:placeholder:text-on-secondary-dim-gray`,
+            `
+              mt-8
+              px-4
+              py-2
+              ${inputClassnames.input}
+              disabled:placeholder:bg-secondary-cadet-gray
+              disabled:placeholder:text-on-secondary-dim-gray
+            `,
             {
               'border-error-imperial-red': error,
               'border-on-secondary-platinum': !error,

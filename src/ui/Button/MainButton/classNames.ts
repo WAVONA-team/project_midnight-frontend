@@ -1,6 +1,7 @@
 export const classNamesBase = {
   mainButton: `
   relative
+  block
   px-11
   py-7
   w-full
@@ -10,6 +11,7 @@ export const classNamesBase = {
   duration-290
   outline outline-1 outline-primary-poppy
   bg-primary-poppy
+  text-on-primary-lavender-blush
   hover:outline hover:outline-1 hover:outline-primary-fire-brick
   hover:bg-primary-fire-brick
   hover:border-none

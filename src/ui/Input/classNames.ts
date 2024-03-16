@@ -16,7 +16,7 @@ export const classNames = {
   `,
   icon: `
     absolute
-    top-1/2
-    translate-y-0.5
+    top-16
+    translate-y-1
   `,
 };
