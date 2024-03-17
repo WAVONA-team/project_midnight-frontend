@@ -1,14 +1,18 @@
 import React from 'react';
-import { useStore } from '../../store/index.ts'
 
-const VolumeChanger: React.FC = React.memo(() => {
+import { useStore } from '@/store/index';
 
-  const changeVolume = useStore((state) => state.changeVolume)
-  const volume = useStore((state) => state.volume)
-
+export const VolumeChanger: React.FC = React.memo(() => {
+  const { volume, changeVolume } = useStore(({ volume, changeVolume }) => ({
+    volume,
+    changeVolume,
+  }));
   const VolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(event.target.value);
     changeVolume(newVolume);
+  };
+  const handleMute = () => {
+    volume === 0 ? changeVolume(1) : changeVolume(0);
   };
 
   return (
@@ -21,8 +25,7 @@ const VolumeChanger: React.FC = React.memo(() => {
         value={volume}
         onChange={VolumeChange}
       />
+      <button onClick={handleMute}>{volume == 0 ? 'UnMute' : 'Mute'}</button>
     </div>
   );
 });
-
-export default VolumeChanger;

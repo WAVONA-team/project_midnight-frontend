@@ -1,25 +1,21 @@
 import React from 'react';
-import { useStore } from '../../store/index.ts'
 
-const PlayButton: React.FC = React.memo(() => {
+import { useStore } from '@/store/index';
 
-  const changePlayerState = useStore((state) => state.changePlayerState)
-  const playerState = useStore((state) => state.playerState)
-
+export const PlayButton: React.FC = React.memo(() => {
+  const { playerState, changePlayerState } = useStore(
+    ({ playerState, changePlayerState }) => ({
+      playerState,
+      changePlayerState,
+    }),
+  );
   const changeState = () => {
     changePlayerState(!playerState);
   };
 
   return (
     <div>
-      {playerState ? (
-        <button onClick={changeState}>Pause</button>
-      ) : (
-        <button onClick={changeState}>Play</button>
-      )}
+      <button onClick={changeState}>{playerState ? 'Pause' : 'Play'}</button>
     </div>
   );
 });
-
-
-export default PlayButton;

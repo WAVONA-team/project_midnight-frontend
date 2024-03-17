@@ -1,8 +1,10 @@
-import { useStore } from '@/store';
-
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Player from './modules/Player';
+
+import { useStore } from '@/store';
+
+import { ExtendedPlayer } from '@/modules/Player/Components/ExtentedPlayer';
+
 import Loader from './ui/Loader/Loader';
 
 const App: React.FC = React.memo(() => {
@@ -25,7 +27,15 @@ const App: React.FC = React.memo(() => {
 
       <main>
         <Outlet />
-        <Player tracks={['https://youtu.be/a9sHJdyVZ28?si=zTlhGY_sA17KnHzR', 'https://youtu.be/VkTUP51JgWs?si=p_uIcis9EUUF7LHR', 'https://youtu.be/UavO9mYpfuU?si=e_7TxNLQPvsFNB2B']}/>
+        <div>
+          <ExtendedPlayer
+            tracks={[
+              'https://youtu.be/a9sHJdyVZ28?si=zTlhGY_sA17KnHzR',
+              'https://youtu.be/VkTUP51JgWs?si=p_uIcis9EUUF7LHR',
+              'https://youtu.be/UavO9mYpfuU?si=e_7TxNLQPvsFNB2B',
+            ]}
+          />
+        </div>
       </main>
 
       <footer>Footer</footer>
