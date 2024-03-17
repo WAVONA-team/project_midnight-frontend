@@ -72,7 +72,7 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
     setIsButtonLoading(true);
 
     await resetVerify(otp.length ? otp : null)
-      .then(() => navigate('/reset-update', { replace: true, state: { otp } }))
+      .then(() => navigate('/reset-update', { replace: true, state: { otp, email } }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {

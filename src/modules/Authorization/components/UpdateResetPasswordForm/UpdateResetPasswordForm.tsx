@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -7,17 +7,24 @@ import { useStore } from '@/store';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { UpdateResetPasswordInputs } from '@/modules/Authorization/types';
+import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
 
+import { MainButton } from '@/ui/Button';
 import { PasswordInput } from '@/ui/Input';
 
 const UpdateResetPasswordForm: React.FC = React.memo(() => {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
-  const { otp } = location.state;
+  const { otp, email } = location.state || '';
 
-  const { resetActivate } = useStore(({ resetActivate }) => ({
-    resetActivate,
-  }));
+  const { resetActivate, deleteResetToken } = useStore(
+    ({ resetActivate, deleteResetToken }) => ({
+      resetActivate,
+      deleteResetToken,
+    }),
+  );
 
   const {
     formState: { errors },
@@ -31,10 +38,18 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
     },
   });
 
+  const handleDeleteResetToken = () => {
+    deleteResetToken(email && email.length ? email : null).finally(() =>
+      navigate('/login', { replace: true }),
+    );
+  };
+
   const onSubmit: SubmitHandler<UpdateResetPasswordInputs> = async (
     formData,
   ) => {
     const { newPassword, confirmationPassword } = formData;
+
+    setIsButtonLoading(true);
 
     await resetActivate(otp, newPassword, confirmationPassword)
       .then(() => navigate('/login', { replace: true }))
@@ -53,38 +68,71 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
             message: formErrors,
           });
         }
-      });
+      })
+      .finally(() => setIsButtonLoading(false));
   };
 
   return (
-    <form action="#" onSubmit={handleSubmit(onSubmit)}>
-      {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer className="relative">
+        <button
+          type="button"
+          onClick={handleDeleteResetToken}
+          className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
+        >
+          Отменить
+        </button>
 
-      <Controller
-        name="newPassword"
-        control={control}
-        render={({ field }) => (
-          <PasswordInput
-            onChange={(value) => field.onChange(value)}
-            value={field.value}
-            error={errors.root?.newPassword?.message}
-          />
+        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
+          Придумайте новый пароль
+        </h2>
+
+        {errors.root?.formErrors && (
+          <p className="text-error-imperial-red text-xs absolute top-40">
+            {errors.root.formErrors.message}
+          </p>
         )}
-      />
 
-      <Controller
-        name="confirmationPassword"
-        control={control}
-        render={({ field }) => (
-          <PasswordInput
-            onChange={(value) => field.onChange(value)}
-            value={field.value}
-            error={errors.root?.confirmationPassword?.message}
+        <Controller
+          name="newPassword"
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              className="mt-14"
+              labelText="Введите новый пароль"
+              placeholder="Введите пароль"
+              onChange={(value) => field.onChange(value)}
+              value={field.value}
+              error={errors.root?.newPassword?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name="confirmationPassword"
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              className="mt-7"
+              labelText="Повторите пароль"
+              placeholder="Введите пароль"
+              onChange={(value) => field.onChange(value)}
+              value={field.value}
+              error={errors.root?.confirmationPassword?.message}
+            />
+          )}
+        />
+
+        <div className="mt-16 grid grid-cols-3">
+          <MainButton
+            type="submit"
+            title="Продолжить"
+            handler={() => {}}
+            isLoading={isButtonLoading}
+            className="col-start-1 col-end-4 lg:col-start-3"
           />
-        )}
-      />
-
-      <button>Submit</button>
+        </div>
+      </FormContainer>
     </form>
   );
 });
