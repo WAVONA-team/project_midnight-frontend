@@ -6,7 +6,7 @@ type Props = {
   provider: string;
 };
 
-const TrackInfo: React.FC<Props> = React.memo(({name, artist, provider}) => {
+export const TrackInfo: React.FC<Props> = React.memo(({name, artist, provider}) => {
 
   return (
     <div>
@@ -16,5 +16,3 @@ const TrackInfo: React.FC<Props> = React.memo(({name, artist, provider}) => {
     </div>
   );
 });
-
-export default TrackInfo;

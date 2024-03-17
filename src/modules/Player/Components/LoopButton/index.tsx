@@ -1,21 +1,19 @@
 import React from 'react';
-import { useStore } from '../../store/index.ts'
 
-const LoopButton: React.FC = React.memo(({ }) => {
+import { useStore } from '@/store/index';
 
-  const changeIsLoop = useStore((state) => state.changeIsLoop)
-  const isLoop = useStore((state) => state.isLoop)
-
-  const Loop = () => {
-    changeIsLoop(!isLoop)
+export const LoopButton: React.FC = React.memo(() => {
+  const { changeIsLoop, isLoop } = useStore(({ changeIsLoop, isLoop }) => ({
+    changeIsLoop,
+    isLoop,
+  }));
+  const LoopHandler = () => {
+    changeIsLoop(!isLoop);
   };
 
   return (
     <div>
-        <button onClick={Loop}>Loop</button>
+      <button onClick={LoopHandler}>{isLoop ? 'UnLoop' : 'Loop'}</button>
     </div>
   );
 });
-
-
-export default LoopButton;
