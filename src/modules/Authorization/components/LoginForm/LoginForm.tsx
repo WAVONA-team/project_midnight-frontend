@@ -58,7 +58,7 @@ const LoginForm: React.FC = React.memo(() => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormContainer>
+      <FormContainer className="relative">
         <Link
           to="/"
           className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
@@ -70,7 +70,7 @@ const LoginForm: React.FC = React.memo(() => {
           Войдите в аккаунт
         </h2>
 
-        <div className="flex items-center mt-5">
+        <div className="flex items-center mt-16">
           <p className="text-on-primary-anti-flash-white text-sm flex items-center">
             Еще нет аккаунта?
           </p>
@@ -82,7 +82,11 @@ const LoginForm: React.FC = React.memo(() => {
           />
         </div>
 
-        {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+        {errors.root?.formErrors && (
+          <p className="text-error-imperial-red text-xs absolute top-40">
+            {errors.root.formErrors.message}
+          </p>
+        )}
 
         <Controller
           name="email"
