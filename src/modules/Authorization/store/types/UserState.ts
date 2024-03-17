@@ -15,7 +15,7 @@ export type UserState = {
   reset: (email: string) => Promise<NormalizedUser>;
   resetVerify: (resetToken: string | null) => Promise<NormalizedUser>;
   resetActivate: (
-    resetToken: string,
+    resetToken: string | null,
     newPassword: string,
     confirmationPassword: string,
   ) => Promise<NormalizedUser>;

@@ -52,7 +52,11 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
 
     setIsButtonLoading(true);
 
-    await resetActivate(otp, newPassword, confirmationPassword)
+    await resetActivate(
+      otp && otp.length ? otp : null,
+      newPassword,
+      confirmationPassword,
+    )
       .then(() => navigate('/login', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
@@ -89,6 +93,12 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
         {errors.root?.formErrors && (
           <p className="text-error-imperial-red text-xs absolute top-40">
             {errors.root.formErrors.message}
+          </p>
+        )}
+
+        {errors.root?.resetToken && (
+          <p className="text-error-imperial-red text-xs absolute top-40">
+            {errors.root.resetToken.message}
           </p>
         )}
 

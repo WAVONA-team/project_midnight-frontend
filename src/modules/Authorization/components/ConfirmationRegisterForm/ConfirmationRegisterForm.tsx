@@ -64,15 +64,13 @@ const ConfirmationRegisterForm: React.FC = React.memo(() => {
     );
   };
 
-  console.log(errors);
-
   const onSubmit: SubmitHandler<VerifyInputs> = (formData) => {
     const { otp } = formData;
 
     setIsButtonLoading(true);
 
     registerVerify(otp.length ? otp : null)
-      .then(() => navigate('/', { replace: true }))
+      .then(() => navigate('/tracks', { replace: true }))
       .catch(({ formErrors }: ServerErrors) => {
         if (formErrors) {
           setError('root.formErrors', {

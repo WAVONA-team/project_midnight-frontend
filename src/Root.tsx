@@ -49,8 +49,6 @@ export const Root: React.FC = React.memo(() => {
           <Route path="reset-update" element={<UpdateResetPasswordPage />} />
 
           <Route path="/" element={<RequireAuthPage />}>
-            <Route index element={<TracksPage />} />
-
             <Route path="playlists">
               <Route index element={<PlaylistsPage />} />
               <Route path="new" element={<CreateNewPlaylistPage />} />
@@ -58,6 +56,7 @@ export const Root: React.FC = React.memo(() => {
             </Route>
 
             <Route path="tracks">
+              <Route index element={<TracksPage />} />
               <Route path="queue" element={<TrackQueuePage />} />
               <Route path="new" element={<CreateNewTrackPage />} />
               <Route path=":trackId" element={<TrackPage />} />
