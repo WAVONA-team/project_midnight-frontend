@@ -118,7 +118,11 @@ const LoginForm: React.FC = React.memo(() => {
         />
 
         <div className="mt-4 grid grid-cols-4">
-          <TextButtonLink title="Забыли пароль?" path="/reset" />
+          <TextButtonLink
+            title="Забыли пароль?"
+            path="/reset"
+            className="col-start-1 col-end-3"
+          />
         </div>
 
         <div className="mt-16 grid grid-cols-3">
