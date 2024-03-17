@@ -51,6 +51,10 @@ export default {
         5: '5%',
         0: '0%',
       },
+      boxShadow: {
+        'shuffle-button-lite': 'inset 1px 1px 1px rgba(8, 8, 7, 0.5)',
+        'shuffle-button-hard': 'inset 3px 3px 3px rgba(30, 34, 29, 0.9)',
+      },
     },
   },
   plugins: [],
