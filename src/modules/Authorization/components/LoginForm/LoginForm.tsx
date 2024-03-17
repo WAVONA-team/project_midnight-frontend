@@ -7,6 +7,7 @@ import { useStore } from '@/store';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { LoginInputs } from '@/modules/Authorization/types';
+import { FormCTA } from '@/modules/Authorization/ui/FormCTA';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
 import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
@@ -69,17 +70,16 @@ const LoginForm: React.FC = React.memo(() => {
 
         <FormHeader title="Войдите в аккаунт" />
 
-        <div className="flex items-center mt-16">
-          <p className="text-on-primary-anti-flash-white text-sm flex items-center">
-            Еще нет аккаунта?
-          </p>
-
-          <TextButtonLink
-            title="Зарегистрироваться"
-            path="/register"
-            className="w-min"
-          />
-        </div>
+        <FormCTA
+          text="Еще нет аккаунта?"
+          action={
+            <TextButtonLink
+              title="Зарегистрироваться"
+              path="/register"
+              className="w-min"
+            />
+          }
+        />
 
         {errors.root?.formErrors && (
           <p className="text-error-imperial-red text-xs absolute top-40">
