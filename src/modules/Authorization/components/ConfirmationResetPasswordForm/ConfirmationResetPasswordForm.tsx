@@ -8,6 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButton } from '@/ui/Button';
 import { OTPInput } from '@/ui/Input';
@@ -72,7 +73,9 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
     setIsButtonLoading(true);
 
     await resetVerify(otp.length ? otp : null)
-      .then(() => navigate('/reset-update', { replace: true, state: { otp, email } }))
+      .then(() =>
+        navigate('/reset-update', { replace: true, state: { otp, email } }),
+      )
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
@@ -103,9 +106,7 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
           Отменить
         </button>
 
-        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
-          Сброс пароля
-        </h2>
+        <FormHeader title="Сброс пароля" />
 
         <p className="text-on-primary-anti-flash-white text-sm block mt-16">
           Введите код, отправленный на указанную почту

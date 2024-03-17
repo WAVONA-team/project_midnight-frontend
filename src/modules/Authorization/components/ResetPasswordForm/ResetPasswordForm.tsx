@@ -11,6 +11,7 @@ import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
 
 import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput } from '@/ui/Input';
+import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 const ResetPasswordForm: React.FC = React.memo(() => {
   const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -67,9 +68,7 @@ const ResetPasswordForm: React.FC = React.memo(() => {
           Отменить
         </Link>
 
-        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
-          Сброс пароля
-        </h2>
+        <FormHeader title="Сброс пароля" />
 
         <div className="flex items-center mt-16">
           <p className="text-on-primary-anti-flash-white text-sm flex items-center">

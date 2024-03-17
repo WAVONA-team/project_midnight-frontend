@@ -8,6 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { UpdateResetPasswordInputs } from '@/modules/Authorization/types';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton } from '@/ui/Button';
 import { PasswordInput } from '@/ui/Input';
@@ -83,9 +84,7 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
           Отменить
         </button>
 
-        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
-          Придумайте новый пароль
-        </h2>
+        <FormHeader title="Придумайте новый пароль" />
 
         {errors.root?.formErrors && (
           <p className="text-error-imperial-red text-xs absolute top-40">

@@ -8,6 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { LoginInputs } from '@/modules/Authorization/types';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput, PasswordInput } from '@/ui/Input';
@@ -66,9 +67,7 @@ const LoginForm: React.FC = React.memo(() => {
           Отменить
         </Link>
 
-        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
-          Войдите в аккаунт
-        </h2>
+        <FormHeader title="Войдите в аккаунт" />
 
         <div className="flex items-center mt-16">
           <p className="text-on-primary-anti-flash-white text-sm flex items-center">

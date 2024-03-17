@@ -8,6 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { VerifyInputs } from '@/modules/Authorization/types';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButton } from '@/ui/Button';
 import { OTPInput } from '@/ui/Input';
@@ -94,9 +95,7 @@ const ConfirmationRegisterForm: React.FC = React.memo(() => {
           Отменить
         </button>
 
-        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
-          Создайте аккаунт
-        </h2>
+        <FormHeader title="Создайте аккаунт" />
 
         <p className="text-on-primary-anti-flash-white text-sm block mt-16">
           Введите код, отправленный на указанную почту
