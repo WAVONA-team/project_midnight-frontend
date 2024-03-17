@@ -9,14 +9,14 @@ export const ConfirmationRegisterPage: React.FC = React.memo(() => {
   return (
     <div
       className="
-    app
-    h-screen
-    bg-background-hight
-    lg:bg-[url('/src/assets/home_bg_desktop.webp')]
-    lg:bg-no-repeat
-    lg:bg-center
-    lg:bg-cover
-  "
+        app
+        h-screen
+        bg-background-hight
+        lg:bg-[url('/src/assets/home_bg_desktop.webp')]
+        lg:bg-no-repeat
+        lg:bg-center
+        lg:bg-cover
+      "
     >
       <Container className="h-full flex flex-col justify-center">
         <main className="lg:grid lg:grid-cols-2">

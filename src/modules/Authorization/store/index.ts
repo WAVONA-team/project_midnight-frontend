@@ -153,6 +153,24 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
+  deleteResetToken: async (email: string | null) => {
+    return await authClient.patch(`/delete/${email}`).catch((serverErrors) => {
+      const { fieldErrors, formErrors }: ServerErrors =
+        serverErrors.response.data;
+
+      throw { fieldErrors, formErrors };
+    });
+  },
+  resendResetToken: async (email: string | null) => {
+    return await authClient
+      .get(`/resend/${email}/resetToken`)
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
 });
 
 export { type UserState };

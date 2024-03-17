@@ -35,7 +35,9 @@ const ResetPasswordForm: React.FC = React.memo(() => {
     setIsButtonLoading(true);
 
     await reset(email)
-      .then(() => navigate('/reset-verify', { replace: true }))
+      .then(() =>
+        navigate('/reset-verify', { replace: true, state: { email } }),
+      )
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
