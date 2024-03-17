@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -7,10 +7,13 @@ import { useStore } from '@/store';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { RegistrationInputs } from '@/modules/Authorization/types';
+import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
 
+import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput, PasswordInput } from '@/ui/Input';
 
 const RegistrationForm: React.FC = React.memo(() => {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const navigate = useNavigate();
   const { register } = useStore(({ register }) => ({
     register,
@@ -31,6 +34,8 @@ const RegistrationForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<RegistrationInputs> = async (formData) => {
     const { email, password } = formData;
 
+    setIsButtonLoading(true);
+
     await register(email, password)
       .then(() => navigate('/verify', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
@@ -48,40 +53,74 @@ const RegistrationForm: React.FC = React.memo(() => {
             message: formErrors,
           });
         }
-      });
+      })
+      .finally(() => setIsButtonLoading(false));
   };
 
   return (
-    <form action="#" onSubmit={handleSubmit(onSubmit)}>
-      <Link to={'/login'}>Already have an account? Sign in</Link>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer>
+        <Link
+          to="/"
+          className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
+        >
+          Отменить
+        </Link>
 
-      {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+        <h2 className="text-on-primary-anti-flash-white font-rubik font-semibold text-2xl block mt-10 lg:font-openSans lg:font-normal">
+          Создайте аккаунт
+        </h2>
 
-      <Controller
-        name="email"
-        control={control}
-        render={({ field }) => (
-          <DefaultInput
-            value={field.value}
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.email?.message}
+        <div className="flex items-center mt-5">
+          <p className="text-on-primary-anti-flash-white text-sm flex items-center">
+            Уже есть аккаунт?
+          </p>
+
+          <TextButtonLink title="Войти" path="/login" className="w-min" />
+        </div>
+
+        {errors.root?.formErrors && <p>{errors.root.formErrors.message}</p>}
+
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <DefaultInput
+              className="mt-10"
+              labelText="Введите email"
+              placeholder="Email"
+              value={field.value}
+              onChange={(event) => field.onChange(event.target.value)}
+              error={errors.root?.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              className="mt-7"
+              labelText="Введите пароль"
+              placeholder="Введите пароль"
+              value={field.value}
+              onChange={(event) => field.onChange(event.target.value)}
+              error={errors.root?.password?.message}
+            />
+          )}
+        />
+
+        <div className="mt-16 grid grid-cols-3">
+          <MainButton
+            type="submit"
+            title="Продолжить"
+            handler={() => {}}
+            isLoading={isButtonLoading}
+            className="col-start-1 col-end-4 lg:col-start-3"
           />
-        )}
-      />
-
-      <Controller
-        name="password"
-        control={control}
-        render={({ field }) => (
-          <PasswordInput
-            value={field.value}
-            onChange={(event) => field.onChange(event.target.value)}
-            error={errors.root?.password?.message}
-          />
-        )}
-      />
-
-      <button>Submit</button>
+        </div>
+      </FormContainer>
     </form>
   );
 });
