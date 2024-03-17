@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput, PasswordInput } from '@/ui/Input';
 
 const LoginForm: React.FC = React.memo(() => {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useStore(({ login }) => ({
     login,
@@ -32,6 +33,8 @@ const LoginForm: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<LoginInputs> = async (formData) => {
     const { email, password } = formData;
 
+    setIsButtonLoading(true);
+
     await login(email, password)
       .then(() => navigate('/', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
@@ -49,7 +52,8 @@ const LoginForm: React.FC = React.memo(() => {
             message: formErrors,
           });
         }
-      });
+      })
+      .finally(() => setIsButtonLoading(false));
   };
 
   return (
@@ -110,17 +114,16 @@ const LoginForm: React.FC = React.memo(() => {
           )}
         />
 
-        <TextButtonLink
-          title="Забыли пароль?"
-          path="/reset"
-          className="w-fit mt-4"
-        />
+        <div className="mt-4 grid grid-cols-4">
+          <TextButtonLink title="Забыли пароль?" path="/reset" />
+        </div>
 
         <div className="mt-16 grid grid-cols-3">
           <MainButton
             type="submit"
             title="Продолжить"
             handler={() => {}}
+            isLoading={isButtonLoading}
             className="col-start-1 col-end-4 lg:col-start-3"
           />
         </div>
