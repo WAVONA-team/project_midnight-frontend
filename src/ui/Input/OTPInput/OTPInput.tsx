@@ -15,7 +15,7 @@ const OTPInput: React.FC<Props> = React.memo(
         length={length}
         onChange={onChange}
         autoFocus={false}
-        inputClassName={`${inputClassName} border-b border-b-on-primary-anti-flash-white focus:outline-none w-6 text-center`}
+        inputClassName={`${inputClassName} text-on-primary-anti-flash-white bg-[transparent] border-b border-b-on-primary-anti-flash-white focus:outline-none w-6 text-center`}
         containerClassName={`${containerClassName} flex gap-4`}
       />
     );

@@ -17,4 +17,6 @@ export type UserState = {
     newPassword: string,
     confirmationPassword: string,
   ) => Promise<NormalizedUser>;
+  deleteUser: (email: string | null) => Promise<AxiosResponse>;
+  resendCode: (email: string | null) => Promise<AxiosResponse>;
 };

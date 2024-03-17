@@ -37,7 +37,7 @@ const RegistrationForm: React.FC = React.memo(() => {
     setIsButtonLoading(true);
 
     await register(email, password)
-      .then(() => navigate('/verify', { replace: true }))
+      .then(() => navigate('/verify', { replace: true, state: { email } }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
