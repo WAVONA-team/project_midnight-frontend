@@ -21,7 +21,7 @@ const Spinner: React.FC<Props> = React.memo(
         className={`${className} bg-[inherit] absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded`}
       >
         <div
-          className={`${width} ${height} grid place-items-center rounded-full animate-spin bg-[conic-gradient(#FCEEEE,#FCEEEE,#da2f37)]`}
+          className={`${width} ${height} grid place-items-center rounded-full animate-spin bg-gradient-to-t from-on-primary-lavender-blush`}
         />
 
         <div
