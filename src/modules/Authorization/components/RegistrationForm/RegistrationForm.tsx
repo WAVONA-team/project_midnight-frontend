@@ -9,6 +9,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 import { RegistrationInputs } from '@/modules/Authorization/types';
 import { FormCTA } from '@/modules/Authorization/ui/FormCTA';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormError } from '@/modules/Authorization/ui/FormError';
 import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButtonLink } from '@/ui/Button';
@@ -79,9 +80,7 @@ const RegistrationForm: React.FC = React.memo(() => {
         />
 
         {errors.root?.formErrors && (
-          <p className="text-error-imperial-red text-xs absolute top-40">
-            {errors.root.formErrors.message}
-          </p>
+          <FormError text={errors.root.formErrors.message as string} />
         )}
 
         <Controller

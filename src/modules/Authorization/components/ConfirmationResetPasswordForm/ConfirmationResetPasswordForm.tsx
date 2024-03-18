@@ -8,6 +8,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ResetPasswordConfirmationInputs } from '@/modules/Authorization/types';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormError } from '@/modules/Authorization/ui/FormError';
 import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButton } from '@/ui/Button';
@@ -106,28 +107,24 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
           Отменить
         </button>
 
-        <FormHeader title="Сброс пароля" />
+        <FormHeader title="Восстановление пароля" />
 
-        <p className="text-on-primary-anti-flash-white text-sm block mt-16">
+        <p className="text-on-primary-anti-flash-white text-sm block mt-3">
           Введите код, отправленный на указанную почту
         </p>
 
         <TextButton
-          className="mt-8 !justify-start"
+          className="mt-16 !justify-start"
           title="Отправить код еще раз"
           handler={handleResetResetToken}
         />
 
         {errors.root?.formErrors && (
-          <p className="text-error-imperial-red text-xs absolute top-40">
-            {errors.root.formErrors.message}
-          </p>
+          <FormError text={errors.root.formErrors.message as string} />
         )}
 
         {errors.root?.resetToken && (
-          <p className="text-error-imperial-red text-xs absolute top-40">
-            {errors.root.resetToken.message}
-          </p>
+          <FormError text={errors.root.resetToken.message as string} />
         )}
 
         <Controller

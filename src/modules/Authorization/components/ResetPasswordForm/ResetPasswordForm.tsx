@@ -9,6 +9,7 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 import { ResetPasswordInputs } from '@/modules/Authorization/types';
 import { FormCTA } from '@/modules/Authorization/ui/FormCTA';
 import { FormContainer } from '@/modules/Authorization/ui/FormContainer';
+import { FormError } from '@/modules/Authorization/ui/FormError';
 import { FormHeader } from '@/modules/Authorization/ui/FormHeader';
 
 import { MainButton, TextButtonLink } from '@/ui/Button';
@@ -69,7 +70,7 @@ const ResetPasswordForm: React.FC = React.memo(() => {
           Отменить
         </Link>
 
-        <FormHeader title="Сброс пароля" />
+        <FormHeader title="Восстановление пароля" />
 
         <FormCTA
           text="Еще нет аккаунта?"
@@ -83,9 +84,7 @@ const ResetPasswordForm: React.FC = React.memo(() => {
         />
 
         {errors.root?.formErrors && (
-          <p className="text-error-imperial-red text-xs absolute top-40">
-            {errors.root.formErrors.message}
-          </p>
+          <FormError text={errors.root.formErrors.message as string} />
         )}
 
         <Controller

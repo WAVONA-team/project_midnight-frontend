@@ -7,7 +7,7 @@ type Props = {
 
 const FormCTA: React.FC<Props> = React.memo(({ text, action }) => {
   return (
-    <div className="flex items-center mt-16">
+    <div className="flex items-center mt-3">
       <p className="text-on-primary-anti-flash-white text-sm flex items-center">
         {text}
       </p>
