@@ -2,43 +2,40 @@ import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
+import { classNamesBase } from './classNames';
+
 type Props = {
   title: string;
   link: string;
-  children: ReactNode;
-  state: boolean;
+  serviceIcon: ReactNode;
+  isConnected: boolean;
   className?: string;
 };
 
 const ServiceCardLink: React.FC<Props> = React.memo(
-  ({ title, link, children, state = false, className = '' }) => {
+  ({ title, link, serviceIcon, isConnected = false, className = '' }) => {
     return (
       <a
         href={link}
-        className={classNames(
-          'inline-block font-rubik py-20 px-16  relative rounded-lg focus:outline-none cursor-pointer',
-          {
-            'bg-surface-eerie_black': state,
-            'bg-secondary-eerie-black-light': !state,
-          },
-        )}
+        className={classNames(classNamesBase.serviceCardLink, {
+          'bg-surface-eerie_black': isConnected,
+          'bg-secondary-eerie-black-light': !isConnected,
+        })}
       >
-        <div className="absolute top-0 left-0 bottom-0 right-0  flex flex-col justify-evenly items-center rounded-lg">
+        <div className={classNamesBase.serviceCardConnectBox}>
           <div
             className={classNames(
-              `text-[11px] font-normal tracking-wider ${className}`,
+              `${classNamesBase.serviceCardConnectTitle} ${className}`,
               {
-                'text-secondary-cadet-gray': state,
-                'text-on-primary-anti-flash-white ': !state,
+                'text-secondary-cadet-gray': isConnected,
+                'text-on-primary-anti-flash-white ': !isConnected,
               },
             )}
           >
-            {state ? 'Подключено' : 'Подключить'}
+            {isConnected ? 'Подключено' : 'Подключить'}
           </div>
-          {children}
-          <div className="text-base font-normal text-on-primary-anti-flash-white">
-            {title}
-          </div>
+          {serviceIcon}
+          <div className={classNamesBase.serviceCardTitle}>{title}</div>
         </div>
       </a>
     );
