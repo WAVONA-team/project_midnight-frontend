@@ -1,4 +1,4 @@
-import {  type StateCreator } from 'zustand';
+import { type StateCreator } from 'zustand';
 
 import { PlayerState } from './types/PlayerState';
 
@@ -17,7 +17,7 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
   changeVolume: (volume: number) => set({ volume }),
   changeTrackNumber: (trackNumber: number) => set({ trackNumber }),
-  changeTracksLenght: (tracksLenght: number) => set({tracksLenght }),
+  changeTracksLenght: (tracksLenght: number) => set({ tracksLenght }),
   changeCurrentTime: (currentTime: number) => set({ currentTime }),
   changeSecondsLoaded: (secondsLoaded: number) => set({ secondsLoaded }),
   changeDuration: (duration: number) => set({ duration }),
