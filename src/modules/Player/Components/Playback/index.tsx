@@ -1,4 +1,4 @@
-import React , {useRef, useEffect} from 'react';
+import React, { useRef } from 'react';
 import { type OnProgressProps } from 'react-player/base';
 import ReactPlayer from 'react-player/lazy';
 
@@ -45,29 +45,22 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
       changeTracksLenght,
     }),
   );
-  useEffect(() => {
-    console.log('In useEffect')
-    if (seeking) {
-      playerRef.current?.seekTo(seekTo, 'fraction');
-      console.log('seeking');
-      console.log('seekto', seekTo);
-    }
-  }, [seeking]);
+
   const handleProgress = (state: OnProgressProps) => {
-    console.log(seeking);
     if (!seeking) {
       changeCurrentTime(state.played);
       changeSecondsLoaded(state.loadedSeconds);
-      console.log('In condition');
     }
   };
+
   const handleOnPlay = () => {
     changeTracksLenght(tracks.length);
   };
+
   const handleOnDuration = (state: number) => {
     changeDuration(state);
-    console.log('Duration', state);
   };
+
   return (
     <div>
       <ReactPlayer
@@ -80,7 +73,7 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
         height={0}
         loop={isLoop}
         onPlay={handleOnPlay}
-        onSeek={(e) => console.log('onSeek', e)}
+        onSeek={() => {}}
         onDuration={handleOnDuration}
         onProgress={handleProgress}
       />
