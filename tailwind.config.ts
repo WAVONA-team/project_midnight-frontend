@@ -51,6 +51,22 @@ export default {
         5: '5%',
         0: '0%',
       },
+      boxShadow: {
+        'shuffle-button-default':
+          '-3px -3px 8px 0px rgba(8, 8, 7, 0.9), ' +
+          '3px 3px 6px 0px rgba(30, 34, 29, 0.9), ' +
+          '-3px 3px 6px 0px rgba(8, 8, 7, 0.2), ' +
+          '3px -3px 6px 0px rgba(8, 8, 7, 0.2), ' +
+          '1px 1px 2px 0px rgba(8, 8, 7, 0.5) inset, ' +
+          '-1px -1px 2px 0px rgba(30, 34, 29, 0.3) inset',
+        'shuffle-button-active':
+          '3px 3px 8px 0px rgba(8, 8, 7, 0.9) inset, ' +
+          '-3px -3px 6px 0px rgba(30, 34, 29, 0.9) inset, ' +
+          '3px -3px 6px 0px rgba(8, 8, 7, 0.2) inset, ' +
+          '-3px 3px 6px 0px rgba(8, 8, 7, 0.2) inset, ' +
+          '-1px -1px 2px 0px rgba(8, 8, 7, 0.5), ' +
+          '1px 1px 2px 0px rgba(30, 34, 29, 0.3)',
+      },
     },
   },
   plugins: [],
