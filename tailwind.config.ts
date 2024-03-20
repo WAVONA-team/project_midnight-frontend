@@ -34,6 +34,7 @@ export default {
         'cadet-gray': '#A09F9F',
         'eerie-black-light': '#212320',
         glaocous: '#70799A',
+        jet: '#1E201D',
       },
       'on-secondary': {
         'dim-gray': '#696969',
