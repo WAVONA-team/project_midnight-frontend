@@ -3,14 +3,16 @@ import React from 'react';
 import ShuffleIcon from '@/assets/buttons/ShuffleIcon.svg';
 
 type Props = {
+  title: string;
+  className?: string;
   disabled?: boolean;
   handler: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const ShuffleButton: React.FC<Props> = React.memo(
-  ({ disabled = false, handler = () => {} }) => {
+  ({ title, className, disabled = false, handler = () => {} }) => {
     return (
-      <div className="relative">
+      <div className={className}>
         <button
           onClick={handler}
           disabled={disabled}
@@ -37,9 +39,9 @@ const ShuffleButton: React.FC<Props> = React.memo(
           disabled:shadow-shuffle-button-default
           "
         >
-          <div className="relative flex">
-            <img className="mr-4" src={ShuffleIcon} alt="shuffle" />
-            <span>Перемешать</span>
+          <div className="flex">
+            <img className={title && 'mr-4'} src={ShuffleIcon} alt="shuffle" />
+            <span>{title}</span>
           </div>
         </button>
       </div>
