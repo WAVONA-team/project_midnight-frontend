@@ -7,6 +7,9 @@ export const classNamesBase = {
   rounded-lg 
   focus:outline-none 
   cursor-pointer 
+  hover:bg-secondary-jet
+  active:bg-secondary-jet 
+  active:shadow-[inset_3px_3px_8px_0px_#080807e5,inset_-3px_-3px_6px_0px_#1e221de5,inset_3px_-3px_6px_0px_#08080733,inset_-3px_3px_6px_0px_#08080733,inset_-1px_-1px_2px_0px_#08080780,inset_1px_1px_2px_0px_#1e221d4d]
     `,
   serviceCardConnectBox: `
   absolute 
@@ -20,6 +23,7 @@ export const classNamesBase = {
   items-center 
   rounded-lg
     `,
+
   serviceCardConnectTitle: `
   text-[11px] 
   font-normal 
@@ -41,5 +45,8 @@ export const classNamesBase = {
   rounded-lg 
   focus:outline-none 
   cursor-pointer
+  hover:bg-secondary-jet
+  active:bg-secondary-jet 
+  active:shadow-[inset_3px_3px_8px_0px_#080807e5,inset_-3px_-3px_6px_0px_#1e221de5,inset_3px_-3px_6px_0px_#08080733,inset_-3px_3px_6px_0px_#08080733,inset_-1px_-1px_2px_0px_#08080780,inset_1px_1px_2px_0px_#1e221d4d]
     `,
 };
