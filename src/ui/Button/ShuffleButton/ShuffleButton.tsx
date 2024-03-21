@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ShuffleIcon from '@/assets/buttons/ShuffleIcon.svg';
+import shuffleIcon from '@/assets/buttons/playerButtons/shuffleIcon.svg';
 
 type Props = {
   title: string;
@@ -24,7 +24,7 @@ const ShuffleButton: React.FC<Props> = React.memo(
           px-4
           font-normal
           text-base
-          shadow-shuffle-button-default
+          shadow-button-default
           rounded-3xl
           tracking-wider
           bg-primary-poppy
@@ -32,15 +32,15 @@ const ShuffleButton: React.FC<Props> = React.memo(
           text-on-primary-anti-flash-white
           hover:bg-primary-fire-brick
           focus:outline-none
-          active:shadow-shuffle-button-active
+          active:shadow-button-active
           active:bg-primary-madder
           disabled:bg-secondary-cadet-gray
           disabled:cursor-not-allowed
-          disabled:shadow-shuffle-button-default
+          disabled:shadow-button-default
           "
         >
           <div className="flex">
-            <img className={title && 'mr-4'} src={ShuffleIcon} alt="shuffle" />
+            <img className={title && 'mr-4'} src={shuffleIcon} alt="shuffle" />
             <span>{title}</span>
           </div>
         </button>

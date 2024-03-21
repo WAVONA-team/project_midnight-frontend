@@ -52,20 +52,30 @@ export default {
         0: '0%',
       },
       boxShadow: {
-        'shuffle-button-default':
+        'button-default':
           '-3px -3px 8px 0px rgba(8, 8, 7, 0.9), ' +
           '3px 3px 6px 0px rgba(30, 34, 29, 0.9), ' +
           '-3px 3px 6px 0px rgba(8, 8, 7, 0.2), ' +
           '3px -3px 6px 0px rgba(8, 8, 7, 0.2), ' +
           '1px 1px 2px 0px rgba(8, 8, 7, 0.5) inset, ' +
           '-1px -1px 2px 0px rgba(30, 34, 29, 0.3) inset',
-        'shuffle-button-active':
+        'button-active':
           '3px 3px 8px 0px rgba(8, 8, 7, 0.9) inset, ' +
           '-3px -3px 6px 0px rgba(30, 34, 29, 0.9) inset, ' +
           '3px -3px 6px 0px rgba(8, 8, 7, 0.2) inset, ' +
           '-3px 3px 6px 0px rgba(8, 8, 7, 0.2) inset, ' +
           '-1px -1px 2px 0px rgba(8, 8, 7, 0.5), ' +
           '1px 1px 2px 0px rgba(30, 34, 29, 0.3)',
+      },
+      backgroundImage: {
+        'play-button-small-gradient-default':
+          'linear-gradient(135deg, #141613 0%, #121411 100%)',
+        'play-button-big-gradient-default':
+          'radial-gradient(73.91% 73.91% at 50% 51.09%, rgba(255, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%), ' +
+          'linear-gradient(135deg, #141613 0%, #121411 100%)',
+        'play-button-big-gradient-hover':
+          'radial-gradient(73.91% 73.91% at 50% 51.09%, rgba(255, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), ' +
+          'linear-gradient(135deg, #141613 0%, #121411 100%)',
       },
     },
   },
