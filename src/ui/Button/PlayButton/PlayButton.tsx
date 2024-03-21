@@ -46,8 +46,8 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
       className="
         w-8
         h-8
-        lg:h-16
-        lg:w-16
+        lg:h-[62px]
+        lg:w-[62px]
         flex
         justify-center
         items-center
@@ -69,8 +69,8 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
             className="
               w-4
               h-4
-              lg:h-8
-              lg:w-8
+              lg:h-6
+              lg:w-6
               select-none
               focus:outline-none
             "
@@ -85,8 +85,8 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
             className="
               w-4
               h-4
-              lg:h-8
-              lg:w-8
+              lg:h-6
+              lg:w-6
               select-none
               focus:outline-none
             "
