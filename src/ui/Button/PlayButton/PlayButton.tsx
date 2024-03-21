@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 
 import pauseIcon from '@/assets/buttons/playerButtons/pauseIcon.svg';
 import playIcon from '@/assets/buttons/playerButtons/playIcon.svg';
@@ -11,38 +11,26 @@ type Props = {
 };
 
 const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
-  const controls = useAnimationControls();
-
-  const imageVariants = {
-    initial: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        ease: 'easeInOut',
-        duration: 0.3,
-      },
-    },
-    animate: {
-      scale: 0,
-      opacity: 0,
-      rotate: 360,
-      transition: {
-        ease: 'easeInOut',
-        duration: 0.3,
-      },
-    },
-  };
+  const [scope, animate] = useAnimate();
 
   const handleClick = async () => {
-    await controls.start('animate');
     toggle(!isPlay);
-    controls.set('initial');
+    await animate(
+      'img',
+      { scale: 0, opacity: 0, rotate: 360 },
+      { duration: 0.3 },
+    );
+    await animate(
+      'img',
+      { scale: 1, opacity: 1, rotate: 0 },
+      { duration: 0.3 },
+    );
   };
 
   return (
     <motion.button
       onClick={handleClick}
+      ref={scope}
       className="
         w-8
         h-8
@@ -63,9 +51,7 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
       <AnimatePresence>
         {isPlay ? (
           <motion.img
-            variants={imageVariants}
             initial="initial"
-            animate={controls}
             className="
               w-4
               h-4
@@ -79,9 +65,7 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
           />
         ) : (
           <motion.img
-            variants={imageVariants}
             initial="initial"
-            animate={controls}
             className="
               w-4
               h-4
