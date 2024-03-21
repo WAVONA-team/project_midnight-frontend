@@ -5,12 +5,25 @@ import { useStore } from '@/store/index';
 import format from '@/modules/Player/helpers/format';
 
 export const TimeRange: React.FC = React.memo(() => {
-  const { currentTime, duration, changeSeeking, changeSeekTo } = useStore(
-    ({ currentTime, duration, changeSeeking, changeSeekTo }) => ({
+  const {
+    currentTime,
+    duration,
+    changeSeeking,
+    changeSeekTo,
+    changeCurrentTime,
+  } = useStore(
+    ({
       currentTime,
       duration,
       changeSeeking,
       changeSeekTo,
+      changeCurrentTime,
+    }) => ({
+      currentTime,
+      duration,
+      changeSeeking,
+      changeSeekTo,
+      changeCurrentTime,
     }),
   );
 
@@ -28,13 +41,14 @@ export const TimeRange: React.FC = React.memo(() => {
         step="any"
         value={currentTime}
         onMouseDown={() => {
-          console.log('mouse down');
           changeSeeking(true);
         }}
-        onMouseUp={(event) => {
-          console.log('mouse up');
+        onChange={(event) => {
+          changeCurrentTime(+event.target.value);
+          changeSeekTo(+event.target.value);
+        }}
+        onMouseUp={() => {
           changeSeeking(false);
-          changeSeekTo(+event.currentTarget.value);
         }}
         className="w-56"
       />

@@ -1,5 +1,4 @@
-import { Playback } from '@/modules/Player/Components/Playback';
-
-import { Controls } from './Components/Controls';
+import { Controls } from '@/modules/Player/Components';
+import { Playback } from '@/modules/Player/Components/Playback/Playback';
 
 export { Playback, Controls };

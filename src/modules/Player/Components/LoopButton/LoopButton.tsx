@@ -7,13 +7,16 @@ export const LoopButton: React.FC = React.memo(() => {
     changeIsLoop,
     isLoop,
   }));
+
   const LoopHandler = () => {
     changeIsLoop(!isLoop);
   };
 
   return (
     <div>
-      <button onClick={LoopHandler}>{isLoop ? 'UnLoop' : 'Loop'}</button>
+      <button type="button" onClick={LoopHandler}>
+        {isLoop ? 'UnLoop' : 'Loop'}
+      </button>
     </div>
   );
 });
