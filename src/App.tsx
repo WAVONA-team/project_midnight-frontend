@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
-import { ExtendedPlayer } from '@/modules/Player/Components/ExtentedPlayer';
+import { ExtendedPlayer } from '@/modules/Player/Components/ExtentedPlayer/ExtendedPlayer';
 
 import Loader from './ui/Loader/Loader';
 

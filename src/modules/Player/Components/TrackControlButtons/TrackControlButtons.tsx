@@ -2,18 +2,29 @@ import React from 'react';
 
 import { useStore } from '@/store/index';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export const SkipButton: React.FC<Props> = React.memo(({ children }) => {
-  const { tracksLenght, changeTrackNumber, trackNumber } = useStore(
-    ({ tracksLenght, changeTrackNumber, trackNumber }) => ({
+export const TrackControlButtons: React.FC = React.memo(() => {
+  const {
+    tracksLenght,
+    changeTrackNumber,
+    trackNumber,
+    playerState,
+    changePlayerState,
+  } = useStore(
+    ({
       tracksLenght,
       changeTrackNumber,
       trackNumber,
+      playerState,
+      changePlayerState,
+    }) => ({
+      tracksLenght,
+      changeTrackNumber,
+      trackNumber,
+      playerState,
+      changePlayerState,
     }),
   );
+
   const NextTrack = () => {
     if (trackNumber === tracksLenght - 1) {
       return changeTrackNumber(0);
@@ -30,12 +41,20 @@ export const SkipButton: React.FC<Props> = React.memo(({ children }) => {
     }
   };
 
+  const changeState = () => {
+    changePlayerState(!playerState);
+  };
+
   return (
     <div className="flex gap-2">
       <button type="button" onClick={NextTrack}>
         Next
       </button>
-      {children}
+
+      <button type="button" onClick={changeState}>
+        {playerState ? 'Pause' : 'Play'}
+      </button>
+
       <button type="button" onClick={PreviosTrack}>
         Previos
       </button>
