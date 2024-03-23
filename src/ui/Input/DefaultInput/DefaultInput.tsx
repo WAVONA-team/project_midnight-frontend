@@ -39,7 +39,7 @@ const DefaultInput: React.FC<Props> = React.memo(
 
         <input
           className={classNames(
-            `
+            ` 
               mt-8
               px-4
               py-2

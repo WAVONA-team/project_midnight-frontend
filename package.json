@@ -17,9 +17,9 @@
     "react-auth-code-input": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
-    "react-router-dom": "^6.22.0",
+    "react-router-dom": "^6.22.3",
     "tailwind-gradient-mask-image": "^1.2.0",
-    "zustand": "^4.5.1"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

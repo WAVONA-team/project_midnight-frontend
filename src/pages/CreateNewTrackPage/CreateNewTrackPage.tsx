@@ -1,10 +1,17 @@
 import React from 'react';
 
-export const CreateNewTrackPage: React.FC = React.memo(() => {
+import { MusicAddition } from '@/modules/MusicAddition';
 
+export const CreateNewTrackPage: React.FC = React.memo(() => {
   return (
-    <div>
-      <h1>CreateTrackPage</h1>
+    <div
+      className="
+      bg-background-hight
+      h-screen
+      pt-8
+    "
+    >
+      <MusicAddition />
     </div>
   );
 });

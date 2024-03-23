@@ -5,6 +5,7 @@ export default {
     fontFamily: {
       rubik: ['Rubik', 'sans-serif'],
       openSans: ['Open Sans', 'sans-serif'],
+      notoSans: ['Noto Sans', 'sans-serif'],
       ubuntu: ['Ubuntu', 'sans-serif'],
     },
 
