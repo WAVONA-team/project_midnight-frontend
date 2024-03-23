@@ -4,9 +4,10 @@ import {
   LoopButton,
   TimeRange,
   TrackControlButtons,
-  TrackInfo,
   VolumeChanger,
 } from '@/modules/Player/components';
+
+import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
 
 export const Controls: React.FC = React.memo(() => {
   return (
