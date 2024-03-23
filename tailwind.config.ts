@@ -23,6 +23,7 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
+        'misty_rose': '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -35,6 +36,7 @@ export default {
         'eerie-black-light': '#212320',
         glaocous: '#70799A',
         jet: '#1E201D',
+
       },
       'on-secondary': {
         'dim-gray': '#696969',
