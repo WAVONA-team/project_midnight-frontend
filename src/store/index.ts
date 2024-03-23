@@ -5,6 +5,12 @@ import {
   createUserSlice,
 } from '@/modules/Authorization/store';
 
-export const useStore = create<UserState>((...a) => ({
+import {
+  type PlayerState,
+  createPlayerSlice,
+} from '@/modules/Player/store';
+
+export const useStore = create<UserState & PlayerState>((...a) => ({
   ...createUserSlice(...a),
+  ...createPlayerSlice(...a),
 }));
