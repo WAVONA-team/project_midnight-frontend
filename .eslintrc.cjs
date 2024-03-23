@@ -8,10 +8,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: [
-    'react-refresh',
-    'simple-import-sort',
-  ],
+  plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -33,18 +30,5 @@ module.exports = {
       'error',
       'always'
     ],
-    'simple-import-sort/imports': [
-      'error',
-      {
-        'groups': [
-          ['^react'],
-          ['^@?shared/helpers', '^@?shared/types'],
-          ['^@?modules/.*$'],
-          ['^@?components/.*$'],
-          ['^@?ui/.*$'],
-          ['^@?assets/.*$'],
-        ],
-      }
-    ],
   },
-}
+};
