@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 
@@ -6,15 +6,15 @@ import pauseIcon from '@/assets/buttons/playerButtons/pauseIcon.svg';
 import playIcon from '@/assets/buttons/playerButtons/playIcon.svg';
 
 type Props = {
-  isPlay: boolean;
-  toggle: (state: boolean) => void;
+  className?: string;
 };
 
-const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
+const PlayButton: React.FC<Props> = React.memo(({ className }) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [scope, animate] = useAnimate();
 
   const handleClick = async () => {
-    toggle(!isPlay);
+    setIsActive(!isActive);
     await animate(
       'img',
       { scale: 0, opacity: 0, rotate: 360 },
@@ -31,7 +31,8 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
     <motion.button
       onClick={handleClick}
       ref={scope}
-      className="
+      className={`
+        ${className}
         w-8
         h-8
         lg:h-[62px]
@@ -46,12 +47,11 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
         lg:bg-play-button-big-gradient-default
         focus:outline-none
         lg:hover:bg-play-button-big-gradient-hover
-      "
+      `}
     >
       <AnimatePresence>
-        {isPlay ? (
+        {isActive ? (
           <motion.img
-            initial="initial"
             className="
               w-4
               h-4
@@ -65,7 +65,6 @@ const PlayButton: React.FC<Props> = React.memo(({ toggle, isPlay = false }) => {
           />
         ) : (
           <motion.img
-            initial="initial"
             className="
               w-4
               h-4
