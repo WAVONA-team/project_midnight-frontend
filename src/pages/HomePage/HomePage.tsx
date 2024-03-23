@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ExtendedPlayer } from '@/modules/Player/components/ExtentedPlayer/ExtendedPlayer';
+
 import { MainButtonLink } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 import { Logo } from '@/ui/Logo';
@@ -45,6 +47,10 @@ export const HomePage: React.FC = React.memo(() => {
           <h1 className="font-openSans text-on-primary-anti-flash-white text-4xl lg:text-6xl">
             Слушайте треки со всех площадок в одном месте
           </h1>
+
+          <ExtendedPlayer
+            tracks={['https://www.youtube.com/watch?v=95d2uohF0CQ']}
+          />
         </main>
       </Container>
     </div>

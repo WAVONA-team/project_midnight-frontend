@@ -6,7 +6,7 @@ import {
   TrackControlButtons,
   TrackInfo,
   VolumeChanger,
-} from '@/modules/Player/Components/index';
+} from '@/modules/Player/components';
 
 export const Controls: React.FC = React.memo(() => {
   return (

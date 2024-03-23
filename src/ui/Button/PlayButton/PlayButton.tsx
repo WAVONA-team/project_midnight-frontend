@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import { useStore } from '@/store';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 
 import pauseIcon from '@/assets/buttons/playerButtons/pauseIcon.svg';
@@ -10,11 +11,18 @@ type Props = {
 };
 
 const PlayButton: React.FC<Props> = React.memo(({ className }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
   const [scope, animate] = useAnimate();
 
+  const { playerState, changePlayerState } = useStore(
+    ({ playerState, changePlayerState }) => ({
+      playerState,
+      changePlayerState,
+    }),
+  );
+
   const handleClick = async () => {
-    setIsActive(!isActive);
+    changePlayerState(!playerState);
+
     await animate(
       'img',
       { scale: 0, opacity: 0, rotate: 360 },
@@ -50,7 +58,7 @@ const PlayButton: React.FC<Props> = React.memo(({ className }) => {
       `}
     >
       <AnimatePresence>
-        {isActive ? (
+        {playerState ? (
           <motion.img
             className="
               w-4

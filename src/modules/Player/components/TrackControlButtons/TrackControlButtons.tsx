@@ -2,26 +2,14 @@ import React from 'react';
 
 import { useStore } from '@/store/index';
 
+import { PlayButton } from '@/ui/Button';
+
 export const TrackControlButtons: React.FC = React.memo(() => {
-  const {
-    tracksLenght,
-    changeTrackNumber,
-    trackNumber,
-    playerState,
-    changePlayerState,
-  } = useStore(
-    ({
+  const { tracksLenght, changeTrackNumber, trackNumber } = useStore(
+    ({ tracksLenght, changeTrackNumber, trackNumber }) => ({
       tracksLenght,
       changeTrackNumber,
       trackNumber,
-      playerState,
-      changePlayerState,
-    }) => ({
-      tracksLenght,
-      changeTrackNumber,
-      trackNumber,
-      playerState,
-      changePlayerState,
     }),
   );
 
@@ -41,19 +29,13 @@ export const TrackControlButtons: React.FC = React.memo(() => {
     }
   };
 
-  const changeState = () => {
-    changePlayerState(!playerState);
-  };
-
   return (
     <div className="flex gap-2">
       <button type="button" onClick={NextTrack}>
         Next
       </button>
 
-      <button type="button" onClick={changeState}>
-        {playerState ? 'Pause' : 'Play'}
-      </button>
+      <PlayButton />
 
       <button type="button" onClick={PreviosTrack}>
         Previos
