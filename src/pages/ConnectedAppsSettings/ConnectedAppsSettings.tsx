@@ -2,15 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
-import { User } from 'project_midnight';
+import { NormalizedUser } from 'project_midnight';
 
 import { ServiceCard } from '@/components/ServiceCard';
 
-import arrowIcon from '@/assets/arrows/arrowIcon.svg';
-import spotifyIcon from '@/assets/services/spotifyIcon.svg';
-import yandexMusicIcon from '@/assets/services/yandexMusicIcon.svg';
+import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
 
-export const ConnectedAppsSettings: React.FC<User> = React.memo(
+import arrowIcon from '@/assets/arrows/arrowIcon.svg';
+
+export const ConnectedAppsSettings: React.FC<NormalizedUser> = React.memo(
   ({ spotifyOAUTH, yandexOAUTH }) => {
     const navigate = useNavigate();
 
@@ -70,47 +70,15 @@ export const ConnectedAppsSettings: React.FC<User> = React.memo(
         >
           <ServiceCard
             title="Spotify"
-            serviceIcon={
-              <div
-                className="
-                  rounded-md
-                  flex justify-center
-                  w-[48px] h-[48px]
-                  shadow-service-icon-spotify
-                  bg-service-icon-gradient
-                "
-              >
-                <img
-                  className="rounded-md"
-                  src={spotifyIcon}
-                  alt="Spotify Icon"
-                />
-              </div>
-            }
+            serviceIcon={<ServiceIconSpotify />}
             isConnected={spotifyOAUTH !== null}
             handler={registerSpotify}
           />
 
           <ServiceCard
             title="Yandex Music"
-            serviceIcon={
-              <div
-                className="
-                  rounded-md
-                  flex justify-center
-                  w-[48px] h-[48px]
-                  shadow-service-icon-yandex
-                  bg-service-icon-yandex-gradient
-                "
-              >
-                <img
-                  className="rounded-md"
-                  src={yandexMusicIcon}
-                  alt="Yandex Music Icon"
-                />
-              </div>
-            }
-            isConnected={yandexOAUTH === null}
+            serviceIcon={<ServiceIconYandex />}
+            isConnected={yandexOAUTH !== null}
             handler={() => {}}
           />
         </div>
