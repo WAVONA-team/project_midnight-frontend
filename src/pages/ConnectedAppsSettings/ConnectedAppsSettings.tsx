@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
-import { NormalizedUser } from 'project_midnight';
+import { User } from 'project_midnight';
 
 import { ServiceCard } from '@/components/ServiceCard';
 
@@ -10,7 +10,7 @@ import arrowIcon from '@/assets/arrows/arrowIcon.svg';
 import spotifyIcon from '@/assets/services/spotifyIcon.svg';
 import yandexMusicIcon from '@/assets/services/yandexMusicIcon.svg';
 
-export const ConnectedAppsSettings: React.FC<NormalizedUser> = React.memo(
+export const ConnectedAppsSettings: React.FC<User> = React.memo(
   ({ spotifyOAUTH, yandexOAUTH }) => {
     const navigate = useNavigate();
 
@@ -110,7 +110,7 @@ export const ConnectedAppsSettings: React.FC<NormalizedUser> = React.memo(
                 />
               </div>
             }
-            isConnected={yandexOAUTH !== null}
+            isConnected={yandexOAUTH === null}
             handler={() => {}}
           />
         </div>
