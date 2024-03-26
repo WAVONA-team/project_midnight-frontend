@@ -39,7 +39,7 @@ const LoginForm: React.FC = React.memo(() => {
     setIsButtonLoading(true);
 
     await login(email, password)
-      .then(() => navigate('/', { replace: true }))
+      .then(() => navigate('/tracks', { replace: true }))
       .catch(({ fieldErrors, formErrors }: ServerErrors) => {
         if (fieldErrors) {
           fieldErrors.forEach((serverError) => {
