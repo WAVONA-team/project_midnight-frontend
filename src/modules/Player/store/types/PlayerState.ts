@@ -1,0 +1,22 @@
+export type PlayerState = {
+  playerState: boolean;
+  isLoop: boolean;
+  volume: number;
+  trackNumber: number;
+  tracksLenght: number;
+  currentTime: number;
+  secondsLoaded: number;
+  duration: number;
+  seekTo: number;
+  seeking: boolean;
+  changePlayerState: (playerState: boolean) => void;
+  changeIsLoop: (isLoop: boolean) => void;
+  changeVolume: (volume: number) => void;
+  changeTrackNumber: (trackNumber: number) => void;
+  changeTracksLenght: (trackLenght: number) => void;
+  changeCurrentTime: (currentTime: number) => void;
+  changeSecondsLoaded: (secondsLoaded: number) => void;
+  changeDuration: (duration: number) => void;
+  changeSeekTo: (playerState: number) => void;
+  changeSeeking: (seeking: boolean) => void;
+};

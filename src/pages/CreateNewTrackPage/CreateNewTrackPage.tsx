@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MusicAddition } from '@/modules/MusicAddition';
+import { TrackAddition } from '@/modules/TrackAddition';
 
 export const CreateNewTrackPage: React.FC = React.memo(() => {
   return (
@@ -11,7 +11,7 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
       pt-8
     "
     >
-      <MusicAddition />
+      <TrackAddition />
     </div>
   );
 });

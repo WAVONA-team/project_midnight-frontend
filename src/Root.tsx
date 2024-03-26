@@ -48,27 +48,30 @@ export const Root: React.FC = React.memo(() => {
 
           <Route path="reset-update" element={<UpdateResetPasswordPage />} />
 
-          {/* <Route path="/" element={<RequireAuthPage />}> */}
-          <Route path="playlists">
-            <Route index element={<PlaylistsPage />} />
-            <Route path="new" element={<CreateNewPlaylistPage />} />
-            <Route path=":playlistId" element={<PlaylistPage />} />
-          </Route>
+          <Route path="/" element={<RequireAuthPage />}>
+            <Route path="playlists">
+              <Route index element={<PlaylistsPage />} />
+              <Route path="new" element={<CreateNewPlaylistPage />} />
+              <Route path=":playlistId" element={<PlaylistPage />} />
+            </Route>
 
-          <Route path="tracks">
-            <Route index element={<TracksPage />} />
-            <Route path="queue" element={<TrackQueuePage />} />
-            <Route path="new" element={<CreateNewTrackPage />} />
-            <Route path=":trackId" element={<TrackPage />} />
-          </Route>
+            <Route path="tracks">
+              <Route index element={<TracksPage />} />
+              <Route path="queue" element={<TrackQueuePage />} />
+              <Route path="new" element={<CreateNewTrackPage />} />
+              <Route path=":trackId" element={<TrackPage />} />
+            </Route>
 
-          <Route path="settings">
-            <Route index element={<SettingsPage />} />
-            <Route path="connected-apps" element={<ConnectedAppsSettings />} />
-          </Route>
+            <Route path="settings">
+              <Route index element={<SettingsPage />} />
+              <Route
+                path="connected-apps"
+                element={<ConnectedAppsSettings />}
+              />
+            </Route>
 
-          <Route path="test" element={<TestPage />} />
-          {/* </Route> */}
+            <Route path="test" element={<TestPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

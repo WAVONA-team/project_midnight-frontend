@@ -19,7 +19,7 @@ const ServiceCard: React.FC<Props> = React.memo(
         type="button"
         onClick={handler}
         className={classNames(classNamesBase.serviceCardButton, {
-          'bg-surface-eerie_black': isConnected,
+          'bg-surface-eerie_black  ': isConnected,
           'bg-secondary-eerie-black-light': !isConnected,
         })}
       >
@@ -28,12 +28,12 @@ const ServiceCard: React.FC<Props> = React.memo(
             className={classNames(
               `${classNamesBase.serviceCardConnectTitle} ${className}`,
               {
-                'text-secondary-cadet-gray': isConnected,
+                'text-secondary-cadet-gray ': isConnected,
                 'text-on-primary-anti-flash-white ': !isConnected,
               },
             )}
           >
-            {isConnected ? 'Подключено' : 'Подключить'}
+            {isConnected ? 'Отключить' : 'Подключить'}
           </div>
           {serviceIcon}
           <div className={classNamesBase.serviceCardTitle}>{title}</div>
