@@ -11,19 +11,18 @@ const BackButton: React.FC<Props> = React.memo((className) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mr-2">
-      <button
-        onClick={() => navigate(-1)}
-        className={`
+    <button
+      onClick={() => navigate(-1)}
+      className={`
         ${className}
         px-1.5
+        mr-2
         focus:outline-none
         sm:hidden
       `}
-      >
-        <img src={arrowIcon} alt="Arrow Icon" />
-      </button>
-    </div>
+    >
+      <img src={arrowIcon} alt="Arrow Icon" />
+    </button>
   );
 });
 
