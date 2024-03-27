@@ -1,18 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
 import { ServiceCard } from '@/components/ServiceCard';
 
+import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
 
-import arrowIcon from '@/assets/arrows/arrowIcon.svg';
-
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
-  const navigate = useNavigate();
-
   const { registerSpotify, removeSpotify, user } = useStore(
     ({ registerSpotify, removeSpotify, user }) => ({
       registerSpotify,
@@ -22,29 +18,25 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
   );
 
   return (
-    <Container>
+    <Container
+      className="
+        bg-background-hight
+        py-6
+        sm:bg-background-default-gradient
+        sm:py-12
+      "
+    >
       <div
         className="
         font-rubik
-        bg-background-hight
         text-on-primary-anti-flash-white
         max-w-full
         h-dvh
-        sm:bg-background-default-gradient
         sm:max-w-full
       "
       >
         <div className="flex">
-          <button
-            onClick={() => navigate(-1)}
-            className="
-            px-1.5
-            mr-2
-            focus:outline-none
-          "
-          >
-            <img src={arrowIcon} alt="arrow" />
-          </button>
+          <BackButton />
           <h1
             className="
             font-normal
@@ -74,7 +66,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
             serviceIcon={<ServiceIconSpotify />}
             isConnected={!!user?.spotifyOAUTH}
             handler={() =>
-              !user?.spotifyOAUTH ? registerSpotify : removeSpotify(user.id)
+              !user?.spotifyOAUTH ? registerSpotify() : removeSpotify(user.id)
             }
           />
 

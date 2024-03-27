@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-const BackButton: React.FC<Props> = React.memo((className) => {
+const BackButton: React.FC<Props> = React.memo(({ className = '' }) => {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,6 @@ const BackButton: React.FC<Props> = React.memo((className) => {
         px-1.5
         mr-2
         focus:outline-none
-        sm:hidden
       `}
     >
       <img src={arrowIcon} alt="Arrow Icon" />

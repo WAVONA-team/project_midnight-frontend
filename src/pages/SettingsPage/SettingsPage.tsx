@@ -12,20 +12,25 @@ export const SettingsPage: React.FC = React.memo(() => {
   const { logout } = useStore(({ logout }) => ({ logout }));
 
   return (
-    <Container>
+    <Container
+      className="
+        bg-background-hight
+        py-6
+        sm:bg-background-default-gradient
+        sm:py-12
+      "
+    >
       <div
         className="
         font-rubik
-        bg-background-hight
         text-on-primary-anti-flash-white
         max-w-full
         h-dvh
-        sm:bg-background-default-gradient
         sm:max-w-full
       "
       >
-        <div className="flex">
-          <BackButton />
+        <div className="flex sm:mb-3">
+          <BackButton className="sm:hidden" />
           <h1
             className="
             font-normal
@@ -33,7 +38,6 @@ export const SettingsPage: React.FC = React.memo(() => {
             tracking-wider
             sm:text-4xl
             sm:leading-10
-            sm:mb-3
             sm:font-openSans
           "
           >
