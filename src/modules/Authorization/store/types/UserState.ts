@@ -8,6 +8,7 @@ export type UserState = {
   registerVerify: (
     activationToken: string | null,
   ) => Promise<UserWithAccessToken>;
+  removeSpotify: (userId: string) => Promise<NormalizedUser>;
   registerSpotify: () => Window | null;
   login: (email: string, password: string) => Promise<UserWithAccessToken>;
   logout: () => Promise<AxiosResponse>;
