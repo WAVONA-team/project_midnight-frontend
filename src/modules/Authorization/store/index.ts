@@ -56,9 +56,14 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
   },
   removeSpotify: async (userId: string) => {
     return httpClient
-      .patch('/users/remove-app', {
+      .patch<NormalizedUser>('/users/remove-app', {
         provider: 'Spotify',
         userId,
+      })
+      .then(({ data: user }) => {
+        set({ user });
+
+        return user;
       })
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
