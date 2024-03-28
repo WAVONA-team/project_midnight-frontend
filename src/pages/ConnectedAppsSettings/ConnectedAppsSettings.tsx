@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useStore } from '@/store';
 
+import ServiceModalContent from '@/components/Modals/ServiceModalContent/ServiceModalContent.tsx';
 import { ServiceCard } from '@/components/ServiceCard';
 
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
+import Modal from '@/ui/Modal/Modal.tsx';
 import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
 
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
   const { registerSpotify, removeSpotify, user } = useStore(
     ({ registerSpotify, removeSpotify, user }) => ({
       registerSpotify,
@@ -16,6 +20,11 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       user,
     }),
   );
+
+  const removeSpotifyAndCloseModal = () => {
+    setIsModalActive(false);
+    removeSpotify(user!.id);
+  };
 
   return (
     <Container
@@ -66,7 +75,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
             serviceIcon={<ServiceIconSpotify />}
             isConnected={!!user?.spotifyOAUTH}
             handler={() =>
-              !user?.spotifyOAUTH ? registerSpotify() : removeSpotify(user.id)
+              !user?.spotifyOAUTH ? registerSpotify() : setIsModalActive(true)
             }
           />
 
@@ -76,6 +85,14 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
             isConnected={!!user?.yandexOAUTH}
             handler={() => {}}
           />
+
+          <Modal isActive={isModalActive} setIsActive={setIsModalActive}>
+            <ServiceModalContent
+              title="Spotify"
+              setIsActive={setIsModalActive}
+              handler={removeSpotifyAndCloseModal}
+            />
+          </Modal>
         </div>
       </div>
     </Container>
