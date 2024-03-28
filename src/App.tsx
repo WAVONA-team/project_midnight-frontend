@@ -11,7 +11,7 @@ const App: React.FC = React.memo(() => {
   }));
 
   useEffect(() => {
-    console.log('isChecked App', isChecked);
+    console.log('isChecked', isChecked);
     checkAuth();
   }, []);
 

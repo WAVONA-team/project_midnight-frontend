@@ -1,30 +1,36 @@
+import { Track } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
-import { createClient } from '@/shared/http';
+import { httpClient } from '@/shared/api/httpClient';
+import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import { Track } from '../types';
 import { TrackAdditionState } from './types/TrackAdditionState';
 
-const authClient = createClient();
-
 export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
-  track: null,
-  isLoading: false,
-  isError: false,
-  trackRequest: async (url) => {
-    return await authClient
-      .post<Track>('/track', {
+  newTrack: null,
+  isNewTrackLoading: false,
+  newTrackError: '',
+  newTrackRequest: async (url, userId) => {
+    set({ newTrackError: '' });
+    return await httpClient
+      .post<Track>('/track/new', {
         url,
+        userId,
       })
       .then(({ data: track }) => {
-        set({ track: track });
+        set({ newTrack: track });
         return track;
       })
-      .catch((e) => {
-        set(e.response.data.message);
-        throw e.response.data;
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+        set({ newTrackError: formErrors });
+        throw { fieldErrors, formErrors };
       })
-      .finally(() => set({ isLoading: false }));
+      .finally(() => set({ isNewTrackLoading: false }));
+  },
+  clearNewTrack: () => {
+    set({ newTrack: null, newTrackError: '' });
   },
 });
 

@@ -1,8 +1,9 @@
-import { Track } from '../../types';
+import { Track } from 'project_midnight';
 
 export type TrackAdditionState = {
-  track: Track | null;
-  isLoading: boolean;
-  isError: boolean;
-  trackRequest: (url: string) => Promise<Track>;
+  newTrack: Track | null;
+  isNewTrackLoading: boolean;
+  newTrackError: string;
+  newTrackRequest: (url: string, userId: string) => Promise<Track>;
+  clearNewTrack: () => void;
 };

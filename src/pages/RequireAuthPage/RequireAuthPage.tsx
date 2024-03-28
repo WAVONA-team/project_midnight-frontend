@@ -16,11 +16,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
   return (
     <>
-      <header>header</header>
-
       <main>{children || <Outlet />}</main>
-
-      <footer>footer</footer>
     </>
   );
 };
