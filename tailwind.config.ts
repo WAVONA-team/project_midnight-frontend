@@ -79,8 +79,7 @@ export default {
         'play-button-big-gradient-hover':
           'radial-gradient(73.91% 73.91% at 50% 51.09%, rgba(255, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), ' +
           'linear-gradient(135deg, #141613 0%, #121411 100%)',
-        'background-desktop': `linear-gradient(0deg, #0b0d0b, #0b0d0b),
-          radial-gradient(
+        'background-desktop': `radial-gradient(
             35.35% 48.59% at 95.69% 96.29%,
             rgba(218, 47, 55, 0.1) 0%,
             rgba(218, 47, 55, 0) 100%
@@ -89,7 +88,8 @@ export default {
             5.73% 7.96% at 96.28% 66.75%,
             rgba(218, 47, 55, 0.1) 0%,
             rgba(218, 47, 55, 0) 76.29%
-          );`,
+          ),
+          linear-gradient(0deg, #0b0d0b, #0b0d0b)`,
       },
     },
   },
