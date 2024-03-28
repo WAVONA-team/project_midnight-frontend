@@ -1,10 +1,25 @@
 import React from 'react';
 
-export const CreateNewTrackPage: React.FC = React.memo(() => {
+import {
+  LoopButton,
+  Playback,
+  TimeRange,
+  TrackControlButtons,
+  VolumeChanger,
+} from '@/modules/Player/components';
 
+import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+
+export const CreateNewTrackPage: React.FC = React.memo(() => {
   return (
-    <div>
+    <div className="w-full h-screen bg-[black]">
       <h1>CreateTrackPage</h1>
+      <TrackInfo />
+      <LoopButton></LoopButton>
+      {/* <Playback></Playback> */}
+      <TimeRange></TimeRange>
+      <TrackControlButtons></TrackControlButtons>
+      <VolumeChanger></VolumeChanger>
     </div>
   );
 });

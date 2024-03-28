@@ -9,10 +9,14 @@ type Props = {
 export const TrackInfo: React.FC<Props> = React.memo(
   ({ name, artist, provider }) => {
     return (
-      <div>
-        <p>{name}</p>
-        <p>{artist}</p>
-        <p>{provider}</p>
+      <div className="flex">
+        <div></div>
+        <div>
+          <p>{name}</p>
+          <p>{artist}</p>
+          <p>{provider}</p>
+        </div>
+        <div></div>
       </div>
     );
   },
