@@ -13,7 +13,10 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   duration: 0,
   seekTo: 0,
   seeking: false,
-  changePlayerState: (playerState: boolean) => set({ playerState }),
+  changePlayerState: (playerState: boolean) => {
+    console.log('player state in store', playerState);
+    set({ playerState });
+  },
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
   changeVolume: (volume: number) => set({ volume }),
   changeTrackNumber: (trackNumber: number) => set({ trackNumber }),

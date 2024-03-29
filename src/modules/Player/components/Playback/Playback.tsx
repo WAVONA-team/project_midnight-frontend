@@ -71,6 +71,12 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
     changeDuration(state);
   };
 
+  useEffect(() => {
+    console.log('playerState in Playback', playerState);
+    console.log('trackNumber in Playback', trackNumber);
+    console.log('Playback', tracks[trackNumber]);
+  }, [playerState]);
+
   return (
     <div>
       <ReactPlayer
