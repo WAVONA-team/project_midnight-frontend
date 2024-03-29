@@ -3,6 +3,8 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
+import NavBar from '@/modules/NavBar';
+
 export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
@@ -16,11 +18,10 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
   return (
     <>
-      <header>header</header>
-
-      <main>{children || <Outlet />}</main>
-
-      <footer>footer</footer>
+      <div className=' flex flex-col justify-normal lg:flex-row-reverse lg:justify-end h-screen'>
+        <main className=' '>{children || <Outlet />}</main>
+        <NavBar />
+      </div>
     </>
   );
 };
