@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { useStore } from '@/store';
+import { NormalizedUser } from 'project_midnight';
 
 import ServiceModalContent from '@/pages/ConnectedAppsSettings/components/ServiceModalContent.tsx';
 
@@ -16,13 +17,14 @@ type Service = {
   icon: React.JSX.Element;
   token: string | null | undefined;
   register: () => void;
-  remove: () => void;
+  remove: () => Promise<NormalizedUser>;
 };
 
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
   const [currentService, setCurrentService] = useState<Service>();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<string>('');
 
   const { registerSpotify, removeSpotify, user } = useStore(
     ({ registerSpotify, removeSpotify, user }) => ({
@@ -45,7 +47,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       icon: <ServiceIconYandex />,
       token: user?.yandexOAUTH,
       register: () => {},
-      remove: async () => {},
+      remove: async () => removeSpotify(user!.id),
     },
   ];
 
@@ -54,14 +56,20 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
     setIsModalActive(true);
   };
 
-  const disableModal = async (isServiceRemoved: boolean) => {
-    if (isServiceRemoved) {
-      setIsLoading(true);
-      currentService?.remove();
-      setIsLoading(false);
-    }
+  const disableModal = async () => {
+    setIsLoading(true);
 
-    setIsModalActive(false);
+    await currentService
+      ?.remove()
+      .then(() => {
+        setIsModalActive(false);
+      })
+      .catch(() => {
+        setIsError('Something went wrong. Try to disable service later.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -123,6 +131,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
           <Modal isActive={isModalActive} disableModal={disableModal}>
             <ServiceModalContent
               isLoading={isLoading}
+              isError={isError}
               title={currentService?.title}
               handler={disableModal}
             />

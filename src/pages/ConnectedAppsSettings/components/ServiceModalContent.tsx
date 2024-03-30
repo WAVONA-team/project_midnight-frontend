@@ -7,12 +7,13 @@ import crossIcon from '@/assets/cross/cross.svg';
 type Props = {
   title: string | undefined;
   isLoading: boolean;
+  isError: string;
   handler: (key: boolean) => void;
   className?: string;
 };
 
 const ServiceModalContent: React.FC<Props> = React.memo(
-  ({ title, isLoading, handler, className = '' }) => {
+  ({ title, isLoading, isError, handler, className = '' }) => {
     return (
       <div className={`${className} flex flex-col`}>
         <div className="flex justify-end mb-6">
@@ -28,6 +29,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
             {isLoading ? 'Отключаем, подождите...' : `Отключить ${title}?`}
           </h1>
         </div>
+        {isError ? <span className="text-primary-poppy">{isError}</span> : null}
         {isLoading ? (
           <Spinner className="mt-8" />
         ) : (
