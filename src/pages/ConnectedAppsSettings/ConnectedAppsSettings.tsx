@@ -56,10 +56,10 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
     setIsModalActive(true);
   };
 
-  const disableModal = async () => {
+  const disableModal = () => {
     setIsLoading(true);
 
-    await currentService
+    currentService
       ?.remove()
       .then(() => {
         setIsModalActive(false);
