@@ -9,7 +9,7 @@ import { ServiceCard } from '@/components/ServiceCard';
 
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
-import Modal from '@/ui/Modal/Modal.tsx';
+import Modal from '@/ui/Modal/Modal';
 import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
 
 type Service = {
@@ -54,10 +54,12 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
   const enableModal = (service: Service) => {
     setCurrentService(service);
     setIsModalActive(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const disableModal = () => {
     setIsLoading(true);
+    document.body.style.overflow = 'auto';
 
     currentService
       ?.remove()
@@ -65,7 +67,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         setIsModalActive(false);
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error.formErrors);
       })
       .finally(() => {
         setIsLoading(false);

@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Modal: React.FC<Props> = React.memo(
-  ({ isActive, disableModal, children, className = '' }) => {
+  ({ isActive = false, disableModal, children, className = '' }) => {
     return (
       <div
         onClick={() => disableModal(false)}

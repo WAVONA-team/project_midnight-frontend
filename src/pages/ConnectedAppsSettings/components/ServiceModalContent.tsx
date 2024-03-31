@@ -13,39 +13,78 @@ type Props = {
 };
 
 const ServiceModalContent: React.FC<Props> = React.memo(
-  ({ title, isLoading, isError, handler, className = '' }) => {
+  ({ title, isLoading = false, isError, handler, className = '' }) => {
     return (
       <div className={`${className} flex flex-col`}>
-        <div className="flex justify-end mb-6">
+        <div
+          className="
+            flex
+            justify-end
+            mb-6
+          "
+        >
           <button
-            className={`${isLoading && 'hidden'} "active:outline-none focus:outline-none`}
+            className={`
+            ${isLoading && 'hidden'} 
+              "active:outline-none 
+              focus:outline-none
+            `}
             onClick={() => handler(false)}
           >
             <img src={crossIcon} alt="Close Modal" />
           </button>
         </div>
+
         <div>
-          <h1 className="select-none font-semibold text-xl text-center">
+          <h1
+            className="
+              select-none
+              font-semibold
+              text-xl
+              text-center
+            "
+          >
             Отключить {title}?
           </h1>
         </div>
+
         {isError ? <span className="text-primary-poppy">{isError}</span> : null}
+
         {isLoading ? (
-          <Spinner className="mt-8" />
+          <Spinner className="mt-8" backgroundColor="bg-surface-eerie_black" />
         ) : (
-          <div className="flex mt-8 justify-between">
+          <div
+            className="
+              flex
+              mt-8
+              justify-between
+            "
+          >
             <button
               onClick={() => handler(false)}
-              className="font-semibold text-base active:outline-none focus:outline-none"
+              className="
+                font-semibold
+                text-base
+                active:outline-none
+                focus:outline-none
+              "
             >
               Отмена
             </button>
-            <button
-              onClick={() => handler(true)}
-              className="font-normal text-base active:outline-none focus:outline-none"
-            >
-              Да, отключить
-            </button>
+
+            {!isError && (
+              <button
+                onClick={() => handler(true)}
+                className="
+                  font-normal
+                  text-base
+                  active:outline-none
+                  focus:outline-none
+                "
+              >
+                Да, отключить
+              </button>
+            )}
           </div>
         )}
       </div>
