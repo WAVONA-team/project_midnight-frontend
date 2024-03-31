@@ -24,7 +24,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
   const [currentService, setCurrentService] = useState<Service>();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<string>('');
+  const [isError, setError] = useState<string>('');
 
   const { registerSpotify, removeSpotify, user } = useStore(
     ({ registerSpotify, removeSpotify, user }) => ({
@@ -64,8 +64,8 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       .then(() => {
         setIsModalActive(false);
       })
-      .catch(() => {
-        setIsError('Something went wrong. Try to disable service later.');
+      .catch((error) => {
+        setError(error.message);
       })
       .finally(() => {
         setIsLoading(false);

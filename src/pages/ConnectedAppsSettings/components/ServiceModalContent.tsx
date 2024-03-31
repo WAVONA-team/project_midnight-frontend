@@ -26,7 +26,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
         </div>
         <div>
           <h1 className="select-none font-semibold text-xl text-center">
-            {isLoading ? 'Отключаем, подождите...' : `Отключить ${title}?`}
+            Отключить {title}?
           </h1>
         </div>
         {isError ? <span className="text-primary-poppy">{isError}</span> : null}

@@ -14,7 +14,7 @@ const Modal: React.FC<Props> = React.memo(
         onClick={() => disableModal(false)}
         className={`
             ${className}
-            ${isActive ? 'opacity-1' : 'opacity-0'}
+            ${isActive ? 'opacity-1' : 'opacity-0 z-[-100]'}
             transition-all
             duration-100
             bg-surface-black/60
