@@ -6,6 +6,7 @@ type Props = {
   thicknessWidth?: string;
   thicknessHeight?: string;
   className?: string;
+  backgroundColor?: string;
 };
 
 const Spinner: React.FC<Props> = React.memo(
@@ -15,6 +16,7 @@ const Spinner: React.FC<Props> = React.memo(
     thicknessWidth = 'w-5',
     thicknessHeight = 'h-5',
     className = '',
+    backgroundColor = 'bg-[inherit]',
   }) => {
     return (
       <div
@@ -25,7 +27,7 @@ const Spinner: React.FC<Props> = React.memo(
         />
 
         <div
-          className={`${thicknessWidth} ${thicknessHeight} bg-[inherit] absolute rounded-full`}
+          className={`${thicknessWidth} ${thicknessHeight} ${backgroundColor} absolute rounded-full`}
         />
       </div>
     );

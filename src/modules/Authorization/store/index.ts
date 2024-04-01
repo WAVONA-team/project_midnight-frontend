@@ -4,6 +4,7 @@ import {
 } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
+import { httpClient } from '@/shared/api/httpClient';
 import { createClient } from '@/shared/http';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
@@ -52,6 +53,24 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
       `${import.meta.env.VITE_API_BASE_URL}/auth/spotify`,
       '_self',
     );
+  },
+  removeSpotify: async (userId: string) => {
+    return httpClient
+      .patch<NormalizedUser>('/users/remove-app', {
+        provider: 'Spotify',
+        userId,
+      })
+      .then(({ data: user }) => {
+        set({ user });
+
+        return user;
+      })
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
   },
   login: async (email: string, password: string) => {
     return await authClient
@@ -117,7 +136,7 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
       });
   },
   resetActivate: async (
-    resetToken: string,
+    resetToken: string | null,
     newPassword: string,
     confirmationPassword: string,
   ) => {

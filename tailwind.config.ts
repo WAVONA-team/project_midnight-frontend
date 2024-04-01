@@ -23,7 +23,7 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
-        'misty_rose': '#F4D5D5',
+        misty_rose: '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -36,7 +36,6 @@ export default {
         'eerie-black-light': '#212320',
         glaocous: '#70799A',
         jet: '#1E201D',
-
       },
       'on-secondary': {
         'dim-gray': '#696969',
@@ -69,6 +68,13 @@ export default {
           '-3px 3px 6px 0px rgba(8, 8, 7, 0.2) inset, ' +
           '-1px -1px 2px 0px rgba(8, 8, 7, 0.5), ' +
           '1px 1px 2px 0px rgba(30, 34, 29, 0.3)',
+        'modal-content':
+          'px -3px 8px 0px rgba(10, 11, 9, 0.9), ' +
+          '-3px 3px 6px 0px rgba(34, 37, 33, 0.9), ' +
+          '3px 3px 6px 0px rgba(10, 11, 9, 0.2), ' +
+          '-3px -3px 6px 0px rgba(10, 11, 9, 0.2), ' +
+          '-1px 1px 2px 0px rgba(10, 11, 9, 0.5) inset, ' +
+          '1px -1px 2px 0px rgba(34, 37, 33, 0.3) inset',
       },
       backgroundImage: {
         'play-button-small-gradient-default':
@@ -79,6 +85,10 @@ export default {
         'play-button-big-gradient-hover':
           'radial-gradient(73.91% 73.91% at 50% 51.09%, rgba(255, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), ' +
           'linear-gradient(135deg, #141613 0%, #121411 100%)',
+        'background-default-gradient':
+          'radial-gradient(5.73% 7.96% at 96.28% 66.75%, rgba(218, 47, 55, 0.1) 0%, rgba(218, 47, 55, 0) 76.29%), ' +
+          'radial-gradient(35.35% 48.59% at 95.69% 96.29%, rgba(218, 47, 55, 0.1) 0%, rgba(218, 47, 55, 0) 100%), ' +
+          'linear-gradient(0deg, #0B0D0B, #0B0D0B)',
       },
     },
   },
