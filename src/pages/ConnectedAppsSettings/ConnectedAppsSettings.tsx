@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useStore } from '@/store';
+import { NormalizedUser } from 'project_midnight';
+
+import ServiceModalContent from '@/pages/ConnectedAppsSettings/components/ServiceModalContent.tsx';
 
 import { ServiceCard } from '@/components/ServiceCard';
 
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
+import Modal from '@/ui/Modal/Modal';
 import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
 
+type Service = {
+  title: string;
+  icon: React.JSX.Element;
+  token: string | null | undefined;
+  register: () => void;
+  remove: () => Promise<NormalizedUser>;
+};
+
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
+  const [currentService, setCurrentService] = useState<Service | null>(null);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setError] = useState<string>('');
+
   const { registerSpotify, removeSpotify, user } = useStore(
     ({ registerSpotify, removeSpotify, user }) => ({
       registerSpotify,
@@ -16,6 +33,51 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       user,
     }),
   );
+
+  const services: Service[] = [
+    {
+      title: 'Spotify',
+      icon: <ServiceIconSpotify />,
+      token: user?.spotifyOAUTH,
+      register: registerSpotify,
+      remove: async () => removeSpotify(user!.id),
+    },
+    {
+      title: 'Yandex Music',
+      icon: <ServiceIconYandex />,
+      token: user?.yandexOAUTH,
+      register: () => {},
+      remove: async () => removeSpotify(user!.id),
+    },
+  ];
+
+  const enableModal = (service: Service) => {
+    setCurrentService(service);
+    setIsModalActive(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const disableModal = () => {
+    setIsModalActive(false);
+    document.body.style.overflow = 'auto';
+  };
+
+  const disableService = () => {
+    setIsLoading(true);
+
+    currentService!
+      .remove()
+      .then(() => {
+        setCurrentService(null);
+        setIsModalActive(false);
+      })
+      .catch((error) => {
+        setError(error.formErrors);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Container
@@ -61,21 +123,27 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
           sm:mt-10
         "
         >
-          <ServiceCard
-            title="Spotify"
-            serviceIcon={<ServiceIconSpotify />}
-            isConnected={!!user?.spotifyOAUTH}
-            handler={() =>
-              !user?.spotifyOAUTH ? registerSpotify() : removeSpotify(user.id)
-            }
-          />
+          {services.map((service) => (
+            <ServiceCard
+              key={service.title}
+              title={service.title}
+              serviceIcon={service.icon}
+              isConnected={!!service.token}
+              handler={() =>
+                !service.token ? service.register() : enableModal(service)
+              }
+            />
+          ))}
 
-          <ServiceCard
-            title="Yandex Music"
-            serviceIcon={<ServiceIconYandex />}
-            isConnected={!!user?.yandexOAUTH}
-            handler={() => {}}
-          />
+          <Modal isModalActive={isModalActive} disableModal={disableModal}>
+            <ServiceModalContent
+              isLoading={isLoading}
+              isError={isError}
+              title={currentService?.title}
+              disableModal={disableModal}
+              disableService={disableService}
+            />
+          </Modal>
         </div>
       </div>
     </Container>
