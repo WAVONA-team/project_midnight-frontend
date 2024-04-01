@@ -21,7 +21,7 @@ type Service = {
 };
 
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
-  const [currentService, setCurrentService] = useState<Service>();
+  const [currentService, setCurrentService] = useState<Service | null>(null);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setError] = useState<string>('');
@@ -58,12 +58,17 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
   };
 
   const disableModal = () => {
-    setIsLoading(true);
+    setIsModalActive(false);
     document.body.style.overflow = 'auto';
+  };
 
-    currentService
-      ?.remove()
+  const disableService = () => {
+    setIsLoading(true);
+
+    currentService!
+      .remove()
       .then(() => {
+        setCurrentService(null);
         setIsModalActive(false);
       })
       .catch((error) => {
@@ -130,12 +135,13 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
             />
           ))}
 
-          <Modal isActive={isModalActive} disableModal={disableModal}>
+          <Modal isModalActive={isModalActive} disableModal={disableModal}>
             <ServiceModalContent
               isLoading={isLoading}
               isError={isError}
               title={currentService?.title}
-              handler={disableModal}
+              disableModal={disableModal}
+              disableService={disableService}
             />
           </Modal>
         </div>

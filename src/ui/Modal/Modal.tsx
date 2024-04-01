@@ -1,20 +1,20 @@
 import React from 'react';
 
 type Props = {
-  isActive: boolean;
-  disableModal: (key: boolean) => void;
+  isModalActive: boolean;
+  disableModal: () => void;
   children: React.ReactNode;
   className?: string;
 };
 
 const Modal: React.FC<Props> = React.memo(
-  ({ isActive = false, disableModal, children, className = '' }) => {
+  ({ isModalActive = false, disableModal, children, className = '' }) => {
     return (
       <div
-        onClick={() => disableModal(false)}
+        onClick={disableModal}
         className={`
             ${className}
-            ${isActive ? 'opacity-1' : 'opacity-0 z-[-100]'}
+            ${isModalActive ? 'opacity-1' : 'opacity-0 z-[-100]'}
             transition-all
             duration-100
             bg-surface-black/60
@@ -27,21 +27,24 @@ const Modal: React.FC<Props> = React.memo(
             items-center
             justify-center
             font-rubik
+    
           `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
           className={`
-            ${isActive ? 'scale-100' : 'scale-0'}
+            ${isModalActive ? 'scale-100' : 'scale-0'}
               transition-all
               duration-200
               p-6
               shadow-modal-content
               bg-surface-eerie_black
-              min-w-[354px]
+              min-w-[278px]
               max-w-fit
-              min-h-[182px]
+              min-h-[136px]
               max-h-fit
+              sm:min-w-[354px]
+              sm:min-h-[182px]
           `}
         >
           {children}

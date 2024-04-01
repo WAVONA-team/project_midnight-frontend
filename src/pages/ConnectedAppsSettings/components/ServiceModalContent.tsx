@@ -8,12 +8,20 @@ type Props = {
   title: string | undefined;
   isLoading: boolean;
   isError: string;
-  handler: (key: boolean) => void;
+  disableModal: () => void;
+  disableService: () => void;
   className?: string;
 };
 
 const ServiceModalContent: React.FC<Props> = React.memo(
-  ({ title, isLoading = false, isError, handler, className = '' }) => {
+  ({
+    title,
+    isLoading = false,
+    isError,
+    disableModal,
+    disableService,
+    className = '',
+  }) => {
     return (
       <div className={`${className} flex flex-col`}>
         <div
@@ -29,7 +37,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
               "active:outline-none 
               focus:outline-none
             `}
-            onClick={() => handler(false)}
+            onClick={disableModal}
           >
             <img src={crossIcon} alt="Close Modal" />
           </button>
@@ -61,7 +69,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
             "
           >
             <button
-              onClick={() => handler(false)}
+              onClick={disableModal}
               className="
                 font-semibold
                 text-base
@@ -74,7 +82,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
 
             {!isError && (
               <button
-                onClick={() => handler(true)}
+                onClick={disableService}
                 className="
                   font-normal
                   text-base
