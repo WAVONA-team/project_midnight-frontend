@@ -1,5 +1,6 @@
 export const classNames = {
   input: `
+    block
     w-full
     font-rubik
     text-base

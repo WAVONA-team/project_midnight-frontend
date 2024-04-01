@@ -21,9 +21,6 @@ const TrackAddition: React.FC = memo(() => {
       }),
     );
   const debounceValue = useDebounce(url, 600);
-  useEffect(() => {
-    console.log('newTrack', newTrack);
-  }, [newTrack]);
 
   useEffect(() => {
     clearNewTrack();
@@ -107,7 +104,7 @@ const TrackAddition: React.FC = memo(() => {
       />
 
       {newTrack ? (
-        <TrackInfo />
+        <TrackInfo artist="" name="" provider="" />
       ) : (
         <div className="text-secondary-cadet-gray font-rubik font-normal text-base leading-6 tracking-wider ">
           Вставьте ссылку на трек из стримингового сервиса и добавьте его в свою
