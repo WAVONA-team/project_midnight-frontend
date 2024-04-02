@@ -1,10 +1,9 @@
-import { Track } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
 import { httpClient } from '@/shared/api/httpClient';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import { TrackAdditionState } from './types/TrackAdditionState';
+import { ParsedTrack, TrackAdditionState } from './types';
 
 export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   newTrack: null,
@@ -13,7 +12,7 @@ export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   newTrackRequest: async (url, userId) => {
     set({ newTrackError: '' });
     return await httpClient
-      .post<Track>('/track/new', {
+      .post<ParsedTrack>('/track/get-info', {
         url,
         userId,
       })

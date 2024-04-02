@@ -1,9 +1,9 @@
-import { Track } from 'project_midnight';
+import { ParsedTrack } from '@/modules/TrackAddition/store/types';
 
 export type TrackAdditionState = {
-  newTrack: Track | null;
+  newTrack: ParsedTrack | null;
   isNewTrackLoading: boolean;
   newTrackError: string;
-  newTrackRequest: (url: string, userId: string) => Promise<Track>;
+  newTrackRequest: (url: string, userId: string) => Promise<ParsedTrack>;
   clearNewTrack: () => void;
 };
