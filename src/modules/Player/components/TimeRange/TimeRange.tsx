@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { useStore } from '@/store/index';
+import { useStore } from '@/store';
 
 import format from '@/modules/Player/helpers/format';
+
+import InputRange from '@/ui/inputRange/InputRange.tsx';
 
 export const TimeRange: React.FC = React.memo(() => {
   const {
@@ -30,27 +32,22 @@ export const TimeRange: React.FC = React.memo(() => {
   const elapsed = format(currentTime * duration);
   const fullness = format(duration);
 
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    changeCurrentTime(+event.target.value);
+    changeSeekTo(+event.target.value);
+  };
+
   return (
     <div>
       <p>{`${elapsed} : ${fullness}`}</p>
 
-      <input
-        type="range"
-        min={0}
-        max={1}
-        step="any"
+      <InputRange
+        min={+elapsed}
+        max={+fullness}
         value={currentTime}
-        onMouseDown={() => {
-          changeSeeking(true);
-        }}
-        onChange={(event) => {
-          changeCurrentTime(+event.target.value);
-          changeSeekTo(+event.target.value);
-        }}
-        onMouseUp={() => {
-          changeSeeking(false);
-        }}
-        className="w-56"
+        onChange={onChangeHandler}
+        onMouseUp={() => changeSeeking(false)}
+        onMouseDown={() => changeSeeking(true)}
       />
     </div>
   );
