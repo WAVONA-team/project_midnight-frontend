@@ -1,38 +1,57 @@
-import React, { useState } from 'react';
-import ReactPlayer from 'react-player';
+import React from 'react';
+
+import classNames from 'classnames';
+
+import Streamline from '@/ui/Streamline/Streamline';
+
+//состояние включенности если isPlay=true и trackIndex = trackIndexPlay
+//то, что в handlerPlay всегда отправляет true
 
 type Props = {
   name: string;
   artist: string;
   provider: string;
   imgUrl: string;
-  url: string;
-  trackNumber: number;
+  duration: number;
+  trackIndexPlay: number;
+  trackIndex: number;
   isPlay: boolean;
-  currentTrack: number;
+  handlerPlay: React.MouseEventHandler<HTMLDivElement>;
+  handlerModal: React.MouseEventHandler<HTMLDivElement>;
 };
 
-//состояние включенности если isPlay= true и trackNumber = trackNumberON
-
 export const TrackInfo: React.FC<Props> = React.memo(
-  ({ name, artist, provider, imgUrl, url }) => {
-    const [duration, setDuration] = useState(0);
-
-    const getDuration = (state: number) => {
-      const min = state / 60;
-      const sec = state - 60 * Math.floor(min);
-      console.log('seconds)', sec);
-      setDuration(state);
-    };
-
+  ({
+    name,
+    artist,
+    provider,
+    imgUrl,
+    duration,
+    trackIndexPlay,
+    trackIndex,
+    isPlay,
+    handlerPlay,
+    handlerModal,
+  }) => {
     return (
-      <div className="flex p-2 px-4 bg-[black]">
+      <div
+        onClick={handlerPlay}
+        className={classNames('flex p-2 px-4 bg-[black] cursor-pointer', {
+          'bg-[linear-gradient(90deg,rgba(218,47,55,0.2)0%,rgba(218,47,55,0.05)74.4%,rgba(218,47,55,0)100%)]':
+            isPlay && trackIndexPlay === trackIndex,
+        })}
+      >
         <div
-          className="w-16 h-16 mr-2 rounded 
+          className="relative w-16 h-16 mr-2 rounded 
         lg:mr-4
         "
         >
           <img className="rounded" src={imgUrl} alt="Cover"></img>
+          {isPlay && trackIndexPlay === trackIndex && (
+            <div className="absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center">
+              <Streamline />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col justify-between font-rubik lg:flex-row lg:items-center lg:flex-[4]">
@@ -49,15 +68,12 @@ export const TrackInfo: React.FC<Props> = React.memo(
             {duration}
           </div>
         </div>
-        <div className="flex flex-1 justify-end items-center lg:justify-center  ">
-          <div className="flex gap-1 ">
+        <div className="flex flex-1 justify-end items-center lg:justify-center cursor-pointer ">
+          <div className="flex gap-1  " onClick={handlerModal}>
             <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid "></div>
             <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid"></div>
             <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid"></div>
           </div>
-        </div>
-        <div className="hidden">
-          <ReactPlayer url={url} playing={false} onDuration={getDuration} />
         </div>
       </div>
     );

@@ -23,7 +23,7 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
-        'misty_rose': '#F4D5D5',
+        misty_rose: '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -36,7 +36,6 @@ export default {
         'eerie-black-light': '#212320',
         glaocous: '#70799A',
         jet: '#1E201D',
-
       },
       'on-secondary': {
         'dim-gray': '#696969',
@@ -79,6 +78,12 @@ export default {
         'play-button-big-gradient-hover':
           'radial-gradient(73.91% 73.91% at 50% 51.09%, rgba(255, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), ' +
           'linear-gradient(135deg, #141613 0%, #121411 100%)',
+      },
+      keyframes: {
+        streamline: {
+          '0% 100%': { height: '8px' },
+          '50%': { height: '25px' },
+        },
       },
     },
   },
