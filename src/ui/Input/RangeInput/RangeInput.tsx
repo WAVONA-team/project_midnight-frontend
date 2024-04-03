@@ -5,21 +5,32 @@ type Props = {
   max?: number;
   value?: number;
   step?: number;
+  className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onMouseDown?: () => void;
   onMouseUp?: () => void;
 };
 
-const InputRange: React.FC<Props> = React.memo(
-  ({ min, max, value, step, onChange, onMouseDown, onMouseUp }) => {
+const RangeInput: React.FC<Props> = React.memo(
+  ({
+    min,
+    max,
+    value,
+    step,
+    className = '',
+    onChange,
+    onMouseDown,
+    onMouseUp,
+  }) => {
     return (
       <div
-        className="
+        className={`
+          ${className}
           relative
           bg-on-secondary-dim-gray
           flex
           items-center
-        "
+        `}
       >
         <input
           type="range"
@@ -62,4 +73,4 @@ const InputRange: React.FC<Props> = React.memo(
   },
 );
 
-export default InputRange;
+export default RangeInput;

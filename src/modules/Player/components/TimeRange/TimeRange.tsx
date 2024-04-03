@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 
 import format from '@/modules/Player/helpers/format';
 
-import InputRange from '@/ui/Input/inputRange/InputRange.tsx';
+import { RangeInput } from '@/ui/Input';
 
 export const TimeRange: React.FC = React.memo(() => {
   const {
@@ -41,7 +41,7 @@ export const TimeRange: React.FC = React.memo(() => {
     <div>
       <p>{`${elapsed} : ${fullness}`}</p>
 
-      <InputRange
+      <RangeInput
         min={0}
         max={+elapsed}
         value={currentTime}
