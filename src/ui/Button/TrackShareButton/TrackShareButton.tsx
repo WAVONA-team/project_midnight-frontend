@@ -18,10 +18,13 @@ const TrackShareButton: React.FC<Props> = React.memo(
     const copyToClipboard = async () => {
       if (!navigator.share) {
         await navigator.clipboard.writeText(trackUrl);
+
         if (timeId) {
           clearTimeout(timeId);
         }
+
         setIsClicked(true);
+
         timeId = setTimeout(() => {
           setIsClicked(false);
         }, TIME_DELAY);
@@ -55,14 +58,13 @@ const TrackShareButton: React.FC<Props> = React.memo(
         <div className="flex p-4">
           <img src={shareIcon} alt="Share" />
           <span
-            className={`
-              ${!isClicked ? 'opacity-100' : 'opacity-5'}
+            className="
               text-on-primary-anti-flash-white
               ml-4
               font-normal
               text-base
               tracking-widest
-            `}
+            "
           >
             {isClicked ? 'Скопировано!' : 'Поделиться'}
           </span>
