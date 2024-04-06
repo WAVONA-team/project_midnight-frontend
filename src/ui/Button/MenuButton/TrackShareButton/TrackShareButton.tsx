@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
+
 import shareIcon from '@/assets/buttons/actionButtons/shareIcon.svg';
 
 type Props = {
@@ -11,7 +13,7 @@ type Props = {
 const TIME_DELAY = 20000;
 
 const TrackShareButton: React.FC<Props> = React.memo(
-  ({ trackName, trackUrl, className = '' }) => {
+  ({ trackName, trackUrl }) => {
     const [isClicked, setIsClicked] = useState<boolean>(false);
     let timeId: NodeJS.Timeout | null;
 
@@ -38,38 +40,11 @@ const TrackShareButton: React.FC<Props> = React.memo(
     };
 
     return (
-      <button
-        onClick={copyToClipboard}
-        className={`
-          ${className}
-          bg-[inherit]
-          w-full
-          border-t-0
-          border-l-0
-          border-r-0
-          border-b
-          border-secondary-eerie-black-light
-          border-solid
-          outline-none
-          focus:outline-none
-          hover:border-secondary-eerie-black-light
-        `}
-      >
-        <div className="flex p-4">
-          <img src={shareIcon} alt="Share" />
-          <span
-            className="
-              text-on-primary-anti-flash-white
-              ml-4
-              font-normal
-              text-base
-              tracking-widest
-            "
-          >
-            {isClicked ? 'Скопировано!' : 'Поделиться'}
-          </span>
-        </div>
-      </button>
+      <MenuButton
+        title={isClicked ? 'Скопировано!' : 'Поделиться'}
+        icon={shareIcon}
+        handler={copyToClipboard}
+      />
     );
   },
 );
