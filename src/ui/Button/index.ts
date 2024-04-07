@@ -6,3 +6,4 @@ export { default as TextButton } from './TextButton/TextButton';
 export { default as TextButtonLink } from './TextButton/TextButtonLink';
 export { default as ShuffleButton } from './ShuffleButton/ShuffleButton';
 export { default as PlayButton } from './PlayButton/PlayButton';
+export { default as TrackShareButton } from './MenuButton/TrackShareButton/TrackShareButton';
