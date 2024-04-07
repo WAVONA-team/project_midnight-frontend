@@ -4,7 +4,7 @@ type Props = {
   className?: string;
   icon: string;
   title: string;
-  handler: () => void;
+  handler: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const MenuButton: React.FC<Props> = React.memo(
