@@ -7,7 +7,6 @@ import shareIcon from '@/assets/buttons/actionButtons/shareIcon.svg';
 type Props = {
   trackName: string;
   trackUrl: string;
-  className?: string;
 };
 
 const TIME_DELAY = 20000;
