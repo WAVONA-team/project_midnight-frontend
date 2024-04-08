@@ -5,10 +5,11 @@ type Props = {
   name: string;
   artist: string;
   provider: string;
+  duration: string;
 };
 
 export const TrackInfo: React.FC<Props> = React.memo(
-  ({ name, artist, provider }) => {
+  ({ name, artist, provider, duration }) => {
     return (
       <div>
         <p>{name}</p>
