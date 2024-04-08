@@ -36,6 +36,7 @@ export default {
         'eerie-black-light': '#212320',
         glaocous: '#70799A',
         jet: '#1E201D',
+        'picton-blue': '#1AA8EF',
       },
       'on-secondary': {
         'dim-gray': '#696969',
