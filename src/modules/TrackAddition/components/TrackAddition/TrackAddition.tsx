@@ -16,11 +16,11 @@ import Logo from '../../ui/logo.svg';
 const TrackAddition: React.FC = memo(() => {
   const [duration, setDuration] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { user, parsedTrack, parsedTrackRequest, clearParsedTrack } = useStore(
-    ({ user, parsedTrack, parsedTrackRequest, clearParsedTrack }) => ({
+  const { user, parsedTrack, parseTrack, clearParsedTrack } = useStore(
+    ({ user, parsedTrack, parseTrack, clearParsedTrack }) => ({
       user,
       parsedTrack,
-      parsedTrackRequest,
+      parseTrack,
       clearParsedTrack,
     }),
   );
@@ -45,7 +45,7 @@ const TrackAddition: React.FC = memo(() => {
   useEffect(() => {
     if (debounceValue && user) {
       setIsLoading(true);
-      parsedTrackRequest(debounceValue, user.id).catch(({ formErrors }) => {
+      parseTrack(debounceValue, user.id).catch(({ formErrors }) => {
         setError('url', {
           message: formErrors,
         });
