@@ -4,20 +4,17 @@ import classNames from 'classnames';
 
 import Streamline from '@/ui/Streamline/Streamline';
 
-//состояние включенности если isPlay=true и trackIndex = trackIndexPlay
-//то, что в handlerPlay всегда отправляет true
-
 type Props = {
   name: string;
   artist: string;
   provider: string;
   imgUrl: string;
-  duration: number;
+  duration: string;
   trackIndexPlay: number;
   trackIndex: number;
   isPlay: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
-  handlerModal: React.MouseEventHandler<HTMLDivElement>;
+  handlerModal: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const TrackInfo: React.FC<Props> = React.memo(
@@ -69,11 +66,15 @@ export const TrackInfo: React.FC<Props> = React.memo(
           </div>
         </div>
         <div className="flex flex-1 justify-end items-center lg:justify-center cursor-pointer ">
-          <div className="flex gap-1  " onClick={handlerModal}>
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid "></div>
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid"></div>
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid"></div>
-          </div>
+          <button
+            type="button"
+            className="flex gap-1 focus:outline-none focus-visible:outline-none"
+            onClick={handlerModal}
+          >
+            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid " />
+            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid" />
+            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid" />
+          </button>
         </div>
       </div>
     );

@@ -14,7 +14,6 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   seekTo: 0,
   seeking: false,
   changePlayerState: (playerState: boolean) => {
-    console.log('player state in store', playerState);
     set({ playerState });
   },
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
