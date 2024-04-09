@@ -17,7 +17,7 @@ export default {
         'imperial-red': '#EF4444',
       },
       primary: {
-        poppy: '#DA2F37',
+        poppy: '#CA2B33',
         'fire-brick': '#BF222A',
         madder: '#9C1C22',
         'misty-rose': '#F4D5D5',
@@ -37,6 +37,9 @@ export default {
         glaocous: '#70799A',
         jet: '#1E201D',
         'picton-blue': '#1AA8EF',
+        'satin-sheen-gold': '#C8963E',
+        'earth-yellow': '#D2A860',
+        'dark-goldenrod': '#BF8D36',
       },
       'on-secondary': {
         'dim-gray': '#696969',
