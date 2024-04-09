@@ -10,6 +10,9 @@ export { default as TextButtonLinkWithIcon } from './TextButtonWithIcon/TextButt
 export { default as TextButton } from './TextButton/TextButton';
 export { default as TextButtonLink } from './TextButton/TextButtonLink';
 
+export { default as TextSecondaryButton } from './TextSecondaryButton/TextSecondaryButton';
+export { default as TextSecondaryButtonLink } from './TextSecondaryButton/TextSecondaryButtonLink';
+
 export { default as ShuffleButton } from './ShuffleButton/ShuffleButton';
 
 export { default as PlayButton } from './PlayButton/PlayButton';
