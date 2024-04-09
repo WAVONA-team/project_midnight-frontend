@@ -7,7 +7,7 @@ type Props = {
 
 const Container: React.FC<Props> = React.memo(
   ({ className = '', children }) => {
-    return <div className={`${className} px-4 lg:px-6`}>{children}</div>;
+    return <div className={`${className} px-4`}>{children}</div>;
   },
 );
 
