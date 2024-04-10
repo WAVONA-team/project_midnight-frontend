@@ -11,7 +11,7 @@ const TrackPageControls: React.FC = React.memo(() => {
         <h1 className="font-semibold text-2xl whitespace-nowrap">Все треки</h1>
       </div>
 
-      <div className="flex justify-between sm:w-full">
+      <div className="flex justify-between sm:w-full items-center">
         <div>
           <ShuffleButton
             className="

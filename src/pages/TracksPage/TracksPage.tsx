@@ -26,6 +26,7 @@ export const TracksPage: React.FC = React.memo(() => {
           font-rubik
           text-on-primary-anti-flash-white
           h-dvh
+
         "
       >
         <TrackPageHeader />
