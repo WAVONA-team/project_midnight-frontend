@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactPlayer from 'react-player';
 
 type Props = {
   name: string;
-  artist: string;
+  artist: string | null;
   provider: string;
   duration: string;
 };
@@ -15,6 +14,7 @@ export const TrackInfo: React.FC<Props> = React.memo(
         <p>{name}</p>
         <p>{artist}</p>
         <p>{provider}</p>
+        <p>{duration}</p>
       </div>
     );
   },

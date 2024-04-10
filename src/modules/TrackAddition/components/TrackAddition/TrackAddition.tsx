@@ -7,6 +7,8 @@ import { useStore } from '@/store';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
+import { TrackHistory } from '@/modules/TrackAddition/components/TrackHistory';
+
 import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
 
 import { DefaultInput } from '@/ui/Input';
@@ -64,7 +66,7 @@ const TrackAddition: React.FC = memo(() => {
             pt-6
             lg:p-0
             lg:pt-12
-            lg:px-20 
+            lg:px-20
             "
     >
       <header className="mb-8 lg:hidden">
@@ -72,18 +74,16 @@ const TrackAddition: React.FC = memo(() => {
           <img src={Logo} alt="logo" />
         </span>
       </header>
-
       <h2
-        className="mb-6 text-[white] font-rubik font-semibold text-[22px] tracking-wider 
+        className="mb-6 text-[white] font-rubik font-semibold text-[22px] tracking-wider
                   lg:mb-0
                   lg:font-openSans
                   lg:text-[28px]
-                  lg:font-normal 
+                  lg:font-normal
                   "
       >
         Добавление трека
       </h2>
-
       <Controller
         name="url"
         control={control}
@@ -107,6 +107,7 @@ const TrackAddition: React.FC = memo(() => {
           библиотеку!
         </div>
       )}
+      <TrackHistory />
       <ReactPlayer
         url={parsedTrack?.url}
         onReady={() => {
