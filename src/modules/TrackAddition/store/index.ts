@@ -1,4 +1,3 @@
-import { Track } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
 import { httpClient } from '@/shared/api/httpClient';
@@ -26,21 +25,6 @@ export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
         throw { fieldErrors, formErrors };
       })
       .finally(() => set({ isParsedTrackLoading: false }));
-  },
-  addParsedTrack: async (userId, parsedTrack, duration) => {
-    return await httpClient
-      .post<Track>('/track/new', {
-        userId,
-        ...parsedTrack,
-        duration,
-      })
-      .then(({ data: track }) => track)
-      .catch((serverErrors) => {
-        const { fieldErrors, formErrors }: ServerErrors =
-          serverErrors.response.data;
-
-        throw { fieldErrors, formErrors };
-      });
   },
   clearParsedTrack: () => {
     set({ parsedTrack: null });
