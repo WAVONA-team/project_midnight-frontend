@@ -1,13 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import TrackPageHeader from '@/pages/TracksPage/TrackPageHeader/TrackPageHeader.tsx';
-import TrackPageTracks from '@/pages/TracksPage/TrackPageTracks/TrackPageTracks.tsx';
-import TrackPagesControls from '@/pages/TracksPage/TrackPagesControls/TrackPagesControls.tsx';
+import TrackPageControls from '@/pages/TracksPage/components/TrackPageControls/TrackPageControls.tsx';
+import TrackPageHeader from '@/pages/TracksPage/components/TrackPageHeader/TrackPageHeader.tsx';
+import TrackPageTracks from '@/pages/TracksPage/components/TrackPageTracks/TrackPageTracks.tsx';
 
 import { MainButton } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 
 export const TracksPage: React.FC = React.memo(() => {
+  const navigate = useNavigate();
+
   return (
     <Container
       className="
@@ -26,13 +29,13 @@ export const TracksPage: React.FC = React.memo(() => {
         "
       >
         <TrackPageHeader />
-        <TrackPagesControls />
+        <TrackPageControls />
         <TrackPageTracks />
         <div>
           <MainButton
-            className="sm:max-w-[285px]"
+            className="sm:max-w-[285px] z-0"
             title="Добавить"
-            handler={() => {}}
+            handler={() => navigate(`/${location.pathname}/new`)}
           />
         </div>
       </div>

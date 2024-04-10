@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TrackPageActions from '@/pages/TracksPage/TrackPageHeader/TrackPageActions/TrackPageActions.tsx';
-import TrackPageLogo from '@/pages/TracksPage/TrackPageHeader/TrackPageLogo/TrackPageLogo.tsx';
+import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/TrackPageActions/TrackPageActions.tsx';
+import TrackPageLogo from '@/pages/TracksPage/components/TrackPageHeader/TrackPageLogo/TrackPageLogo.tsx';
 
 const TrackPageHeader: React.FC = React.memo(() => {
   return (

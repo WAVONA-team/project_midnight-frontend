@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { ShuffleButton, SortButton } from '@/ui/Button';
+import TrackPageDropdown from '@/pages/TracksPage/components/TrackPageControls/TrackPageDropdown/TrackPageDropdown.tsx';
 
-const TrackPagesControls: React.FC = React.memo(() => {
+import { ShuffleButton } from '@/ui/Button';
+
+const TrackPageControls: React.FC = React.memo(() => {
   return (
     <div className="sm:flex mb-12">
       <div className="mb-4 mr-20">
@@ -27,17 +29,10 @@ const TrackPagesControls: React.FC = React.memo(() => {
             title="Перемешать"
           />
         </div>
-
-        <div>
-          <SortButton
-            disabled={false}
-            title="По умолчанию"
-            handler={() => {}}
-          />
-        </div>
+        <TrackPageDropdown />
       </div>
     </div>
   );
 });
 
-export default TrackPagesControls;
+export default TrackPageControls;

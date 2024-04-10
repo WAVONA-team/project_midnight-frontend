@@ -40,7 +40,7 @@ const MainButton: React.FC<Props> = React.memo(
           <Spinner />
         ) : (
           <div
-            className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded "
+            className="absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded "
             style={{ background: 'inherit' }}
           >
             {title}

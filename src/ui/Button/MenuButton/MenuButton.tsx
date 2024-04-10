@@ -25,6 +25,7 @@ const MenuButton: React.FC<Props> = React.memo(
           outline-none
           focus:outline-none
           hover:border-secondary-eerie-black-light
+          hover:bg-secondary-eerie-black-light
         `}
       >
         <div className="flex p-4">

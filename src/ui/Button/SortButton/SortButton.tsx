@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type Props = {
   title: string;
   className?: string;
   disabled?: boolean;
+  isOpen: boolean;
   handler: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const SortButton: React.FC<Props> = React.memo(
-  ({ title, className, disabled, handler }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const onClickHandler = () => {
-      setIsOpen(!isOpen);
-      return handler;
-    };
-
+  ({ title, className, disabled, isOpen, handler }) => {
     return (
       <button
-        onClick={onClickHandler}
+        onClick={handler}
         className={`${className} focus:outline-none`}
         disabled={disabled}
       >
