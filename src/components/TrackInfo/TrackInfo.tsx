@@ -71,9 +71,41 @@ export const TrackInfo: React.FC<Props> = React.memo(
             className="flex gap-1 focus:outline-none focus-visible:outline-none"
             onClick={handlerModal}
           >
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid " />
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid" />
-            <div className="w-[3px] h-[3px] rounded-sm bg-[transparent] border-[1px] border-on-primary-anti-flash-white border-solid" />
+            <svg
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="18"
+                y="11.1678"
+                width="3"
+                height="3"
+                rx="1"
+                stroke="#A09F9F"
+                stroke-width="1.5"
+              />
+              <rect
+                x="10.5"
+                y="11.1678"
+                width="3"
+                height="3"
+                rx="1"
+                stroke="#A09F9F"
+                stroke-width="1.5"
+              />
+              <rect
+                x="3"
+                y="11.1678"
+                width="3"
+                height="3"
+                rx="1"
+                stroke="#A09F9F"
+                stroke-width="1.5"
+              />
+            </svg>
           </button>
         </div>
       </div>

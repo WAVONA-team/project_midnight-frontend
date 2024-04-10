@@ -23,7 +23,6 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
-        misty_rose: '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
