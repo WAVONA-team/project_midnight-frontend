@@ -6,7 +6,7 @@ import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
   name: string;
-  artist: string;
+  artist: string | null;
   provider: string;
   imgUrl: string;
   duration: string;

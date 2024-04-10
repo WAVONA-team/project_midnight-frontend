@@ -1,5 +1,6 @@
 import { type AxiosResponse } from 'axios';
 import { NormalizedUser, UserWithAccessToken } from 'project_midnight/types';
+import { Track } from 'project_midnight';
 
 export type UserState = {
   user: NormalizedUser | null;
@@ -23,4 +24,5 @@ export type UserState = {
   resendCode: (email: string | null) => Promise<AxiosResponse>;
   deleteResetToken: (email: string | null) => Promise<AxiosResponse>;
   resendResetToken: (email: string | null) => Promise<AxiosResponse>;
+  getSearchHistory: (userId: string) => Promise<Track[]>;
 };
