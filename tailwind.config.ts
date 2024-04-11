@@ -24,7 +24,6 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
-        misty_rose: '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -90,6 +89,12 @@ export default {
             rgba(218, 47, 55, 0) 76.29%
           ),
           linear-gradient(0deg, #0b0d0b, #0b0d0b)`,
+      },
+      keyframes: {
+        streamline: {
+          '0% 100%': { height: '8px' },
+          '50%': { height: '25px' },
+        },
       },
     },
   },
