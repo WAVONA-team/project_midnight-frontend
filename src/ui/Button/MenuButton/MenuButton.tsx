@@ -8,9 +8,10 @@ type Props = {
 };
 
 const MenuButton: React.FC<Props> = React.memo(
-  ({ className = '', handler, icon, title }) => {
+  React.forwardRef(({ className = '', handler, icon, title }, ref: any) => {
     return (
       <button
+        ref={ref}
         onClick={handler}
         className={`
           ${className}
@@ -44,7 +45,7 @@ const MenuButton: React.FC<Props> = React.memo(
         </div>
       </button>
     );
-  },
+  }),
 );
 
 export default MenuButton;

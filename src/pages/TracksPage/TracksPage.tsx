@@ -19,6 +19,7 @@ export const TracksPage: React.FC = React.memo(() => {
         md:py-12
         bg-background-hight
         sm:bg-background-default-gradient
+        w-full
       "
     >
       <div
@@ -26,7 +27,6 @@ export const TracksPage: React.FC = React.memo(() => {
           font-rubik
           text-on-primary-anti-flash-white
           h-dvh
-
         "
       >
         <TrackPageHeader />

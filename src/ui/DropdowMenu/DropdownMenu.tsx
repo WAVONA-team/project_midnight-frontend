@@ -7,9 +7,10 @@ type Props = {
   isOpen: boolean;
 };
 
-const Dropdown: React.FC<Props> = React.memo(({ children, isOpen }) => {
+const DropdownMenu: React.FC<Props> = React.memo(({ children, isOpen }) => {
   return (
     <Transition
+      as="div"
       show={isOpen}
       enter="transition duration-100 ease-out"
       enterFrom="transform scale-95 opacity-0"
@@ -17,15 +18,28 @@ const Dropdown: React.FC<Props> = React.memo(({ children, isOpen }) => {
       leave="transition duration-75 ease-out"
       leaveFrom="transform scale-100 opacity-100"
       leaveTo="transform scale-95 opacity-0"
+      className="
+        fixed
+        bottom-0
+        right-0
+        w-full
+        rounded-t-xl
+        sm:right-0
+        sm:top-8
+        sm:w-[254px]
+        sm:absolute
+        flex-col
+        bg-surface-eerie_black
+        h-fit
+        sm:rounded-xl
+        z-20
+      "
     >
-      <Menu.Items
-        static
-        className="absolute bottom-0 rounded-t-xl right-0 w-full flex-col bg-surface-eerie_black h-fit min-w-[254px] sm:absolute sm:top-8 sm:rounded-xl"
-      >
+      <Menu.Items as="div" static>
         {children}
       </Menu.Items>
     </Transition>
   );
 });
 
-export default Dropdown;
+export default DropdownMenu;

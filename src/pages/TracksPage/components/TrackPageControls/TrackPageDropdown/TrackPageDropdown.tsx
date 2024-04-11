@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import { Menu, Transition } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
 
 import { MenuButton, SortButton } from '@/ui/Button';
+import DropdownMenu from '@/ui/DropdowMenu/DropdownMenu.tsx';
 
 import alphaSortIcon from '@/assets/buttons/actionButtons/alphaSortIcon.svg';
 import dateSortIcon from '@/assets/buttons/actionButtons/dateSortIcon.svg';
@@ -11,64 +12,63 @@ import sourceSortIcon from '@/assets/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentTitle, setCurrentTitle] = useState<string>('По умолчанию');
 
   const sortControls = [
     {
       title: 'По умолчанию',
       icon: defaultSortIcon,
-      handler: () => {},
+      handler: () => {
+        setCurrentTitle('По умолчанию');
+        setIsOpen(false);
+      },
     },
     {
       title: 'По дате загрузки',
       icon: dateSortIcon,
-      handler: () => {},
+      handler: () => {
+        setCurrentTitle('По дате загрузки');
+        setIsOpen(false);
+      },
     },
     {
       title: 'По алфавиту',
       icon: alphaSortIcon,
-      handler: () => {},
+      handler: () => {
+        setCurrentTitle('По алфавиту');
+        setIsOpen(false);
+      },
     },
     {
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: () => {},
+      handler: () => {
+        setCurrentTitle('По источнику');
+        setIsOpen(false);
+      },
     },
   ];
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="focus:outline-none">
-        <SortButton
-          title="По умолчанию"
-          handler={() => setIsOpen(!isOpen)}
-          isOpen={isOpen}
-        />
-      </Menu.Button>
+      <SortButton
+        title={currentTitle}
+        handler={() => setIsOpen(!isOpen)}
+        isOpen={isOpen}
+      />
 
-      <Transition
-        as="div"
-        show={isOpen}
-        enter="transition duration-100 ease-out"
-        enterFrom="transform scale-95 opacity-0"
-        enterTo="transform scale-100 opacity-100"
-        leave="transition duration-75 ease-out"
-        leaveFrom="transform scale-100 opacity-100"
-        leaveTo="transform scale-95 opacity-0"
-        className="sm:absolute rounded-t-xl sm:right-0 sm:top-8 w-[254px] flex-col m bg-surface-eerie_black h-fit sm:rounded-xl"
-      >
-        <Menu.Items as="div" static>
-          {sortControls.map((controls) => (
-            <Menu.Item key={controls.title}>
-              <MenuButton
-                handler={controls.handler}
-                icon={controls.icon}
-                title={controls.title}
-                className="last:border-b-0 last:rounded-b-xl first:rounded-t-xl first:hover:rounded-t-xl"
-              />
-            </Menu.Item>
-          ))}
-        </Menu.Items>
-      </Transition>
+      <DropdownMenu isOpen={isOpen}>
+        {sortControls.map((controls) => (
+          <Menu.Item
+            handler={controls.handler}
+            icon={controls.icon}
+            title={controls.title}
+            className="last:border-b-0 last:rounded-b-xl first:rounded-t-xl first:hover:rounded-t-xl"
+            as={MenuButton}
+            key={controls.title}
+          />
+        ))}
+      </DropdownMenu>
     </Menu>
   );
 });
