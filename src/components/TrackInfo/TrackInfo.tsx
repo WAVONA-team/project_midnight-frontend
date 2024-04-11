@@ -39,7 +39,7 @@ export const TrackInfo: React.FC<Props> = React.memo(
         })}
       >
         <div
-          className="relative w-16 h-16 mr-2 rounded 
+          className="relative w-16 h-16 mr-2 rounded
         lg:mr-4
         "
         >
