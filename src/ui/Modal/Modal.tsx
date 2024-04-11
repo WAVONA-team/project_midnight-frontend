@@ -27,25 +27,27 @@ const Modal: React.FC<Props> = React.memo(
             items-center
             justify-center
             font-rubik
-    
+
           `}
+        //box-shadow: -10px 10px 16px 0px #0C0D0B80;
       >
         <div
           onClick={(e) => e.stopPropagation()}
           className={`
             ${isModalActive ? 'scale-100' : 'scale-0'}
-              transition-all
-              duration-200
-              p-6
-              shadow-modal-content
-              bg-surface-eerie_black
-              min-w-[278px]
-              max-w-fit
-              min-h-[136px]
-              max-h-fit
-              sm:min-w-[354px]
-              sm:min-h-[182px]
+            transition-all
+            duration-200
+            p-6
+            drop-shadow-xl
+            bg-surface-eerie_black
+            min-w-[278px]
+            max-w-fit
+            min-h-[136px]
+            max-h-fit
+            sm:min-w-[354px]
+            sm:min-h-[182px]
           `}
+          style={{ boxShadow: '-10px 10px 16px 0px #0C0D0B80' }}
         >
           {children}
         </div>
