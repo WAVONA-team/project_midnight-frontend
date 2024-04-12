@@ -18,54 +18,51 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     {
       title: 'По умолчанию',
       icon: defaultSortIcon,
-      handler: () => {
-        setCurrentTitle('По умолчанию');
-        setIsOpen(false);
-      },
+      handler: (title: string) => sortHandler(title),
     },
     {
       title: 'По дате загрузки',
       icon: dateSortIcon,
-      handler: () => {
-        setCurrentTitle('По дате загрузки');
-        setIsOpen(false);
-      },
+      handler: (title: string) => sortHandler(title),
     },
     {
       title: 'По алфавиту',
       icon: alphaSortIcon,
-      handler: () => {
-        setCurrentTitle('По алфавиту');
-        setIsOpen(false);
-      },
+      handler: (title: string) => sortHandler(title),
     },
     {
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: () => {
-        setCurrentTitle('По источнику');
-        setIsOpen(false);
-      },
+      handler: (title: string) => sortHandler(title),
     },
   ];
+
+  const sortHandler = (title: string) => {
+    setCurrentTitle(title);
+    setIsOpen(!isOpen);
+  };
 
   return (
     <Menu as="div" className="relative">
       <SortButton
         title={currentTitle}
-        handler={() => setIsOpen(!isOpen)}
+        handler={() => sortHandler(currentTitle)}
         isOpen={isOpen}
       />
-
-      <DropdownMenu isOpen={isOpen}>
-        {sortControls.map((controls) => (
+      <DropdownMenu isOpen={isOpen} setIsOpen={setIsOpen}>
+        {sortControls.map((control) => (
           <Menu.Item
-            handler={controls.handler}
-            icon={controls.icon}
-            title={controls.title}
-            className="last:border-b-0 last:rounded-b-xl first:rounded-t-xl first:hover:rounded-t-xl"
             as={MenuButton}
-            key={controls.title}
+            key={control.title}
+            handler={() => control.handler(control.title)}
+            icon={control.icon}
+            title={control.title}
+            className="
+              last:border-b-0
+              last:rounded-b-xl
+              first:rounded-t-xl
+              first:hover:rounded-t-xl
+            "
           />
         ))}
       </DropdownMenu>
