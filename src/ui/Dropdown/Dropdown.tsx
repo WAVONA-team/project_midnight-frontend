@@ -8,7 +8,7 @@ type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DropdownMenu: React.FC<Props> = React.memo(
+const Dropdown: React.FC<Props> = React.memo(
   ({ children, isOpen, setIsOpen }) => {
     return (
       <div
@@ -59,4 +59,4 @@ const DropdownMenu: React.FC<Props> = React.memo(
   },
 );
 
-export default DropdownMenu;
+export default Dropdown;

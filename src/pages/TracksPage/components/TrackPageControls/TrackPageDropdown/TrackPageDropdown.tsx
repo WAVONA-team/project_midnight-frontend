@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Menu } from '@headlessui/react';
 
 import { MenuButton, SortButton } from '@/ui/Button';
-import DropdownMenu from '@/ui/DropdowMenu/DropdownMenu.tsx';
+import Dropdown from '@/ui/Dropdown/Dropdown.tsx';
 
 import alphaSortIcon from '@/assets/buttons/actionButtons/alphaSortIcon.svg';
 import dateSortIcon from '@/assets/buttons/actionButtons/dateSortIcon.svg';
@@ -54,7 +54,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
         handler={() => setIsOpen(!isOpen)}
         isOpen={isOpen}
       />
-      <DropdownMenu isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Dropdown isOpen={isOpen} setIsOpen={setIsOpen}>
         {sortControls.map((control) => (
           <Menu.Item
             as={MenuButton}
@@ -70,7 +70,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
             "
           />
         ))}
-      </DropdownMenu>
+      </Dropdown>
     </Menu>
   );
 });
