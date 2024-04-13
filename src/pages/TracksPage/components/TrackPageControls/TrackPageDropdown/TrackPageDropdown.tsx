@@ -16,29 +16,34 @@ const TrackPageDropdown: React.FC = React.memo(() => {
 
   const sortControls = [
     {
+      id: 1,
       title: 'По умолчанию',
       icon: defaultSortIcon,
-      handler: (title: string) => sortHandler(title),
+      handler: (id: number) => sortHandler(id),
     },
     {
+      id: 2,
       title: 'По дате загрузки',
       icon: dateSortIcon,
-      handler: (title: string) => sortHandler(title),
+      handler: (id: number) => sortHandler(id),
     },
     {
+      id: 3,
       title: 'По алфавиту',
       icon: alphaSortIcon,
-      handler: (title: string) => sortHandler(title),
+      handler: (id: number) => sortHandler(id),
     },
     {
+      id: 4,
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: (title: string) => sortHandler(title),
+      handler: (id: number) => sortHandler(id),
     },
   ];
 
-  const sortHandler = (title: string) => {
-    setCurrentTitle(title);
+  const sortHandler = (id: number) => {
+    const control = sortControls.find((control) => control.id === id);
+    setCurrentTitle(control!.title);
     setIsOpen(!isOpen);
   };
 
@@ -46,7 +51,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     <Menu as="div" className="relative">
       <SortButton
         title={currentTitle}
-        handler={() => sortHandler(currentTitle)}
+        handler={() => setIsOpen(!isOpen)}
         isOpen={isOpen}
       />
       <DropdownMenu isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -54,7 +59,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           <Menu.Item
             as={MenuButton}
             key={control.title}
-            handler={() => control.handler(control.title)}
+            handler={() => control.handler(control.id)}
             icon={control.icon}
             title={control.title}
             className="
