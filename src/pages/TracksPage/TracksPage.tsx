@@ -15,8 +15,8 @@ export const TracksPage: React.FC = React.memo(() => {
     <Container
       className="
         p-6
-        md:px-20
-        md:py-12
+        lg:px-20
+        lg:py-12
         bg-background-hight
         sm:bg-background-default-gradient
         w-full
