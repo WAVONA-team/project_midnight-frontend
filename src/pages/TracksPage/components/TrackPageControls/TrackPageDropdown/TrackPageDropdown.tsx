@@ -12,7 +12,6 @@ import sourceSortIcon from '@/assets/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [currentTitle, setCurrentTitle] = useState<string>('По умолчанию');
 
   const sortControls = [
     {
@@ -40,6 +39,10 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       handler: (id: number) => sortHandler(id),
     },
   ];
+
+  const [currentTitle, setCurrentTitle] = useState<string>(
+    sortControls[0].title,
+  );
 
   const sortHandler = (id: number) => {
     const control = sortControls.find((control) => control.id === id);

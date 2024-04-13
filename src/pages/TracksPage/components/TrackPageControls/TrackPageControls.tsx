@@ -6,12 +6,37 @@ import { ShuffleButton } from '@/ui/Button';
 
 const TrackPageControls: React.FC = React.memo(() => {
   return (
-    <div className="sm:flex mb-12">
-      <div className="mb-4 mr-20">
-        <h1 className="font-semibold text-2xl whitespace-nowrap">Все треки</h1>
+    <div
+      className="
+        flex
+        flex-col
+        mb-12
+        lg:flex-row
+      "
+    >
+      <div className="mr-[87px]">
+        <h1
+          className="
+            font-openSans
+            font-normal
+            text-2xl
+            whitespace-nowrap
+          "
+        >
+          Все треки
+        </h1>
       </div>
 
-      <div className="flex justify-between sm:w-full items-center">
+      <div
+        className="
+          mt-4
+          lg:mt-0
+          flex
+          justify-between
+          sm:w-full
+          items-center
+        "
+      >
         <div>
           <ShuffleButton
             className="

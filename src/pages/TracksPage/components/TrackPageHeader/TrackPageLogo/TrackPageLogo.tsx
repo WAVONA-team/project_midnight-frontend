@@ -4,7 +4,7 @@ import logo from '@/assets/logo.svg';
 
 const TrackPageLogo: React.FC = React.memo(() => {
   return (
-    <div className="flex items-center">
+    <div className="lg:hidden flex items-center">
       <img
         className="
               max-w-[24px]
