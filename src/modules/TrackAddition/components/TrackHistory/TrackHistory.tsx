@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
@@ -12,25 +12,27 @@ export const TrackHistory: React.FC = React.memo(() => {
     user,
   }));
 
-  const getSearchHistoryFunction = async () => {
-    const history = await getSearchHistory(user!.id);
-    setSearchHistory(history);
-  };
-  getSearchHistoryFunction();
+  useEffect(() => {
+    getSearchHistory(user!.id)
+      .then(res => setSearchHistory(res));
+  }, []);
+
   return (
     <div>
       <p className="font-notoSans text-on-primary-anti-flash-white">
         История Поиска
       </p>
       <div>
-        {searchHistory.map((track, index) => (
-          <TrackInfo
-            key={index}
-            name={track.title}
-            artist={track.author}
-            provider={track.source}
-            duration={track.duration}
-          />
+        {searchHistory.map((track) => (
+          <button>
+            <TrackInfo
+              key={track.id}
+              name={track.title}
+              artist={track.author}
+              provider={track.source}
+              duration={track.duration}
+            />
+          </button>
         ))}
       </div>
     </div>

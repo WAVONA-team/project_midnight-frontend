@@ -8,6 +8,7 @@ import { ParsedTrack, TrackAdditionState } from './types';
 
 export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
+  setParsedTrack: (track: Track) => set({ parsedTrack: track }),
   isParsedTrackLoading: false,
   parseTrack: async (url, userId) => {
     return await httpClient
