@@ -3,12 +3,13 @@ export const classNames = {
     w-full
     font-rubik
     text-base
+    text-on-secondary-platinum
     placeholder:text-on-secondary-dim-gray
-    bg-on-secondary-platinum
-    rounded-[10px]
+    bg-secondary-jet
+    rounded-[1px]
     focus:outline-none
     border-2
-    focus:border-secondary-glaocous
+    focus:border-secondary-picton-blue
     focus:placeholder:text-on-secondary-davys-gray
     active:placeholder:text-on-secondary-dim-gray
 

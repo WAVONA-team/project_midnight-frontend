@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { textButtonClassNames } from '@/ui/Button/TextButton/classNames';
+import { textSecondaryClassNames } from '@/ui/Button/TextSecondaryButton/classNames';
 
 type Props = {
   title: string;
@@ -10,11 +10,11 @@ type Props = {
   disabled?: boolean;
 };
 
-const TextButton: React.FC<Props> = React.memo(
+const TextSecondaryButton: React.FC<Props> = React.memo(
   ({ title, handler, className, type = 'button', disabled = false }) => {
     return (
       <button
-        className={`${className} ${textButtonClassNames.button}`}
+        className={`${className} ${textSecondaryClassNames.button}`}
         disabled={disabled}
         type={type}
         onClick={handler}
@@ -25,4 +25,4 @@ const TextButton: React.FC<Props> = React.memo(
   },
 );
 
-export default TextButton;
+export default TextSecondaryButton;

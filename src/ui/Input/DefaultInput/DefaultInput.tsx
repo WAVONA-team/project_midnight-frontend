@@ -49,7 +49,7 @@ const DefaultInput: React.FC<Props> = React.memo(
             `,
             {
               'border-error-imperial-red': error,
-              'border-on-secondary-platinum': !error,
+              'border-secondary-eerie-black-light': !error,
             },
           )}
           type="text"
