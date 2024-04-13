@@ -4,12 +4,13 @@ import { Menu, Transition } from '@headlessui/react';
 
 type Props = {
   children: React.ReactNode;
+  className?: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Dropdown: React.FC<Props> = React.memo(
-  ({ children, isOpen, setIsOpen }) => {
+  ({ children, className = '', isOpen, setIsOpen }) => {
     return (
       <div
         onClick={() => setIsOpen(false)}
@@ -33,22 +34,19 @@ const Dropdown: React.FC<Props> = React.memo(
           leave="transition duration-75 ease-out"
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
-          className="
+          className={`
+          ${className}
             fixed
             bottom-0
             right-0
             w-full
             rounded-t-xl
-            sm:right-0
-            sm:top-8
-            sm:w-[254px]
-            sm:absolute
             flex-col
             bg-surface-eerie_black
             h-fit
             sm:rounded-xl
             z-20
-          "
+          `}
         >
           <Menu.Items as="div" static>
             {children}

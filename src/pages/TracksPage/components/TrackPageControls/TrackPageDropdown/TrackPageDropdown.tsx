@@ -54,7 +54,15 @@ const TrackPageDropdown: React.FC = React.memo(() => {
         handler={() => setIsOpen(!isOpen)}
         isOpen={isOpen}
       />
-      <Dropdown isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Dropdown
+        className="
+          sm:right-0
+          sm:top-8
+          sm:w-[254px]
+          sm:absolute"
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      >
         {sortControls.map((control) => (
           <Menu.Item
             as={MenuButton}

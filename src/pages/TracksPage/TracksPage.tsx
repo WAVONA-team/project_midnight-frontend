@@ -36,7 +36,7 @@ export const TracksPage: React.FC = React.memo(() => {
           <MainButton
             className="sm:max-w-[285px] z-0"
             title="Добавить"
-            handler={() => navigate(`/${location.pathname}/new`)}
+            handler={() => navigate('/tracks/new')}
           />
         </div>
       </div>
