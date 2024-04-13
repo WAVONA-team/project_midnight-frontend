@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/TrackPageActions/TrackPageActions.tsx';
-import TrackPageLogo from '@/pages/TracksPage/components/TrackPageHeader/TrackPageLogo/TrackPageLogo.tsx';
+import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/components/TrackPageActions/TrackPageActions.tsx';
+import TrackPageLogo from '@/pages/TracksPage/components/TrackPageHeader/components/TrackPageLogo/TrackPageLogo.tsx';
 
 import { SearchInput } from '@/ui/Input';
 
