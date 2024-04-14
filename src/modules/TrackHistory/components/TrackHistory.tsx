@@ -4,32 +4,26 @@ import { useStore } from '@/store';
 
 import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
 
+import { Container } from '@/ui/Container';
+
 export const TrackHistory: React.FC = React.memo(() => {
-  const {
-    playerState,
-    trackNumber,
-    userSearchHistory,
-  } = useStore(
-    ({
+  const { user, userSearchHistory, parseTrack } = useStore(
+    ({ user, userSearchHistory, parseTrack }) => ({
       user,
-      playerState,
-      trackNumber,
       userSearchHistory,
-    }) => ({
-      user,
-      playerState,
-      trackNumber,
-      userSearchHistory,
+      parseTrack,
     }),
   );
 
   return (
     <div className="mt-8">
-      <h2 className="font-notoSans text-on-primary-anti-flash-white">
-        История Поиска
-      </h2>
+      <Container>
+        <h2 className="font-notoSans text-on-primary-anti-flash-white">
+          История Поиска
+        </h2>
+      </Container>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mt-3">
         {userSearchHistory?.map((track) => (
           <TrackInfo
             key={track.id}
@@ -38,10 +32,10 @@ export const TrackHistory: React.FC = React.memo(() => {
             provider={track.source}
             duration={track.duration}
             imgUrl={track.imgUrl as string}
-            trackIndexPlay={trackNumber}
-            trackIndex={trackNumber}
-            isPlay={playerState}
-            handlerPlay={() => {}}
+            trackIndexPlay={0}
+            trackIndex={0}
+            isPlay={false}
+            handlerPlay={() => parseTrack(track.url, user?.id as string)}
             handlerModal={() => {}}
           />
         ))}

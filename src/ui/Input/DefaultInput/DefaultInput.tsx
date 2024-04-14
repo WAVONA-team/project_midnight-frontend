@@ -40,7 +40,7 @@ const DefaultInput: React.FC<Props> = React.memo(
           <p
             className={classNames(
               'absolute  top-8  text-xs text-error-imperial-red',
-              { 'lg:top-3': withoutLabel },
+              { 'lg:-top-5': withoutLabel },
             )}
           >
             {error}
@@ -49,7 +49,7 @@ const DefaultInput: React.FC<Props> = React.memo(
 
         <input
           className={classNames(
-            ` 
+            `
               mt-8
               px-4
               py-2

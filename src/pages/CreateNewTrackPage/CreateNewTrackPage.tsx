@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
-import classNames from 'classnames';
 
+import { Playback } from '@/modules/Player';
 import { TrackAddition } from '@/modules/TrackAddition';
 import { TrackHistory } from '@/modules/TrackHistory';
 
@@ -12,46 +12,44 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
     parsedTrack,
     userSearchHistory,
     getUserSearchHistory,
-    clearParsedTrack,
+    isParsedTrackLoading,
   } = useStore(
     ({
       user,
       parsedTrack,
       userSearchHistory,
       getUserSearchHistory,
-      clearParsedTrack,
+      isParsedTrackLoading,
     }) => ({
       user,
       parsedTrack,
       userSearchHistory,
       getUserSearchHistory,
-      clearParsedTrack,
+      isParsedTrackLoading,
     }),
   );
 
   useEffect(() => {
     getUserSearchHistory(user?.id as string);
-  }, [clearParsedTrack]);
+  }, [parsedTrack]);
 
   return (
     <div
-      className={classNames(
-        `
-          bg-background-hight
-          pt-8
-          h-screen
-          lg:p-0
-          lg:bg-background-desktop
-        `,
-        {
-          'h-full': userSearchHistory && userSearchHistory.length === 5,
-          'h-screen': userSearchHistory && userSearchHistory.length < 5,
-        },
-      )}
+      className="
+        bg-background-hight
+        pt-8
+        h-full
+        lg:p-0
+        lg:bg-background-desktop
+      "
     >
       <TrackAddition />
 
-      {!parsedTrack && <TrackHistory />}
+      {!parsedTrack && !isParsedTrackLoading && userSearchHistory?.length && (
+        <TrackHistory />
+      )}
+
+      <Playback />
     </div>
   );
 });

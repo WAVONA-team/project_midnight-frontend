@@ -8,7 +8,11 @@ import { ParsedTrack, TrackAdditionState } from './types';
 export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
   isParsedTrackLoading: false,
+  setIsParsedTrackLoading: (state: boolean) =>
+    set({ isParsedTrackLoading: state }),
   parseTrack: async (url, userId) => {
+    set({ isParsedTrackLoading: true });
+
     return await httpClient
       .post<ParsedTrack>('/track/get-info', {
         url,
@@ -23,8 +27,7 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
           serverErrors.response.data;
 
         throw { fieldErrors, formErrors };
-      })
-      .finally(() => set({ isParsedTrackLoading: false }));
+      });
   },
   clearParsedTrack: () => {
     set({ parsedTrack: null });
