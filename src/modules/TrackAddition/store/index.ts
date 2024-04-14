@@ -26,6 +26,8 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;
 
+        set({ isParsedTrackLoading: false });
+
         throw { fieldErrors, formErrors };
       });
   },

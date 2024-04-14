@@ -137,6 +137,7 @@ const TrackAddition: React.FC = memo(() => {
 
                 if (!event.target.value.length) {
                   clearParsedTrack();
+                  setIsParsedTrackLoading(false);
                   changePlayerState(false);
                 }
               }}
