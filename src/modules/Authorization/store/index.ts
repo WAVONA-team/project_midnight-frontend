@@ -3,13 +3,11 @@ import {
   type UserWithAccessToken,
 } from 'project_midnight';
 import { StateCreator } from 'zustand';
-import { Track } from 'project_midnight';
 
 import { createClient } from '@/shared/http';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { UserState } from '@/modules/Authorization/store/types/UserState';
-import { httpClient } from '@/shared/api/httpClient';
 
 const authClient = createClient();
 
@@ -173,17 +171,7 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
-  getSearchHistory: async (userId: string) => {
-    return await httpClient
-      .get<Track[]>(`/users/search-history/${userId}`)
-      .then(res => res.data as Track[])
-      .catch((serverErrors) => {
-        const { fieldErrors, formErrors }: ServerErrors =
-          serverErrors.response.data;
 
-        throw { fieldErrors, formErrors };
-      });
-  },
 });
 
 export { type UserState };

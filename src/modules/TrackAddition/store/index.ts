@@ -5,9 +5,8 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ParsedTrack, TrackAdditionState } from './types';
 
-export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
+export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
-  setParsedTrack: (track: Track) => set({ parsedTrack: track }),
   isParsedTrackLoading: false,
   parseTrack: async (url, userId) => {
     return await httpClient

@@ -13,7 +13,7 @@
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.18",
-    "project_midnight": "^0.0.27",
+    "project_midnight": "^0.0.34",
     "react": "^18.2.0",
     "react-auth-code-input": "^3.2.1",
     "react-dom": "^18.2.0",

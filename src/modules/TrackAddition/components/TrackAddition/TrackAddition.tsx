@@ -7,8 +7,6 @@ import { useStore } from '@/store';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
-import { TrackHistory } from '@/modules/TrackAddition/components/TrackHistory';
-
 import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
 
 import { DefaultInput } from '@/ui/Input';
@@ -58,29 +56,32 @@ const TrackAddition: React.FC = memo(() => {
   return (
     <div
       className="
-            flex
-            flex-col
-            h-full
-            w-full
-            p-4
-            pt-6
-            lg:p-0
-            lg:pt-12
-            lg:px-20
-            "
+        p-4
+        pt-6
+        lg:p-0
+        lg:pt-12
+        lg:px-20
+      "
     >
       <header className="mb-8 lg:hidden">
         <span>
           <img src={Logo} alt="logo" />
         </span>
       </header>
+
       <h2
-        className="mb-6 text-[white] font-rubik font-semibold text-[22px] tracking-wider
-                  lg:mb-0
-                  lg:font-openSans
-                  lg:text-[28px]
-                  lg:font-normal
-                  "
+        className="
+          mb-6
+          text-[white]
+          font-rubik
+          font-semibold
+          text-[22px]
+          tracking-wider
+          lg:mb-0
+          lg:font-openSans
+          lg:text-[28px]
+          lg:font-normal
+        "
       >
         Добавление трека
       </h2>
@@ -94,20 +95,36 @@ const TrackAddition: React.FC = memo(() => {
             placeholder="Ссылка на трек"
             error={errors.url?.message}
             className="mb-8 max-w-sm lg:mb-12"
-            onChange={onChange}
+            onChange={(event) => {
+              onChange(event.target.value);
+
+              if (event.target.value.length === 0) {
+                clearParsedTrack();
+              }
+            }}
             value={value}
           />
         )}
       />
       {parsedTrack && !isLoading ? (
-        <TrackInfo artist="" name="" provider="" duration={duration} />
+        <TrackInfo
+          artist={parsedTrack.author}
+          name={parsedTrack.title}
+          provider={parsedTrack.source}
+          duration={duration}
+          imgUrl={parsedTrack.imgUrl as string}
+          trackIndexPlay={0}
+          trackIndex={0}
+          isPlay={false}
+          handlerPlay={() => {}}
+          handlerModal={() => {}}
+        />
       ) : (
         <div className="text-secondary-cadet-gray font-rubik font-normal text-base leading-6 tracking-wider ">
           Вставьте ссылку на трек из стримингового сервиса и добавьте его в свою
           библиотеку!
         </div>
       )}
-      <TrackHistory />
       <ReactPlayer
         url={parsedTrack?.url}
         onReady={() => {

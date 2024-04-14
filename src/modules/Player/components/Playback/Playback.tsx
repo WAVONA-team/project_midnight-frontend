@@ -4,11 +4,7 @@ import ReactPlayer from 'react-player/lazy';
 
 import { useStore } from '@/store/index';
 
-type Props = {
-  tracks: string[];
-};
-
-export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
+export const Playback: React.FC = React.memo(() => {
   const playerRef = useRef<ReactPlayer>(null);
   const {
     playerState,
@@ -22,6 +18,7 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
     changeDuration,
     changeTracksLenght,
     changeSeeking,
+    tracks,
   } = useStore(
     ({
       playerState,
@@ -35,6 +32,7 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      tracks,
     }) => ({
       playerState,
       volume,
@@ -47,6 +45,7 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      tracks,
     }),
   );
 
