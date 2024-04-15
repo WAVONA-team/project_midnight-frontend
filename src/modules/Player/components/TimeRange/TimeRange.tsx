@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStore } from '@/store/index';
 
-import format from '@/modules/Player/helpers/format';
+import format from '@/shared/helpers/format';
 
 export const TimeRange: React.FC = React.memo(() => {
   const {

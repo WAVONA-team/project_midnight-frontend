@@ -1,1 +1,1 @@
-export { TrackAddition } from './components/TrackAddition';
+export { default as TrackAddition } from './components/TrackAddition/TrackAddition';

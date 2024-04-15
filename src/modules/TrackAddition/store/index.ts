@@ -5,10 +5,14 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { ParsedTrack, TrackAdditionState } from './types';
 
-export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
+export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
   isParsedTrackLoading: false,
+  setIsParsedTrackLoading: (state: boolean) =>
+    set({ isParsedTrackLoading: state }),
   parseTrack: async (url, userId) => {
+    set({ isParsedTrackLoading: true });
+
     return await httpClient
       .post<ParsedTrack>('/track/get-info', {
         url,
@@ -22,9 +26,10 @@ export const createTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;
 
+        set({ isParsedTrackLoading: false });
+
         throw { fieldErrors, formErrors };
-      })
-      .finally(() => set({ isParsedTrackLoading: false }));
+      });
   },
   clearParsedTrack: () => {
     set({ parsedTrack: null });

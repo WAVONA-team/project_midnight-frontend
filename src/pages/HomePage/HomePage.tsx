@@ -38,9 +38,10 @@ export const HomePage: React.FC = React.memo(() => {
             lg:grid
             lg:grid-cols-2
             lg:mt-60
+            items-start
           "
         >
-          <Logo />
+          <Logo className="md:mt-10" />
 
           <h1 className="font-openSans text-on-primary-anti-flash-white text-4xl lg:text-6xl">
             Слушайте треки со всех площадок в одном месте
