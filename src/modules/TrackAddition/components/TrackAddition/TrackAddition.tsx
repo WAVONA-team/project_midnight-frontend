@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import ReactPlayer from 'react-player';
 
@@ -16,7 +16,6 @@ import { Spinner } from '@/ui/Spinner';
 import Logo from '../../ui/logo.svg';
 
 const TrackAddition: React.FC = memo(() => {
-  const [duration, setDuration] = useState('');
   const {
     user,
     parsedTrack,
@@ -29,6 +28,8 @@ const TrackAddition: React.FC = memo(() => {
     trackNumber,
     setTracks,
     changeTrackNumber,
+    parsedTrackDuration,
+    setParsedTrackDuration,
   } = useStore(
     ({
       user,
@@ -42,6 +43,8 @@ const TrackAddition: React.FC = memo(() => {
       trackNumber,
       setTracks,
       changeTrackNumber,
+      parsedTrackDuration,
+      setParsedTrackDuration,
     }) => ({
       user,
       parsedTrack,
@@ -54,6 +57,8 @@ const TrackAddition: React.FC = memo(() => {
       trackNumber,
       setTracks,
       changeTrackNumber,
+      parsedTrackDuration,
+      setParsedTrackDuration,
     }),
   );
   const {
@@ -77,11 +82,13 @@ const TrackAddition: React.FC = memo(() => {
 
   useEffect(() => {
     if (debounceValue.length > 0) {
-      parseTrack(debounceValue, user?.id as string).catch(({ formErrors }) => {
-        setError('url', {
-          message: formErrors,
-        });
-      });
+      parseTrack(debounceValue, user?.id as string, '111').catch(
+        ({ formErrors }) => {
+          setError('url', {
+            message: formErrors,
+          });
+        },
+      );
     }
   }, [debounceValue]);
 
@@ -154,7 +161,7 @@ const TrackAddition: React.FC = memo(() => {
           artist={parsedTrack.author}
           name={parsedTrack.title}
           provider={parsedTrack.source}
-          duration={duration}
+          duration={parsedTrackDuration as string}
           imgUrl={parsedTrack.imgUrl as string}
           trackIndexPlay={0}
           trackIndex={trackNumber}
@@ -173,7 +180,7 @@ const TrackAddition: React.FC = memo(() => {
         onReady={() => {
           if (newTrackRef.current) {
             const duration = format(newTrackRef.current?.getDuration());
-            setDuration(duration);
+            setParsedTrackDuration(duration);
 
             setIsParsedTrackLoading(false);
           }
