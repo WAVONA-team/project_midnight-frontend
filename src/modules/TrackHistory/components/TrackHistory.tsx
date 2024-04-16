@@ -35,7 +35,9 @@ export const TrackHistory: React.FC = React.memo(() => {
             trackIndexPlay={0}
             trackIndex={0}
             isPlay={false}
-            handlerPlay={() => parseTrack(track.url, user?.id as string, '111')}
+            handlerPlay={() =>
+              parseTrack(track.url, user?.id as string, track.duration)
+            }
             handlerModal={() => {}}
           />
         ))}

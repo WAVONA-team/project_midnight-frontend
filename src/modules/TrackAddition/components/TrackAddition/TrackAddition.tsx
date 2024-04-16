@@ -81,18 +81,6 @@ const TrackAddition: React.FC = memo(() => {
   }, []);
 
   useEffect(() => {
-    if (debounceValue.length > 0) {
-      parseTrack(debounceValue, user?.id as string, '111').catch(
-        ({ formErrors }) => {
-          setError('url', {
-            message: formErrors,
-          });
-        },
-      );
-    }
-  }, [debounceValue]);
-
-  useEffect(() => {
     if (parsedTrack?.url) {
       setValue('url', parsedTrack.url);
     }
@@ -169,21 +157,27 @@ const TrackAddition: React.FC = memo(() => {
           handlerPlay={() => {
             setTracks([parsedTrack.url]);
             changeTrackNumber(0);
-            changePlayerState(true);
+            changePlayerState(!playerState);
           }}
           handlerModal={() => {}}
         />
       )}
 
       <ReactPlayer
-        url={parsedTrack?.url}
+        url={debounceValue}
         onReady={() => {
-          if (newTrackRef.current) {
-            const duration = format(newTrackRef.current?.getDuration());
-            setParsedTrackDuration(duration);
+          const duration = format(newTrackRef.current?.getDuration() as number);
+          setParsedTrackDuration(duration);
 
-            setIsParsedTrackLoading(false);
-          }
+          parseTrack(debounceValue, user?.id as string, duration).catch(
+            ({ formErrors }) => {
+              setError('url', {
+                message: formErrors,
+              });
+            },
+          );
+
+          setIsParsedTrackLoading(false);
         }}
         ref={newTrackRef}
         width="0"
