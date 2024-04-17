@@ -17,11 +17,20 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   }
 
   return (
-    <>
-      <div className=' flex flex-col justify-normal lg:flex-row-reverse lg:justify-end h-screen'>
-        <main className=' '>{children || <Outlet />}</main>
-        <NavBar />
-      </div>
-    </>
+    <div
+      className="
+        h-full
+        grid
+        grid-rows-[1fr_min-content]
+        lg:grid-cols-[min-content_1fr]
+        lg:grid-rows-none
+      "
+    >
+      <NavBar className="order-2 lg:order-none" />
+
+      <main className="h-full order-1 lg:order-0">
+        {children || <Outlet />}
+      </main>
+    </div>
   );
 };
