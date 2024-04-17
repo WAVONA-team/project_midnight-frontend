@@ -34,14 +34,14 @@ const SearchInput: React.FC<Props> = React.memo(
           </p>
         )}
 
-        <img src={searchIcon} alt="search" className="absolute top-10 left-4" />
+        <img src={searchIcon} alt="search" className="absolute top-9 left-4" />
 
         {!!value.length && (
           <button type="button" onClick={clearValue}>
             <img
               src={clearIcon}
               alt="clear"
-              className="absolute top-10 right-4"
+              className="absolute top-9 right-4"
             />
           </button>
         )}
@@ -57,7 +57,7 @@ const SearchInput: React.FC<Props> = React.memo(
             `,
             {
               'border-error-imperial-red': error,
-              'border-on-secondary-platinum': !error,
+              'border-secondary-eerie-black-light': !error,
             },
           )}
           type="search"

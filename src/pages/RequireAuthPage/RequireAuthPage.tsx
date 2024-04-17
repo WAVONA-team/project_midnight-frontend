@@ -18,8 +18,8 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
   return (
     <>
-      <div className=' flex flex-col justify-normal lg:flex-row-reverse lg:justify-end h-screen'>
-        <main className=' '>{children || <Outlet />}</main>
+      <div className=" flex flex-col justify-normal lg:flex-row-reverse lg:justify-end h-screen">
+        <main className="w-full">{children || <Outlet />}</main>
         <NavBar />
       </div>
     </>
