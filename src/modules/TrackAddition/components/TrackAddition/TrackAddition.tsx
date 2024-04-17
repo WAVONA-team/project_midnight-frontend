@@ -145,22 +145,45 @@ const TrackAddition: React.FC = memo(() => {
       {isParsedTrackLoading && <Spinner />}
 
       {parsedTrack && !isParsedTrackLoading && (
-        <TrackInfo
-          artist={parsedTrack.author}
-          name={parsedTrack.title}
-          provider={parsedTrack.source}
-          duration={parsedTrackDuration as string}
-          imgUrl={parsedTrack.imgUrl as string}
-          trackIndexPlay={0}
-          trackIndex={trackNumber}
-          isPlay={playerState}
-          handlerPlay={() => {
-            setTracks([parsedTrack.url]);
-            changeTrackNumber(0);
-            changePlayerState(!playerState);
-          }}
-          handlerModal={() => {}}
-        />
+        <>
+          <div className="lg:hidden">
+            <TrackInfo
+              artist={parsedTrack.author}
+              name={parsedTrack.title}
+              provider={parsedTrack.source}
+              duration={parsedTrackDuration as string}
+              imgUrl={parsedTrack.imgUrl as string}
+              trackIndexPlay={0}
+              trackIndex={trackNumber}
+              isPlay={playerState}
+              handlerPlay={() => {
+                setTracks([parsedTrack.url]);
+                changeTrackNumber(0);
+                changePlayerState(!playerState);
+              }}
+              handlerModal={() => {}}
+            />
+          </div>
+          <div className="hidden lg:block">
+            <TrackInfo
+              isDesktop={false}
+              artist={parsedTrack.author}
+              name={parsedTrack.title}
+              provider={parsedTrack.source}
+              duration={parsedTrackDuration as string}
+              imgUrl={parsedTrack.imgUrl as string}
+              trackIndexPlay={0}
+              trackIndex={trackNumber}
+              isPlay={playerState}
+              handlerPlay={() => {
+                setTracks([parsedTrack.url]);
+                changeTrackNumber(0);
+                changePlayerState(!playerState);
+              }}
+              handlerModal={() => {}}
+            />
+          </div>
+        </>
       )}
 
       <ReactPlayer

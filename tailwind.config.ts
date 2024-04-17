@@ -95,6 +95,10 @@ export default {
           '0% 100%': { height: '8px' },
           '50%': { height: '25px' },
         },
+        streamlineDesktop: {
+          '0% 100%': { height: '16px' },
+          '50%': { height: '42px' },
+        },
       },
     },
   },

@@ -1,23 +1,46 @@
-import { classNames } from './classNames';
+import { classNames as baseClass } from './classNames';
 
-const Streamline: React.FC = () => {
-  return (
+type Props = {
+  isDesktop?: boolean;
+};
+
+const Streamline: React.FC<Props> = ({ isDesktop = false }) => {
+  return isDesktop ? (
     <div className="spin flex gap-[2px] items-center">
       <div
-        className={`${classNames.lineBaseClass} animate-[streamline_1s_ease-in_infinite]`}
+        className={`${baseClass.lineBaseClassDesktop} animate-[streamlineDesktop_1s_ease-in_infinite]`}
       />
       <div
-        className={`${classNames.lineBaseClass} animate-[streamline_1s_ease-in_0.2s_infinite]`}
+        className={`${baseClass.lineBaseClassDesktop} animate-[streamlineDesktop_1s_ease-in_0.2s_infinite]`}
       />
       <div
-        className={`${classNames.lineBaseClass} animate-[streamline_1s_ease-in_0.4s_infinite]`}
+        className={`${baseClass.lineBaseClassDesktop} animate-[streamlineDesktop_1s_ease-in_0.4s_infinite]`}
       />
       <div
-        className={`${classNames.lineBaseClass} animate-[streamline_1s_ease-in_0.6s_infinite]`}
+        className={`${baseClass.lineBaseClassDesktop} animate-[streamlineDesktop_1s_ease-in_0.6s_infinite]`}
       />
 
       <div
-        className={`${classNames.lineBaseClass} animate-[streamline_1s_ease-in_0.8s_infinite]`}
+        className={`${baseClass.lineBaseClassDesktop} animate-[streamlineDesktop_1s_ease-in_0.8s_infinite]`}
+      />
+    </div>
+  ) : (
+    <div className="spin flex gap-[2px] items-center">
+      <div
+        className={`${baseClass.lineBaseClass} animate-[streamline_1s_ease-in_infinite]`}
+      />
+      <div
+        className={`${baseClass.lineBaseClass} animate-[streamline_1s_ease-in_0.2s_infinite]`}
+      />
+      <div
+        className={`${baseClass.lineBaseClass} animate-[streamline_1s_ease-in_0.4s_infinite]`}
+      />
+      <div
+        className={`${baseClass.lineBaseClass} animate-[streamline_1s_ease-in_0.6s_infinite]`}
+      />
+
+      <div
+        className={`${baseClass.lineBaseClass} animate-[streamline_1s_ease-in_0.8s_infinite]`}
       />
     </div>
   );
