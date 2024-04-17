@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 import { Menu } from '@headlessui/react';
 
+import Dropdown from '@/components/Dropdown/Dropdown.tsx';
+
 import { MenuButton, SortButton } from '@/ui/Button';
-import Dropdown from '@/ui/Dropdown/Dropdown.tsx';
 
 import alphaSortIcon from '@/assets/buttons/actionButtons/alphaSortIcon.svg';
 import dateSortIcon from '@/assets/buttons/actionButtons/dateSortIcon.svg';

@@ -5,10 +5,13 @@ const TrackPageTracks: React.FC = React.memo(() => {
     <div className="mb-28 sm:mb-12">
       <h2
         className="
-          font-openSans
-          font-normal
+          font-rubik
+          font-semibold
+          text-secondary-cadet-gray
           text-2xl
-          sm:text-4xl
+          sm:text-2xl
+          lg:text-xl
+          tracking-wide
         "
       >
         У вас пока нет добавленных треков :(

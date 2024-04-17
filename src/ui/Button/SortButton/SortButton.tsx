@@ -9,7 +9,7 @@ type Props = {
 };
 
 const SortButton: React.FC<Props> = React.memo(
-  ({ title, className, disabled, isOpen, handler }) => {
+  ({ title, className, disabled = false, isOpen, handler }) => {
     return (
       <button
         onClick={handler}

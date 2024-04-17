@@ -1,36 +1,37 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import settingsIcon from '@/assets/buttons/settingsIcon.svg';
-import searchIcon from '@/assets/inputs/search.svg';
+import searchIcon from '@/assets/inputs/searchIconWhite.svg';
 
 type Props = {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handler: () => void;
 };
 
-const TrackPageActions: React.FC<Props> = React.memo(
-  ({ isOpen, setIsOpen }) => {
-    const navigate = useNavigate();
+const TrackPageActions: React.FC<Props> = React.memo(({ handler }) => {
+  const navigate = useNavigate();
 
-    return (
-      <div className="lg:hidden flex gap-3 justify-end">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="active:outline-none focus:outline-none"
-        >
-          <img src={searchIcon} alt="search" />
-        </button>
+  return (
+    <div className="lg:hidden flex gap-3 justify-end">
+      <button
+        onClick={handler}
+        className="active:outline-none focus:outline-none"
+      >
+        <img
+          src={searchIcon}
+          className="stroke-on-primary-anti-flash-white"
+          alt="Search"
+        />
+      </button>
 
-        <button
-          onClick={() => navigate('/settings')}
-          className="active:outline-none focus:outline-none"
-        >
-          <img src={settingsIcon} alt="Settings" />
-        </button>
-      </div>
-    );
-  },
-);
+      <button
+        onClick={() => navigate('/settings')}
+        className="active:outline-none focus:outline-none"
+      >
+        <img src={settingsIcon} alt="Settings" />
+      </button>
+    </div>
+  );
+});
 
 export default TrackPageActions;

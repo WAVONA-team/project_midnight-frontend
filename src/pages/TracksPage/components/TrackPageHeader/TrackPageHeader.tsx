@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/components/TrackPageActions/TrackPageActions.tsx';
-import TrackPageLogo from '@/pages/TracksPage/components/TrackPageHeader/components/TrackPageLogo/TrackPageLogo.tsx';
+import { useAnimate } from 'framer-motion';
+
+import TracksPageHeaderMobile from '@/pages/TracksPage/components/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
 import { SearchInput } from '@/ui/Input';
 
 const TrackPageHeader: React.FC = React.memo(() => {
   const [value, setValue] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scope, animate] = useAnimate();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -17,12 +19,17 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
   };
 
+  const handleClick = async () => {
+    await animate('label', { height: 0 }, { duration: 0.1 });
+    setIsOpen(!isOpen);
+    await animate('label', { height: 60 }, { duration: 0.1 });
+  };
+
   return (
-    <div className="grid grid-cols-2 justify-between mb-8">
-      <TrackPageLogo />
-      <TrackPageActions isOpen={isOpen} setIsOpen={setIsOpen} />
+    <div ref={scope} className="mb-8">
+      <TracksPageHeaderMobile handler={handleClick} />
       <SearchInput
-        className={`${!isOpen && 'hidden'} lg:block md:max-w-[398px] col-span-3`}
+        className={`${!isOpen && 'hidden'} lg:block lg:max-w-[398px] col-span-3`}
         clearValue={clearValueHandler}
         placeholder="Название, исполнитель..."
         value={value}

@@ -17,13 +17,17 @@ const TrackPageControls: React.FC = React.memo(() => {
       <div className="mr-[87px]">
         <h1
           className="
-            font-openSans
-            font-normal
+            font-rubik
+            font-semibold
             text-2xl
+            tracking-wide
             whitespace-nowrap
+            lg:font-openSans
+            lg:font-normal
+            lg:font-3xl
           "
         >
-          Все треки
+          Сохраненные треки
         </h1>
       </div>
 
@@ -37,23 +41,7 @@ const TrackPageControls: React.FC = React.memo(() => {
           items-center
         "
       >
-        <div>
-          <ShuffleButton
-            className="
-              bg-transparent
-              p-0
-              sm:bg-primary-poppy
-              sm:py-1.5
-              sm:px-4
-              sm:shadow-button-default
-              sm:active:shadow-button-active
-              sm:active:bg-primary-madder
-              sm:hover:bg-primary-fire-brick
-            "
-            handler={() => {}}
-            title="Перемешать"
-          />
-        </div>
+        <ShuffleButton handler={() => {}} title="Перемешать" />
         <TrackPageDropdown />
       </div>
     </div>
