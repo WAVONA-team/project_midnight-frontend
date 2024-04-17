@@ -26,7 +26,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
   };
 
   return (
-    <div ref={scope} className="mb-8">
+    <div ref={scope} className="mb-12">
       <TracksPageHeaderMobile handler={handleClick} />
       <SearchInput
         className={`${!isOpen && 'hidden'} lg:block lg:max-w-[398px] col-span-3`}
