@@ -42,8 +42,12 @@ export const TrackInfo: React.FC<Props> = React.memo(
             'bg-surface-eerie_black relative w-full flex p-6 rounded-lg  ',
           )}
         >
-          <div className="relative w-32 h-32 rounded-md object-cover mr-6">
-            <img src={imgUrl} alt={name} className="w-full h-full rounded-md" />
+          <div className="relative w-32 h-32 rounded-md  mr-6">
+            <img
+              src={imgUrl}
+              alt={name}
+              className="w-full h-full object-cover rounded-md"
+            />
             {isPlay && trackIndexPlay === trackIndex && (
               <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center">
                 <Streamline isDesktop={isDesktop} />
@@ -121,13 +125,18 @@ export const TrackInfo: React.FC<Props> = React.memo(
             },
           )}
         >
-          <img src={imgUrl} alt={name} className="w-16 h-16 rounded-md" />
-
-          {isPlay && trackIndexPlay === trackIndex && (
-            <div className="absolute top-0 right-0 left-0 lg:left-16 bottom-0 flex items-center pl-9">
-              <Streamline />
-            </div>
-          )}
+          <div className="relative w-16 h-16 rounded-md">
+            <img
+              src={imgUrl}
+              alt={name}
+              className="w-full h-full object-cover rounded-md"
+            />
+            {isPlay && trackIndexPlay === trackIndex && (
+              <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center ">
+                <Streamline />
+              </div>
+            )}
+          </div>
 
           <div className="lg:hidden min-w-48">
             <h3 className="flex text-base font-rubik text-on-primary-anti-flash-white truncate min-w-48">

@@ -18,6 +18,8 @@ export const Playback: React.FC = React.memo(() => {
     changeDuration,
     changeTracksLenght,
     changeSeeking,
+    changeTrackNumber,
+    changePlayerState,
     tracks,
   } = useStore(
     ({
@@ -32,6 +34,8 @@ export const Playback: React.FC = React.memo(() => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      changeTrackNumber,
+      changePlayerState,
       tracks,
     }) => ({
       playerState,
@@ -45,6 +49,8 @@ export const Playback: React.FC = React.memo(() => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      changeTrackNumber,
+      changePlayerState,
       tracks,
     }),
   );
@@ -70,6 +76,14 @@ export const Playback: React.FC = React.memo(() => {
     changeDuration(state);
   };
 
+  const handlerOnEnded = () => {
+    if (tracks[trackNumber + 1]) {
+      changeTrackNumber(trackNumber + 1);
+    } else {
+      changePlayerState(false);
+    }
+  };
+
   return (
     <div>
       <ReactPlayer
@@ -84,6 +98,7 @@ export const Playback: React.FC = React.memo(() => {
         onPlay={handleOnPlay}
         onDuration={handleOnDuration}
         onProgress={handleProgress}
+        onEnded={handlerOnEnded}
       />
     </div>
   );

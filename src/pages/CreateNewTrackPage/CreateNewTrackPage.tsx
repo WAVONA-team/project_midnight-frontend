@@ -39,6 +39,7 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
         bg-background-hight
         pt-8
         h-full
+        overflow-auto
         lg:p-0
         lg:bg-background-desktop
       "
