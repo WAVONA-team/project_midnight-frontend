@@ -39,8 +39,6 @@ export const TimeRange: React.FC = React.memo(() => {
 
   return (
     <div>
-      <p>{`${elapsed} : ${fullness}`}</p>
-
       <RangeInput
         min={0}
         max={+elapsed}
@@ -49,6 +47,10 @@ export const TimeRange: React.FC = React.memo(() => {
         onMouseUp={() => changeSeeking(false)}
         onMouseDown={() => changeSeeking(true)}
       />
+      <div className='lg:flex justify-between text-on-primary-anti-flash-white hidden'>
+        <p>{`${elapsed}`}</p>
+        <p>{`${fullness}`}</p>
+      </div>
     </div>
   );
 });
