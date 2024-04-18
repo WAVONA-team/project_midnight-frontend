@@ -164,9 +164,10 @@ const TrackAddition: React.FC = memo(() => {
               handlerModal={() => {}}
             />
           </div>
+
           <div className="hidden lg:block">
             <TrackInfo
-              isDesktop={false}
+              isDesktop={true}
               artist={parsedTrack.author}
               name={parsedTrack.title}
               provider={parsedTrack.source}
