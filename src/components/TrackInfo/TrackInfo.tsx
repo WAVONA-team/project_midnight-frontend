@@ -11,7 +11,7 @@ import dot from '@/assets/dot.svg';
 type Props = {
   isDesktop?: boolean;
   name: string;
-  artist: string | null;
+  artist: string;
   provider: string;
   imgUrl: string;
   duration: string;
