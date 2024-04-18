@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { type OnProgressProps } from 'react-player/base';
-import ReactPlayer from 'react-player/lazy';
+
+import ReactPlayer from '@/lib/ReactPlayer';
+import { OnProgressProps } from '@/lib/ReactPlayer/base';
 
 import { useStore } from '@/store/index';
 

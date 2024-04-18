@@ -13,6 +13,7 @@
   "importOrder": [
     "^react",
     "<THIRD_PARTY_MODULES>",
+    "^@/lib/(.*)$",
     "^@/shared/(.*)$",
     "^@/store/(.*)$",
     "^@/pages/(.*)$",
