@@ -1,5 +1,6 @@
 import {
   type NormalizedUser,
+  Track,
   type UserWithAccessToken,
 } from 'project_midnight';
 import { StateCreator } from 'zustand';
@@ -12,7 +13,7 @@ import { UserState } from '@/modules/Authorization/store/types/UserState';
 
 const authClient = createClient();
 
-export const createUserSlice: StateCreator<UserState> = (set) => ({
+export const createUserSlice: StateCreator<UserState> = (set, get) => ({
   user: null,
   isChecked: false,
   register: async (email: string, password: string) => {
@@ -48,6 +49,24 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
+
+  getTracksByUser: async (userId: string, page: string) => {
+    return await httpClient
+      .get<Track[]>(`/users/tracks/${userId}?page=${page}`)
+      .then(({ data }) => {
+        const user = get().user as NormalizedUser;
+        set({ user: { ...user, tracks: [...(user.tracks || []), ...data] } });
+
+        return data;
+      })
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
+
   registerSpotify: () => {
     return window.open(
       `${import.meta.env.VITE_API_BASE_URL}/auth/spotify`,
