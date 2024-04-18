@@ -4,6 +4,9 @@ import { useStore } from '@/store/index';
 
 import { PlayButton } from '@/ui/Button';
 
+import back from '@/assets/buttons/playerButtons/back.svg';
+import next from '@/assets/buttons/playerButtons/next.svg';
+
 export const TrackControlButtons: React.FC = React.memo(() => {
   const { tracksLenght, changeTrackNumber, trackNumber } = useStore(
     ({ tracksLenght, changeTrackNumber, trackNumber }) => ({
@@ -32,13 +35,13 @@ export const TrackControlButtons: React.FC = React.memo(() => {
   return (
     <div className="flex gap-2">
       <button type="button" onClick={NextTrack}>
-        Next
+        <img src={next} alt="" />
       </button>
 
       <PlayButton />
 
       <button type="button" onClick={PreviosTrack}>
-        Previos
+        <img src={back} alt="" />
       </button>
     </div>
   );

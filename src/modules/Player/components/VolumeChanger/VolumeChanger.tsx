@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useStore } from '@/store/index';
 
+import volumeIcon from '@/assets/buttons/playerButtons/volume.svg';
+
 export const VolumeChanger: React.FC = React.memo(() => {
   const { volume, changeVolume } = useStore(({ volume, changeVolume }) => ({
     volume,
@@ -17,6 +19,9 @@ export const VolumeChanger: React.FC = React.memo(() => {
 
   return (
     <div>
+      <button onClick={handleMute}>
+        <img src={volumeIcon} alt="" />
+      </button>
       <input
         type="range"
         min={0}
@@ -25,7 +30,6 @@ export const VolumeChanger: React.FC = React.memo(() => {
         value={volume}
         onChange={VolumeChange}
       />
-      <button onClick={handleMute}>{volume == 0 ? 'UnMute' : 'Mute'}</button>
     </div>
   );
 });
