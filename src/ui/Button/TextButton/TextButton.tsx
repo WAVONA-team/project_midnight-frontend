@@ -14,7 +14,7 @@ const TextButton: React.FC<Props> = React.memo(
   ({ title, handler, className, type = 'button', disabled = false }) => {
     return (
       <button
-        className={`${className} ${textButtonClassNames.button}`}
+        className={`${className} ${textButtonClassNames.button} text-secondary-satin-sheen-gold`}
         disabled={disabled}
         type={type}
         onClick={handler}
