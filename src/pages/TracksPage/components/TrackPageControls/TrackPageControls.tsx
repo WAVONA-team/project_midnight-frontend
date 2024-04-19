@@ -14,7 +14,7 @@ const TrackPageControls: React.FC = React.memo(() => {
         lg:flex-row
       "
     >
-      <div className="mr-[87px]">
+      <div className="mr-5 xl:mr-20">
         <h1
           className="
             font-rubik

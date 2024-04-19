@@ -4,15 +4,12 @@ import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/comp
 
 import { Logo } from '@/ui/Logo';
 
-type Props = {
-  handler: () => void;
-};
-
-const TracksPageHeaderMobile: React.FC<Props> = React.memo(({ handler }) => {
+const TracksPageHeaderMobile: React.FC = React.memo(() => {
   return (
     <div className="lg:hidden flex justify-between">
-      <Logo />
-      <TrackPageActions handler={handler} />
+      <Logo textSize="text-lg" logoWidth="w-6" />
+
+      <TrackPageActions />
     </div>
   );
 });

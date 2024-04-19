@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { classNames as inputClassnames } from '@/ui/Input/classNames';
 
-import searchIcon from '@/assets/inputs/search.svg';
 import clearIcon from '@/assets/inputs/clear.svg';
+import searchIcon from '@/assets/inputs/search.svg';
 
 type Props = {
   value: string;
@@ -34,7 +34,11 @@ const SearchInput: React.FC<Props> = React.memo(
           </p>
         )}
 
-        <img src={searchIcon} alt="search" className="absolute top-9 left-4" />
+        <img
+          src={searchIcon}
+          alt="search"
+          className="absolute top-[10px] left-4"
+        />
 
         {!!value.length && (
           <button type="button" onClick={clearValue}>

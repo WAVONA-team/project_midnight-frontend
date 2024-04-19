@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import ReactPlayer from 'react-player';
 
 import { useStore } from '@/store';
+
+import ReactPlayer from '@/lib/ReactPlayer';
 
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
@@ -146,7 +147,7 @@ const TrackAddition: React.FC = memo(() => {
 
       {parsedTrack && !isParsedTrackLoading && (
         <>
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <TrackInfo
               artist={parsedTrack.author}
               name={parsedTrack.title}
@@ -165,7 +166,7 @@ const TrackAddition: React.FC = memo(() => {
             />
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <TrackInfo
               isDesktop={true}
               artist={parsedTrack.author}

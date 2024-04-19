@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -8,8 +8,6 @@ import { SearchInput } from '@/ui/Input';
 
 const TrackPageHeader: React.FC = React.memo(() => {
   const [value, setValue] = useState<string>('');
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [deviceSize, changeDeviceSize] = useState(window.innerWidth);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -19,21 +17,14 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
   };
 
-  useEffect(() => {
-    window.addEventListener('resize', () =>
-      changeDeviceSize(window.innerWidth),
-    );
-
-    if (deviceSize >= 1024) {
-      setIsOpen(true);
-    }
-  }, [isOpen, deviceSize]);
-
   return (
     <div className="mb-8 md:mb-12">
-      <TracksPageHeaderMobile handler={() => setIsOpen(!isOpen)} />
-      <AnimatePresence initial={false}>
-        {isOpen && (
+      <div className="lg:hidden">
+        <TracksPageHeaderMobile />
+      </div>
+
+      <div className="hidden lg:block">
+        <AnimatePresence initial={false}>
           <motion.div
             className="overflow-hidden"
             initial={{ height: 0 }}
@@ -49,8 +40,8 @@ const TrackPageHeader: React.FC = React.memo(() => {
               onChange={onChangeHandler}
             />
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
     </div>
   );
 });

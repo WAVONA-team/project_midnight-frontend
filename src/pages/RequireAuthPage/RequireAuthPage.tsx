@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
-import NavBar from '@/modules/NavBar';
+import { NavBar } from '@/components/NavBar';
 
 export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   children,

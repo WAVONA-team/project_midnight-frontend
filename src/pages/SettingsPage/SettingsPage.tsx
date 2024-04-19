@@ -18,16 +18,15 @@ export const SettingsPage: React.FC = React.memo(() => {
         py-6
         sm:bg-background-default-gradient
         sm:py-12
+        w-full
+        h-full
       "
     >
       <div
         className="
-        font-rubik
-        text-on-primary-anti-flash-white
-        max-w-full
-        h-dvh
-        sm:max-w-full
-      "
+          font-rubik
+          text-on-primary-anti-flash-white
+        "
       >
         <div className="flex sm:mb-3">
           <BackButton className="sm:hidden" />
