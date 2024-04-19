@@ -8,7 +8,7 @@ type Props = {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   labelText: string;
-
+  withoutLabel?: boolean;
   className?: string;
   placeholder?: string;
   error?: string;
@@ -20,6 +20,7 @@ const DefaultInput: React.FC<Props> = React.memo(
     value,
     onChange,
     labelText,
+    withoutLabel = false,
     className = '',
     placeholder = '',
     error,
@@ -27,12 +28,21 @@ const DefaultInput: React.FC<Props> = React.memo(
   }) => {
     return (
       <label className={`${className} relative block`}>
-        <p className="text-base text-on-primary-anti-flash-white font-bold">
+        <p
+          className={classNames(
+            'text-base text-on-primary-anti-flash-white font-bold ',
+            { 'lg:hidden': withoutLabel },
+          )}
+        >
           {labelText}
         </p>
-
         {error && (
-          <p className="absolute top-8 text-xs text-error-imperial-red">
+          <p
+            className={classNames(
+              'absolute  top-8  text-xs text-error-imperial-red',
+              { 'lg:-top-5': withoutLabel },
+            )}
+          >
             {error}
           </p>
         )}

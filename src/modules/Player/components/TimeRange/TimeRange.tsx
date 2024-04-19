@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStore } from '@/store';
 
-import format from '@/modules/Player/helpers/format';
+import format from '@/shared/helpers/format';
 
 import { RangeInput } from '@/ui/Input';
 

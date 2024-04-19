@@ -5,11 +5,7 @@ import { OnProgressProps } from '@/lib/ReactPlayer/base';
 
 import { useStore } from '@/store/index';
 
-type Props = {
-  tracks: string[];
-};
-
-export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
+export const Playback: React.FC = React.memo(() => {
   const playerRef = useRef<ReactPlayer>(null);
   const {
     playerState,
@@ -23,6 +19,9 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
     changeDuration,
     changeTracksLenght,
     changeSeeking,
+    changeTrackNumber,
+    changePlayerState,
+    tracks,
   } = useStore(
     ({
       playerState,
@@ -36,6 +35,9 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      changeTrackNumber,
+      changePlayerState,
+      tracks,
     }) => ({
       playerState,
       volume,
@@ -48,6 +50,9 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
       changeDuration,
       changeTracksLenght,
       changeSeeking,
+      changeTrackNumber,
+      changePlayerState,
+      tracks,
     }),
   );
 
@@ -72,6 +77,14 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
     changeDuration(state);
   };
 
+  const handlerOnEnded = () => {
+    if (tracks[trackNumber + 1]) {
+      changeTrackNumber(trackNumber + 1);
+    } else {
+      changePlayerState(false);
+    }
+  };
+
   return (
     <div>
       <ReactPlayer
@@ -86,6 +99,7 @@ export const Playback: React.FC<Props> = React.memo(({ tracks }) => {
         onPlay={handleOnPlay}
         onDuration={handleOnDuration}
         onProgress={handleProgress}
+        onEnded={handlerOnEnded}
       />
     </div>
   );

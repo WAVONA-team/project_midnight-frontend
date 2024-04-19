@@ -19,7 +19,7 @@ export const RegistrationPage: React.FC = React.memo(() => {
       "
     >
       <Container className="h-full flex flex-col justify-center">
-        <main className="lg:grid lg:grid-cols-2">
+        <main className="lg:grid lg:grid-cols-2 items-center">
           <Logo className="hidden lg:flex" />
           <RegistrationForm />
         </main>

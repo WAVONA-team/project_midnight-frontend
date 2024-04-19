@@ -3,9 +3,10 @@ import { type StateCreator } from 'zustand';
 import { PlayerState } from './types/PlayerState';
 
 export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
+  tracks: [],
   playerState: false,
   isLoop: false,
-  volume: 100,
+  volume: 70,
   trackNumber: 0,
   tracksLenght: 0,
   currentTime: 0,
@@ -13,7 +14,10 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   duration: 0,
   seekTo: 0,
   seeking: false,
-  changePlayerState: (playerState: boolean) => set({ playerState }),
+  setTracks: (tracks: string[]) => set({ tracks }),
+  changePlayerState: (playerState: boolean) => {
+    set({ playerState });
+  },
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
   changeVolume: (volume: number) => set({ volume }),
   changeTrackNumber: (trackNumber: number) => set({ trackNumber }),

@@ -5,6 +5,7 @@ export default {
     fontFamily: {
       rubik: ['Rubik', 'sans-serif'],
       openSans: ['Open Sans', 'sans-serif'],
+      notoSans: ['Noto Sans', 'sans-serif'],
       ubuntu: ['Ubuntu', 'sans-serif'],
     },
 
@@ -23,7 +24,6 @@ export default {
         'misty-rose': '#F4D5D5',
       },
       'on-primary': {
-        misty_rose: '#F4D5D5',
         'lavender-blush': '#FCEEEE',
         'anti-flash-white': '#FFFFFF',
       },
@@ -95,6 +95,27 @@ export default {
           'linear-gradient(0deg, #0B0D0B, #0B0D0B)',
         'track-range-gradient':
           'linear-gradient(90deg, #9C1C22 0%, #DA2F37 100%)',
+        'background-desktop': `radial-gradient(
+            35.35% 48.59% at 95.69% 96.29%,
+            rgba(218, 47, 55, 0.1) 0%,
+            rgba(218, 47, 55, 0) 100%
+          ),
+          radial-gradient(
+            5.73% 7.96% at 96.28% 66.75%,
+            rgba(218, 47, 55, 0.1) 0%,
+            rgba(218, 47, 55, 0) 76.29%
+          ),
+          linear-gradient(0deg, #0b0d0b, #0b0d0b)`,
+      },
+      keyframes: {
+        streamline: {
+          '0% 100%': { height: '8px' },
+          '50%': { height: '25px' },
+        },
+        streamlineDesktop: {
+          '0% 100%': { height: '16px' },
+          '50%': { height: '42px' },
+        },
       },
     },
   },

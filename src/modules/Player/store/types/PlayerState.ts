@@ -1,4 +1,5 @@
 export type PlayerState = {
+  tracks: string[];
   playerState: boolean;
   isLoop: boolean;
   volume: number;
@@ -9,6 +10,7 @@ export type PlayerState = {
   duration: number;
   seekTo: number;
   seeking: boolean;
+  setTracks: (tracks: string[]) => void;
   changePlayerState: (playerState: boolean) => void;
   changeIsLoop: (isLoop: boolean) => void;
   changeVolume: (volume: number) => void;

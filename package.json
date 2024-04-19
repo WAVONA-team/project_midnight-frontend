@@ -17,7 +17,7 @@
     "framer-motion": "^11.0.18",
     "load-script": "^2.0.0",
     "memoize-one": "^6.0.0",
-    "project_midnight": "^0.0.27",
+    "project_midnight": "^0.0.34",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-auth-code-input": "^3.2.1",
@@ -26,7 +26,7 @@
     "react-hook-form": "^7.50.1",
     "react-router-dom": "^6.22.0",
     "tailwind-gradient-mask-image": "^1.2.0",
-    "zustand": "^4.5.1"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
