@@ -6,6 +6,9 @@ export type UserState = {
   user: NormalizedUser | null;
   isChecked: boolean;
   register: (email: string, password: string) => Promise<NormalizedUser>;
+  userTracks: Track[];
+  isUserTracksLoading: boolean;
+  setIsUserTracksLoading: (isUserTracksLoading: boolean) => void;
   getTracksByUser: (userId: string, page: string) => Promise<Track[]>;
   registerVerify: (
     activationToken: string | null,

@@ -15,6 +15,11 @@ const authClient = createClient();
 
 export const createUserSlice: StateCreator<UserState> = (set, get) => ({
   user: null,
+  userTracks: [],
+  isUserTracksLoading: true,
+  setIsUserTracksLoading: (state) => {
+    set({ isUserTracksLoading: state });
+  },
   isChecked: false,
   register: async (email: string, password: string) => {
     return await authClient
@@ -54,8 +59,7 @@ export const createUserSlice: StateCreator<UserState> = (set, get) => ({
     return await httpClient
       .get<Track[]>(`/users/tracks/${userId}?page=${page}`)
       .then(({ data }) => {
-        const user = get().user as NormalizedUser;
-        set({ user: { ...user, tracks: [...(user.tracks || []), ...data] } });
+        set({ userTracks: [...get().userTracks, ...data] });
 
         return data;
       })
