@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,17 +14,9 @@ const TrackPageTracks: React.FC = React.memo(() => {
     getTracksByUser,
   } = useStore((state) => state);
 
-  const [currentPage, setCurrentPage] = useState<string>('1');
-
   useEffect(() => {
-    if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage)
-        .then(() => {
-          setCurrentPage((prevState) => String(Number(prevState) + 1));
-        })
-        .finally(() => setIsUserTracksLoading(false));
-    }
-  }, [isUserTracksLoading]);
+    getTracksByUser(user!.id);
+  }, []);
 
   const scrollHandler = (e: any) => {
     if (
@@ -35,12 +27,14 @@ const TrackPageTracks: React.FC = React.memo(() => {
     }
   };
 
+  console.log(isUserTracksLoading);
+
   return (
     <div
       onScroll={scrollHandler}
       className={`${userTracks.length >= 10 && 'overflow-y-auto'} h-full lg:h-[800px] mb-8 sm:mb-12 flex flex-col gap-11`}
     >
-      {userTracks.length <= 0 && (
+      {!isUserTracksLoading && userTracks.length <= 0 && (
         <h2
           className="
             font-rubik
@@ -57,25 +51,29 @@ const TrackPageTracks: React.FC = React.memo(() => {
       )}
 
       <AnimatePresence>
-        {userTracks.map((track) => (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="bg-secondary-dark-goldenrod w-full h-[65px]"
-            key={track.id}
-          >
-            <img src={track.imgUrl!} alt="Image" />
-            <h3>{track.author}</h3>
-          </motion.div>
-        ))}
-
         {isUserTracksLoading && (
           <Spinner
             className="relative"
             backgroundColor="bg-surface-eerie_black"
           />
+        )}
+
+        {!isUserTracksLoading && userTracks && (
+          <>
+            {userTracks.map((track) => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-secondary-dark-goldenrod w-full h-[65px]"
+                key={track.id}
+              >
+                <img src={track.imgUrl!} alt="Image" />
+                <h3>{track.author}</h3>
+              </motion.div>
+            ))}
+          </>
         )}
       </AnimatePresence>
     </div>

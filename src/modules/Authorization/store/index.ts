@@ -13,14 +13,14 @@ import { UserState } from '@/modules/Authorization/store/types/UserState';
 
 const authClient = createClient();
 
-export const createUserSlice: StateCreator<UserState> = (set, get) => ({
+export const createUserSlice: StateCreator<UserState> = (set) => ({
   user: null,
   userTracks: [],
   isUserTracksLoading: true,
+  isChecked: false,
   setIsUserTracksLoading: (state) => {
     set({ isUserTracksLoading: state });
   },
-  isChecked: false,
   register: async (email: string, password: string) => {
     return await authClient
       .post<NormalizedUser>('/register', {
@@ -56,10 +56,12 @@ export const createUserSlice: StateCreator<UserState> = (set, get) => ({
   },
 
   getTracksByUser: async (userId: string, page: string) => {
+    set({ isUserTracksLoading: true });
+
     return await httpClient
       .get<Track[]>(`/users/tracks/${userId}?page=${page}`)
       .then(({ data }) => {
-        set({ userTracks: [...get().userTracks, ...data] });
+        set((state) => ({ userTracks: [...state.userTracks, ...data] }));
 
         return data;
       })
@@ -68,7 +70,8 @@ export const createUserSlice: StateCreator<UserState> = (set, get) => ({
           serverErrors.response.data;
 
         throw { fieldErrors, formErrors };
-      });
+      })
+      .finally(() => set({ isUserTracksLoading: false }));
   },
 
   registerSpotify: () => {
