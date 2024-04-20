@@ -74,36 +74,6 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
       .finally(() => set({ isUserTracksLoading: false }));
   },
 
-  // getTracksByUser: async (userId: string, page: string) => {
-  //   set({ isUserTracksLoading: true });
-  //
-  //   return new Promise((res, _rej) => {
-  //     setTimeout(() => {
-  //       const tracks: Track[] = [];
-  //
-  //       for (let i = 0; i < 30; i++) {
-  //         tracks.push({
-  //           id: String(Math.random()),
-  //           userIdTracks: 'http://localhost:8080',
-  //           userIdSearchHistory: 'http://localhost:8080',
-  //           title: 'http://localhost:8080',
-  //           urlId: 'http://localhost:8080',
-  //           duration: 'http://localhost:8080',
-  //           createdAt: new Date(),
-  //           updatedAt: new Date(),
-  //           url: 'http://localhost:8080',
-  //           imgUrl: 'http://localhost:8080',
-  //           author: 'http://localhost:8080',
-  //           source: 'http://localhost:8080',
-  //         });
-  //       }
-  //       set((state) => ({ userTracks: [...state.userTracks, ...tracks] }));
-  //       set({ isUserTracksLoading: false });
-  //       res(tracks);
-  //     }, 1000);
-  //   });
-  // },
-
   registerSpotify: () => {
     return window.open(
       `${import.meta.env.VITE_API_BASE_URL}/auth/spotify`,
