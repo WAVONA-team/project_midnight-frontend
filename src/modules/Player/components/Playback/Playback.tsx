@@ -11,15 +11,14 @@ export const Playback: React.FC = React.memo(() => {
     playerState,
     volume,
     isLoop,
-    trackNumber,
+    currentTrack,
     seekTo,
     seeking,
     changeCurrentTime,
     changeSecondsLoaded,
     changeDuration,
-    changeTracksLenght,
     changeSeeking,
-    changeTrackNumber,
+    changeCurrentTrack,
     changePlayerState,
     tracks,
   } = useStore(
@@ -27,30 +26,28 @@ export const Playback: React.FC = React.memo(() => {
       playerState,
       volume,
       isLoop,
-      trackNumber,
+      currentTrack,
       seekTo,
       seeking,
       changeCurrentTime,
       changeSecondsLoaded,
       changeDuration,
-      changeTracksLenght,
       changeSeeking,
-      changeTrackNumber,
+      changeCurrentTrack,
       changePlayerState,
       tracks,
     }) => ({
       playerState,
       volume,
       isLoop,
-      trackNumber,
+      currentTrack,
       seekTo,
       seeking,
       changeCurrentTime,
       changeSecondsLoaded,
       changeDuration,
-      changeTracksLenght,
       changeSeeking,
-      changeTrackNumber,
+      changeCurrentTrack,
       changePlayerState,
       tracks,
     }),
@@ -69,38 +66,35 @@ export const Playback: React.FC = React.memo(() => {
     }
   };
 
-  const handleOnPlay = () => {
-    changeTracksLenght(tracks.length);
-  };
-
   const handleOnDuration = (state: number) => {
     changeDuration(state);
   };
 
   const handlerOnEnded = () => {
-    if (tracks[trackNumber + 1]) {
-      changeTrackNumber(trackNumber + 1);
+    const currentTrackIndex = tracks?.findIndex(
+      (track) => track.url === currentTrack?.url,
+    ) as number;
+
+    if (tracks && tracks[currentTrackIndex + 1]) {
+      changeCurrentTrack(tracks[currentTrackIndex + 1]);
     } else {
       changePlayerState(false);
     }
   };
 
   return (
-    <div>
-      <ReactPlayer
-        ref={playerRef}
-        url={tracks[trackNumber]}
-        controls={false}
-        volume={volume}
-        playing={playerState}
-        width={0}
-        height={0}
-        loop={isLoop}
-        onPlay={handleOnPlay}
-        onDuration={handleOnDuration}
-        onProgress={handleProgress}
-        onEnded={handlerOnEnded}
-      />
-    </div>
+    <ReactPlayer
+      ref={playerRef}
+      url={currentTrack?.url}
+      controls={false}
+      volume={volume}
+      playing={playerState}
+      width={0}
+      height={0}
+      loop={isLoop}
+      onDuration={handleOnDuration}
+      onProgress={handleProgress}
+      onEnded={handlerOnEnded}
+    />
   );
 });

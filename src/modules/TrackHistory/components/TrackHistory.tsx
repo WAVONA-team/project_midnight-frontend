@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStore } from '@/store';
 
-import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 
@@ -32,8 +32,6 @@ export const TrackHistory: React.FC = React.memo(() => {
             provider={track.source}
             duration={track.duration}
             imgUrl={track.imgUrl as string}
-            trackIndexPlay={0}
-            trackIndex={0}
             isPlay={false}
             handlerPlay={() =>
               parseTrack(track.url, user?.id as string, track.duration)

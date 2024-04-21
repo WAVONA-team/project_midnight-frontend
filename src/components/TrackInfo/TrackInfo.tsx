@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useStore } from '@/store';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
@@ -14,14 +15,12 @@ type Props = {
   provider: string;
   imgUrl: string;
   duration: string;
-  trackIndexPlay: number;
-  trackIndex: number;
   isPlay: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
   handlerModal: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export const TrackInfo: React.FC<Props> = React.memo(
+const TrackInfo: React.FC<Props> = React.memo(
   ({
     isDesktop = false,
     name,
@@ -29,12 +28,12 @@ export const TrackInfo: React.FC<Props> = React.memo(
     provider,
     imgUrl,
     duration,
-    trackIndexPlay,
-    trackIndex,
     isPlay,
     handlerPlay,
     handlerModal,
   }) => {
+    const { playerState } = useStore(({ playerState }) => ({ playerState }));
+
     return isDesktop ? (
       <div className="px-20">
         <div
@@ -48,7 +47,7 @@ export const TrackInfo: React.FC<Props> = React.memo(
               alt={name}
               className="w-full h-full object-cover rounded-md"
             />
-            {isPlay && trackIndexPlay === trackIndex && (
+            {isPlay && playerState && (
               <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center">
                 <Streamline isDesktop={isDesktop} />
               </div>
@@ -67,8 +66,11 @@ export const TrackInfo: React.FC<Props> = React.memo(
               {duration} <img src={dot} alt="separator" /> {provider}
             </p>
           </div>
-          <div className="flex gap-8 justify-end items-center lg:justify-center cursor-pointer ">
-            <PlayButton />
+          <div className="flex gap-8 justify-end items-center lg:justify-center cursor-pointer">
+            <div onClick={handlerPlay}>
+              <PlayButton />
+            </div>
+
             <button
               type="button"
               className="flex gap-1 focus:outline-none focus-visible:outline-none w-6 h-6"
@@ -121,7 +123,7 @@ export const TrackInfo: React.FC<Props> = React.memo(
             'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2  xl:pr-64',
             {
               'bg-[linear-gradient(90deg,rgba(218,47,55,0.2)0%,rgba(218,47,55,0.05)74.4%,rgba(218,47,55,0)100%)]':
-                isPlay && trackIndexPlay === trackIndex,
+                isPlay && playerState,
             },
           )}
         >
@@ -131,7 +133,7 @@ export const TrackInfo: React.FC<Props> = React.memo(
               alt={name}
               className="w-full h-full object-cover rounded-md"
             />
-            {isPlay && trackIndexPlay === trackIndex && (
+            {isPlay && playerState && (
               <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center ">
                 <Streamline />
               </div>
@@ -213,3 +215,5 @@ export const TrackInfo: React.FC<Props> = React.memo(
     );
   },
 );
+
+export default TrackInfo;

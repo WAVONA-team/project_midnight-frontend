@@ -6,7 +6,7 @@ import { Logo } from '@/ui/Logo';
 
 const TracksPageHeaderMobile: React.FC = React.memo(() => {
   return (
-    <div className="lg:hidden flex justify-between">
+    <div className="pt-6 flex justify-between">
       <Logo textSize="text-lg" logoWidth="w-6" />
 
       <TrackPageActions />

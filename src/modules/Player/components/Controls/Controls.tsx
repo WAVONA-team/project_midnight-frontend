@@ -7,7 +7,7 @@ import {
   VolumeChanger,
 } from '@/modules/Player/components';
 
-import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+// import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
 
 export const Controls: React.FC = React.memo(() => {
   return (
@@ -18,11 +18,11 @@ export const Controls: React.FC = React.memo(() => {
 
       <TimeRange />
 
-      <TrackInfo
+      {/* <TrackInfo
         name="The Zephyr song"
         artist="Red Hot Chili Peppers"
         provider="YouTube"
-      />
+      /> */}
 
       <LoopButton />
     </div>

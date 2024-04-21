@@ -1,27 +1,24 @@
+import { Track } from 'project_midnight';
 import { type StateCreator } from 'zustand';
 
 import { PlayerState } from './types/PlayerState';
 
 export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
-  tracks: [],
+  tracks: null,
   playerState: false,
   isLoop: false,
   volume: 70,
-  trackNumber: 0,
-  tracksLenght: 0,
+  currentTrack: null,
   currentTime: 0,
   secondsLoaded: 0,
   duration: 0,
   seekTo: 0,
   seeking: false,
-  setTracks: (tracks: string[]) => set({ tracks }),
-  changePlayerState: (playerState: boolean) => {
-    set({ playerState });
-  },
+  setTracks: (tracks: Track[]) => set({ tracks }),
+  changePlayerState: (playerState: boolean) => set({ playerState }),
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
   changeVolume: (volume: number) => set({ volume }),
-  changeTrackNumber: (trackNumber: number) => set({ trackNumber }),
-  changeTracksLenght: (tracksLenght: number) => set({ tracksLenght }),
+  changeCurrentTrack: (currentTrack: Track) => set({ currentTrack }),
   changeCurrentTime: (currentTime: number) => set({ currentTime }),
   changeSecondsLoaded: (secondsLoaded: number) => set({ secondsLoaded }),
   changeDuration: (duration: number) => set({ duration }),

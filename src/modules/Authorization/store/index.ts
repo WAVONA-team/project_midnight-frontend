@@ -1,6 +1,5 @@
 import {
   type NormalizedUser,
-  Track,
   type UserWithAccessToken,
 } from 'project_midnight';
 import { StateCreator } from 'zustand';
@@ -15,12 +14,7 @@ const authClient = createClient();
 
 export const createUserSlice: StateCreator<UserState> = (set) => ({
   user: null,
-  userTracks: [],
-  isUserTracksLoading: true,
   isChecked: false,
-  setIsUserTracksLoading: (state) => {
-    set({ isUserTracksLoading: state });
-  },
   register: async (email: string, password: string) => {
     return await authClient
       .post<NormalizedUser>('/register', {
@@ -53,25 +47,6 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
 
         throw { fieldErrors, formErrors };
       });
-  },
-
-  getTracksByUser: async (userId: string, page: string) => {
-    set({ isUserTracksLoading: true });
-
-    return await httpClient
-      .get<Track[]>(`/users/tracks/${userId}?page={${page}`)
-      .then(({ data }) => {
-        set((state) => ({ userTracks: [...state.userTracks, ...data] }));
-
-        return data;
-      })
-      .catch((serverErrors) => {
-        const { fieldErrors, formErrors }: ServerErrors =
-          serverErrors.response.data;
-
-        throw { fieldErrors, formErrors };
-      })
-      .finally(() => set({ isUserTracksLoading: false }));
   },
 
   registerSpotify: () => {

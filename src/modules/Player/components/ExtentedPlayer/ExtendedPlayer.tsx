@@ -2,14 +2,10 @@ import React from 'react';
 
 import { Controls, Playback } from '@/modules/Player';
 
-type Props = {
-  tracks: string[];
-};
-
-export const ExtendedPlayer: React.FC<Props> = React.memo(({ tracks }) => {
+export const ExtendedPlayer: React.FC = React.memo(() => {
   return (
     <div>
-      <Playback tracks={tracks} />
+      <Playback />
       <Controls />
     </div>
   );

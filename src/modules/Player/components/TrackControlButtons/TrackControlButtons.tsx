@@ -5,27 +5,43 @@ import { useStore } from '@/store/index';
 import { PlayButton } from '@/ui/Button';
 
 export const TrackControlButtons: React.FC = React.memo(() => {
-  const { tracksLenght, changeTrackNumber, trackNumber } = useStore(
-    ({ tracksLenght, changeTrackNumber, trackNumber }) => ({
-      tracksLenght,
-      changeTrackNumber,
-      trackNumber,
+  const { tracks, currentTrack, changeCurrentTrack } = useStore(
+    ({ tracks, currentTrack, changeCurrentTrack }) => ({
+      tracks,
+      currentTrack,
+      changeCurrentTrack,
     }),
   );
 
   const NextTrack = () => {
-    if (trackNumber === tracksLenght - 1) {
-      return changeTrackNumber(0);
-    } else {
-      changeTrackNumber(trackNumber + 1);
+    const currentTrackIndex = tracks?.findIndex(
+      (track) => track.url === currentTrack?.url,
+    ) as number;
+
+    const nextTrack = tracks![currentTrackIndex + 1];
+
+    if (tracks && nextTrack) {
+      return changeCurrentTrack(nextTrack);
+    }
+
+    if (tracks && !nextTrack) {
+      return changeCurrentTrack(tracks[0]);
     }
   };
 
   const PreviosTrack = () => {
-    if (trackNumber === 0) {
-      return changeTrackNumber(trackNumber);
-    } else {
-      changeTrackNumber(trackNumber - 1);
+    const currentTrackIndex = tracks?.findIndex(
+      (track) => track.url === currentTrack?.url,
+    ) as number;
+
+    const previousTrack = tracks![currentTrackIndex - 1];
+
+    if (tracks && previousTrack) {
+      return changeCurrentTrack(previousTrack);
+    }
+
+    if (tracks && !previousTrack) {
+      return changeCurrentTrack(tracks[tracks.length - 1]);
     }
   };
 

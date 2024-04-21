@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/components/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
+import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
 const TrackPageHeader: React.FC = React.memo(() => {
@@ -18,7 +19,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
   };
 
   return (
-    <div className="mb-8 md:mb-12">
+    <Container className="mb-8 md:mb-12">
       <div className="lg:hidden">
         <TracksPageHeaderMobile />
       </div>
@@ -42,7 +43,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
           </motion.div>
         </AnimatePresence>
       </div>
-    </div>
+    </Container>
   );
 });
 

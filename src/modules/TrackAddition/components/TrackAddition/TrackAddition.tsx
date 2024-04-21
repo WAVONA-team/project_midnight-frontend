@@ -8,60 +8,57 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
-import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 import { DefaultInput } from '@/ui/Input';
+import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
-
-import Logo from '../../ui/logo.svg';
 
 const TrackAddition: React.FC = memo(() => {
   const {
     user,
     parsedTrack,
+    currentTrack,
     parseTrack,
     clearParsedTrack,
     isParsedTrackLoading,
     setIsParsedTrackLoading,
     playerState,
     changePlayerState,
-    trackNumber,
-    setTracks,
-    changeTrackNumber,
+    changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
   } = useStore(
     ({
       user,
       parsedTrack,
+      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
       playerState,
       changePlayerState,
-      trackNumber,
-      setTracks,
-      changeTrackNumber,
+      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
     }) => ({
       user,
       parsedTrack,
+      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
       playerState,
       changePlayerState,
-      trackNumber,
-      setTracks,
-      changeTrackNumber,
+      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
     }),
   );
+
   const {
     watch,
     control,
@@ -74,7 +71,6 @@ const TrackAddition: React.FC = memo(() => {
     },
   });
   const newTrackRef = useRef<ReactPlayer>(null);
-
   const debounceValue = useDebounce(watch('url'), 600);
 
   useEffect(() => {
@@ -96,9 +92,7 @@ const TrackAddition: React.FC = memo(() => {
     >
       <Container>
         <header className="mb-8 lg:hidden">
-          <span>
-            <img src={Logo} alt="logo" />
-          </span>
+          <Logo textSize="text-lg" logoWidth="w-6" />
         </header>
 
         <h2
@@ -154,12 +148,9 @@ const TrackAddition: React.FC = memo(() => {
               provider={parsedTrack.source}
               duration={parsedTrackDuration as string}
               imgUrl={parsedTrack.imgUrl as string}
-              trackIndexPlay={0}
-              trackIndex={trackNumber}
-              isPlay={playerState}
+              isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
-                setTracks([parsedTrack.url]);
-                changeTrackNumber(0);
+                changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
               handlerModal={() => {}}
@@ -174,12 +165,9 @@ const TrackAddition: React.FC = memo(() => {
               provider={parsedTrack.source}
               duration={parsedTrackDuration as string}
               imgUrl={parsedTrack.imgUrl as string}
-              trackIndexPlay={0}
-              trackIndex={trackNumber}
-              isPlay={playerState}
+              isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
-                setTracks([parsedTrack.url]);
-                changeTrackNumber(0);
+                changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
               handlerModal={() => {}}
