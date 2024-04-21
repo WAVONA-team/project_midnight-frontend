@@ -8,6 +8,7 @@ import { TrackAdditionState } from './types';
 
 export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
+  setParsedTrack: (track: Track) => set({ parsedTrack: track }),
   parseTrack: async (url, userId, duration) => {
     set({ isParsedTrackLoading: true });
 
@@ -34,7 +35,7 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   setIsParsedTrackLoading: (state: boolean) =>
     set({ isParsedTrackLoading: state }),
   parsedTrackDuration: null,
-  setParsedTrackDuration: (state: string) =>
+  setParsedTrackDuration: (state: string | null) =>
     set({ parsedTrackDuration: state }),
   clearParsedTrack: () => {
     set({ parsedTrack: null });

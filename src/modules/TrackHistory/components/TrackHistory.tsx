@@ -7,11 +7,11 @@ import { TrackInfo } from '@/components/TrackInfo';
 import { Container } from '@/ui/Container';
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const { user, userSearchHistory, parseTrack } = useStore(
-    ({ user, userSearchHistory, parseTrack }) => ({
-      user,
+  const { userSearchHistory, setParsedTrack, updateHistoryOrder } = useStore(
+    ({ userSearchHistory, setParsedTrack, updateHistoryOrder }) => ({
       userSearchHistory,
-      parseTrack,
+      setParsedTrack,
+      updateHistoryOrder,
     }),
   );
 
@@ -34,7 +34,7 @@ export const TrackHistory: React.FC = React.memo(() => {
             imgUrl={track.imgUrl as string}
             isPlay={false}
             handlerPlay={() =>
-              parseTrack(track.url, user?.id as string, track.duration)
+              updateHistoryOrder(track.id).then(() => setParsedTrack(track))
             }
             handlerModal={() => {}}
           />

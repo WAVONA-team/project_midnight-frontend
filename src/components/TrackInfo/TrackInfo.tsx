@@ -38,15 +38,16 @@ const TrackInfo: React.FC<Props> = React.memo(
       <div className="px-20">
         <div
           className={classNames(
-            'bg-surface-eerie_black relative w-full flex p-6 rounded-lg  ',
+            'bg-surface-eerie_black relative w-full flex items-center p-6 rounded-lg  ',
           )}
         >
-          <div className="relative w-32 h-32 rounded-md  mr-6">
+          <div className="relative w-32 h-32 rounded-md mr-6">
             <img
               src={imgUrl}
               alt={name}
               className="w-full h-full object-cover rounded-md"
             />
+
             {isPlay && playerState && (
               <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center">
                 <Streamline isDesktop={isDesktop} />
@@ -54,8 +55,8 @@ const TrackInfo: React.FC<Props> = React.memo(
             )}
           </div>
 
-          <div className=" min-w-48 flex-1 pt-4">
-            <h3 className="flex text-2xl font-normal font-openSans text-on-primary-anti-flash-white truncate min-w-48 mb-[6px]">
+          <div className="flex-1 pt-4">
+            <h3 className="flex text-2xl font-normal font-openSans text-on-primary-anti-flash-white mb-[6px]">
               {name}
             </h3>
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -64,7 +65,6 @@ const TrackAddition: React.FC = memo(() => {
     control,
     setError,
     formState: { errors },
-    setValue,
   } = useForm({
     defaultValues: {
       url: '',
@@ -73,15 +73,27 @@ const TrackAddition: React.FC = memo(() => {
   const newTrackRef = useRef<ReactPlayer>(null);
   const debounceValue = useDebounce(watch('url'), 600);
 
+  const getUrl = (url: string) => {
+    switch (true) {
+      case url.includes('spotify'): {
+        if (url.split(':').length === 3) {
+          return url;
+        }
+
+        const urlId = url.match(/(?:spotify\.com\/track\/)([a-zA-Z0-9]+)/)?.[1];
+
+        return `spotify:track:${urlId}`;
+      }
+
+      default: {
+        return url;
+      }
+    }
+  };
+
   useEffect(() => {
     clearParsedTrack();
   }, []);
-
-  useEffect(() => {
-    if (parsedTrack?.url) {
-      setValue('url', parsedTrack.url);
-    }
-  }, [parseTrack, parsedTrack?.url, setValue]);
 
   return (
     <div
@@ -146,7 +158,7 @@ const TrackAddition: React.FC = memo(() => {
               artist={parsedTrack.author}
               name={parsedTrack.title}
               provider={parsedTrack.source}
-              duration={parsedTrackDuration as string}
+              duration={parsedTrackDuration || parsedTrack.duration}
               imgUrl={parsedTrack.imgUrl as string}
               isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
@@ -163,7 +175,7 @@ const TrackAddition: React.FC = memo(() => {
               artist={parsedTrack.author}
               name={parsedTrack.title}
               provider={parsedTrack.source}
-              duration={parsedTrackDuration as string}
+              duration={parsedTrackDuration || parsedTrack.duration}
               imgUrl={parsedTrack.imgUrl as string}
               isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
@@ -177,22 +189,32 @@ const TrackAddition: React.FC = memo(() => {
       )}
 
       <ReactPlayer
-        url={debounceValue}
+        url={getUrl(debounceValue)}
         onReady={() => {
           const duration = format(newTrackRef.current?.getDuration() as number);
-          setParsedTrackDuration(duration);
 
-          parseTrack(debounceValue, user?.id as string, duration).catch(
-            ({ formErrors }) => {
+          if (duration === '0:00') {
+            setParsedTrackDuration(null);
+          } else {
+            setParsedTrackDuration(duration);
+          }
+
+          parseTrack(debounceValue, user?.id as string, duration)
+            .then((track) => setParsedTrackDuration(track.duration))
+            .catch(({ formErrors }) => {
               setError('url', {
                 message: formErrors,
               });
-            },
-          );
+            });
 
           setIsParsedTrackLoading(false);
         }}
         ref={newTrackRef}
+        onError={() =>
+          setError('url', {
+            message: 'Некорректный формат. Попробуйте снова',
+          })
+        }
         width="0"
         height="0"
       />
