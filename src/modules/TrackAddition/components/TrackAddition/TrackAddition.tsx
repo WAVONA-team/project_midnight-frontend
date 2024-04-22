@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -8,6 +7,8 @@ import ReactPlayer from '@/lib/ReactPlayer';
 
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+
+import { getUrl } from '@/modules/TrackAddition/helpers';
 
 import { TrackInfo } from '@/components/TrackInfo';
 
@@ -72,24 +73,6 @@ const TrackAddition: React.FC = memo(() => {
   });
   const newTrackRef = useRef<ReactPlayer>(null);
   const debounceValue = useDebounce(watch('url'), 600);
-
-  const getUrl = (url: string) => {
-    switch (true) {
-      case url.includes('spotify'): {
-        if (url.split(':').length === 3) {
-          return url;
-        }
-
-        const urlId = url.match(/(?:spotify\.com\/track\/)([a-zA-Z0-9]+)/)?.[1];
-
-        return `spotify:track:${urlId}`;
-      }
-
-      default: {
-        return url;
-      }
-    }
-  };
 
   useEffect(() => {
     clearParsedTrack();
