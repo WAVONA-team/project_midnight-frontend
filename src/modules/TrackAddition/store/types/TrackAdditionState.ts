@@ -1,16 +1,11 @@
 import { Track } from 'project_midnight';
 
-import { ParsedTrack } from '@/modules/TrackAddition/store/types';
-
 export type TrackAdditionState = {
-  parsedTrack: Track | ParsedTrack | null;
-  parseTrack: (
-    url: string,
-    userId: string,
-    duration: string,
-  ) => Promise<ParsedTrack>;
+  parsedTrack: Track | null;
+  setParsedTrack: (track: Track) => void,
+  parseTrack: (url: string, userId: string, duration: string) => Promise<Track>;
   parsedTrackDuration: string | null;
-  setParsedTrackDuration: (state: string) => void;
+  setParsedTrackDuration: (state: string | null) => void;
   isParsedTrackLoading: boolean;
   setIsParsedTrackLoading: (state: boolean) => void;
   clearParsedTrack: () => void;

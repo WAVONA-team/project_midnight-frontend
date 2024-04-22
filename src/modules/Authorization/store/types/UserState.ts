@@ -1,15 +1,10 @@
 import { type AxiosResponse } from 'axios';
-import { Track } from 'project_midnight';
 import { NormalizedUser, UserWithAccessToken } from 'project_midnight/types';
 
 export type UserState = {
   user: NormalizedUser | null;
   isChecked: boolean;
   register: (email: string, password: string) => Promise<NormalizedUser>;
-  userTracks: Track[];
-  isUserTracksLoading: boolean;
-  setIsUserTracksLoading: (isUserTracksLoading: boolean) => void;
-  getTracksByUser: (userId: string, page: string) => Promise<Track[]>;
   registerVerify: (
     activationToken: string | null,
   ) => Promise<UserWithAccessToken>;

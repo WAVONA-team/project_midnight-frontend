@@ -1,17 +1,19 @@
+import { Track } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
 import { httpClient } from '@/shared/api/httpClient';
 import { ServerErrors } from '@/shared/types/ServerErrors';
 
-import { ParsedTrack, TrackAdditionState } from './types';
+import { TrackAdditionState } from './types';
 
 export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
+  setParsedTrack: (track: Track) => set({ parsedTrack: track }),
   parseTrack: async (url, userId, duration) => {
     set({ isParsedTrackLoading: true });
 
     return await httpClient
-      .post<ParsedTrack>('/track/get-info', {
+      .post<Track>('/track/get-info', {
         url,
         userId,
         duration,
@@ -33,7 +35,7 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   setIsParsedTrackLoading: (state: boolean) =>
     set({ isParsedTrackLoading: state }),
   parsedTrackDuration: null,
-  setParsedTrackDuration: (state: string) =>
+  setParsedTrackDuration: (state: string | null) =>
     set({ parsedTrackDuration: state }),
   clearParsedTrack: () => {
     set({ parsedTrack: null });

@@ -3,10 +3,11 @@ import React from 'react';
 import TrackPageDropdown from '@/pages/TracksPage/components/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
 import { ShuffleButton } from '@/ui/Button';
+import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
   return (
-    <div
+    <Container
       className="
         flex
         flex-col
@@ -44,7 +45,7 @@ const TrackPageControls: React.FC = React.memo(() => {
         <ShuffleButton handler={() => {}} title="Перемешать" />
         <TrackPageDropdown />
       </div>
-    </div>
+    </Container>
   );
 });
 

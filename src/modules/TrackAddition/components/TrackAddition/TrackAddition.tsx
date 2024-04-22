@@ -8,84 +8,75 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
-import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+import { getUrl } from '@/modules/TrackAddition/helpers';
+
+import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 import { DefaultInput } from '@/ui/Input';
+import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
-
-import Logo from '../../ui/logo.svg';
 
 const TrackAddition: React.FC = memo(() => {
   const {
     user,
     parsedTrack,
+    currentTrack,
     parseTrack,
     clearParsedTrack,
     isParsedTrackLoading,
     setIsParsedTrackLoading,
     playerState,
     changePlayerState,
-    trackNumber,
-    setTracks,
-    changeTrackNumber,
+    changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
   } = useStore(
     ({
       user,
       parsedTrack,
+      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
       playerState,
       changePlayerState,
-      trackNumber,
-      setTracks,
-      changeTrackNumber,
+      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
     }) => ({
       user,
       parsedTrack,
+      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
       playerState,
       changePlayerState,
-      trackNumber,
-      setTracks,
-      changeTrackNumber,
+      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
     }),
   );
+
   const {
     watch,
     control,
     setError,
     formState: { errors },
-    setValue,
   } = useForm({
     defaultValues: {
       url: '',
     },
   });
   const newTrackRef = useRef<ReactPlayer>(null);
-
   const debounceValue = useDebounce(watch('url'), 600);
 
   useEffect(() => {
     clearParsedTrack();
   }, []);
-
-  useEffect(() => {
-    if (parsedTrack?.url) {
-      setValue('url', parsedTrack.url);
-    }
-  }, [parseTrack, parsedTrack?.url, setValue]);
 
   return (
     <div
@@ -96,9 +87,7 @@ const TrackAddition: React.FC = memo(() => {
     >
       <Container>
         <header className="mb-8 lg:hidden">
-          <span>
-            <img src={Logo} alt="logo" />
-          </span>
+          <Logo textSize="text-lg" logoWidth="w-6" />
         </header>
 
         <h2
@@ -152,14 +141,11 @@ const TrackAddition: React.FC = memo(() => {
               artist={parsedTrack.author}
               name={parsedTrack.title}
               provider={parsedTrack.source}
-              duration={parsedTrackDuration as string}
+              duration={parsedTrackDuration || parsedTrack.duration}
               imgUrl={parsedTrack.imgUrl as string}
-              trackIndexPlay={0}
-              trackIndex={trackNumber}
-              isPlay={playerState}
+              isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
-                setTracks([parsedTrack.url]);
-                changeTrackNumber(0);
+                changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
               handlerModal={() => {}}
@@ -172,14 +158,11 @@ const TrackAddition: React.FC = memo(() => {
               artist={parsedTrack.author}
               name={parsedTrack.title}
               provider={parsedTrack.source}
-              duration={parsedTrackDuration as string}
+              duration={parsedTrackDuration || parsedTrack.duration}
               imgUrl={parsedTrack.imgUrl as string}
-              trackIndexPlay={0}
-              trackIndex={trackNumber}
-              isPlay={playerState}
+              isPlay={parsedTrack.url === currentTrack?.url}
               handlerPlay={() => {
-                setTracks([parsedTrack.url]);
-                changeTrackNumber(0);
+                changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
               handlerModal={() => {}}
@@ -189,22 +172,32 @@ const TrackAddition: React.FC = memo(() => {
       )}
 
       <ReactPlayer
-        url={debounceValue}
+        url={getUrl(debounceValue)}
         onReady={() => {
           const duration = format(newTrackRef.current?.getDuration() as number);
-          setParsedTrackDuration(duration);
 
-          parseTrack(debounceValue, user?.id as string, duration).catch(
-            ({ formErrors }) => {
+          if (duration === '0:00') {
+            setParsedTrackDuration(null);
+          } else {
+            setParsedTrackDuration(duration);
+          }
+
+          parseTrack(debounceValue, user?.id as string, duration)
+            .then((track) => setParsedTrackDuration(track.duration))
+            .catch(({ formErrors }) => {
               setError('url', {
                 message: formErrors,
               });
-            },
-          );
+            });
 
           setIsParsedTrackLoading(false);
         }}
         ref={newTrackRef}
+        onError={() =>
+          setError('url', {
+            message: 'Некорректный формат. Попробуйте снова',
+          })
+        }
         width="0"
         height="0"
       />

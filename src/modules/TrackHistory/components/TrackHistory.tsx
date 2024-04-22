@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
-import { TrackInfo } from '@/components/TrackInfo/TrackInfo';
+import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const { user, userSearchHistory, parseTrack } = useStore(
-    ({ user, userSearchHistory, parseTrack }) => ({
-      user,
+  const {
+    userSearchHistory,
+    updateHistoryOrder,
+    changeCurrentTrack,
+    playerState,
+    changePlayerState,
+    currentTrack,
+  } = useStore(
+    ({
       userSearchHistory,
-      parseTrack,
+      updateHistoryOrder,
+      changeCurrentTrack,
+      playerState,
+      changePlayerState,
+      currentTrack,
+    }) => ({
+      userSearchHistory,
+      updateHistoryOrder,
+      changeCurrentTrack,
+      playerState,
+      changePlayerState,
+      currentTrack,
     }),
   );
+
+  useEffect(() => {
+    return () => changeCurrentTrack(null);
+  }, []);
 
   return (
     <div className="mt-8">
@@ -32,12 +53,15 @@ export const TrackHistory: React.FC = React.memo(() => {
             provider={track.source}
             duration={track.duration}
             imgUrl={track.imgUrl as string}
-            trackIndexPlay={0}
-            trackIndex={0}
-            isPlay={false}
-            handlerPlay={() =>
-              parseTrack(track.url, user?.id as string, track.duration)
-            }
+            isPlay={currentTrack?.url === track.url}
+            handlerPlay={() => {
+              changeCurrentTrack(track);
+              changePlayerState(
+                currentTrack?.url !== track.url ? true : !playerState,
+              );
+
+              updateHistoryOrder(track.id);
+            }}
             handlerModal={() => {}}
           />
         ))}

@@ -1,21 +1,21 @@
+import { Track } from 'project_midnight';
+
 export type PlayerState = {
-  tracks: string[];
+  tracks: Track[] | null;
   playerState: boolean;
   isLoop: boolean;
   volume: number;
-  trackNumber: number;
-  tracksLenght: number;
+  currentTrack: Track | null;
   currentTime: number;
   secondsLoaded: number;
   duration: number;
   seekTo: number;
   seeking: boolean;
-  setTracks: (tracks: string[]) => void;
+  setTracks: (tracks: Track[]) => void;
   changePlayerState: (playerState: boolean) => void;
   changeIsLoop: (isLoop: boolean) => void;
   changeVolume: (volume: number) => void;
-  changeTrackNumber: (trackNumber: number) => void;
-  changeTracksLenght: (trackLenght: number) => void;
+  changeCurrentTrack: (track: Track | null) => void;
   changeCurrentTime: (currentTime: number) => void;
   changeSecondsLoaded: (secondsLoaded: number) => void;
   changeDuration: (duration: number) => void;
