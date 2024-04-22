@@ -49,7 +49,7 @@ export const TrackControlButtons: React.FC = React.memo(() => {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-11">
       <button type="button" onClick={NextTrack}>
         <img src={next} alt="" />
       </button>

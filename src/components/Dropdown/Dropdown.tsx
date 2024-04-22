@@ -14,14 +14,14 @@ const Dropdown: React.FC<Props> = React.memo(
     return (
       <div
         onClick={() => setIsOpen(false)}
-        className={`${isOpen ? 'fixed opacity-100 sm:static' : 'opacity-0'} 
-          z-20 
-          transition-all 
-          duration-200 
-          left-0 
-          top-0 
-          w-full 
-          h-full 
+        className={`${isOpen ? 'fixed opacity-100 sm:static' : 'opacity-0'}
+          z-20
+          transition-all
+          duration-200
+          left-0
+          top-0
+          w-full
+          h-full
           bg-surface-eerie_black/60
         `}
       >

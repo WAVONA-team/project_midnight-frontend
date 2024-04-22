@@ -1,8 +1,7 @@
 import React from 'react';
-import loop from '@/assets/buttons/playerButtons/loop.svg';
 
 import { useStore } from '@/store/index';
-
+import LoopIcon from '@/ui/icons/LoopIcon/LoopIcon';
 export const LoopButton: React.FC = React.memo(() => {
   const { changeIsLoop, isLoop } = useStore(({ changeIsLoop, isLoop }) => ({
     changeIsLoop,
@@ -16,7 +15,7 @@ export const LoopButton: React.FC = React.memo(() => {
   return (
     <div>
       <button type="button" onClick={LoopHandler}>
-        <img src={loop} alt="" />
+        <LoopIcon active={isLoop} />
       </button>
     </div>
   );
