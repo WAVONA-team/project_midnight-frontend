@@ -19,7 +19,7 @@ const AddToPlaylistButton: React.FC<Props> = React.memo(({ className }) => {
     <MenuButton
       title={isClicked ? 'Добавлено в плейлист!' : 'Добавить в плейлист'}
       icon={addToPlaylistIcon}
-      className={`${className}`}
+      className={`${className} whitespace-nowrap` }
       handler={addToPlaylist}
     />
   );

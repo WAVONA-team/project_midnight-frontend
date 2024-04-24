@@ -18,17 +18,17 @@ export const Dots: React.FC = React.memo(() => {
   };
   return (
     <div>
-      <button type="button" onClick={openMenu}>
+      <button type="button" onClick={openMenu} className='focus:outline-none'>
         <DotsIcon active={isOpen} />
       </button>
       <Menu as="div" className="relative">
         <Dropdown
           className="
-          sm:right-0
-          sm:bottom-8
-          sm:w-[254px]
-          sm:absolute
-
+          right-0
+          bottom-8
+          w-[266px]
+          absolute
+          shadow-dropdown-bottom-shadow
           "
           isOpen={isOpen}
           setIsOpen={openMenu}

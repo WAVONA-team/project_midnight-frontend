@@ -1,5 +1,5 @@
 const generalClassNames = {
-  base: 'stroke-on-primary-anti-flash-white hover:stroke-on-primary-misty_rose',
+  base: 'stroke-on-primary-anti-flash-white hover:stroke-on-primary-misty_rose active:stroke-primary-poppy',
   active: 'stroke-primary-poppy',
 };
 

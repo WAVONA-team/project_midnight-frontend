@@ -46,6 +46,8 @@ export const TimeRange: React.FC = React.memo(() => {
         onChange={onChangeHandler}
         onMouseUp={() => changeSeeking(false)}
         onMouseDown={() => changeSeeking(true)}
+        rangeColor='bg-track-range-gradient'
+        inputClassName='            [&::-webkit-slider-thumb]:bg-primary-poppy'
       />
       <div className='lg:flex justify-between text-on-primary-anti-flash-white hidden'>
         <p>{`${elapsed}`}</p>

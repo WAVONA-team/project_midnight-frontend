@@ -6,6 +6,9 @@ type Props = {
   value?: number;
   step?: number;
   className?: string;
+  inputClassName?: string;
+  rangeColor?: string;
+  multiplier?: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onMouseDown?: () => void;
   onMouseUp?: () => void;
@@ -18,6 +21,9 @@ const RangeInput: React.FC<Props> = React.memo(
     value,
     step,
     className = '',
+    inputClassName = '',
+    rangeColor = '',
+    multiplier = 0,
     onChange,
     onMouseDown,
     onMouseUp,
@@ -41,7 +47,8 @@ const RangeInput: React.FC<Props> = React.memo(
           onChange={onChange}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
-          className="
+          className={`
+            ${inputClassName}
             w-full
             h-px
             bg-[inherit]
@@ -51,22 +58,26 @@ const RangeInput: React.FC<Props> = React.memo(
             sm:h-[1.5px]
             sm:[&::-webkit-slider-thumb]:w-2
             sm:[&::-webkit-slider-thumb]:h-2
-            [&::-webkit-slider-thumb]:bg-primary-poppy
             [&::-webkit-slider-thumb]:appearance-none
             [&::-webkit-slider-thumb]:w-0
             [&::-webkit-slider-thumb]:h-0
             [&::-webkit-slider-thumb]:rounded-full
-          "
+          `}
         />
 
         <div
-          style={{ width: value + '%' }}
-          className="
+          style={{
+            width:
+              value !== undefined && multiplier !== 0
+                ? value * multiplier + '%'
+                : value + '%',
+          }}
+          className={`
+            ${rangeColor}
             pointer-events-none
             absolute
             h-full
-            bg-track-range-gradient
-          "
+          `}
         ></div>
       </div>
     );

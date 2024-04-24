@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
+
 import { useStore } from '@/store/index';
 
 import { RangeInput } from '@/ui/Input';
-
 import VolumeIcon from '@/ui/icons/VolumeIcon/VolumeIcon';
 
 export const VolumeChanger: React.FC = React.memo(() => {
@@ -25,18 +26,25 @@ export const VolumeChanger: React.FC = React.memo(() => {
       onMouseEnter={() => setShowInput(true)}
       onMouseLeave={() => setShowInput(false)}
     >
-      {showInput && (
-        <RangeInput
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={VolumeChange}
-          className=" bg-secondary-cadet-gray h-[2px]"
-        />
-      )}
-      <button onClick={handleMute}>
-        <VolumeIcon volume={volume}/>
+      <RangeInput
+        min={0}
+        max={1}
+        step={0.01}
+        value={volume}
+        onChange={VolumeChange}
+        multiplier={100}
+        className={
+          ' bg-secondary-cadet-gray h-[2px]' +
+          classNames({
+            visible: showInput,
+            invisible: !showInput,
+          })
+        }
+        inputClassName='[&::-webkit-slider-thumb]:bg-on-primary-anti-flash-white'
+        rangeColor='bg-on-primary-anti-flash-white'
+      />
+      <button onClick={handleMute} className=" focus:outline-none">
+        <VolumeIcon />
       </button>
     </div>
   );

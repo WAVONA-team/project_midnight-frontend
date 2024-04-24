@@ -79,6 +79,8 @@ export default {
           '-3px -3px 6px 0px rgba(10, 11, 9, 0.2), ' +
           '-1px 1px 2px 0px rgba(10, 11, 9, 0.5) inset, ' +
           '1px -1px 2px 0px rgba(34, 37, 33, 0.3) inset',
+        'dropdown-bottom-shadow':
+          '-16px 16px 16px 0px #0C0D0B80',
       },
       backgroundImage: {
         'play-button-small-gradient-default':

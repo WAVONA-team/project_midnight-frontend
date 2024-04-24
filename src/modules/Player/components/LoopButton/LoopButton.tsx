@@ -14,7 +14,7 @@ export const LoopButton: React.FC = React.memo(() => {
 
   return (
     <div>
-      <button type="button" onClick={LoopHandler}>
+      <button type="button" onClick={LoopHandler} className='focus:outline-none'>
         <LoopIcon active={isLoop} />
       </button>
     </div>
