@@ -19,7 +19,7 @@ const TrackSaveOnMainButton: React.FC<Props> = React.memo(({ className }) => {
     <MenuButton
       title={isClicked ? 'Сохранено на главную!' : 'Сохранить на главную'}
       icon={addToMainIcon}
-      className={`${className}`}
+      className={`${className} whitespace-nowrap`}
       handler={saveOnMain}
     />
   );
