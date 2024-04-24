@@ -84,6 +84,9 @@ export const Playback: React.FC = React.memo(() => {
 
   return (
     <ReactPlayer
+      style={{
+        position: 'absolute',
+      }}
       ref={playerRef}
       url={currentTrack?.url}
       controls={false}

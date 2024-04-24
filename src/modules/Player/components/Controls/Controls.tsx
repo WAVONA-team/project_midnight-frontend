@@ -13,17 +13,43 @@ import { PlayButton } from '@/ui/Button';
 
 export const Controls: React.FC = React.memo(() => {
   return (
-    <div className="lg:gap-3 lg:bottom-6 lg:p-4 lg:sticky bg-surface-eerie_black lg:mx-6 flex flex-col-reverse pt-3 lg:backdrop-filter lg:backdrop-blur-lg lg:bg-opacity-90 lg:rounded-lg rounded-t-lg">
+    <div
+      className="
+        gap-3
+        lg:bottom-6
+        lg:p-4
+        absolute
+        bottom-0
+        w-full
+        py-3
+        flex
+        flex-col-reverse
+        lg:block
+        bg-surface-eerie_black
+        lg:backdrop-filter
+        lg:backdrop-blur-lg
+        lg:bg-opacity-90
+        lg:rounded-lg
+        lg:w-11/12
+        lg:left-1/2
+        lg:-translate-x-1/2
+        rounded-t-lg
+      "
+    >
       <TimeRange />
-      <div className=" items-center flex justify-between px-4">
-        <TrackInformation/>
+
+      <div className="grid grid-cols-[1fr_min-content] lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
+        <TrackInformation />
+
         <div className="block lg:hidden">
           <PlayButton />
         </div>
+
         <div className="hidden lg:block">
           <TrackControlButtons />
         </div>
-        <div className=" lg:flex hidden gap-6 ">
+
+        <div className="lg:flex justify-end w-full hidden gap-6">
           <VolumeChanger />
           <LoopButton />
           <Dots />

@@ -3,14 +3,16 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
+import { Controls, Playback } from '@/modules/Player';
+
 import { NavBar } from '@/components/NavBar';
-import { Controls } from '@/modules/Player';
 
 export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const { user } = useStore(({ user }) => ({
+  const { user, currentTrack } = useStore(({ user, currentTrack }) => ({
     user,
+    currentTrack,
   }));
 
   if (!user) {
@@ -29,10 +31,13 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     >
       <NavBar className="order-2 lg:order-none" />
 
-      <main className="h-full order-1 lg:order-0">
+      <main className="h-full order-1 lg:order-0 relative">
         {children || <Outlet />}
-        <Controls />
+
+        {currentTrack && <Controls />}
       </main>
+
+      <Playback />
     </div>
   );
 };

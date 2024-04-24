@@ -50,7 +50,7 @@ const TracksList: React.FC = React.memo(() => {
   );
 
   useEffect(() => {
-    getTracksByUser(user!.id, currentPage).then(() => setTracks(userTracks));
+    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
   }, []);
 
   const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
@@ -107,7 +107,7 @@ const TracksList: React.FC = React.memo(() => {
                 transition={{ duration: 0.3 }}
               >
                 <TrackInfo
-                  artist={track.author}
+                  artist={track.author as string}
                   name={track.title}
                   handlerPlay={() => {
                     changeCurrentTrack(track);

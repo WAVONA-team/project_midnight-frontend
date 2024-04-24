@@ -7,15 +7,15 @@ export const TrackInformation: React.FC = React.memo(() => {
     currentTrack,
   }));
   return (
-    <div className=" flex">
+    <div className="flex gap-4 items-center w-full">
       <img
-        src={currentTrack?.imgUrl ?? ''}
+        src={currentTrack?.imgUrl as string}
         alt={currentTrack?.title}
         className="w-16 h-16 rounded-md"
       />
 
-      <div className="">
-        <h3 className="flex text-sm font-rubik text-on-primary-anti-flash-white truncate min-w-48">
+      <div className="w-2/3">
+        <h3 className="block w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm font-rubik text-on-primary-anti-flash-white">
           {currentTrack?.title}
         </h3>
 
@@ -23,7 +23,7 @@ export const TrackInformation: React.FC = React.memo(() => {
           {currentTrack?.author}
         </p>
 
-        <p className=" text-secondary-cadet-gray text-xs flex items-center">
+        <p className="text-secondary-cadet-gray text-xs flex items-center">
           {currentTrack?.source}
         </p>
       </div>

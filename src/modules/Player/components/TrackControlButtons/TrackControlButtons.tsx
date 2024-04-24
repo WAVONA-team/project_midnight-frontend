@@ -3,9 +3,9 @@ import React from 'react';
 import { useStore } from '@/store/index';
 
 import { PlayButton } from '@/ui/Button';
-
-import NextTrackIcon from '@/ui/icons/NextTrackIcon/NextTrackIcon';
 import BackTrackIcon from '@/ui/icons/BackTrackIcon/BackTrackIcon';
+import NextTrackIcon from '@/ui/icons/NextTrackIcon/NextTrackIcon';
+
 export const TrackControlButtons: React.FC = React.memo(() => {
   const { tracks, currentTrack, changeCurrentTrack } = useStore(
     ({ tracks, currentTrack, changeCurrentTrack }) => ({
@@ -16,6 +16,8 @@ export const TrackControlButtons: React.FC = React.memo(() => {
   );
 
   const NextTrack = () => {
+    console.log(tracks);
+
     const currentTrackIndex = tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
@@ -49,14 +51,18 @@ export const TrackControlButtons: React.FC = React.memo(() => {
 
   return (
     <div className="flex gap-11">
-      <button type="button" onClick={NextTrack} className='focus:outline-none'>
-        <NextTrackIcon />
+      <button
+        type="button"
+        onClick={PreviosTrack}
+        className="focus:outline-none"
+      >
+        <BackTrackIcon />
       </button>
 
       <PlayButton />
 
-      <button type="button" onClick={PreviosTrack} className='focus:outline-none'>
-        <BackTrackIcon />
+      <button type="button" onClick={NextTrack} className="focus:outline-none">
+        <NextTrackIcon />
       </button>
     </div>
   );

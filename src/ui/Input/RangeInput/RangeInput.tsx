@@ -4,7 +4,7 @@ type Props = {
   min?: number;
   max?: number;
   value?: number;
-  step?: number;
+  step?: number | string;
   className?: string;
   inputClassName?: string;
   rangeColor?: string;
@@ -78,7 +78,7 @@ const RangeInput: React.FC<Props> = React.memo(
             absolute
             h-full
           `}
-        ></div>
+        />
       </div>
     );
   },
