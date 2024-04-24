@@ -16,8 +16,6 @@ export const TrackControlButtons: React.FC = React.memo(() => {
   );
 
   const NextTrack = () => {
-    console.log(tracks);
-
     const currentTrackIndex = tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;

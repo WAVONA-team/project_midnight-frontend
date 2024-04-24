@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
-import { Playback } from '@/modules/Player';
 import { TrackAddition } from '@/modules/TrackAddition';
 import { TrackHistory } from '@/modules/TrackHistory';
 
@@ -49,8 +48,6 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
       {!parsedTrack && !isParsedTrackLoading && userSearchHistory?.length && (
         <TrackHistory />
       )}
-
-      <Playback />
     </div>
   );
 });

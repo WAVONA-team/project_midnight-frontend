@@ -21,6 +21,7 @@ const TracksList: React.FC = React.memo(() => {
     changePlayerState,
     currentPage,
     setTracks,
+    setCurrentPage,
   } = useStore(
     ({
       user,
@@ -34,6 +35,7 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
+      setCurrentPage,
     }) => ({
       user,
       isUserTracksLoading,
@@ -46,10 +48,13 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
+      setCurrentPage,
     }),
   );
 
   useEffect(() => {
+    setCurrentPage(1);
+
     getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
   }, []);
 
@@ -111,7 +116,9 @@ const TracksList: React.FC = React.memo(() => {
                   name={track.title}
                   handlerPlay={() => {
                     changeCurrentTrack(track);
-                    changePlayerState(!playerState);
+                    changePlayerState(
+                      track.url === currentTrack?.url ? !playerState : true,
+                    );
                   }}
                   handlerModal={() => {}}
                   duration={track.duration}

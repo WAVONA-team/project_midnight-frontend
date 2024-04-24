@@ -138,7 +138,7 @@ const TrackAddition: React.FC = memo(() => {
         <>
           <div className="xl:hidden">
             <TrackInfo
-              artist={parsedTrack.author}
+              artist={parsedTrack.author as string}
               name={parsedTrack.title}
               provider={parsedTrack.source}
               duration={parsedTrackDuration || parsedTrack.duration}
@@ -155,7 +155,7 @@ const TrackAddition: React.FC = memo(() => {
           <div className="hidden xl:block">
             <TrackInfo
               isDesktop={true}
-              artist={parsedTrack.author}
+              artist={parsedTrack.author as string}
               name={parsedTrack.title}
               provider={parsedTrack.source}
               duration={parsedTrackDuration || parsedTrack.duration}
