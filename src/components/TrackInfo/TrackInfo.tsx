@@ -142,7 +142,7 @@ const TrackInfo: React.FC<Props> = React.memo(
           </div>
 
           <div className="lg:hidden min-w-48">
-            <h3 className="flex text-base font-rubik text-on-primary-anti-flash-white truncate min-w-48">
+            <h3 className="block text-base font-rubik text-on-primary-anti-flash-white overflow-hidden whitespace-nowrap text-ellipsis">
               {name}
             </h3>
 
@@ -153,7 +153,7 @@ const TrackInfo: React.FC<Props> = React.memo(
             </p>
           </div>
 
-          <h3 className="hidden lg:block text-base font-rubik text-on-primary-anti-flash-white truncate text-wrap">
+          <h3 className="hidden lg:block text-base font-rubik text-on-primary-anti-flash-white overflow-hidden whitespace-nowrap text-ellipsis">
             {name}
           </h3>
 
