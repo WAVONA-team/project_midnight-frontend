@@ -12,17 +12,17 @@ type Props = {
 const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
   const linksInfo = [
     {
-      img: 'public/navBar/home.svg',
+      img: '/navBar/home.svg',
       title: 'Главная',
       path: '/tracks',
     },
     {
-      img: 'public/navBar/playlist.svg',
+      img: '/navBar/playlist.svg',
       title: 'Плейлисты',
       path: '/playlists',
     },
     {
-      img: 'public/navBar/addTrack.svg',
+      img: '/navBar/addTrack.svg',
       title: 'Добавить трек',
       path: '/tracks/new',
     },
@@ -81,7 +81,7 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
             to="/settings"
           >
             <img
-              src="public/navBar/settings.svg"
+              src="/navBar/settings.svg"
               alt="Настройки"
               height={20}
               width={20}
