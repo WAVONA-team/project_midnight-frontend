@@ -10,7 +10,7 @@ import { ServiceCard } from '@/components/ServiceCard';
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 import Modal from '@/ui/Modal/Modal';
-import { ServiceIconSpotify, ServiceIconYandex } from '@/ui/ServiceIcon';
+import { ServiceIconSpotify } from '@/ui/ServiceIcon';
 
 type Service = {
   title: string;
@@ -42,13 +42,13 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       register: registerSpotify,
       remove: async () => removeSpotify(user!.id),
     },
-    {
-      title: 'Yandex Music',
-      icon: <ServiceIconYandex />,
-      token: user?.yandexOAUTH,
-      register: () => {},
-      remove: async () => removeSpotify(user!.id),
-    },
+    // {
+    //   title: 'Yandex Music',
+    //   icon: <ServiceIconYandex />,
+    //   token: user?.yandexOAUTH,
+    //   register: () => {},
+    //   remove: async () => removeSpotify(user!.id),
+    // },
   ];
 
   const enableModal = (service: Service) => {

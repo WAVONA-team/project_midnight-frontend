@@ -6,10 +6,10 @@ import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 
 import { MenuButton, SortButton } from '@/ui/Button';
 
-import alphaSortIcon from '@/assets/buttons/actionButtons/alphaSortIcon.svg';
-import dateSortIcon from '@/assets/buttons/actionButtons/dateSortIcon.svg';
-import defaultSortIcon from '@/assets/buttons/actionButtons/defaultSortIcon.svg';
-import sourceSortIcon from '@/assets/buttons/actionButtons/sourceSortIcon.svg';
+import alphaSortIcon from '../../../../../../../public/buttons/actionButtons/alphaSortIcon.svg';
+import dateSortIcon from '../../../../../../../public/buttons/actionButtons/dateSortIcon.svg';
+import defaultSortIcon from '../../../../../../../public/buttons/actionButtons/defaultSortIcon.svg';
+import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

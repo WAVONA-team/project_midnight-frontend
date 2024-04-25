@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { classNames as inputClassnames } from '@/ui/Input/classNames';
 
-import passwordHideIcon from '@/assets/inputs/passwordHide.svg';
-import passwordShowIcon from '@/assets/inputs/passwordShowed.svg';
+import passwordHideIcon from '../../../../public/inputs/passwordHide.svg';
+import passwordShowIcon from '../../../../public/inputs/passwordShowed.svg';
 
 type Props = {
   value: string;

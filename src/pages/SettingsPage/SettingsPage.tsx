@@ -6,7 +6,7 @@ import { useStore } from '@/store';
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 
-import arrowIcon from '@/assets/arrows/arrowIcon.svg';
+import arrowIcon from '../../../public/arrows/arrowIcon.svg';
 
 export const SettingsPage: React.FC = React.memo(() => {
   const { logout } = useStore(({ logout }) => ({ logout }));

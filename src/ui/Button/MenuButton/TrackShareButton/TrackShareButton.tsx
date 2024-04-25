@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-import shareIcon from '@/assets/buttons/actionButtons/shareIcon.svg';
+import shareIcon from '../../../../../public/buttons/actionButtons/shareIcon.svg';
 
 type Props = {
   trackName: string;

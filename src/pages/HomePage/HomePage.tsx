@@ -10,8 +10,8 @@ export const HomePage: React.FC = React.memo(() => {
       className="
         app
         h-screen
-        bg-[url('/src/assets/home_bg_mobile.webp')]
-        lg:bg-[url('/src/assets/home_bg_desktop.webp')]
+        bg-[url('/home_bg_mobile.webp')]
+        lg:bg-[url('/home_bg_desktop.webp')]
         bg-no-repeat
         bg-center
         bg-cover

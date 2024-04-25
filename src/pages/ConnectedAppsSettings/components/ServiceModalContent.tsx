@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Spinner } from '@/ui/Spinner';
 
-import crossIcon from '@/assets/cross/cross.svg';
+import crossIcon from '../../../../public/cross/cross.svg';
 
 type Props = {
   title: string | undefined;
@@ -33,8 +33,8 @@ const ServiceModalContent: React.FC<Props> = React.memo(
         >
           <button
             className={`
-            ${isLoading && 'hidden'} 
-              "active:outline-none 
+            ${isLoading && 'hidden'}
+              "active:outline-none
               focus:outline-none
             `}
             onClick={disableModal}

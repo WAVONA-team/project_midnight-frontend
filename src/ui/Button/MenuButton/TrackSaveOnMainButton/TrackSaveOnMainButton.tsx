@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-import addToMainIcon from '@/assets/buttons/actionButtons/addToMainIcon.svg';
+import addToMainIcon from '../../../../../public/buttons/actionButtons/addToMainIcon.svg';
 
 type Props = {
   className?: string;

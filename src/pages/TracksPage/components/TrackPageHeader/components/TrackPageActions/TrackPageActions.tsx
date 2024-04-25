@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import settingsIcon from '@/assets/buttons/settingsIcon.svg';
-import searchIcon from '@/assets/inputs/searchIconWhite.svg';
+import settingsIcon from '../../../../../../../public/buttons/settingsIcon.svg';
+import searchIcon from '../../../../../../../public/inputs/searchIconWhite.svg';
 
 const TrackPageActions: React.FC = React.memo(() => {
   const navigate = useNavigate();

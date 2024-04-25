@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
 
-import dot from '@/assets/dot.svg';
+import dot from '../../../public/dot.svg';
 
 type Props = {
   isDesktop?: boolean;
