@@ -8,7 +8,7 @@ import { RangeInput } from '@/ui/Input';
 import VolumeIcon from '@/ui/icons/VolumeIcon/VolumeIcon';
 
 export const VolumeChanger: React.FC = React.memo(() => {
-  const [showInput, setShowInput] = useState(true);
+  const [showInput, setShowInput] = useState(false);
   const { volume, changeVolume } = useStore(({ volume, changeVolume }) => ({
     volume,
     changeVolume,

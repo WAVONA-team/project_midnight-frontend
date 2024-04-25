@@ -79,6 +79,7 @@ export const Playback: React.FC = React.memo(() => {
       changeCurrentTrack(tracks[currentTrackIndex + 1]);
     } else {
       changePlayerState(false);
+      changeCurrentTrack(null);
     }
   };
 
