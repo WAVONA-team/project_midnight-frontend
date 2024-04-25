@@ -1,6 +1,6 @@
 import React from 'react';
 
-import shuffleIcon from '@/assets/buttons/playerButtons/shuffleIcon.svg';
+import shuffleIcon from '../../../../public/buttons/playerButtons/shuffleIcon.svg';
 
 type Props = {
   title: string;

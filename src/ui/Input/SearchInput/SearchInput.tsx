@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { classNames as inputClassnames } from '@/ui/Input/classNames';
 
-import clearIcon from '@/assets/inputs/clear.svg';
-import searchIcon from '@/assets/inputs/search.svg';
+import clearIcon from '../../../../public/inputs/clear.svg';
+import searchIcon from '../../../../public/inputs/search.svg';
 
 type Props = {
   value: string;

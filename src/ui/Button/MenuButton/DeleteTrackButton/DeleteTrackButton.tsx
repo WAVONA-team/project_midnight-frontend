@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-import deleteIcon from '@/assets/buttons/actionButtons/deleteIcon.svg';
+import deleteIcon from '../../../../../public/buttons/actionButtons/deleteIcon.svg';
 
 type Props = {
   className?: string;

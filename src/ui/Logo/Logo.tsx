@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '@/assets/logo.svg';
+import logo from '../../../public/logo.svg';
 
 type Props = {
   className?: string;

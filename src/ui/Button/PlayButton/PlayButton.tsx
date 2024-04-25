@@ -3,8 +3,8 @@ import React from 'react';
 import { useStore } from '@/store';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 
-import pauseIcon from '@/assets/buttons/playerButtons/pauseIcon.svg';
-import playIcon from '@/assets/buttons/playerButtons/playIcon.svg';
+import pauseIcon from '../../../../public/buttons/playerButtons/pauseIcon.svg';
+import playIcon from '../../../../public/buttons/playerButtons/playIcon.svg';
 
 type Props = {
   className?: string;
