@@ -21,6 +21,7 @@ const TracksList: React.FC = React.memo(() => {
     changePlayerState,
     currentPage,
     setTracks,
+    setCurrentPage,
   } = useStore(
     ({
       user,
@@ -34,6 +35,7 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
+      setCurrentPage,
     }) => ({
       user,
       isUserTracksLoading,
@@ -46,11 +48,14 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
+      setCurrentPage,
     }),
   );
 
   useEffect(() => {
-    getTracksByUser(user!.id, currentPage).then(() => setTracks(userTracks));
+    setCurrentPage(1);
+
+    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
   }, []);
 
   const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
@@ -107,11 +112,13 @@ const TracksList: React.FC = React.memo(() => {
                 transition={{ duration: 0.3 }}
               >
                 <TrackInfo
-                  artist={track.author}
+                  artist={track.author as string}
                   name={track.title}
                   handlerPlay={() => {
                     changeCurrentTrack(track);
-                    changePlayerState(!playerState);
+                    changePlayerState(
+                      track.url === currentTrack?.url ? !playerState : true,
+                    );
                   }}
                   handlerModal={() => {}}
                   duration={track.duration}

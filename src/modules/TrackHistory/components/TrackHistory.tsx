@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 
@@ -32,10 +32,6 @@ export const TrackHistory: React.FC = React.memo(() => {
     }),
   );
 
-  useEffect(() => {
-    return () => changeCurrentTrack(null);
-  }, []);
-
   return (
     <div className="mt-8">
       <Container>
@@ -49,7 +45,7 @@ export const TrackHistory: React.FC = React.memo(() => {
           <TrackInfo
             key={track.id}
             name={track.title}
-            artist={track.author}
+            artist={track.author as string}
             provider={track.source}
             duration={track.duration}
             imgUrl={track.imgUrl as string}

@@ -10,6 +10,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
   userTracks: [],
   isUserTracksLoading: false,
   currentPage: 1,
+  setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   getTracksByUser: async (userId: string, page: number) => {
     set({ isUserTracksLoading: true });
