@@ -123,7 +123,7 @@ const TrackInfo: React.FC<Props> = React.memo(
           className={classNames(
             'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2',
             {
-              'bg-[linear-gradient(90deg,rgba(218,47,55,0.2)0%,rgba(218,47,55,0.05)74.4%,rgba(218,47,55,0)100%)]':
+              'bg-background-trackInfo':
                 isPlay && playerState,
             },
           )}
