@@ -24,11 +24,12 @@ export const Dots: React.FC = React.memo(() => {
       <Menu as="div" className="relative">
         <Dropdown
           className="
-          right-0
-          bottom-8
-          w-[266px]
+          w-80
+          right-5
+          bottom-10
           absolute
           shadow-dropdown-bottom-shadow
+          z-10
           "
           isOpen={isOpen}
           setIsOpen={openMenu}

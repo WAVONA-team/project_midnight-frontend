@@ -33,8 +33,11 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
       <main className="h-full order-1 lg:order-0 relative">
         {children || <Outlet />}
-
-        {currentTrack && <Controls />}
+        {currentTrack && (
+          <div className="sticky bottom-0 z-10">
+            <Controls />
+          </div>
+        )}
       </main>
 
       <Playback />

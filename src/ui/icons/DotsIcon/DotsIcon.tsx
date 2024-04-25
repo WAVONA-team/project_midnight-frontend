@@ -27,7 +27,7 @@ const DotsIcon: React.FC<Props> = React.memo(({ active = false }) => {
         width="3"
         height="3"
         rx="1"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <rect
         x="10.5"
@@ -35,7 +35,7 @@ const DotsIcon: React.FC<Props> = React.memo(({ active = false }) => {
         width="3"
         height="3"
         rx="1"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <rect
         x="3"
@@ -43,7 +43,7 @@ const DotsIcon: React.FC<Props> = React.memo(({ active = false }) => {
         width="3"
         height="3"
         rx="1"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
     </svg>
   );
