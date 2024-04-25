@@ -6,11 +6,12 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
+  width?: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Dropdown: React.FC<Props> = React.memo(
-  ({ children, className = '', isOpen, setIsOpen }) => {
+  ({ children, className = '', isOpen, setIsOpen, width }) => {
     return (
       <div
         onClick={() => setIsOpen(false)}
@@ -35,6 +36,7 @@ const Dropdown: React.FC<Props> = React.memo(
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
           className={`
+          ${width}
           ${className}
             fixed
             bottom-0
