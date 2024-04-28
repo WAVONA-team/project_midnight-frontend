@@ -6,24 +6,24 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { TracksPageState } from './types';
 
-export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
+export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   userTracks: [],
-  isUserTracksLoading: false,
+  totalTracks: 0,
+  isUserTracksLoading: true,
   currentPage: 1,
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   getTracksByUser: async (userId: string, page: number) => {
-    set({ isUserTracksLoading: true });
-
     return await httpClient
       .get<Track[]>(`/users/tracks/${userId}?page=${page}`)
-      .then(({ data }) => {
+      .then(({ data, headers }) => {
         set((state) => ({
           userTracks: [...state.userTracks, ...data],
           currentPage: state.currentPage + 1,
         }));
+        set({ totalTracks: headers['x-total-count'] });
 
-        return data;
+        return get().userTracks;
       })
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =

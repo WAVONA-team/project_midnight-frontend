@@ -21,7 +21,7 @@ const TracksList: React.FC = React.memo(() => {
     changePlayerState,
     currentPage,
     setTracks,
-    setCurrentPage,
+    totalTracks,
   } = useStore(
     ({
       user,
@@ -35,7 +35,7 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
-      setCurrentPage,
+      totalTracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -48,31 +48,41 @@ const TracksList: React.FC = React.memo(() => {
       changePlayerState,
       currentPage,
       setTracks,
-      setCurrentPage,
+      totalTracks,
     }),
   );
 
   useEffect(() => {
-    setCurrentPage(1);
+    if (isUserTracksLoading) {
+      getTracksByUser(user!.id, currentPage).then((tracks) =>
+        setTracks(tracks),
+      );
+    }
+  }, [isUserTracksLoading]);
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
-  }, []);
-
-  const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+  const scrollHandler = () => {
     if (
-      e.currentTarget.scrollHeight -
-        (e.currentTarget.scrollTop + e.currentTarget.clientHeight) <
-      100
+      document.documentElement.scrollHeight -
+        (document.documentElement.scrollTop + window.innerHeight) <
+        100 &&
+      userTracks.length < totalTracks
     ) {
       setIsUserTracksLoading(true);
     }
   };
 
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+    document.addEventListener('resize', scrollHandler);
+
+    return () => {
+      document.removeEventListener('scroll', scrollHandler);
+      document.removeEventListener('resize', scrollHandler);
+    };
+  }, [userTracks]);
+
   return (
-    <div
-      onScroll={scrollHandler}
-      className="mb-8 sm:mb-12 flex flex-col gap-11"
-    >
+    <div className="mb-8 sm:mb-12 flex flex-col gap-11">
       {!isUserTracksLoading && !userTracks.length && (
         <Container>
           <h2
