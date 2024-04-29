@@ -3,9 +3,9 @@ import React from 'react';
 import { useStore } from '@/store';
 
 // import { useNavigate } from 'react-router-dom';
-import TrackPageControls from '@/pages/TracksPage/components/TrackPageControls/TrackPageControls';
-import TrackPageHeader from '@/pages/TracksPage/components/TrackPageHeader/TrackPageHeader';
-import TracksList from '@/pages/TracksPage/components/TracksList/TracksList';
+import TrackPageControls from '@/pages/TracksPage/modules/TrackPageControls/TrackPageControls';
+import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPageHeader';
+import TracksList from '@/pages/TracksPage/modules/TracksList/TracksList';
 
 // import { MainButton } from '@/ui/Button';
 
@@ -17,7 +17,7 @@ export const TracksPage: React.FC = React.memo(() => {
 
   return (
     <div
-      className={`${currentTrack && 'pb-28'} 
+      className={`${currentTrack && 'pb-28'}
         bg-background-hight
         sm:bg-background-default-gradient
         w-full

@@ -60,10 +60,12 @@ const TracksList: React.FC = React.memo(() => {
     }
   }, [isUserTracksLoading]);
 
-  const scrollHandler = () => {
+  const scrollHandler = (event: Event) => {
     if (
-      document.documentElement.scrollHeight -
-        (document.documentElement.scrollTop + window.innerHeight) <
+      // @ts-expect-error Должно работать и без этого, но проблема с типизацией
+      event.currentTarget?.documentElement.scrollHeight -
+        // @ts-expect-error Такая же проблема
+        (event.currentTarget?.documentElement.scrollTop + window.innerHeight) <
         100 &&
       userTracks.length < totalTracks
     ) {
@@ -79,7 +81,7 @@ const TracksList: React.FC = React.memo(() => {
       document.removeEventListener('scroll', scrollHandler);
       document.removeEventListener('resize', scrollHandler);
     };
-  }, [userTracks]);
+  }, []);
 
   return (
     <div className="mb-8 sm:mb-12 flex flex-col gap-11">

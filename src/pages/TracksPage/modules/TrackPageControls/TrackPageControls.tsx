@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TrackPageDropdown from '@/pages/TracksPage/components/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
+import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
 import { ShuffleButton } from '@/ui/Button';
 import { Container } from '@/ui/Container';
