@@ -22,7 +22,6 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   return (
     <div
       className="
-        h-full
         grid
         grid-rows-[1fr_min-content]
         lg:grid-cols-[min-content_1fr]
@@ -31,7 +30,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     >
       <NavBar className="order-2 lg:order-none" />
 
-      <main className="h-full order-1 lg:order-0 relative">
+      <main className="order-1 lg:order-0">
         {children || <Outlet />}
         {currentTrack && (
           <div className="sticky bottom-0 z-10">

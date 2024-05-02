@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TrackPageActions from '@/pages/TracksPage/components/TrackPageHeader/components/TrackPageActions/TrackPageActions.tsx';
+import TrackPageActions from '@/pages/TracksPage/modules/TrackPageHeader/components/TrackPageActions/TrackPageActions.tsx';
 
 import { Logo } from '@/ui/Logo';
 
