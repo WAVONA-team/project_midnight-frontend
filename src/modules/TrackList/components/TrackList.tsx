@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -11,79 +11,46 @@ import { Spinner } from '@/ui/Spinner';
 
 type Props = {
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
   tracks: Track[];
-  totalTracks: number;
-  getTracks: (userId: string, page: number) => Promise<Track[]>;
-  currentPage: number;
   header?: string;
+  handler: () => void;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({
-    isLoading,
-    tracks,
-    totalTracks,
-    getTracks,
-    currentPage,
-    setIsLoading,
-    header,
-  }) => {
-    const {
-      currentTrack,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
-      user,
-      setTracks,
-    } = useStore(
-      ({
-        currentTrack,
-        changeCurrentTrack,
-        playerState,
-        changePlayerState,
-        user,
-        setTracks,
-      }) => ({
-        currentTrack,
-        changeCurrentTrack,
-        playerState,
-        changePlayerState,
-        user,
-        setTracks,
-      }),
-    );
+  ({ isLoading, tracks, header, handler }) => {
+    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
+      useStore(
+        ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }) => ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }),
+      );
+
+    const handleTrack = (track: Track) => {
+      changeCurrentTrack(track);
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    };
 
     useEffect(() => {
-      if (isLoading) {
-        getTracks(user!.id, currentPage).then((tracks) => setTracks(tracks));
-      }
-    }, [isLoading]);
-
-    const scrollHandler = useCallback(() => {
-      if (
-        document.documentElement.scrollHeight -
-          (document.documentElement.scrollTop + window.innerHeight) <
-          100 &&
-        tracks.length < totalTracks
-      ) {
-        setIsLoading(true);
-      }
-    }, [tracks, totalTracks]);
-
-    useEffect(() => {
-      document.addEventListener('scroll', scrollHandler);
-      document.addEventListener('resize', scrollHandler);
+      document.addEventListener('scroll', handler);
+      document.addEventListener('resize', handler);
 
       return () => {
-        document.removeEventListener('scroll', scrollHandler);
-        document.removeEventListener('resize', scrollHandler);
+        document.removeEventListener('scroll', handler);
+        document.removeEventListener('resize', handler);
       };
-    }, [scrollHandler]);
+    }, [handler]);
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+        {header && !isLoading && !tracks.length && (
           <Container>
             <h2
               className="
@@ -115,12 +82,7 @@ const TrackList: React.FC<Props> = React.memo(
                   <TrackInfo
                     artist={track.author as string}
                     name={track.title}
-                    handlerPlay={() => {
-                      changeCurrentTrack(track);
-                      changePlayerState(
-                        track.url === currentTrack?.url ? !playerState : true,
-                      );
-                    }}
+                    handlerPlay={() => handleTrack(track)}
                     handlerModal={() => {}}
                     duration={track.duration}
                     provider={track.source}
