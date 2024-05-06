@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
+// import { classNames } from '@/ui/Input/classNames';
 import shareIcon from '@/assets/buttons/actionButtons/shareIcon.svg';
 
 type Props = {
   trackName: string;
   trackUrl: string;
+  className: string;
 };
 
 const TIME_DELAY = 20000;
 
 const TrackShareButton: React.FC<Props> = React.memo(
-  ({ trackName, trackUrl }) => {
+  ({ trackName, trackUrl, className }) => {
     const [isClicked, setIsClicked] = useState<boolean>(false);
     let timeId: NodeJS.Timeout | null;
 
@@ -43,6 +45,7 @@ const TrackShareButton: React.FC<Props> = React.memo(
         title={isClicked ? 'Скопировано!' : 'Поделиться'}
         icon={shareIcon}
         handler={copyToClipboard}
+        className={className}
       />
     );
   },

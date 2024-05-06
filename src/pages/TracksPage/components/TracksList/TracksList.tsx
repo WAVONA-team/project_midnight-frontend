@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 
 import { useStore } from '@/store';
+import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import Dropdown from '@/components/Dropdown/Dropdown';
+import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import TrackFavoriteButton from '@/ui/Button/MenuButton/TrackFavoriteButton/TrackFavoriteButton';
+import TrackShareButton from '@/ui/Button/MenuButton/TrackShareButton/TrackShareButton';
 import { Container } from '@/ui/Container';
+import DropdownTrackInfo from '@/ui/DropdownTrackInfo/DropdownTrackInfo';
 import { Spinner } from '@/ui/Spinner';
 
 const TracksList: React.FC = React.memo(() => {
+  const [showModal, setShowModal] = useState(false);
+  const [childElement, setChildElement] = useState<HTMLElement | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const {
     user,
     isUserTracksLoading,
@@ -63,6 +72,25 @@ const TracksList: React.FC = React.memo(() => {
     }
   };
 
+  const handlerModal = ({
+    currentTarget,
+    trackId,
+  }: React.MouseEvent<HTMLButtonElement> & { trackId?: string }) => {
+    if (currentTarget === childElement) {
+      setShowModal((state) => !state);
+    } else {
+      const element = currentTarget as HTMLElement;
+      const track = userTracks?.find((item) => item.id === trackId);
+      track && setSelectedTrack(track);
+      setChildElement(element);
+      setShowModal(true);
+    }
+  };
+
+  const modalOnBlurHandler = () => {
+    setShowModal(false);
+  };
+
   return (
     <div
       onScroll={scrollHandler}
@@ -107,13 +135,15 @@ const TracksList: React.FC = React.memo(() => {
                 transition={{ duration: 0.3 }}
               >
                 <TrackInfo
+                  id={track.id}
                   artist={track.author}
                   name={track.title}
                   handlerPlay={() => {
                     changeCurrentTrack(track);
                     changePlayerState(!playerState);
                   }}
-                  handlerModal={() => {}}
+                  handlerModal={handlerModal}
+                  modalOnBlurHandler={modalOnBlurHandler}
                   duration={track.duration}
                   provider={track.source}
                   imgUrl={track.imgUrl!}
@@ -124,6 +154,42 @@ const TracksList: React.FC = React.memo(() => {
           </div>
         )}
       </AnimatePresence>
+      <Portal openPortal={showModal} element={childElement}>
+        <Menu>
+          <Dropdown
+            headerItem={
+              selectedTrack && (
+                <DropdownTrackInfo
+                  artist={selectedTrack?.author}
+                  imgUrl={selectedTrack?.imgUrl}
+                  name={selectedTrack?.title}
+                  provider={selectedTrack?.source}
+                />
+              )
+            }
+            className="
+                sm:right-0
+                sm:top-8
+                sm:w-[254px]
+                sm:absolute
+                py-4
+                sm:py-0
+                shadow-[16px_-16px_16px_0px_#0C0D0B80]
+                "
+            isOpen={showModal}
+            setIsOpen={setShowModal}
+          >
+            <Menu.Item
+              as={TrackFavoriteButton}
+              className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+            ></Menu.Item>
+            <Menu.Item
+              as={TrackShareButton}
+              className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+            ></Menu.Item>
+          </Dropdown>
+        </Menu>
+      </Portal>
     </div>
   );
 });

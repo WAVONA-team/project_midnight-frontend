@@ -2,10 +2,21 @@ import React from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-import favoriteIcon from '@/assets/buttons/actionButtons/favoriteicon.svg';
+import saveIcon from '@/assets/buttons/actionButtons/saveIcon.svg';
 
-const TrackFavoriteButton: React.FC = React.memo(() => {
-  return <MenuButton title="Нравится" icon={favoriteIcon} handler={() => {}} />;
+type Props = {
+  className: string;
+};
+
+const TrackFavoriteButton: React.FC<Props> = React.memo(({ className }) => {
+  return (
+    <MenuButton
+      className={className}
+      title="Сохранить"
+      icon={saveIcon}
+      handler={() => {}}
+    />
+  );
 });
 
 export default TrackFavoriteButton;

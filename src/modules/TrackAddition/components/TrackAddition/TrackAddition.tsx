@@ -1,7 +1,15 @@
-import React, { memo, useEffect, useRef } from 'react';
+import React, {
+  MouseEventHandler,
+  memo,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
+import { Menu } from '@headlessui/react';
+import { Track } from 'project_midnight';
 
 import ReactPlayer from '@/lib/ReactPlayer';
 
@@ -10,14 +18,22 @@ import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { getUrl } from '@/modules/TrackAddition/helpers';
 
+import Dropdown from '@/components/Dropdown/Dropdown';
+import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import TrackFavoriteButton from '@/ui/Button/MenuButton/TrackFavoriteButton/TrackFavoriteButton';
+import TrackShareButton from '@/ui/Button/MenuButton/TrackShareButton/TrackShareButton';
 import { Container } from '@/ui/Container';
+import DropdownTrackInfo from '@/ui/DropdownTrackInfo/DropdownTrackInfo';
 import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
 const TrackAddition: React.FC = memo(() => {
+  const [showModal, setShowModal] = useState(false);
+  const [childElement, setChildElement] = useState<HTMLElement | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const {
     user,
     parsedTrack,
@@ -73,6 +89,22 @@ const TrackAddition: React.FC = memo(() => {
   });
   const newTrackRef = useRef<ReactPlayer>(null);
   const debounceValue = useDebounce(watch('url'), 600);
+
+  const handlerModal = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    if (currentTarget === childElement) {
+      setShowModal((state) => !state);
+    } else {
+      const element = currentTarget as HTMLElement;
+      setChildElement(element);
+      setShowModal(true);
+    }
+  };
+
+  const modalOnBlurHandler = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     clearParsedTrack();
@@ -148,7 +180,8 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={() => {}}
+              handlerModal={handlerModal}
+              modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
 
@@ -165,7 +198,8 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={() => {}}
+              handlerModal={handlerModal}
+              modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
         </>
@@ -201,6 +235,42 @@ const TrackAddition: React.FC = memo(() => {
         width="0"
         height="0"
       />
+      <Portal openPortal={showModal} element={childElement}>
+        <Menu>
+          <Dropdown
+            headerItem={
+              parsedTrack && (
+                <DropdownTrackInfo
+                  artist={parsedTrack?.author}
+                  imgUrl={parsedTrack?.imgUrl}
+                  name={parsedTrack?.title}
+                  provider={parsedTrack?.source}
+                />
+              )
+            }
+            className="
+                sm:right-0
+                sm:top-8
+                sm:w-[254px]
+                sm:absolute
+                py-4
+                sm:py-0
+                shadow-[16px_-16px_16px_0px_#0C0D0B80]
+                "
+            isOpen={showModal}
+            setIsOpen={setShowModal}
+          >
+            <Menu.Item
+              as={TrackFavoriteButton}
+              className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+            ></Menu.Item>
+            <Menu.Item
+              as={TrackShareButton}
+              className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+            ></Menu.Item>
+          </Dropdown>
+        </Menu>
+      </Portal>
     </div>
   );
 });

@@ -1,16 +1,21 @@
 import React from 'react';
 
 import { Menu, Transition } from '@headlessui/react';
+import classNames from 'classnames';
+
+import cross from '@/assets/cross/cross.svg';
 
 type Props = {
   children: React.ReactNode;
+  title?: React.ReactNode;
+  headerItem?: React.ReactNode;
   className?: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Dropdown: React.FC<Props> = React.memo(
-  ({ children, className = '', isOpen, setIsOpen }) => {
+  ({ children, title, headerItem, className = '', isOpen, setIsOpen }) => {
     return (
       <div
         onClick={() => setIsOpen(false)}
@@ -22,7 +27,8 @@ const Dropdown: React.FC<Props> = React.memo(
           top-0 
           w-full 
           h-full 
-          bg-surface-eerie_black/60
+        bg-surface-eerie_black/60
+          
         `}
       >
         <Transition
@@ -42,13 +48,32 @@ const Dropdown: React.FC<Props> = React.memo(
             w-full
             rounded-t-xl
             flex-col
-            bg-surface-eerie_black
+          bg-surface-eerie_black
+
             h-fit
             sm:rounded-xl
+        
             z-20
           `}
         >
-          <Menu.Items as="div" static>
+          <div
+            className="sm:hidden px-4 mb-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              className={classNames(
+                'font-rubik text-on-primary-anti-flash-white text-base font-semibold tracking-wide flex justify-end',
+                {
+                  ['justify-between items-center']: title,
+                },
+              )}
+            >
+              {title}
+              <img src={cross} alt="cross" onClick={() => setIsOpen(false)} />
+            </div>
+            {headerItem}
+          </div>
+          <Menu.Items onClick={() => setIsOpen(false)} as="div" static>
             {children}
           </Menu.Items>
         </Transition>
