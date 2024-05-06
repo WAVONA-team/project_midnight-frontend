@@ -80,7 +80,7 @@ export const TrackHistory: React.FC = React.memo(() => {
             key={track.id}
             id={track.id}
             name={track.title}
-            artist={track.author}
+            artist={track.author as string}
             provider={track.source}
             duration={track.duration}
             imgUrl={track.imgUrl as string}

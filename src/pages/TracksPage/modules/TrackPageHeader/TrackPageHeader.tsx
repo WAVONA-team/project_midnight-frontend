@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import TracksPageHeaderMobile from '@/pages/TracksPage/components/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
+import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';

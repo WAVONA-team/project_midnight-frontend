@@ -12,7 +12,7 @@ export const UpdateResetPasswordPage: React.FC = React.memo(() => {
         app
         h-screen
         bg-background-hight
-        lg:bg-[url('/src/assets/home_bg_desktop.webp')]
+        lg:bg-[url('/home_bg_desktop.webp')]
         lg:bg-no-repeat
         lg:bg-center
         lg:bg-cover

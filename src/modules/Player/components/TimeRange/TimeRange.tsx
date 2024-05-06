@@ -39,16 +39,22 @@ export const TimeRange: React.FC = React.memo(() => {
 
   return (
     <div>
-      <p>{`${elapsed} : ${fullness}`}</p>
-
       <RangeInput
         min={0}
-        max={+elapsed}
+        max={1}
+        step="any"
         value={currentTime}
+        multiplier={100}
         onChange={onChangeHandler}
         onMouseUp={() => changeSeeking(false)}
         onMouseDown={() => changeSeeking(true)}
+        rangeColor="bg-track-range-gradient"
+        inputClassName="[&::-webkit-slider-thumb]:bg-primary-poppy"
       />
+      <div className="lg:flex justify-between text-on-primary-anti-flash-white hidden mt-3 text-sm">
+        <p>{`${elapsed}`}</p>
+        <p>{`${fullness}`}</p>
+      </div>
     </div>
   );
 });

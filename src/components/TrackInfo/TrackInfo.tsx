@@ -111,10 +111,9 @@ const TrackInfo: React.FC<Props> = React.memo(
         <div
           onClick={handlerPlay}
           className={classNames(
-            'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2  xl:pr-64',
+            'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2',
             {
-              'bg-[linear-gradient(90deg,rgba(218,47,55,0.2)0%,rgba(218,47,55,0.05)74.4%,rgba(218,47,55,0)100%)]':
-                isPlay && playerState,
+              'bg-background-trackInfo': isPlay && playerState,
             },
           )}
         >
@@ -132,7 +131,7 @@ const TrackInfo: React.FC<Props> = React.memo(
           </div>
 
           <div className="lg:hidden min-w-48">
-            <h3 className="flex text-base font-rubik text-on-primary-anti-flash-white truncate min-w-48">
+            <h3 className="block text-base font-rubik text-on-primary-anti-flash-white overflow-hidden whitespace-nowrap text-ellipsis">
               {name}
             </h3>
 
@@ -143,7 +142,7 @@ const TrackInfo: React.FC<Props> = React.memo(
             </p>
           </div>
 
-          <h3 className="hidden lg:block text-base font-rubik text-on-primary-anti-flash-white truncate text-wrap">
+          <h3 className="hidden lg:block text-base font-rubik text-on-primary-anti-flash-white overflow-hidden whitespace-nowrap text-ellipsis">
             {name}
           </h3>
 

@@ -1,8 +1,9 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Track } from 'project_midnight';
 
 import Dropdown from '@/components/Dropdown/Dropdown';
 import Portal from '@/components/Portal/Portal';

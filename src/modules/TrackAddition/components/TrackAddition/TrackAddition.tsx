@@ -1,15 +1,8 @@
-import React, {
-  MouseEventHandler,
-  memo,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
-import { Track } from 'project_midnight';
 
 import ReactPlayer from '@/lib/ReactPlayer';
 
@@ -33,7 +26,7 @@ import { Spinner } from '@/ui/Spinner';
 const TrackAddition: React.FC = memo(() => {
   const [showModal, setShowModal] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
+
   const {
     user,
     parsedTrack,
@@ -170,7 +163,7 @@ const TrackAddition: React.FC = memo(() => {
         <>
           <div className="xl:hidden">
             <TrackInfo
-              artist={parsedTrack.author}
+              artist={parsedTrack.author as string}
               name={parsedTrack.title}
               provider={parsedTrack.source}
               duration={parsedTrackDuration || parsedTrack.duration}
@@ -188,7 +181,7 @@ const TrackAddition: React.FC = memo(() => {
           <div className="hidden xl:block">
             <TrackInfo
               isDesktop={true}
-              artist={parsedTrack.author}
+              artist={parsedTrack.author as string}
               name={parsedTrack.title}
               provider={parsedTrack.source}
               duration={parsedTrackDuration || parsedTrack.duration}

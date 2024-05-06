@@ -7,7 +7,7 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   tracks: null,
   playerState: false,
   isLoop: false,
-  volume: 70,
+  volume: 0.7,
   currentTrack: null,
   currentTime: 0,
   secondsLoaded: 0,
