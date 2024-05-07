@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
+import saveIcon from '@/../public/buttons/actionButtons/saveIcon.svg';
 
-import saveIcon from '@/assets/buttons/actionButtons/saveIcon.svg';
+import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
 type Props = {
   className: string;

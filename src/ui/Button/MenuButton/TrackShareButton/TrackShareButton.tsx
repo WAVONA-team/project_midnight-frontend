@@ -2,21 +2,12 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-<<<<<<< HEAD
-// import { classNames } from '@/ui/Input/classNames';
-import shareIcon from '@/assets/buttons/actionButtons/shareIcon.svg';
-=======
 import shareIcon from '../../../../../public/buttons/actionButtons/shareIcon.svg';
->>>>>>> 5ba3934a2c7d46eff3733a6fb31ebc951013fc14
 
 type Props = {
   trackName: string;
   trackUrl: string;
-<<<<<<< HEAD
-  className: string;
-=======
   className?: string;
->>>>>>> 5ba3934a2c7d46eff3733a6fb31ebc951013fc14
 };
 
 const TIME_DELAY = 20000;

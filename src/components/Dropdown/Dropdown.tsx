@@ -1,9 +1,8 @@
 import React from 'react';
 
+import cross from '@/../public/cross/cross.svg';
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-
-import cross from '@/assets/cross/cross.svg';
 
 type Props = {
   children: React.ReactNode;
@@ -41,8 +40,7 @@ const Dropdown: React.FC<Props> = React.memo(
           leave="transition duration-75 ease-out"
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
-          className={`
-          ${width}
+          className={`         
           ${className}
             fixed
             bottom-0

@@ -10,12 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@headlessui/react": "^1.7.18",
-    "@rollup/rollup-win32-x64-msvc": "^4.16.4",
-=======
     "@headlessui/react": "^1.7.19",
->>>>>>> 5ba3934a2c7d46eff3733a6fb31ebc951013fc14
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
     "deepmerge": "^4.3.1",

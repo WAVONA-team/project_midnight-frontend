@@ -53,17 +53,25 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     setIsOpen(!isOpen);
   };
 
-  const sortButtonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setChildElement(e.currentTarget);
-    setIsOpen(!isOpen);
+  const handlerModal = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement> & { trackId?: string }) => {
+    const element = currentTarget as HTMLElement;
+
+    setChildElement(element);
+    setIsOpen(true);
+  };
+
+  const modalOnBlurHandler = () => {
+    setIsOpen(false);
   };
 
   return (
     <Menu as="div" className="relative">
       <SortButton
+        onBlur={modalOnBlurHandler}
         title={currentTitle}
-        handler={sortButtonHandler}
-        onBlur={() => setIsOpen(false)}
+        handler={handlerModal}
         isOpen={isOpen}
       />
       <Portal openPortal={isOpen} element={childElement}>
@@ -74,8 +82,9 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           sm:w-[254px]
           sm:absolute
           py-4
-          sm:py-0"
-          title="Фильтры"
+          sm:py-0
+          shadow-[16px_-16px_16px_0px_#0C0D0B80]
+          "
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         >

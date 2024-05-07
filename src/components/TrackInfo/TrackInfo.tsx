@@ -1,12 +1,12 @@
 import React from 'react';
 
+import dot from '@/../public/dot.svg';
 import { useStore } from '@/store';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
 
-import dot from '@/assets/dot.svg';
 import kebab from '@/assets/kebab/kebab.svg';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
   duration: string;
   isPlay: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
-  // handlerModal: React.MouseEventHandler<HTMLButtonElement>;
+
   handlerModal: (
     e: React.MouseEvent<HTMLButtonElement> & { trackId?: string },
   ) => void;
