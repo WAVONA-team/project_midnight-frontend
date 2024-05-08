@@ -3,6 +3,7 @@ import React from 'react';
 import cross from '@/../public/cross/cross.svg';
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 type Props = {
   children: React.ReactNode;
@@ -17,7 +18,20 @@ type Props = {
 const Dropdown: React.FC<Props> = React.memo(
   ({ children, title, headerItem, className = '', isOpen, setIsOpen }) => {
     return (
-      <div
+      <motion.div
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.01,
+          ease: 'easeInOut',
+        }}
+        exit={{
+          opacity: 0,
+        }}
         onClick={() => setIsOpen(false)}
         className={`${isOpen ? 'fixed opacity-100 sm:static' : 'opacity-0'} 
           z-20 
@@ -31,30 +45,33 @@ const Dropdown: React.FC<Props> = React.memo(
           
         `}
       >
-        <Transition
-          as="div"
-          show={isOpen}
-          enter="transition duration-100 ease-out"
-          enterFrom="transform scale-95 opacity-0"
-          enterTo="transform scale-100 opacity-100"
-          leave="transition duration-75 ease-out"
-          leaveFrom="transform scale-100 opacity-100"
-          leaveTo="transform scale-95 opacity-0"
-          className={`         
-          ${className}
-            fixed
-            bottom-0
-            right-0
-            w-full
-            rounded-t-xl
-            flex-col
-          bg-surface-eerie_black
+        <motion.div
+          className={`${className}
+        fixed
+        bottom-0
+        right-0
+        w-full
+        rounded-t-xl
+        flex-col
+      bg-surface-eerie_black
 
-            h-fit
-            sm:rounded-xl
-        
-            z-20
-          `}
+        h-fit
+        sm:rounded-xl
+    
+        z-20`}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.06,
+            ease: 'easeInOut',
+          }}
+          exit={{
+            opacity: 0,
+          }}
         >
           <div
             className="sm:hidden px-4 mb-3"
@@ -76,8 +93,8 @@ const Dropdown: React.FC<Props> = React.memo(
           <Menu.Items onClick={() => setIsOpen(false)} as="div" static>
             {children}
           </Menu.Items>
-        </Transition>
-      </div>
+        </motion.div>
+      </motion.div>
     );
   },
 );

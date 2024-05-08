@@ -59,7 +59,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     const element = currentTarget as HTMLElement;
 
     setChildElement(element);
-    setIsOpen(true);
+    setIsOpen((state) => !state);
   };
 
   const modalOnBlurHandler = () => {

@@ -1,6 +1,8 @@
 import { FC, ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { AnimatePresence } from 'framer-motion';
+
 type Props = {
   element: HTMLElement | null;
   children: ReactNode;
@@ -16,7 +18,13 @@ const Portal: FC<Props> = ({ element, children, openPortal }) => {
     }
   }, [element]);
 
-  return currentElem && openPortal ? createPortal(children, currentElem) : null;
+  return (
+    currentElem &&
+    createPortal(
+      <AnimatePresence>{openPortal && children}</AnimatePresence>,
+      currentElem,
+    )
+  );
 };
 
 export default Portal;
