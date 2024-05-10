@@ -51,7 +51,7 @@ export const createUserSlice: StateCreator<UserState> = (set) => ({
 
   registerSpotify: () => {
     return window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/auth/spotify`,
+      `${import.meta.env.VITE_API_BASE_URL}/auth/spotify?id=111`,
       '_self',
     );
   },
