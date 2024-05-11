@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
@@ -21,10 +21,6 @@ const TracksContainer: React.FC = React.memo(() => {
       setIsUserTracksLoading,
       userTracks,
       getTracksByUser,
-      currentTrack,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
       currentPage,
       setTracks,
       totalTracks,
@@ -34,26 +30,11 @@ const TracksContainer: React.FC = React.memo(() => {
       setIsUserTracksLoading,
       userTracks,
       getTracksByUser,
-      currentTrack,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
       currentPage,
       setTracks,
       totalTracks,
     }),
   );
-
-  const scrollHandler = useCallback(() => {
-    if (
-      document.documentElement.scrollHeight -
-        (document.documentElement.scrollTop + window.innerHeight) <
-        100 &&
-      userTracks.length < totalTracks
-    ) {
-      setIsUserTracksLoading(true);
-    }
-  }, [userTracks, totalTracks]);
 
   useEffect(() => {
     if (isUserTracksLoading) {
@@ -67,8 +48,9 @@ const TracksContainer: React.FC = React.memo(() => {
     <TrackList
       tracks={userTracks}
       isLoading={isUserTracksLoading}
+      setIsLoading={setIsUserTracksLoading}
+      totalTracks={totalTracks}
       header="У вас пока нет добавленных треков :("
-      handler={scrollHandler}
     />
   );
 });

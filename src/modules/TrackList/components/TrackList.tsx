@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -11,13 +11,14 @@ import { Spinner } from '@/ui/Spinner';
 
 type Props = {
   isLoading: boolean;
+  setIsLoading: (state: boolean) => void;
   tracks: Track[];
+  totalTracks: number;
   header?: string;
-  handler: () => void;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({ isLoading, tracks, header, handler }) => {
+  ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
     const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
       useStore(
         ({
@@ -38,15 +39,26 @@ const TrackList: React.FC<Props> = React.memo(
       changePlayerState(track.url === currentTrack?.url ? !playerState : true);
     };
 
+    const scrollHandler = useCallback(() => {
+      if (
+        document.documentElement.scrollHeight -
+          (document.documentElement.scrollTop + window.innerHeight) <
+          100 &&
+        tracks.length < totalTracks
+      ) {
+        setIsLoading(true);
+      }
+    }, [tracks, totalTracks]);
+
     useEffect(() => {
-      document.addEventListener('scroll', handler);
-      document.addEventListener('resize', handler);
+      document.addEventListener('scroll', scrollHandler);
+      document.addEventListener('resize', scrollHandler);
 
       return () => {
-        document.removeEventListener('scroll', handler);
-        document.removeEventListener('resize', handler);
+        document.removeEventListener('scroll', scrollHandler);
+        document.removeEventListener('resize', scrollHandler);
       };
-    }, [handler]);
+    }, [scrollHandler]);
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
