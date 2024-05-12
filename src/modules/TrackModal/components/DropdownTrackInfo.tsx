@@ -4,7 +4,7 @@ type Props = {
   name: string;
   artist: string | null;
   provider: string;
-  imgUrl: string | null;
+  imgUrl: string;
 };
 
 const DropdownTrackInfo: FC<Props> = ({ name, artist, provider, imgUrl }) => {

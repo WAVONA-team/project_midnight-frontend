@@ -10,6 +10,9 @@ import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { getUrl } from '@/modules/TrackAddition/helpers';
+import { TrackModal } from '@/modules/TrackModal';
+import DropdownTrackInfo from '@/modules/TrackModal/components/DropdownTrackInfo';
+import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Dropdown from '@/components/Dropdown/Dropdown';
 import Portal from '@/components/Portal/Portal';
@@ -18,15 +21,11 @@ import { TrackInfo } from '@/components/TrackInfo';
 import TrackFavoriteButton from '@/ui/Button/MenuButton/TrackFavoriteButton/TrackFavoriteButton';
 import TrackShareButton from '@/ui/Button/MenuButton/TrackShareButton/TrackShareButton';
 import { Container } from '@/ui/Container';
-import DropdownTrackInfo from '@/ui/DropdownTrackInfo/DropdownTrackInfo';
 import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
 const TrackAddition: React.FC = memo(() => {
-  const [showModal, setShowModal] = useState(false);
-  const [childElement, setChildElement] = useState<HTMLElement | null>(null);
-
   const {
     user,
     parsedTrack,
@@ -80,24 +79,17 @@ const TrackAddition: React.FC = memo(() => {
       url: '',
     },
   });
+
+  const {
+    modalOnBlurHandler,
+    handlerTrackModal,
+    setShowModal,
+    showModal,
+    childElement,
+  } = useHandlerModal(parsedTrack);
+
   const newTrackRef = useRef<ReactPlayer>(null);
   const debounceValue = useDebounce(watch('url'), 600);
-
-  const handlerModal = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLButtonElement>) => {
-    if (currentTarget === childElement) {
-      setShowModal((state) => !state);
-    } else {
-      const element = currentTarget as HTMLElement;
-      setChildElement(element);
-      setShowModal(true);
-    }
-  };
-
-  const modalOnBlurHandler = () => {
-    setShowModal(false);
-  };
 
   useEffect(() => {
     clearParsedTrack();
@@ -173,7 +165,7 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={handlerModal}
+              handlerModal={handlerTrackModal!}
               modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
@@ -191,7 +183,7 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={handlerModal}
+              handlerModal={handlerTrackModal!}
               modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
@@ -229,40 +221,26 @@ const TrackAddition: React.FC = memo(() => {
         height="0"
       />
       <Portal openPortal={showModal} element={childElement}>
-        <Menu>
-          <Dropdown
-            headerItem={
-              parsedTrack && (
-                <DropdownTrackInfo
-                  artist={parsedTrack?.author}
-                  imgUrl={parsedTrack?.imgUrl}
-                  name={parsedTrack?.title}
-                  provider={parsedTrack?.source}
-                />
-              )
-            }
-            className="
-                sm:right-0
-                sm:top-8
-                sm:w-[254px]
-                sm:absolute
-                py-4
-                sm:py-0
-                shadow-[16px_-16px_16px_0px_#0C0D0B80]
-                "
-            isOpen={showModal}
-            setIsOpen={setShowModal}
-          >
-            <Menu.Item
-              as={TrackFavoriteButton}
-              className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-            ></Menu.Item>
-            <Menu.Item
-              as={TrackShareButton}
-              className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-            ></Menu.Item>
-          </Dropdown>
-        </Menu>
+        <TrackModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          actionButtons={
+            <>
+              <Menu.Item
+                as={TrackFavoriteButton}
+                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+              />
+              <Menu.Item
+                as={TrackShareButton}
+                className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+              />
+            </>
+          }
+          trackAuthor={parsedTrack && parsedTrack.author}
+          trackImgUrl={parsedTrack && parsedTrack.imgUrl}
+          trackTitle={parsedTrack && parsedTrack.title}
+          trackSource={parsedTrack && parsedTrack.source}
+        />
       </Portal>
     </div>
   );

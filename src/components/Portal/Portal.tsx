@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, ReactNode, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { AnimatePresence } from 'framer-motion';

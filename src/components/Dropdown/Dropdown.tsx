@@ -1,7 +1,7 @@
 import React from 'react';
 
 import cross from '@/../public/cross/cross.svg';
-import { Menu, Transition } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
@@ -47,18 +47,17 @@ const Dropdown: React.FC<Props> = React.memo(
       >
         <motion.div
           className={`${className}
-        fixed
-        bottom-0
-        right-0
-        w-full
-        rounded-t-xl
-        flex-col
-      bg-surface-eerie_black
-
-        h-fit
-        sm:rounded-xl
-    
-        z-20`}
+          fixed
+          bottom-0
+          right-0
+          w-full
+          rounded-t-xl
+          flex-col
+        bg-surface-eerie_black
+          h-fit
+          sm:rounded-xl
+          z-20
+          `}
           initial={{
             opacity: 0,
           }}
