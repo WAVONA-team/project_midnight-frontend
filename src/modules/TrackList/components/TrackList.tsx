@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -6,9 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
 import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
-import DropdownTrackInfo from '@/modules/TrackModal/components/DropdownTrackInfo';
 
-import Dropdown from '@/components/Dropdown/Dropdown';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
@@ -164,8 +162,8 @@ const TrackList: React.FC<Props> = React.memo(
                 <Menu.Item
                   as={TrackShareButton}
                   className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                  trackName={selectedTrack?.author}
-                  trackUrl={selectedTrack?.url}
+                  trackName="mokAuthor"
+                  trackUrl="mokUrl"
                 />
               </>
             }

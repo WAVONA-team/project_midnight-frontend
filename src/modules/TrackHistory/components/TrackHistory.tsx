@@ -1,8 +1,7 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
-import { Track } from 'project_midnight';
 
 import { TrackModal } from '@/modules/TrackModal';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
@@ -97,6 +96,8 @@ export const TrackHistory: React.FC = React.memo(() => {
               <Menu.Item
                 as={TrackShareButton}
                 className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                trackName="mokAuthor"
+                trackUrl="mokUrl"
               />
             </>
           }

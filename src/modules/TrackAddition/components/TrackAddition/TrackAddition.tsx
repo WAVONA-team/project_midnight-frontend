@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
@@ -11,10 +11,8 @@ import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { getUrl } from '@/modules/TrackAddition/helpers';
 import { TrackModal } from '@/modules/TrackModal';
-import DropdownTrackInfo from '@/modules/TrackModal/components/DropdownTrackInfo';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
-import Dropdown from '@/components/Dropdown/Dropdown';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
@@ -233,6 +231,8 @@ const TrackAddition: React.FC = memo(() => {
               <Menu.Item
                 as={TrackShareButton}
                 className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                trackName="mokAuthor"
+                trackUrl="mokUrl"
               />
             </>
           }

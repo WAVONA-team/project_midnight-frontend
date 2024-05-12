@@ -41,9 +41,8 @@ const Dropdown: React.FC<Props> = React.memo(
           top-0 
           w-full 
           h-full 
-        bg-surface-eerie_black/60
-          
-        `}
+        bg-surface-eerie_black/60   
+          `}
       >
         <motion.div
           className={`${className}
@@ -53,7 +52,7 @@ const Dropdown: React.FC<Props> = React.memo(
           w-full
           rounded-t-xl
           flex-col
-        bg-surface-eerie_black
+          bg-surface-eerie_black
           h-fit
           sm:rounded-xl
           z-20
