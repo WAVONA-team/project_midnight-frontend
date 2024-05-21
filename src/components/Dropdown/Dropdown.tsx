@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import cross from '@/../public/cross/cross.svg';
 import { Menu } from '@headlessui/react';
@@ -11,8 +11,8 @@ type Props = {
   headerItem?: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  width?: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  width?: string;
 };
 
 const Dropdown: React.FC<Props> = React.memo(
@@ -32,7 +32,6 @@ const Dropdown: React.FC<Props> = React.memo(
         exit={{
           opacity: 0,
         }}
-        onClick={() => setIsOpen(false)}
         className={`${isOpen ? 'fixed opacity-100 sm:static' : 'opacity-0'} 
           z-20 
           transition-all 
@@ -41,8 +40,9 @@ const Dropdown: React.FC<Props> = React.memo(
           top-0 
           w-full 
           h-full 
-        bg-surface-eerie_black/60   
+        bg-surface-eerie_black/60  
           `}
+        onClick={() => setIsOpen(false)}
       >
         <motion.div
           className={`${className}
@@ -72,7 +72,7 @@ const Dropdown: React.FC<Props> = React.memo(
           }}
         >
           <div
-            className="sm:hidden px-4 mb-3"
+            className="sm:hidden px-4 mb-3 "
             onClick={(e) => e.stopPropagation()}
           >
             <div

@@ -10,7 +10,8 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
   const handlerTracksModal = ({
     currentTarget,
     trackId,
-  }: React.MouseEvent<HTMLButtonElement> & { trackId?: string }) => {
+  }: React.MouseEvent<HTMLDivElement> & { trackId?: string }) => {
+    console.log('хук Trackshandler');
     if (currentTarget === childElement) {
       setShowModal((state) => !state);
     } else {
@@ -25,7 +26,8 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
 
   const handlerTrackModal = ({
     currentTarget,
-  }: React.MouseEvent<HTMLButtonElement>) => {
+  }: React.MouseEvent<HTMLDivElement>) => {
+    console.log('хук Trackshandler');
     if (currentTarget === childElement) {
       setShowModal((state) => !state);
     } else {

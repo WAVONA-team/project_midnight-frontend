@@ -5,16 +5,14 @@ type Props = {
   className?: string;
   disabled?: boolean;
   isOpen: boolean;
-  handler: React.MouseEventHandler<HTMLButtonElement>;
-  onBlur: () => void;
+  onMouseDown: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const SortButton: React.FC<Props> = React.memo(
-  ({ title, className, disabled = false, isOpen, handler, onBlur }) => {
+  ({ title, className, disabled = false, isOpen, onMouseDown }) => {
     return (
       <button
-        onBlur={onBlur}
-        onClick={handler}
+        onMouseDown={onMouseDown}
         className={`${className} focus:outline-none`}
         disabled={disabled}
       >

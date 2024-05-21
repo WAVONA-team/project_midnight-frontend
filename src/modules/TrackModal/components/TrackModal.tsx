@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useLayoutEffect } from 'react';
 
 import { Menu } from '@headlessui/react';
 
@@ -25,6 +25,18 @@ const TrackModal: FC<Props> = ({
   trackSource,
   actionButtons,
 }) => {
+  useLayoutEffect(() => {
+    if (window.innerWidth < 640) {
+      document.body.classList.add('overflow-hidden');
+
+      return () => {
+        if (showModal) {
+          document.body.classList.remove('overflow-hidden');
+        }
+      };
+    }
+  }, []);
+
   return (
     <Menu>
       <Dropdown
@@ -46,6 +58,7 @@ const TrackModal: FC<Props> = ({
                 sm:top-8
                 sm:w-[254px]
                 sm:absolute
+                
                 py-4
                 sm:py-0
                 shadow-[16px_-16px_16px_0px_#0C0D0B80]

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import { Menu } from '@headlessui/react';
 
@@ -13,8 +13,23 @@ import defaultSortIcon from '../../../../../../../public/buttons/actionButtons/d
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
+  const ref = useRef(null);
+
+  useLayoutEffect(() => {
+    if (window.innerWidth < 640) {
+      if (isOpen) {
+        document.body.classList.add('overflow-hidden');
+      } else {
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      return () => {
+        document.body.classList.remove('overflow-hidden');
+      };
+    }
+  }, [isOpen]);
 
   const sortControls = [
     {
@@ -55,25 +70,47 @@ const TrackPageDropdown: React.FC = React.memo(() => {
 
   const handlerModal = ({
     currentTarget,
-  }: React.MouseEvent<HTMLButtonElement> & { trackId?: string }) => {
-    const element = currentTarget as HTMLElement;
+  }: React.MouseEvent<HTMLDivElement> & { trackId?: string }) => {
+    if (currentTarget === childElement) {
+      setIsOpen((state) => !state);
+    } else {
+      const element = currentTarget as HTMLElement;
 
-    setChildElement(element);
-    setIsOpen((state) => !state);
+      setChildElement(element);
+
+      setIsOpen((state) => !state);
+    }
   };
 
   const modalOnBlurHandler = () => {
     setIsOpen(false);
   };
 
+  const handlerButtonFocus = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (ref.current) {
+      (ref.current as HTMLDivElement).focus();
+    }
+  };
+
   return (
-    <Menu as="div" className="relative">
-      <SortButton
+    <Menu as="div">
+      <div
+        className="relative"
+        ref={ref}
+        onClick={handlerModal}
         onBlur={modalOnBlurHandler}
-        title={currentTitle}
-        handler={handlerModal}
-        isOpen={isOpen}
-      />
+        tabIndex={0}
+      >
+        <SortButton
+          title={currentTitle}
+          isOpen={isOpen}
+          onMouseDown={handlerButtonFocus}
+        />
+      </div>
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="

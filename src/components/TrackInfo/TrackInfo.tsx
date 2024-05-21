@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { RefObject, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import dot from '@/../public/dot.svg';
 import { useStore } from '@/store';
@@ -8,6 +9,8 @@ import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
 
 import kebab from '@/assets/kebab/kebab.svg';
+
+import './style.css';
 
 type Props = {
   isDesktop?: boolean;
@@ -21,7 +24,7 @@ type Props = {
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
 
   handlerModal: (
-    e: React.MouseEvent<HTMLButtonElement> & { trackId?: string },
+    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => void;
   modalOnBlurHandler: () => void;
 };
@@ -41,8 +44,9 @@ const TrackInfo: React.FC<Props> = React.memo(
     modalOnBlurHandler,
   }) => {
     const { playerState } = useStore(({ playerState }) => ({ playerState }));
+    const ref = useRef(null);
 
-    const handlerModalEvent = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
       if (id) {
         const customEvent = {
           ...e,
@@ -51,6 +55,16 @@ const TrackInfo: React.FC<Props> = React.memo(
         handlerModal(customEvent);
       } else {
         handlerModal(e);
+      }
+    };
+
+    const handlerKebabFocus = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (ref.current) {
+        (ref.current as HTMLDivElement).focus();
       }
     };
 
@@ -92,13 +106,16 @@ const TrackInfo: React.FC<Props> = React.memo(
               <PlayButton />
             </div>
 
-            <div className="relative">
+            <div
+              className="relative "
+              onClick={handlerModalEvent}
+              onBlur={modalOnBlurHandler}
+              tabIndex={0}
+            >
               <button
-                onClick={handlerModalEvent}
-                onBlur={modalOnBlurHandler}
-                tabIndex={0}
                 type="button"
-                className="flex gap-1 focus:outline-none focus-visible:outline-none w-6 h-6"
+                className="flex gap-1 w-6 h-6"
+                onMouseDown={handlerKebabFocus}
               >
                 <img src={kebab} alt="kebab" />
               </button>
@@ -158,13 +175,17 @@ const TrackInfo: React.FC<Props> = React.memo(
             onClick={(e) => e.stopPropagation()}
             className="flex flex-1 justify-end items-center lg:justify-center cursor-pointer "
           >
-            <div className="relative">
+            <div
+              className="relative"
+              onClick={handlerModalEvent}
+              onBlur={modalOnBlurHandler}
+              tabIndex={0}
+              ref={ref}
+            >
               <button
-                onClick={handlerModalEvent}
-                onBlur={modalOnBlurHandler}
-                tabIndex={0}
                 type="button"
-                className="flex gap-1 focus:outline-none focus-visible:outline-none w-6 h-6"
+                className="flex gap-1 w-6 h-6 "
+                onMouseDown={handlerKebabFocus}
               >
                 <img src={kebab} alt="kebab" />
               </button>

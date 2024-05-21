@@ -57,6 +57,7 @@ export default {
         5: '5%',
         0: '0%',
       },
+
       boxShadow: {
         'button-default':
           '-3px -3px 8px 0px rgba(8, 8, 7, 0.9), ' +

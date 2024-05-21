@@ -13,7 +13,7 @@ type Props = {
 const TIME_DELAY = 20000;
 
 const TrackShareButton: React.FC<Props> = React.memo(
-  ({ trackName, trackUrl, className }) => {
+  React.forwardRef(({ trackName, trackUrl, className }, ref) => {
     const [isClicked, setIsClicked] = useState<boolean>(false);
     let timeId: NodeJS.Timeout | null;
 
@@ -41,6 +41,7 @@ const TrackShareButton: React.FC<Props> = React.memo(
 
     return (
       <MenuButton
+        ref={ref}
         title={isClicked ? 'Скопировано!' : 'Поделиться'}
         icon={shareIcon}
         className={`${className}`}
@@ -48,7 +49,7 @@ const TrackShareButton: React.FC<Props> = React.memo(
         className={className}
       />
     );
-  },
+  }),
 );
 
 export default TrackShareButton;
