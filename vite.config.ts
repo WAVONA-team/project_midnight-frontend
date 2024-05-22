@@ -9,7 +9,7 @@ export default defineConfig({
     },
   },
   server: {
-    host: '192.168.0.213',
+    host: true,
   },
   plugins: [react()],
 });
