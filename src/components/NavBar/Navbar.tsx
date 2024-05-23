@@ -29,7 +29,7 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
   ];
   return (
     <aside
-      className={`${className} sticky bottom-0 w-full py-3 outline outline-2 outline-surface-eerie_black -outline-offset-1 flex-row  bg-surface-eerie_black flex justify-between lg:w-72 lg:top-0 lg:h-screen lg:py-2 lg:flex-col font-rubik`}
+      className={`${className} z-10 sticky bottom-0 w-full py-3 outline outline-2 outline-surface-eerie_black -outline-offset-1 flex-row  bg-surface-eerie_black flex justify-between lg:w-72 lg:top-0 lg:h-screen lg:py-2 lg:flex-col font-rubik`}
     >
       <div className="relative w-full h-full">
         <Logo
