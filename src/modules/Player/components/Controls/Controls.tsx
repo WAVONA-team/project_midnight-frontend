@@ -38,7 +38,7 @@ export const Controls: React.FC = React.memo(() => {
     >
       <TimeRange />
 
-      <div className="grid grid-cols-[1fr_min-content] lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
+      <div className="grid max-sm:grid-cols-4 md:grid-cols-[1fr_min-content] lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
         <TrackInformation />
 
         <div className="block lg:hidden">

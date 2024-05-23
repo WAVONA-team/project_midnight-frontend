@@ -7,7 +7,7 @@ export const TrackInformation: React.FC = React.memo(() => {
     currentTrack,
   }));
   return (
-    <div className="flex gap-4 items-center w-full">
+    <div className="flex gap-4 items-center w-full max-sm:col-span-3">
       <img
         src={currentTrack?.imgUrl as string}
         alt={currentTrack?.title}
