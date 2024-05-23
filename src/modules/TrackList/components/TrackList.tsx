@@ -11,54 +11,33 @@ import { Spinner } from '@/ui/Spinner';
 
 type Props = {
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
+  setIsLoading: (state: boolean) => void;
   tracks: Track[];
   totalTracks: number;
-  getTracks: (userId: string, page: number) => Promise<Track[]>;
-  currentPage: number;
   header?: string;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({
-    isLoading,
-    tracks,
-    totalTracks,
-    getTracks,
-    currentPage,
-    setIsLoading,
-    header,
-  }) => {
-    const {
-      currentTrack,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
-      user,
-      setTracks,
-    } = useStore(
-      ({
-        currentTrack,
-        changeCurrentTrack,
-        playerState,
-        changePlayerState,
-        user,
-        setTracks,
-      }) => ({
-        currentTrack,
-        changeCurrentTrack,
-        playerState,
-        changePlayerState,
-        user,
-        setTracks,
-      }),
-    );
+  ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
+    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
+      useStore(
+        ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }) => ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }),
+      );
 
-    useEffect(() => {
-      if (isLoading) {
-        getTracks(user!.id, currentPage).then((tracks) => setTracks(tracks));
-      }
-    }, [isLoading]);
+    const handleTrack = (track: Track) => {
+      changeCurrentTrack(track);
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    };
 
     const scrollHandler = useCallback(() => {
       if (
@@ -83,7 +62,7 @@ const TrackList: React.FC<Props> = React.memo(
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+        {header && !isLoading && !tracks.length && (
           <Container>
             <h2
               className="
@@ -115,12 +94,7 @@ const TrackList: React.FC<Props> = React.memo(
                   <TrackInfo
                     artist={track.author as string}
                     name={track.title}
-                    handlerPlay={() => {
-                      changeCurrentTrack(track);
-                      changePlayerState(
-                        track.url === currentTrack?.url ? !playerState : true,
-                      );
-                    }}
+                    handlerPlay={() => handleTrack(track)}
                     handlerModal={() => {}}
                     duration={track.duration}
                     provider={track.source}
