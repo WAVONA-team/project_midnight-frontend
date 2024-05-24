@@ -10,15 +10,18 @@ export const RegistrationPage: React.FC = React.memo(() => {
     <div
       className="
         app
-        h-screen
+        h-dvh
         bg-background-hight
         lg:bg-[url('/home_bg_desktop.webp')]
+        md:h-screen
+        landscape:sm:h-fit
+        sm:h-full
         lg:bg-no-repeat
         lg:bg-center
         lg:bg-cover
       "
     >
-      <Container className="h-full flex flex-col justify-center">
+      <Container className="flex flex-col justify-center lg:h-screen">
         <main className="lg:grid lg:grid-cols-2 items-center">
           <Logo className="hidden lg:flex" />
           <RegistrationForm />
