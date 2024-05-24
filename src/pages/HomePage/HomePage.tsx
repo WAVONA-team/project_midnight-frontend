@@ -9,7 +9,7 @@ export const HomePage: React.FC = React.memo(() => {
     <div
       className="
         app
-        h-screen
+        h-dvh
         bg-[url('/home_bg_mobile.webp')]
         lg:bg-[url('/home_bg_desktop.webp')]
         bg-no-repeat
@@ -29,6 +29,7 @@ export const HomePage: React.FC = React.memo(() => {
 
         <main
           className="
+            h-fit
             row-start-1
             row-end-2
             flex
