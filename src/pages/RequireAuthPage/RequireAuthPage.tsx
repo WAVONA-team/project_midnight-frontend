@@ -22,10 +22,8 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   return (
     <div
       className="
-        h-dvh
         grid
-        grid-rows-[1fr_max-content]
-        lg:h-fit
+        grid-rows-[1fr_min-content]
         lg:grid-cols-[min-content_1fr]
         lg:grid-rows-none
       "
