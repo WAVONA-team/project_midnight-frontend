@@ -33,7 +33,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
       <main className="order-1 lg:order-0">
         {children || <Outlet />}
         {currentTrack && (
-          <div className="sticky z-10 bottom-14 lg:bottom-0">
+          <div className="sticky z-10 bottom-14">
             <Controls />
           </div>
         )}
