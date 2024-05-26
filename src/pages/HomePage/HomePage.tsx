@@ -1,10 +1,21 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useStore } from '@/store';
 
 import { MainButtonLink } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 import { Logo } from '@/ui/Logo';
 
 export const HomePage: React.FC = React.memo(() => {
+  const { user } = useStore(({ user }) => ({
+    user,
+  }));
+
+  if (user) {
+    return <Navigate to="/tracks" replace />;
+  }
+
   return (
     <div
       className="
