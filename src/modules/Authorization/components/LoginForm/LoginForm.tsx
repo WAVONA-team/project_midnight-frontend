@@ -82,8 +82,13 @@ const LoginForm: React.FC = React.memo(() => {
           }
         />
 
-        {errors.root?.formErrors && (
-          <FormError text={errors.root.formErrors.message as string} />
+        {(errors.root?.formErrors || errors.root?.id) && (
+          <FormError
+            text={
+              (errors.root.formErrors?.message ||
+                errors.root.id?.message) as string
+            }
+          />
         )}
 
         <Controller
