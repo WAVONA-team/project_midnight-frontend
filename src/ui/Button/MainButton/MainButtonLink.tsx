@@ -28,8 +28,8 @@ const MainButtonLink: React.FC<Props> = React.memo(
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className="absolute z-10 top-0 right-0 bottom-0 left-0 flex justify-center items-center rounded bg-[inherit]">
-            {title}
+          <div className="flex justify-center items-center">
+            <span>{title}</span>
           </div>
         )}
       </Link>
