@@ -32,6 +32,7 @@ export const classNamesBase = {
   relative
   block
   px-6
+  px-7
   py-4
   w-full
   border-none
