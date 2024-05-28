@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SpinnerImg from '@/../public/loader/loader ж®™Ђ.gif';
+import SpinnerImg from '@/../public/loader/loader.gif';
 
 type Props = {
   width?: string;
