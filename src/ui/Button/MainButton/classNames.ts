@@ -1,10 +1,15 @@
 export const classNamesBase = {
   mainButton: `
   relative
-  block
+  flex
+  items-center
+  justify-center
   px-5
   py-2
-  w-full
+  lg:w-[135px]
+  lg:h-[44px]
+  md:w-full
+  ms:w-full
   border-none
   rounded
   transition-all
@@ -26,7 +31,7 @@ export const classNamesBase = {
   mainButtonLink: `
   relative
   block
-  px-7
+  px-6
   py-4
   w-full
   border-none
@@ -59,6 +64,10 @@ export const classNamesBase = {
   justify-center
   px-5
   py-2
+  lg:w-[135px]
+  lg:h-[44px]
+  md:w-full
+  ms:w-full
   w-full
   border-none
   rounded

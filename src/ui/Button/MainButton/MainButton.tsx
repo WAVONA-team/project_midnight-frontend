@@ -43,7 +43,7 @@ const MainButton: React.FC<Props> = React.memo(
             className="flex justify-center items-center"
             style={{ background: 'inherit' }}
           >
-            <span className="p-2">{title}</span>
+            <span className="m-2">{title}</span>
           </div>
         )}
       </button>
