@@ -29,7 +29,7 @@ const MainButtonLink: React.FC<Props> = React.memo(
           <Spinner />
         ) : (
           <div className="flex justify-center items-center">
-            <span className="m-2">{title}</span>
+            <span>{title}</span>
           </div>
         )}
       </Link>
