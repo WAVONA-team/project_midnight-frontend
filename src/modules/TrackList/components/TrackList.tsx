@@ -110,8 +110,7 @@ const TrackList: React.FC<Props> = React.memo(
         {isLoading && (
           <Container>
             <Spinner
-              className="relative"
-              backgroundColor="bg-surface-eerie_black"
+              className="relative bg-surface-eerie_black"
             />
           </Container>
         )}
