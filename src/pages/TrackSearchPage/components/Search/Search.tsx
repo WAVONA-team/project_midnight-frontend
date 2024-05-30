@@ -40,7 +40,7 @@ export const Search: React.FC = React.memo(() => {
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
+    getTracksByUser(user!.id, currentPage, query).then((tracks) =>
       setTracks(tracks),
     );
   }, []);
@@ -75,7 +75,7 @@ export const Search: React.FC = React.memo(() => {
         onClick={() => {
           clearUserTracks();
 
-          getTracksByUser(user!.id, currentPage).then((tracks) => {
+          getTracksByUser(user!.id, currentPage, '').then((tracks) => {
             setTracks(tracks);
             navigate(-1);
           });

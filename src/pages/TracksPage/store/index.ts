@@ -18,23 +18,9 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   setIsQueryTracksLoading: (state) => set({ isQueryTracksLoading: state }),
-  clearUserTracks: () => set({ userTracks: [], currentPage: 1 }),
-  getTracksByUser: async (
-    userId: string,
-    page: number,
-    filterOptions = {
-      query: '',
-      sortType: 'updatedAt',
-      order: 'desc',
-      isFavourite: false,
-    },
-  ) => {
-    const { query, sortType, order, isFavourite } = filterOptions;
-
+  getTracksByUser: async (userId: string, page: number, query: string) => {
     return await httpClient
-      .get<Track[]>(
-        `/users/tracks/${userId}?page=${page}&query=${query}&sortType=${sortType}&order=${order}&isFavourite=${isFavourite}`,
-      )
+      .get<Track[]>(`/users/tracks/${userId}?page=${page}&query=${query}`)
       .then(({ data, headers }) => {
         set((state) => ({
           userTracks: [...state.userTracks, ...data],
@@ -54,6 +40,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
         set({ isUserTracksLoading: false, isQueryTracksLoading: false }),
       );
   },
+  clearUserTracks: () => set({ userTracks: [] }),
 });
 
 export { type TracksPageState };

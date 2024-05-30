@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
 import { useStore } from '@/store';
+import { AnimatePresence, motion } from 'framer-motion';
 import debounce from 'lodash.debounce';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
@@ -12,38 +13,21 @@ import { SearchInput } from '@/ui/Input';
 const TrackPageHeader: React.FC = React.memo(() => {
   const [value, setValue] = useState<string>('');
 
-  const {
-    user,
-    getTracksByUser,
-    currentPage,
-    setTracks,
-    clearUserTracks,
-    isFavouriteTracksLoading,
-    setIsFavouriteTracksLoading,
-  } = useStore(
-    ({
-      user,
-      getTracksByUser,
-      currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
-    }) => ({
-      user,
-      getTracksByUser,
-      currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
-    }),
-  );
+  const { user, getTracksByUser, currentPage, setTracks, clearUserTracks } =
+    useStore(
+      ({ user, getTracksByUser, currentPage, setTracks, clearUserTracks }) => ({
+        user,
+        getTracksByUser,
+        currentPage,
+        setTracks,
+        clearUserTracks,
+      }),
+    );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
+    getTracksByUser(user!.id, currentPage, query).then((tracks) =>
       setTracks(tracks),
     );
   }, []);
@@ -61,7 +45,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
+    getTracksByUser(user!.id, currentPage, '').then((tracks) =>
+      setTracks(tracks),
+    );
   };
 
   return (

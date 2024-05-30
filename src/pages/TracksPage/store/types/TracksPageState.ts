@@ -13,10 +13,6 @@ export type TracksPageState = {
   setCurrentPage: (number: number) => void;
   setIsUserTracksLoading: (state: boolean) => void;
   setIsQueryTracksLoading: (state: boolean) => void;
-  getTracksByUser: (
-    userId: string,
-    page: number,
-    filterOptions?: FilterOptions,
-  ) => Promise<Track[]>;
+  getTracksByUser: (userId: string, page: number, query: string) => Promise<Track[]>;
   clearUserTracks: () => void;
 };

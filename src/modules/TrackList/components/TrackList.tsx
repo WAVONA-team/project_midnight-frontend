@@ -81,7 +81,7 @@ const TrackList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {(tracks || !isLoading) && (
+          {tracks && !isLoading && (
             <div>
               {tracks.map((track) => (
                 <motion.div
