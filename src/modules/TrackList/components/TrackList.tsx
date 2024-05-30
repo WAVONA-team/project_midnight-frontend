@@ -62,7 +62,7 @@ const TrackList: React.FC<Props> = React.memo(
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {header && !isLoading && !tracks.length && (
+        {!isLoading && !tracks.length && (
           <Container>
             <h2
               className="
@@ -81,7 +81,7 @@ const TrackList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {tracks && (
+          {tracks && !isLoading && (
             <div>
               {tracks.map((track) => (
                 <motion.div

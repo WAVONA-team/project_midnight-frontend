@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import settingsIcon from '../../../../../../../public/buttons/settingsIcon.svg';
 import searchIcon from '../../../../../../../public/inputs/searchIconWhite.svg';
@@ -9,16 +9,16 @@ const TrackPageActions: React.FC = React.memo(() => {
 
   return (
     <div className="lg:hidden flex gap-3 justify-end">
-      <button
-        onClick={() => {}}
-        className="active:outline-none focus:outline-none"
+      <Link
+        to="/tracks/search"
+        className="active:outline-none focus:outline-none flex"
       >
         <img
           src={searchIcon}
           className="stroke-on-primary-anti-flash-white"
           alt="Search"
         />
-      </button>
+      </Link>
 
       <button
         onClick={() => navigate('/settings')}
