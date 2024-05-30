@@ -59,7 +59,7 @@ const ServiceModalContent: React.FC<Props> = React.memo(
         {isError ? <span className="text-primary-poppy">{isError}</span> : null}
 
         {isLoading ? (
-          <Spinner className="mt-8" backgroundColor="bg-surface-eerie_black" />
+          <Spinner className="mt-8 bg-surface-eerie_black" />
         ) : (
           <div
             className="
