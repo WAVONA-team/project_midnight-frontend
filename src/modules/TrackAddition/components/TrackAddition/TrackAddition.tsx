@@ -73,7 +73,7 @@ const TrackAddition: React.FC = memo(() => {
     },
   });
   const newTrackRef = useRef<ReactPlayer>(null);
-  const debounceValue = useDebounce(watch('url'), 600);
+  const debounceValue = useDebounce(watch('url'), 500);
 
   useEffect(() => {
     clearParsedTrack();

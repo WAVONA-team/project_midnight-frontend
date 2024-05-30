@@ -18,6 +18,7 @@ import {
   TestPage,
   TrackPage,
   TrackQueuePage,
+  TrackSearchPage,
   TracksPage,
   UpdateResetPasswordPage,
 } from '@/pages';
@@ -60,6 +61,7 @@ export const Root: React.FC = React.memo(() => {
               <Route path="queue" element={<TrackQueuePage />} />
               <Route path="new" element={<CreateNewTrackPage />} />
               <Route path=":trackId" element={<TrackPage />} />
+              <Route path="search" element={<TrackSearchPage />} />
             </Route>
 
             <Route path="settings">

@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 
 import {
+  type TracksSearchPageState,
+  tracksSearchPageSlice,
+} from '@/pages/TrackSearchPage/store';
+import {
   type TracksPageState,
   tracksPageSlice,
 } from '@/pages/TracksPage/store';
@@ -21,11 +25,13 @@ export const useStore = create<
     PlayerState &
     TrackAdditionState &
     userSearchHistoryState &
-    TracksPageState
+    TracksPageState &
+    TracksSearchPageState
 >((...a) => ({
   ...createUserSlice(...a),
   ...createPlayerSlice(...a),
   ...parseTrackSlice(...a),
   ...userSearchHistorySlice(...a),
   ...tracksPageSlice(...a),
+  ...tracksSearchPageSlice(...a),
 }));
