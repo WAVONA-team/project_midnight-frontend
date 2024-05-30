@@ -10,12 +10,14 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   userTracks: [],
   totalTracks: 0,
   isUserTracksLoading: true,
+  isQueryTracksLoading: false,
   currentPage: 1,
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
-  getTracksByUser: async (userId: string, page: number) => {
+  setIsQueryTracksLoading: (state) => set({ isQueryTracksLoading: state }),
+  getTracksByUser: async (userId: string, page: number, query: string) => {
     return await httpClient
-      .get<Track[]>(`/users/tracks/${userId}?page=${page}`)
+      .get<Track[]>(`/users/tracks/${userId}?page=${page}&query=${query}`)
       .then(({ data, headers }) => {
         set((state) => ({
           userTracks: [...state.userTracks, ...data],
@@ -31,8 +33,11 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
 
         throw { fieldErrors, formErrors };
       })
-      .finally(() => set({ isUserTracksLoading: false }));
+      .finally(() =>
+        set({ isUserTracksLoading: false, isQueryTracksLoading: false }),
+      );
   },
+  clearUserTracks: () => set({ userTracks: [] }),
 });
 
 export { type TracksPageState };
