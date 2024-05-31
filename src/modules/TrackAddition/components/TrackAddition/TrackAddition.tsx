@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import ReactPlayer from '@/lib/ReactPlayer';
 
@@ -132,44 +133,69 @@ const TrackAddition: React.FC = memo(() => {
         />
       </Container>
 
-      {isParsedTrackLoading && <Spinner />}
-
-      {parsedTrack && !isParsedTrackLoading && (
-        <>
-          <div className="xl:hidden">
-            <TrackInfo
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={() => {}}
+      <AnimatePresence>
+        {isParsedTrackLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Spinner
+              className="relative"
+              backgroundColor="bg-surface-eerie_black"
             />
-          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          <div className="hidden xl:block">
-            <TrackInfo
-              isDesktop={true}
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={() => {}}
-            />
-          </div>
-        </>
-      )}
+      <AnimatePresence>
+        {parsedTrack && !isParsedTrackLoading && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{
+              duration: 0.2,
+              delay: 0.4,
+              velocity: 2,
+              restSpeed: 1,
+            }}
+          >
+            <motion.div className="xl:hidden">
+              <TrackInfo
+                artist={parsedTrack.author as string}
+                name={parsedTrack.title}
+                provider={parsedTrack.source}
+                duration={parsedTrackDuration || parsedTrack.duration}
+                imgUrl={parsedTrack.imgUrl as string}
+                isPlay={parsedTrack.url === currentTrack?.url}
+                handlerPlay={() => {
+                  changeCurrentTrack(parsedTrack);
+                  changePlayerState(!playerState);
+                }}
+                handlerModal={() => {}}
+              />
+            </motion.div>
+
+            <motion.div className="hidden xl:block">
+              <TrackInfo
+                isDesktop={true}
+                artist={parsedTrack.author as string}
+                name={parsedTrack.title}
+                provider={parsedTrack.source}
+                duration={parsedTrackDuration || parsedTrack.duration}
+                imgUrl={parsedTrack.imgUrl as string}
+                isPlay={parsedTrack.url === currentTrack?.url}
+                handlerPlay={() => {
+                  changeCurrentTrack(parsedTrack);
+                  changePlayerState(!playerState);
+                }}
+                handlerModal={() => {}}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <ReactPlayer
         url={getUrl(debounceValue)}
@@ -190,7 +216,7 @@ const TrackAddition: React.FC = memo(() => {
               });
             });
 
-          setIsParsedTrackLoading(false);
+          setIsParsedTrackLoading(true);
         }}
         ref={newTrackRef}
         onError={() =>
