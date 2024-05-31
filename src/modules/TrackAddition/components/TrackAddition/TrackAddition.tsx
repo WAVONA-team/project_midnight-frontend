@@ -136,27 +136,29 @@ const TrackAddition: React.FC = memo(() => {
       <AnimatePresence>
         {isParsedTrackLoading && (
           <motion.div
-            className="flex justify-center"
-            initial={{ display: 'none' }}
-            animate={{ display: 'flex' }}
-            exit={{ display: 'none' }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <Spinner width="w-12" height="h-12" />
+            <Spinner className="relative bg-surface-eerie_black" />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {parsedTrack && !isParsedTrackLoading && (
-        <>
-          <AnimatePresence>
-            <motion.div
-              className="xl:hidden"
-              initial={{ opacity: 0, y: -10, display: 'none' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10, display: 'none' }}
-              transition={{ duration: 0.2 }}
-            >
+      <AnimatePresence>
+        {parsedTrack && !isParsedTrackLoading && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{
+              duration: 0.2,
+              delay: 0.4,
+              velocity: 2,
+              restSpeed: 1,
+            }}
+          >
+            <motion.div className="xl:hidden">
               <TrackInfo
                 artist={parsedTrack.author as string}
                 name={parsedTrack.title}
@@ -171,16 +173,8 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
-          </AnimatePresence>
 
-          <AnimatePresence>
-            <motion.div
-              className="hidden xl:block"
-              initial={{ opacity: 0, y: -10, display: 'none' }}
-              animate={{ opacity: 1, y: 0, display: 'block' }}
-              exit={{ opacity: 0, y: -10, display: 'none' }}
-              transition={{ duration: 0.2, delay: 0.1 }}
-            >
+            <motion.div className="hidden xl:block">
               <TrackInfo
                 isDesktop={true}
                 artist={parsedTrack.author as string}
@@ -196,9 +190,9 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
-          </AnimatePresence>
-        </>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         <ReactPlayer
@@ -232,11 +226,6 @@ const TrackAddition: React.FC = memo(() => {
           }
           width="0"
           height="0"
-          style={{
-            display: 'none',
-            transition: 'all',
-            transitionDuration: '0.2s',
-          }}
         />
       </AnimatePresence>
     </div>
