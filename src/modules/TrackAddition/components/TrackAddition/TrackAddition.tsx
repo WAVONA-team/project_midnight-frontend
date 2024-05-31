@@ -141,7 +141,7 @@ const TrackAddition: React.FC = memo(() => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <Spinner className="relative bg-surface-eerie_black" />
+            <Spinner width="w-12" height="h-12" />
           </motion.div>
         )}
       </AnimatePresence>
