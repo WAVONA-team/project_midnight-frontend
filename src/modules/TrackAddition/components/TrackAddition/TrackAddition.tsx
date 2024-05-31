@@ -136,7 +136,6 @@ const TrackAddition: React.FC = memo(() => {
       <AnimatePresence>
         {isParsedTrackLoading && (
           <motion.div
-            className="flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
