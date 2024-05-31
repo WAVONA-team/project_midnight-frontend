@@ -137,10 +137,9 @@ const TrackAddition: React.FC = memo(() => {
         {isParsedTrackLoading && (
           <motion.div
             className="flex justify-center"
-            initial={{ display: 'none' }}
-            animate={{ display: 'flex' }}
-            exit={{ display: 'none' }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
             <Spinner width="w-12" height="h-12" />
           </motion.div>
