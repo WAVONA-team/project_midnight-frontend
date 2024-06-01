@@ -27,7 +27,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage, query).then((tracks) =>
+    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
       setTracks(tracks),
     );
   }, []);
@@ -45,7 +45,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage, '').then((tracks) =>
+    getTracksByUser(user!.id, currentPage).then((tracks) =>
       setTracks(tracks),
     );
   };
