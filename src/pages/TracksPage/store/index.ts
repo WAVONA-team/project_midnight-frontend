@@ -15,9 +15,17 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   setIsQueryTracksLoading: (state) => set({ isQueryTracksLoading: state }),
-  getTracksByUser: async (userId: string, page: number, query: string) => {
+  getTracksByUser: async (
+    userId: string,
+    page: number,
+    filterOptions = { query: '', sortType: 'updatedAt' },
+  ) => {
+    const { query, sortType } = filterOptions;
+
     return await httpClient
-      .get<Track[]>(`/users/tracks/${userId}?page=${page}&query=${query}`)
+      .get<Track[]>(
+        `/users/tracks/${userId}?page=${page}&query=${query}&sortType=${sortType}`,
+      )
       .then(({ data, headers }) => {
         set((state) => ({
           userTracks: [...state.userTracks, ...data],
