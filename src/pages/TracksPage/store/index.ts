@@ -18,13 +18,13 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   getTracksByUser: async (
     userId: string,
     page: number,
-    filterOptions = { query: '', sortType: 'updatedAt' },
+    filterOptions = { query: '', sortType: 'updatedAt', order: 'desc' },
   ) => {
-    const { query, sortType } = filterOptions;
+    const { query, sortType, order } = filterOptions;
 
     return await httpClient
       .get<Track[]>(
-        `/users/tracks/${userId}?page=${page}&query=${query}&sortType=${sortType}`,
+        `/users/tracks/${userId}?page=${page}&query=${query}&sortType=${sortType}&order=${order}`,
       )
       .then(({ data, headers }) => {
         set((state) => ({
