@@ -78,7 +78,10 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-background-hight lg:bg-[transparent]"
+    >
       <FormContainer className="relative">
         <button
           type="button"
