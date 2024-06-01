@@ -14,18 +14,18 @@ export const LoginPage: React.FC = React.memo(() => {
         bg-background-hight
         sm:h-full
         lg:bg-[url('/home_bg_desktop.webp')]
-        landscape:sm:h-fit
         lg:bg-no-repeat
         lg:bg-center
         lg:bg-cover
       "
     >
-      <Container className="flex flex-col justify-center lg:h-screen">
-        <main className="lg:grid lg:grid-cols-2 items-center">
+      <main className="lg:grid lg:grid-cols-2 items-center">
+        <Container>
           <Logo className="hidden lg:flex" />
-          <LoginForm />
-        </main>
-      </Container>
+        </Container>
+
+        <LoginForm />
+      </main>
     </div>
   );
 });
