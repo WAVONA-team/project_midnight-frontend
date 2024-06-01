@@ -34,7 +34,7 @@ export const TrackHistory: React.FC = React.memo(() => {
   );
 
   return (
-    <div>
+    <div className="">
       <Container>
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
           История Поиска
@@ -49,7 +49,7 @@ export const TrackHistory: React.FC = React.memo(() => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
             >
               <TrackInfo
                 name={track.title}
