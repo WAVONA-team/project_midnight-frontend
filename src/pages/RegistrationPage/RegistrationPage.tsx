@@ -14,9 +14,6 @@ export const RegistrationPage: React.FC = React.memo(() => {
         bg-background-hight
         sm:h-full
         lg:bg-[url('/home_bg_desktop.webp')]
-        md:h-screen
-        landscape:sm:h-fit
-        sm:h-full
         lg:bg-no-repeat
         lg:bg-center
         lg:bg-cover
