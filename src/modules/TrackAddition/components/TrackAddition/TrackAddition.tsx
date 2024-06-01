@@ -154,7 +154,7 @@ const TrackAddition: React.FC = memo(() => {
               initial={{ opacity: 0, y: -10, display: 'none' }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10, display: 'none' }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
             >
               <TrackInfo
                 artist={parsedTrack.author as string}
