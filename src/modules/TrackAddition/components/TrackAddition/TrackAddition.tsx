@@ -137,29 +137,26 @@ const TrackAddition: React.FC = memo(() => {
         {isParsedTrackLoading && (
           <motion.div
             className="flex justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ display: 'none' }}
+            animate={{ display: 'flex' }}
+            exit={{ display: 'none' }}
+            transition={{ duration: 0.2 }}
           >
             <Spinner width="w-12" height="h-12" />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {parsedTrack && !isParsedTrackLoading && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{
-              duration: 0.2,
-              delay: 0.4,
-              velocity: 2,
-              restSpeed: 1,
-            }}
-          >
-            <motion.div className="xl:hidden">
+      {parsedTrack && !isParsedTrackLoading && (
+        <>
+          <AnimatePresence>
+            <motion.div
+              className="xl:hidden"
+              initial={{ opacity: 0, y: -10, display: 'none' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10, display: 'none' }}
+              transition={{ duration: 0.2 }}
+            >
               <TrackInfo
                 artist={parsedTrack.author as string}
                 name={parsedTrack.title}
@@ -174,8 +171,16 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
+          </AnimatePresence>
 
-            <motion.div className="hidden xl:block">
+          <AnimatePresence>
+            <motion.div
+              className="hidden xl:block"
+              initial={{ opacity: 0, y: -10, display: 'none' }}
+              animate={{ opacity: 1, y: 0, display: 'block' }}
+              exit={{ opacity: 0, y: -10, display: 'none' }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+            >
               <TrackInfo
                 isDesktop={true}
                 artist={parsedTrack.author as string}
@@ -191,40 +196,49 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </AnimatePresence>
+        </>
+      )}
 
-      <ReactPlayer
-        url={getUrl(debounceValue)}
-        onReady={() => {
-          const duration = format(newTrackRef.current?.getDuration() as number);
+      <AnimatePresence>
+        <ReactPlayer
+          url={getUrl(debounceValue)}
+          onReady={() => {
+            const duration = format(
+              newTrackRef.current?.getDuration() as number,
+            );
 
-          if (duration === '0:00') {
-            setParsedTrackDuration(null);
-          } else {
-            setParsedTrackDuration(duration);
-          }
+            if (duration === '0:00') {
+              setParsedTrackDuration(null);
+            } else {
+              setParsedTrackDuration(duration);
+            }
 
-          parseTrack(debounceValue, user?.id as string, duration)
-            .then((track) => setParsedTrackDuration(track.duration))
-            .catch(({ formErrors }) => {
-              setError('url', {
-                message: formErrors,
+            parseTrack(debounceValue, user?.id as string, duration)
+              .then((track) => setParsedTrackDuration(track.duration))
+              .catch(({ formErrors }) => {
+                setError('url', {
+                  message: formErrors,
+                });
               });
-            });
 
-          setIsParsedTrackLoading(true);
-        }}
-        ref={newTrackRef}
-        onError={() =>
-          setError('url', {
-            message: 'Некорректный формат. Попробуйте снова',
-          })
-        }
-        width="0"
-        height="0"
-      />
+            setIsParsedTrackLoading(true);
+          }}
+          ref={newTrackRef}
+          onError={() =>
+            setError('url', {
+              message: 'Некорректный формат. Попробуйте снова',
+            })
+          }
+          width="0"
+          height="0"
+          style={{
+            display: 'none',
+            transition: 'all',
+            transitionDuration: '0.2s',
+          }}
+        />
+      </AnimatePresence>
     </div>
   );
 });

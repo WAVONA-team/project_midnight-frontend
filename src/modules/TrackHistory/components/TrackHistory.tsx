@@ -34,7 +34,7 @@ export const TrackHistory: React.FC = React.memo(() => {
   );
 
   return (
-    <div className="mt-8">
+    <div>
       <Container>
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
           История Поиска

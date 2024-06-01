@@ -108,10 +108,8 @@ const TrackList: React.FC<Props> = React.memo(
         </AnimatePresence>
 
         {isLoading && (
-          <Container>
-            <Spinner
-              className="relative bg-surface-eerie_black"
-            />
+          <Container className="flex justify-center">
+            <Spinner width="w-7" height="h-7" />
           </Container>
         )}
       </div>
