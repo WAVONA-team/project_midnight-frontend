@@ -147,15 +147,15 @@ const TrackAddition: React.FC = memo(() => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {parsedTrack && !isParsedTrackLoading && (
-          <>
+      {parsedTrack && !isParsedTrackLoading && (
+        <>
+          <AnimatePresence>
             <motion.div
               className="xl:hidden"
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -10, display: 'none' }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.1 }}
+              exit={{ opacity: 0, y: -10, display: 'none' }}
+              transition={{ duration: 0.2, delay: 0.1 }}
             >
               <TrackInfo
                 artist={parsedTrack.author as string}
@@ -171,11 +171,13 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
+          </AnimatePresence>
 
+          <AnimatePresence>
             <motion.div
               className="hidden xl:block"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: -10, display: 'none' }}
+              animate={{ opacity: 1, y: 0, display: 'block' }}
               exit={{ opacity: 0, y: -10, display: 'none' }}
               transition={{ duration: 0.2, delay: 0.1 }}
             >
@@ -194,9 +196,9 @@ const TrackAddition: React.FC = memo(() => {
                 handlerModal={() => {}}
               />
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          </AnimatePresence>
+        </>
+      )}
 
       <AnimatePresence>
         <ReactPlayer
@@ -230,6 +232,11 @@ const TrackAddition: React.FC = memo(() => {
           }
           width="0"
           height="0"
+          style={{
+            display: 'none',
+            transition: 'all',
+            transitionDuration: '0.2s',
+          }}
         />
       </AnimatePresence>
     </div>
