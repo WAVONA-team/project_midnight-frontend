@@ -4,58 +4,58 @@ import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-const TracksContainer: React.FC = React.memo(() => {
+export const TracksContainer: React.FC = React.memo(() => {
   const {
-    isUserTracksLoading,
     isQueryTracksLoading,
-    setIsUserTracksLoading,
+    setIsQueryTracksLoading,
     user,
     userTracks,
     getTracksByUser,
     currentPage,
     totalTracks,
     setTracks,
+    query,
   } = useStore(
     ({
       user,
-      isUserTracksLoading,
       isQueryTracksLoading,
-      setIsUserTracksLoading,
+      setIsQueryTracksLoading,
       userTracks,
       getTracksByUser,
       currentPage,
       setTracks,
       totalTracks,
+      query,
     }) => ({
       user,
-      isUserTracksLoading,
       isQueryTracksLoading,
-      setIsUserTracksLoading,
+      setIsQueryTracksLoading,
       userTracks,
       getTracksByUser,
       currentPage,
       setTracks,
       totalTracks,
+      query,
     }),
   );
 
   useEffect(() => {
-    if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage, '').then((tracks) =>
+    if (isQueryTracksLoading) {
+      getTracksByUser(user!.id, currentPage, query).then((tracks) =>
         setTracks(tracks),
       );
     }
-  }, [isUserTracksLoading]);
+  }, [isQueryTracksLoading]);
 
   return (
-    <TrackList
-      tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
-      setIsLoading={setIsUserTracksLoading}
-      totalTracks={totalTracks}
-      header="У вас пока нет добавленных треков :("
-    />
+    !!userTracks.length && (
+      <TrackList
+        tracks={userTracks}
+        isLoading={isQueryTracksLoading}
+        setIsLoading={setIsQueryTracksLoading}
+        totalTracks={totalTracks}
+        header="Трек не найден :("
+      />
+    )
   );
 });
-
-export default TracksContainer;

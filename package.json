@@ -16,6 +16,7 @@
     "deepmerge": "^4.3.1",
     "framer-motion": "^11.0.18",
     "load-script": "^2.0.0",
+    "lodash.debounce": "^4.0.8",
     "memoize-one": "^6.0.0",
     "project_midnight": "^0.0.34",
     "prop-types": "^15.8.1",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
