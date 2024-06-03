@@ -41,20 +41,22 @@ const TracksContainer: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage, '').then((tracks) =>
+      getTracksByUser(user!.id, currentPage).then((tracks) =>
         setTracks(tracks),
       );
     }
   }, [isUserTracksLoading]);
 
   return (
-    <TrackList
-      tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
-      setIsLoading={setIsUserTracksLoading}
-      totalTracks={totalTracks}
-      header="У вас пока нет добавленных треков :("
-    />
+    !!userTracks.length && (
+      <TrackList
+        tracks={userTracks}
+        isLoading={isUserTracksLoading || isQueryTracksLoading}
+        setIsLoading={setIsUserTracksLoading}
+        totalTracks={totalTracks}
+        header="У вас пока нет добавленных треков :("
+      />
+    )
   );
 });
 

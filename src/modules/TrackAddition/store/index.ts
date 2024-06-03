@@ -8,6 +8,15 @@ import { TrackAdditionState } from './types';
 
 export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   parsedTrack: null,
+  isParsedTrackLoading: false,
+  parsedTrackDuration: null,
+  setIsParsedTrackLoading: (state: boolean) =>
+    set({ isParsedTrackLoading: state }),
+  setParsedTrackDuration: (state: string | null) =>
+    set({ parsedTrackDuration: state }),
+  clearParsedTrack: () => {
+    set({ parsedTrack: null });
+  },
   setParsedTrack: (track: Track) => set({ parsedTrack: track }),
   parseTrack: async (url, userId, duration) => {
     set({ isParsedTrackLoading: true });
@@ -20,25 +29,15 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
       })
       .then(({ data: track }) => {
         set({ parsedTrack: track });
+        set({ isParsedTrackLoading: false });
         return track;
       })
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;
-
-        set({ isParsedTrackLoading: false });
-
         throw { fieldErrors, formErrors };
-      });
-  },
-  isParsedTrackLoading: false,
-  setIsParsedTrackLoading: (state: boolean) =>
-    set({ isParsedTrackLoading: state }),
-  parsedTrackDuration: null,
-  setParsedTrackDuration: (state: string | null) =>
-    set({ parsedTrackDuration: state }),
-  clearParsedTrack: () => {
-    set({ parsedTrack: null });
+      })
+      .finally(() => set({ isParsedTrackLoading: false }));
   },
 });
 

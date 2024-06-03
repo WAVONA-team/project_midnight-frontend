@@ -41,8 +41,8 @@ export const TracksContainer: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (isQueryTracksLoading) {
-      getTracksByUser(user!.id, currentPage, query).then((tracks) =>
-        setTracks(tracks),
+      getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
+        setTracks(tracks.slice(0, 5)),
       );
     }
   }, [isQueryTracksLoading]);

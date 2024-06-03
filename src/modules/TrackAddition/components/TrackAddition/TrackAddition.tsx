@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import ReactPlayer from '@/lib/ReactPlayer';
 
@@ -132,75 +133,112 @@ const TrackAddition: React.FC = memo(() => {
         />
       </Container>
 
-      {isParsedTrackLoading && <Spinner />}
+      <AnimatePresence>
+        {isParsedTrackLoading && (
+          <motion.div
+            className="flex justify-center"
+            initial={{ display: 'none' }}
+            animate={{ display: 'flex' }}
+            exit={{ display: 'none' }}
+            transition={{ duration: 0.2 }}
+          >
+            <Spinner width="w-12" height="h-12" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {parsedTrack && !isParsedTrackLoading && (
         <>
-          <div className="xl:hidden">
-            <TrackInfo
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={() => {}}
-            />
-          </div>
+          <AnimatePresence>
+            <motion.div
+              className="xl:hidden"
+              initial={{ opacity: 0, y: -10, display: 'none' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10, display: 'none' }}
+              transition={{ duration: 0.2 }}
+            >
+              <TrackInfo
+                artist={parsedTrack.author as string}
+                name={parsedTrack.title}
+                provider={parsedTrack.source}
+                duration={parsedTrackDuration || parsedTrack.duration}
+                imgUrl={parsedTrack.imgUrl as string}
+                isPlay={parsedTrack.url === currentTrack?.url}
+                handlerPlay={() => {
+                  changeCurrentTrack(parsedTrack);
+                  changePlayerState(!playerState);
+                }}
+                handlerModal={() => {}}
+              />
+            </motion.div>
+          </AnimatePresence>
 
-          <div className="hidden xl:block">
-            <TrackInfo
-              isDesktop={true}
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={() => {}}
-            />
-          </div>
+          <AnimatePresence>
+            <motion.div
+              className="hidden xl:block"
+              initial={{ opacity: 0, y: -10, display: 'none' }}
+              animate={{ opacity: 1, y: 0, display: 'block' }}
+              exit={{ opacity: 0, y: -10, display: 'none' }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+            >
+              <TrackInfo
+                isDesktop={true}
+                artist={parsedTrack.author as string}
+                name={parsedTrack.title}
+                provider={parsedTrack.source}
+                duration={parsedTrackDuration || parsedTrack.duration}
+                imgUrl={parsedTrack.imgUrl as string}
+                isPlay={parsedTrack.url === currentTrack?.url}
+                handlerPlay={() => {
+                  changeCurrentTrack(parsedTrack);
+                  changePlayerState(!playerState);
+                }}
+                handlerModal={() => {}}
+              />
+            </motion.div>
+          </AnimatePresence>
         </>
       )}
 
-      <ReactPlayer
-        url={getUrl(debounceValue)}
-        onReady={() => {
-          const duration = format(newTrackRef.current?.getDuration() as number);
+      <AnimatePresence>
+        <ReactPlayer
+          url={getUrl(debounceValue)}
+          onReady={() => {
+            const duration = format(
+              newTrackRef.current?.getDuration() as number,
+            );
 
-          if (duration === '0:00') {
-            setParsedTrackDuration(null);
-          } else {
-            setParsedTrackDuration(duration);
-          }
+            if (duration === '0:00') {
+              setParsedTrackDuration(null);
+            } else {
+              setParsedTrackDuration(duration);
+            }
 
-          parseTrack(debounceValue, user?.id as string, duration)
-            .then((track) => setParsedTrackDuration(track.duration))
-            .catch(({ formErrors }) => {
-              setError('url', {
-                message: formErrors,
+            parseTrack(debounceValue, user?.id as string, duration)
+              .then((track) => setParsedTrackDuration(track.duration))
+              .catch(({ formErrors }) => {
+                setError('url', {
+                  message: formErrors,
+                });
               });
-            });
 
-          setIsParsedTrackLoading(false);
-        }}
-        ref={newTrackRef}
-        onError={() =>
-          setError('url', {
-            message: 'Некорректный формат. Попробуйте снова',
-          })
-        }
-        width="0"
-        height="0"
-      />
+            setIsParsedTrackLoading(true);
+          }}
+          ref={newTrackRef}
+          onError={() =>
+            setError('url', {
+              message: 'Некорректный формат. Попробуйте снова',
+            })
+          }
+          width="0"
+          height="0"
+          style={{
+            display: 'none',
+            transition: 'all',
+            transitionDuration: '0.2s',
+          }}
+        />
+      </AnimatePresence>
     </div>
   );
 });
