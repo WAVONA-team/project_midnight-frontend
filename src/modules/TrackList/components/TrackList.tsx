@@ -14,7 +14,7 @@ type Props = {
   setIsLoading: (state: boolean) => void;
   tracks: Track[];
   totalTracks: number;
-  header?: string;
+  header: string;
 };
 
 const TrackList: React.FC<Props> = React.memo(
@@ -69,14 +69,14 @@ const TrackList: React.FC<Props> = React.memo(
           <Container>
             <h2
               className="
-            font-rubik
-            font-semibold
-            text-secondary-cadet-gray
-            text-2xl
-            sm:text-2xl
-            lg:text-xl
-            tracking-wide
-          "
+                font-rubik
+                font-semibold
+                text-secondary-cadet-gray
+                text-2xl
+                sm:text-2xl
+                lg:text-xl
+                tracking-wide
+              "
             >
               {header}
             </h2>

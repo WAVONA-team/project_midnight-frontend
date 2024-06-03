@@ -48,7 +48,7 @@ export const TracksContainer: React.FC = React.memo(() => {
   }, [isQueryTracksLoading]);
 
   return (
-    !!userTracks.length && (
+    !isQueryTracksLoading && (
       <TrackList
         tracks={userTracks}
         isLoading={isQueryTracksLoading}

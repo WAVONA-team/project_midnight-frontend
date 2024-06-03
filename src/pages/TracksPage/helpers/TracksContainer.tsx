@@ -40,6 +40,10 @@ const TracksContainer: React.FC = React.memo(() => {
   );
 
   useEffect(() => {
+    setIsUserTracksLoading(true);
+  }, []);
+
+  useEffect(() => {
     if (isUserTracksLoading) {
       getTracksByUser(user!.id, currentPage).then((tracks) =>
         setTracks(tracks),
@@ -48,7 +52,7 @@ const TracksContainer: React.FC = React.memo(() => {
   }, [isUserTracksLoading]);
 
   return (
-    !!userTracks.length && (
+    (!isUserTracksLoading || !isQueryTracksLoading) && (
       <TrackList
         tracks={userTracks}
         isLoading={isUserTracksLoading || isQueryTracksLoading}

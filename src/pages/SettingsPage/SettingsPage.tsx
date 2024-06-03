@@ -9,7 +9,35 @@ import { Container } from '@/ui/Container';
 import arrowIcon from '../../../public/arrows/arrowIcon.svg';
 
 export const SettingsPage: React.FC = React.memo(() => {
-  const { logout } = useStore(({ logout }) => ({ logout }));
+  const {
+    logout,
+    setTracks,
+    changePlayerState,
+    changeCurrentTrack,
+    setUserTracks,
+  } = useStore(
+    ({
+      logout,
+      setTracks,
+      changePlayerState,
+      changeCurrentTrack,
+      setUserTracks,
+    }) => ({
+      logout,
+      setTracks,
+      changePlayerState,
+      changeCurrentTrack,
+      setUserTracks,
+    }),
+  );
+
+  const logoutHandler = async () => {
+    setUserTracks([]);
+    setTracks(null);
+    changePlayerState(false);
+    changeCurrentTrack(null);
+    logout();
+  };
 
   return (
     <Container
@@ -95,7 +123,7 @@ export const SettingsPage: React.FC = React.memo(() => {
             text-start
             focus:outline-none
           "
-            onClick={logout}
+            onClick={logoutHandler}
           >
             <span>Выйти</span>
           </button>
