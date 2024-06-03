@@ -21,7 +21,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
     page: number,
     filterOptions = { query: '', sortType: 'updatedAt', order: 'desc' },
   ) => {
-    const { query, sortType, order } = filterOptions;
+    const { query, sortType = 'updatedAt', order = 'desc' } = filterOptions;
 
     return await httpClient
       .get<Track[]>(

@@ -19,20 +19,27 @@ type Props = {
 
 const TrackList: React.FC<Props> = React.memo(
   ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
-    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
-      useStore(
-        ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }) => ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }),
-      );
+    const {
+      currentTrack,
+      changeCurrentTrack,
+      changePlayerState,
+      playerState,
+      query,
+    } = useStore(
+      ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        query,
+      }) => ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        query,
+      }),
+    );
 
     const handleTrack = async (track: Track) => {
       await changeCurrentTrack(track).then(() =>
@@ -64,8 +71,14 @@ const TrackList: React.FC<Props> = React.memo(
     }, [scrollHandler]);
 
     return (
-      <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+      <div className="mb-8 sm:mb-12 flex flex-col gap-11 relative">
+        {isLoading && (
+          <Container className="flex justify-center absolute left-1/2 -translate-x-1/2 -top-4">
+            <Spinner width="w-7" height="h-7" />
+          </Container>
+        )}
+
+        {!isLoading && !tracks.length && !!query.length && (
           <Container>
             <h2
               className="
@@ -109,12 +122,6 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
-
-        {isLoading && (
-          <Container className="flex justify-center">
-            <Spinner width="w-7" height="h-7" />
-          </Container>
-        )}
       </div>
     );
   },

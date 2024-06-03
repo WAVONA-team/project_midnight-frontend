@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
+import { Container } from '@/ui/Container';
+import { Spinner } from '@/ui/Spinner';
+
 export const TracksContainer: React.FC = React.memo(() => {
   const {
     isQueryTracksLoading,
     setIsQueryTracksLoading,
-    user,
     userTracks,
-    getTracksByUser,
-    currentPage,
     totalTracks,
-    setTracks,
-    query,
   } = useStore(
     ({
       user,
@@ -39,23 +37,17 @@ export const TracksContainer: React.FC = React.memo(() => {
     }),
   );
 
-  useEffect(() => {
-    if (isQueryTracksLoading) {
-      getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-        setTracks(tracks.slice(0, 5)),
-      );
-    }
-  }, [isQueryTracksLoading]);
-
-  return (
-    !isQueryTracksLoading && (
-      <TrackList
-        tracks={userTracks}
-        isLoading={isQueryTracksLoading}
-        setIsLoading={setIsQueryTracksLoading}
-        totalTracks={totalTracks}
-        header="Трек не найден :("
-      />
-    )
+  return !isQueryTracksLoading ? (
+    <TrackList
+      tracks={userTracks}
+      isLoading={isQueryTracksLoading}
+      setIsLoading={setIsQueryTracksLoading}
+      totalTracks={totalTracks}
+      header="Трек не найден :("
+    />
+  ) : (
+    <Container className="flex justify-center absolute left-1/2 -translate-x-1/2 top-4">
+      <Spinner width="w-10" height="h-10" />
+    </Container>
   );
 });
