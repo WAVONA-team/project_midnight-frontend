@@ -58,13 +58,13 @@ export const TrackHistory: React.FC = React.memo(() => {
                 duration={track.duration}
                 imgUrl={track.imgUrl as string}
                 isPlay={currentTrack?.url === track.url}
-                handlerPlay={() => {
-                  changeCurrentTrack(track);
-                  changePlayerState(
-                    currentTrack?.url !== track.url ? true : !playerState,
-                  );
-
-                  updateHistoryOrder(track.id);
+                handlerPlay={async () => {
+                  await changeCurrentTrack(track).then(() => {
+                    changePlayerState(
+                      currentTrack?.url !== track.url ? true : !playerState,
+                    );
+                    updateHistoryOrder(track.id);
+                  });
                 }}
                 handlerModal={() => {}}
               />

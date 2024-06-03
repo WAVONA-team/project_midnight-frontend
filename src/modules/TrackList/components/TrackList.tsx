@@ -34,9 +34,12 @@ const TrackList: React.FC<Props> = React.memo(
         }),
       );
 
-    const handleTrack = (track: Track) => {
-      changeCurrentTrack(track);
-      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    const handleTrack = async (track: Track) => {
+      await changeCurrentTrack(track).then(() =>
+        changePlayerState(
+          track.url === currentTrack?.url ? !playerState : true,
+        ),
+      );
     };
 
     const scrollHandler = useCallback(() => {

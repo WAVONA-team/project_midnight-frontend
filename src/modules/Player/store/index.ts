@@ -18,7 +18,8 @@ export const createPlayerSlice: StateCreator<PlayerState> = (set) => ({
   changePlayerState: (playerState: boolean) => set({ playerState }),
   changeIsLoop: (isLoop: boolean) => set({ isLoop }),
   changeVolume: (volume: number) => set({ volume }),
-  changeCurrentTrack: (currentTrack: Track | null) => set({ currentTrack }),
+  changeCurrentTrack: async (currentTrack: Track | null) =>
+    set({ currentTrack }),
   changeCurrentTime: (currentTime: number) => set({ currentTime }),
   changeSecondsLoaded: (secondsLoaded: number) => set({ secondsLoaded }),
   changeDuration: (duration: number) => set({ duration }),
