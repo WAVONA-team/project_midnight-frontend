@@ -77,11 +77,7 @@ export const Search: React.FC = React.memo(() => {
         type="button"
         onClick={() => {
           clearUserTracks();
-
-          getTracksByUser(user!.id, currentPage).then((tracks) => {
-            setTracks(tracks);
-            navigate(-1);
-          });
+          navigate(-1);
         }}
       >
         Отмена
