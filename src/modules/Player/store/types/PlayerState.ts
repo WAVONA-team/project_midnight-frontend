@@ -11,11 +11,11 @@ export type PlayerState = {
   duration: number;
   seekTo: number;
   seeking: boolean;
-  setTracks: (tracks: Track[] | null) => void;
+  setTracks: (tracks: Track[]) => void;
   changePlayerState: (playerState: boolean) => void;
   changeIsLoop: (isLoop: boolean) => void;
   changeVolume: (volume: number) => void;
-  changeCurrentTrack: (track: Track | null) => Promise<void>;
+  changeCurrentTrack: (track: Track | null) => void;
   changeCurrentTime: (currentTime: number) => void;
   changeSecondsLoaded: (secondsLoaded: number) => void;
   changeDuration: (duration: number) => void;
