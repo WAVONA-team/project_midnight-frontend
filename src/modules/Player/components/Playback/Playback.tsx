@@ -70,16 +70,16 @@ export const Playback: React.FC = React.memo(() => {
     changeDuration(state);
   };
 
-  const handlerOnEnded = () => {
+  const handlerOnEnded = async () => {
     const currentTrackIndex = tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
     if (tracks && tracks[currentTrackIndex + 1]) {
-      changeCurrentTrack(tracks[currentTrackIndex + 1]);
+      await changeCurrentTrack(tracks[currentTrackIndex + 1]);
     } else {
       changePlayerState(false);
-      changeCurrentTrack(null);
+      await changeCurrentTrack(null);
     }
   };
 

@@ -15,7 +15,7 @@ export const TrackControlButtons: React.FC = React.memo(() => {
     }),
   );
 
-  const NextTrack = () => {
+  const NextTrack = async () => {
     const currentTrackIndex = tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
@@ -23,15 +23,15 @@ export const TrackControlButtons: React.FC = React.memo(() => {
     const nextTrack = tracks![currentTrackIndex + 1];
 
     if (tracks && nextTrack) {
-      return changeCurrentTrack(nextTrack);
+      return await changeCurrentTrack(nextTrack);
     }
 
     if (tracks && !nextTrack) {
-      return changeCurrentTrack(tracks[0]);
+      return await changeCurrentTrack(tracks[0]);
     }
   };
 
-  const PreviosTrack = () => {
+  const PreviosTrack = async () => {
     const currentTrackIndex = tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
@@ -39,11 +39,11 @@ export const TrackControlButtons: React.FC = React.memo(() => {
     const previousTrack = tracks![currentTrackIndex - 1];
 
     if (tracks && previousTrack) {
-      return changeCurrentTrack(previousTrack);
+      return await changeCurrentTrack(previousTrack);
     }
 
     if (tracks && !previousTrack) {
-      return changeCurrentTrack(tracks[tracks.length - 1]);
+      return await changeCurrentTrack(tracks[tracks.length - 1]);
     }
   };
 

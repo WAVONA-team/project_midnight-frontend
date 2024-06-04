@@ -14,11 +14,19 @@ type Props = {
   setIsLoading: (state: boolean) => void;
   tracks: Track[];
   totalTracks: number;
-  header?: string;
+  header: string;
+  headerCondition?: boolean;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
+  ({
+    isLoading,
+    setIsLoading,
+    tracks,
+    totalTracks,
+    header,
+    headerCondition = true,
+  }) => {
     const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
       useStore(
         ({
@@ -34,9 +42,12 @@ const TrackList: React.FC<Props> = React.memo(
         }),
       );
 
-    const handleTrack = (track: Track) => {
-      changeCurrentTrack(track);
-      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    const handleTrack = async (track: Track) => {
+      await changeCurrentTrack(track).then(() =>
+        changePlayerState(
+          track.url === currentTrack?.url ? !playerState : true,
+        ),
+      );
     };
 
     const scrollHandler = useCallback(() => {
@@ -61,19 +72,25 @@ const TrackList: React.FC<Props> = React.memo(
     }, [scrollHandler]);
 
     return (
-      <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+      <div className="mb-8 sm:mb-12 flex flex-col gap-11 relative">
+        {isLoading && (
+          <Container className="flex justify-center absolute left-1/2 -translate-x-1/2 -top-4">
+            <Spinner width="w-7" height="h-7" />
+          </Container>
+        )}
+
+        {!isLoading && !tracks.length && headerCondition && (
           <Container>
             <h2
               className="
-            font-rubik
-            font-semibold
-            text-secondary-cadet-gray
-            text-2xl
-            sm:text-2xl
-            lg:text-xl
-            tracking-wide
-          "
+                font-rubik
+                font-semibold
+                text-secondary-cadet-gray
+                text-2xl
+                sm:text-2xl
+                lg:text-xl
+                tracking-wide
+              "
             >
               {header}
             </h2>
@@ -106,12 +123,6 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
-
-        {isLoading && (
-          <Container className="flex justify-center">
-            <Spinner width="w-7" height="h-7" />
-          </Container>
-        )}
       </div>
     );
   },

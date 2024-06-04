@@ -19,7 +19,7 @@ export const TrackSearchPage: React.FC = React.memo(() => {
       <Container>
         <Search />
 
-        <div className="mt-4">
+        <div className="mt-4 relative">
           <TracksContainer />
         </div>
       </Container>

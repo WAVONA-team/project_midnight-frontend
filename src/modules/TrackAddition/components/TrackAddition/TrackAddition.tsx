@@ -66,6 +66,7 @@ const TrackAddition: React.FC = memo(() => {
     watch,
     control,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -120,6 +121,9 @@ const TrackAddition: React.FC = memo(() => {
               className="mb-8 max-w-sm lg:mb-12"
               onChange={(event) => {
                 onChange(event.target.value);
+                clearErrors('url');
+                changePlayerState(false);
+                changeCurrentTrack(null);
 
                 if (!event.target.value.length) {
                   clearParsedTrack();
@@ -149,54 +153,58 @@ const TrackAddition: React.FC = memo(() => {
 
       {parsedTrack && !isParsedTrackLoading && (
         <>
-          <AnimatePresence>
-            <motion.div
-              className="xl:hidden"
-              initial={{ opacity: 0, y: -10, display: 'none' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10, display: 'none' }}
-              transition={{ duration: 0.2 }}
-            >
-              <TrackInfo
-                artist={parsedTrack.author as string}
-                name={parsedTrack.title}
-                provider={parsedTrack.source}
-                duration={parsedTrackDuration || parsedTrack.duration}
-                imgUrl={parsedTrack.imgUrl as string}
-                isPlay={parsedTrack.url === currentTrack?.url}
-                handlerPlay={() => {
-                  changeCurrentTrack(parsedTrack);
-                  changePlayerState(!playerState);
-                }}
-                handlerModal={() => {}}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="xl:hidden">
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10, display: 'none' }}
+                transition={{ duration: 0.2 }}
+              >
+                <TrackInfo
+                  artist={parsedTrack.author as string}
+                  name={parsedTrack.title}
+                  provider={parsedTrack.source}
+                  duration={parsedTrackDuration || parsedTrack.duration}
+                  imgUrl={parsedTrack.imgUrl as string}
+                  isPlay={parsedTrack.url === currentTrack?.url}
+                  handlerPlay={async () => {
+                    await changeCurrentTrack(parsedTrack).then(() =>
+                      changePlayerState(!playerState),
+                    );
+                  }}
+                  handlerModal={() => {}}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-          <AnimatePresence>
-            <motion.div
-              className="hidden xl:block"
-              initial={{ opacity: 0, y: -10, display: 'none' }}
-              animate={{ opacity: 1, y: 0, display: 'block' }}
-              exit={{ opacity: 0, y: -10, display: 'none' }}
-              transition={{ duration: 0.2, delay: 0.1 }}
-            >
-              <TrackInfo
-                isDesktop={true}
-                artist={parsedTrack.author as string}
-                name={parsedTrack.title}
-                provider={parsedTrack.source}
-                duration={parsedTrackDuration || parsedTrack.duration}
-                imgUrl={parsedTrack.imgUrl as string}
-                isPlay={parsedTrack.url === currentTrack?.url}
-                handlerPlay={() => {
-                  changeCurrentTrack(parsedTrack);
-                  changePlayerState(!playerState);
-                }}
-                handlerModal={() => {}}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="hidden xl:block">
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, y: -10, display: 'none' }}
+                animate={{ opacity: 1, y: 0, display: 'block' }}
+                exit={{ opacity: 0, y: -10, display: 'none' }}
+                transition={{ duration: 0.2, delay: 0.1 }}
+              >
+                <TrackInfo
+                  isDesktop={true}
+                  artist={parsedTrack.author as string}
+                  name={parsedTrack.title}
+                  provider={parsedTrack.source}
+                  duration={parsedTrackDuration || parsedTrack.duration}
+                  imgUrl={parsedTrack.imgUrl as string}
+                  isPlay={parsedTrack.url === currentTrack?.url}
+                  handlerPlay={async () => {
+                    await changeCurrentTrack(parsedTrack).then(() =>
+                      changePlayerState(!playerState),
+                    );
+                  }}
+                  handlerModal={() => {}}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </>
       )}
 

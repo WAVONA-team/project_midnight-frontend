@@ -17,6 +17,7 @@ export const Search: React.FC = React.memo(() => {
     query,
     setQuery,
     setTracks,
+    setIsQueryTracksLoading,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setTracks,
+      setIsQueryTracksLoading,
     }) => ({
       user,
       getTracksByUser,
@@ -34,14 +36,13 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setTracks,
+      setIsQueryTracksLoading,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
-    clearUserTracks();
-
     getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-      setTracks(tracks),
+      setTracks(tracks.slice(0, 5)),
     );
   }, []);
 
@@ -51,6 +52,8 @@ export const Search: React.FC = React.memo(() => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    clearUserTracks();
+    setIsQueryTracksLoading(true);
     debouncedGet(e.target.value);
   };
 
@@ -74,11 +77,7 @@ export const Search: React.FC = React.memo(() => {
         type="button"
         onClick={() => {
           clearUserTracks();
-
-          getTracksByUser(user!.id, currentPage).then((tracks) => {
-            setTracks(tracks);
-            navigate(-1);
-          });
+          navigate(-1);
         }}
       >
         Отмена
