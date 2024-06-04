@@ -4,7 +4,11 @@ import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-const TracksContainer: React.FC = React.memo(() => {
+type Props = {
+  isFavourite: boolean;
+};
+
+const TracksContainer: React.FC<Props> = React.memo(({ isFavourite }) => {
   const {
     isUserTracksLoading,
     isQueryTracksLoading,
@@ -41,9 +45,13 @@ const TracksContainer: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage).then((tracks) =>
-        setTracks(tracks),
-      );
+      getTracksByUser(user!.id, currentPage, {
+        // TODO Добавить динамичность фильтров
+        isFavourite,
+        query: '',
+        sortType: 'updatedAt',
+        order: 'desc',
+      }).then((tracks) => setTracks(tracks));
     }
   }, [isUserTracksLoading]);
 

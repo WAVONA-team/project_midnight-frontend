@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useStore } from '@/store';
 
@@ -15,6 +15,8 @@ export const TracksPage: React.FC = React.memo(() => {
     currentTrack,
   }));
 
+  const [isFavouriteTracks, setIsFavouriteTracks] = useState(false);
+
   return (
     <div
       className={`${currentTrack && 'pb-28'}
@@ -26,11 +28,16 @@ export const TracksPage: React.FC = React.memo(() => {
         text-on-primary-anti-flash-white
       `}
     >
-      <TrackPageHeader />
+      <TrackPageHeader
+        isFavouriteTracks={isFavouriteTracks}
+        setIsFavouriteTracks={setIsFavouriteTracks}
+      />
       <div className="sticky pt-1 top-0 bg-background-hight z-10">
-        <TrackPageControls />
+        <TrackPageControls
+          title={!isFavouriteTracks ? 'Все треки' : 'Избранные'}
+        />
       </div>
-      <TracksContainer />
+      <TracksContainer isFavourite={isFavouriteTracks} />
       {/*<div>*/}
       {/*  <MainButton*/}
       {/*    className="sm:max-w-[285px] z-0"*/}
