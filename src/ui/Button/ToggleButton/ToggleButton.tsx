@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useStore } from '@/store';
 
 type Props = {
   leftTitle: string;
   rightTitle: string;
+  isFavoriteTracks: boolean;
+  setIsFavoriteTracks: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ToggleButton: React.FC<Props> = React.memo(
-  ({ leftTitle, rightTitle }) => {
-    const [isCheckedAllTracks, setCheckedAllTracks] = useState(true);
-    const [isCheckedFavoriteTracks, setCheckedFavoriteTracks] = useState(false);
+  ({ leftTitle, rightTitle, isFavoriteTracks, setIsFavoriteTracks }) => {
+    const { setIsUserTracksLoading, clearUserTracks } = useStore(
+      ({ setIsUserTracksLoading, clearUserTracks }) => ({
+        setIsUserTracksLoading,
+        clearUserTracks,
+      }),
+    );
 
-    const handleAllTracksChange = () => {
-      if (!isCheckedAllTracks) {
-        setCheckedAllTracks(true);
-        setCheckedFavoriteTracks(false);
-      }
-    };
-
-    const handleFavoriteTracksChange = () => {
-      if (!isCheckedFavoriteTracks) {
-        setCheckedFavoriteTracks(true);
-        setCheckedAllTracks(false);
-      }
+    const handleChange = (value: boolean) => {
+      if (isFavoriteTracks === value) return;
+      setIsFavoriteTracks(value);
+      clearUserTracks();
+      setIsUserTracksLoading(true);
     };
 
     return (
@@ -34,29 +35,24 @@ const ToggleButton: React.FC<Props> = React.memo(
         "
       >
         <label className="cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only"
-            checked={isCheckedAllTracks}
-            onChange={handleAllTracksChange}
-          />
+          <button onClick={() => handleChange(false)} />
           <span
             className={`
               transition-all 
               duration-200 
               flex 
               items-center 
-              rounded
+              rounded-l
               px-6 
               py-3 
               text-sm 
               font-medium
-              ${isCheckedAllTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${!isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${!isCheckedAllTracks && 'text-secondary-cadet-gray'} 
+                ${isFavoriteTracks && 'text-secondary-cadet-gray'} 
                 transition-all 
                 duration-200 
                 text-on-primary-lavender-blush 
@@ -72,29 +68,24 @@ const ToggleButton: React.FC<Props> = React.memo(
         </label>
 
         <label className="cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only"
-            checked={isCheckedFavoriteTracks}
-            onChange={handleFavoriteTracksChange}
-          />
+          <button onClick={() => handleChange(true)} />
           <span
             className={`
               transition-all 
               duration-200 
               flex 
               items-center
-              rounded 
+              rounded-r
               px-6 
               py-3 
               text-sm 
               font-medium
-              ${isCheckedFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${!isCheckedFavoriteTracks && 'text-secondary-cadet-gray'} 
+                ${!isFavoriteTracks && 'text-secondary-cadet-gray'} 
                 transition-all 
                 duration-200 
                 text-on-primary-lavender-blush 

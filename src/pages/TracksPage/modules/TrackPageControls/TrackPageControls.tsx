@@ -5,7 +5,11 @@ import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/comp
 import { ShuffleButton } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 
-const TrackPageControls: React.FC = React.memo(() => {
+type Props = {
+  title: string;
+};
+
+const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
   return (
     <Container
       className="
@@ -28,7 +32,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          Сохраненные треки
+          {title}
         </h1>
       </div>
 
