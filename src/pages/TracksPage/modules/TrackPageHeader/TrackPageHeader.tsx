@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 
 import { useStore } from '@/store';
-import { AnimatePresence, motion } from 'framer-motion';
 import debounce from 'lodash.debounce';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
+import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
@@ -44,9 +44,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) =>
-      setTracks(tracks),
-    );
+    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
   };
 
   return (
@@ -55,24 +53,20 @@ const TrackPageHeader: React.FC = React.memo(() => {
         <TracksPageHeaderMobile />
       </div>
 
-      <div className="hidden lg:block">
-        <AnimatePresence initial={false}>
-          <motion.div
-            className="overflow-hidden"
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <SearchInput
-              className={'lg:max-w-[398px] col-span-3'}
-              clearValue={clearValueHandler}
-              placeholder="Название, исполнитель..."
-              value={value}
-              onChange={onChangeHandler}
-            />
-          </motion.div>
-        </AnimatePresence>
+      <div className="flex justify-between flex-col pt-8 sm:flex-row">
+        <div className="overflow-hidden hidden sm:block">
+          <SearchInput
+            className={'lg:max-w-[398px] col-span-3'}
+            clearValue={clearValueHandler}
+            placeholder="Название, исполнитель..."
+            value={value}
+            onChange={onChangeHandler}
+          />
+        </div>
+
+        <div className="flex justify-center sm:self-end">
+          <ToggleButton leftTitle="Все треки" rightTitle="Избранные" />
+        </div>
       </div>
     </Container>
   );
