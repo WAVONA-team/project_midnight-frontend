@@ -9,72 +9,87 @@ import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
-const TrackPageHeader: React.FC = React.memo(() => {
-  const [value, setValue] = useState<string>('');
+type Props = {
+  isFavouriteTracks: boolean;
+  setIsFavouriteTracks: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-  const { user, getTracksByUser, currentPage, setTracks, clearUserTracks } =
-    useStore(
-      ({ user, getTracksByUser, currentPage, setTracks, clearUserTracks }) => ({
-        user,
-        getTracksByUser,
-        currentPage,
-        setTracks,
-        clearUserTracks,
-      }),
-    );
+const TrackPageHeader: React.FC<Props> = React.memo(
+  ({ isFavouriteTracks, setIsFavouriteTracks }) => {
+    const [value, setValue] = useState<string>('');
 
-  const getTracksByUserWrapper = useCallback((query: string) => {
-    clearUserTracks();
+    const { user, getTracksByUser, currentPage, setTracks, clearUserTracks } =
+      useStore(
+        ({
+          user,
+          getTracksByUser,
+          currentPage,
+          setTracks,
+          clearUserTracks,
+        }) => ({
+          user,
+          getTracksByUser,
+          currentPage,
+          setTracks,
+          clearUserTracks,
+        }),
+      );
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-      setTracks(tracks),
-    );
-  }, []);
+    const getTracksByUserWrapper = useCallback((query: string) => {
+      clearUserTracks();
 
-  const debouncedGet = useCallback(debounce(getTracksByUserWrapper, 500), [
-    getTracksByUserWrapper,
-  ]);
+      getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
+        setTracks(tracks),
+      );
+    }, []);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    debouncedGet(e.target.value);
-  };
+    const debouncedGet = useCallback(debounce(getTracksByUserWrapper, 500), [
+      getTracksByUserWrapper,
+    ]);
 
-  const clearValueHandler = () => {
-    setValue('');
-    clearUserTracks();
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+      debouncedGet(e.target.value);
+    };
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
-  };
+    const clearValueHandler = () => {
+      setValue('');
+      clearUserTracks();
 
-  return (
-    <Container className="mb-8 md:mb-12">
-      <div className="lg:hidden">
-        <TracksPageHeaderMobile />
-      </div>
+      getTracksByUser(user!.id, currentPage).then((tracks) =>
+        setTracks(tracks),
+      );
+    };
 
-      <div className="flex justify-between flex-col pt-8 sm:flex-row">
-        <div className="overflow-hidden hidden sm:block">
-          <SearchInput
-            className={'lg:max-w-[398px] col-span-3'}
-            clearValue={clearValueHandler}
-            placeholder="Название, исполнитель..."
-            value={value}
-            onChange={onChangeHandler}
-          />
+    return (
+      <Container className="mb-8 md:mb-12">
+        <div className="lg:hidden">
+          <TracksPageHeaderMobile />
         </div>
 
-        <div className="flex justify-center sm:self-end">
-          <ToggleButton
-            leftTitle="Все треки"
-            rightTitle="Избранные"
-            isFavouriteTracksLoading={isFavouriteTracksLoading}
-            setIsFavouriteTracksLoading={setIsFavouriteTracksLoading}
-          />
+        <div className="flex justify-between flex-col pt-8 sm:flex-row">
+          <div className="overflow-hidden hidden sm:block">
+            <SearchInput
+              className={'lg:max-w-[398px] col-span-3'}
+              clearValue={clearValueHandler}
+              placeholder="Название, исполнитель..."
+              value={value}
+              onChange={onChangeHandler}
+            />
+          </div>
+
+          <div className="flex justify-center sm:self-end">
+            <ToggleButton
+              leftTitle="Все треки"
+              rightTitle="Избранные"
+              isFavoriteTracks={isFavouriteTracks}
+              setIsFavoriteTracks={setIsFavouriteTracks}
+            />
+          </div>
         </div>
-      </div>
-    </Container>
-  );
-});
+      </Container>
+    );
+  },
+);
 
 export default TrackPageHeader;

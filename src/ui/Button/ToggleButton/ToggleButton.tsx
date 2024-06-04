@@ -5,17 +5,12 @@ import { useStore } from '@/store';
 type Props = {
   leftTitle: string;
   rightTitle: string;
-  isFavouriteTracksLoading: boolean;
-  setIsFavouriteTracksLoading: (state: boolean) => void;
+  isFavoriteTracks: boolean;
+  setIsFavoriteTracks: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ToggleButton: React.FC<Props> = React.memo(
-  ({
-    leftTitle,
-    rightTitle,
-    isFavouriteTracksLoading,
-    setIsFavouriteTracksLoading,
-  }) => {
+  ({ leftTitle, rightTitle, isFavoriteTracks, setIsFavoriteTracks }) => {
     const { setIsUserTracksLoading, clearUserTracks } = useStore(
       ({ setIsUserTracksLoading, clearUserTracks }) => ({
         setIsUserTracksLoading,
@@ -24,8 +19,8 @@ const ToggleButton: React.FC<Props> = React.memo(
     );
 
     const handleChange = (value: boolean) => {
-      if (isFavouriteTracksLoading === value) return;
-      setIsFavouriteTracksLoading(value);
+      if (isFavoriteTracks === value) return;
+      setIsFavoriteTracks(value);
       clearUserTracks();
       setIsUserTracksLoading(true);
     };
@@ -52,12 +47,12 @@ const ToggleButton: React.FC<Props> = React.memo(
               py-3
               text-sm
               font-medium
-              ${!isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${!isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
+                ${isFavoriteTracks && 'text-secondary-cadet-gray'}
                 transition-all
                 duration-200
                 text-on-primary-lavender-blush
@@ -85,12 +80,12 @@ const ToggleButton: React.FC<Props> = React.memo(
               py-3
               text-sm
               font-medium
-              ${isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
+                ${!isFavoriteTracks && 'text-secondary-cadet-gray'}
                 transition-all
                 duration-200
                 text-on-primary-lavender-blush
