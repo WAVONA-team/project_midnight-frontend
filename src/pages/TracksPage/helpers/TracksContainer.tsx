@@ -15,6 +15,7 @@ const TracksContainer: React.FC = React.memo(() => {
     currentPage,
     totalTracks,
     setTracks,
+    clearUserTracks,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ const TracksContainer: React.FC = React.memo(() => {
       currentPage,
       setTracks,
       totalTracks,
+      clearUserTracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -36,11 +38,14 @@ const TracksContainer: React.FC = React.memo(() => {
       currentPage,
       setTracks,
       totalTracks,
+      clearUserTracks,
     }),
   );
 
   useEffect(() => {
     setIsUserTracksLoading(true);
+
+    return () => clearUserTracks();
   }, []);
 
   useEffect(() => {

@@ -15,31 +15,32 @@ type Props = {
   tracks: Track[];
   totalTracks: number;
   header: string;
+  headerCondition?: boolean;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
-    const {
-      currentTrack,
-      changeCurrentTrack,
-      changePlayerState,
-      playerState,
-      query,
-    } = useStore(
-      ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
-        query,
-      }) => ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
-        query,
-      }),
-    );
+  ({
+    isLoading,
+    setIsLoading,
+    tracks,
+    totalTracks,
+    header,
+    headerCondition = true,
+  }) => {
+    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
+      useStore(
+        ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }) => ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }),
+      );
 
     const handleTrack = async (track: Track) => {
       await changeCurrentTrack(track).then(() =>
@@ -78,7 +79,7 @@ const TrackList: React.FC<Props> = React.memo(
           </Container>
         )}
 
-        {!isLoading && !tracks.length && !!query.length && (
+        {!isLoading && !tracks.length && headerCondition && (
           <Container>
             <h2
               className="
