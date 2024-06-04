@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
 import { useStore } from '@/store';
-import { AnimatePresence, motion } from 'framer-motion';
 import debounce from 'lodash.debounce';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
@@ -45,9 +44,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) =>
-      setTracks(tracks),
-    );
+    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
   };
 
   return (

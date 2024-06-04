@@ -43,27 +43,27 @@ const ToggleButton: React.FC<Props> = React.memo(
           <button onClick={() => handleChange(false)} />
           <span
             className={`
-              transition-all 
-              duration-200 
-              flex 
-              items-center 
+              transition-all
+              duration-200
+              flex
+              items-center
               rounded-l
-              px-6 
-              py-3 
-              text-sm 
+              px-6
+              py-3
+              text-sm
               font-medium
               ${!isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'} 
-                transition-all 
-                duration-200 
-                text-on-primary-lavender-blush 
-                font-rubik 
-                font-normal 
-                text-sm 
+                ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
+                transition-all
+                duration-200
+                text-on-primary-lavender-blush
+                font-rubik
+                font-normal
+                text-sm
                 tracking-wide
               `}
             >
@@ -76,27 +76,27 @@ const ToggleButton: React.FC<Props> = React.memo(
           <button onClick={() => handleChange(true)} />
           <span
             className={`
-              transition-all 
-              duration-200 
-              flex 
+              transition-all
+              duration-200
+              flex
               items-center
               rounded-r
-              px-6 
-              py-3 
-              text-sm 
+              px-6
+              py-3
+              text-sm
               font-medium
               ${isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'} 
-                transition-all 
-                duration-200 
-                text-on-primary-lavender-blush 
-                font-rubik 
-                font-normal 
-                text-sm 
+                ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
+                transition-all
+                duration-200
+                text-on-primary-lavender-blush
+                font-rubik
+                font-normal
+                text-sm
                 tracking-wide
               `}
             >
