@@ -12,32 +12,20 @@ import { SearchInput } from '@/ui/Input';
 const TrackPageHeader: React.FC = React.memo(() => {
   const [value, setValue] = useState<string>('');
 
-  const {
-    user,
-    getTracksByUser,
-    currentPage,
-    setTracks,
-    clearUserTracks,
-    setIsQueryTracksLoading,
-  } = useStore(
-    ({
-      user,
-      getTracksByUser,
-      currentPage,
-      setTracks,
-      clearUserTracks,
-      setIsQueryTracksLoading,
-    }) => ({
-      user,
-      getTracksByUser,
-      currentPage,
-      setTracks,
-      clearUserTracks,
-      setIsQueryTracksLoading,
-    }),
-  );
+  const { user, getTracksByUser, currentPage, setTracks, clearUserTracks } =
+    useStore(
+      ({ user, getTracksByUser, currentPage, setTracks, clearUserTracks }) => ({
+        user,
+        getTracksByUser,
+        currentPage,
+        setTracks,
+        clearUserTracks,
+      }),
+    );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
+    clearUserTracks();
+
     getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
       setTracks(tracks),
     );
@@ -49,8 +37,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    clearUserTracks();
-    setIsQueryTracksLoading(true);
     debouncedGet(e.target.value);
   };
 
@@ -58,7 +44,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setValue('');
     clearUserTracks();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
+    getTracksByUser(user!.id, currentPage).then((tracks) =>
+      setTracks(tracks),
+    );
   };
 
   return (

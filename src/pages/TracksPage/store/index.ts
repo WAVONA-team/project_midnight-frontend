@@ -12,7 +12,6 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   isUserTracksLoading: true,
   isQueryTracksLoading: false,
   currentPage: 1,
-  setUserTracks: (tracks) => set({ userTracks: tracks }),
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   setIsQueryTracksLoading: (state) => set({ isQueryTracksLoading: state }),
@@ -21,7 +20,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
     page: number,
     filterOptions = { query: '', sortType: 'updatedAt', order: 'desc' },
   ) => {
-    const { query, sortType = 'updatedAt', order = 'desc' } = filterOptions;
+    const { query, sortType, order } = filterOptions;
 
     return await httpClient
       .get<Track[]>(
