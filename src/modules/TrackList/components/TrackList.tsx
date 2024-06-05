@@ -60,6 +60,8 @@ const TrackList: React.FC<Props> = React.memo(
       };
     }, [scrollHandler]);
 
+    console.log(tracks.map((track) => track));
+
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
         {!isLoading && !tracks.length && (
@@ -81,7 +83,7 @@ const TrackList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {tracks && !isLoading && (
+          {(tracks || !isLoading) && (
             <div>
               {tracks.map((track) => (
                 <motion.div

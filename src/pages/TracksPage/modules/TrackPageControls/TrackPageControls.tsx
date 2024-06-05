@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStore } from '@/store';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
@@ -21,9 +21,16 @@ const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
         lg:flex-row
       "
     >
-      <div className="mr-5 xl:mr-20">
-        <h1
-          className="
+      <AnimatePresence>
+        <motion.div
+          className="mr-5 xl:mr-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.h1
+            className="
             font-rubik
             font-semibold
             text-2xl
@@ -33,10 +40,15 @@ const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
             lg:font-normal
             lg:font-3xl
           "
-        >
-          {title}
-        </h1>
-      </div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {title}
+          </motion.h1>
+        </motion.div>
+      </AnimatePresence>
 
       <div
         className="

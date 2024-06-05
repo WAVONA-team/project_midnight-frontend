@@ -4,11 +4,7 @@ import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-type Props = {
-  isFavourite: boolean;
-};
-
-const TracksContainer: React.FC<Props> = React.memo(({ isFavourite }) => {
+const TracksContainer: React.FC = React.memo(() => {
   const {
     isUserTracksLoading,
     isQueryTracksLoading,
@@ -52,24 +48,22 @@ const TracksContainer: React.FC<Props> = React.memo(({ isFavourite }) => {
     if (isUserTracksLoading) {
       getTracksByUser(user!.id, currentPage, {
         // TODO Добавить динамичность фильтров
-        isFavourite,
         query: '',
         sortType: 'updatedAt',
         order: 'desc',
+        isFavourite,
       }).then((tracks) => setTracks(tracks));
     }
   }, [isUserTracksLoading]);
 
   return (
-    !!userTracks.length && (
-      <TrackList
-        tracks={userTracks}
-        isLoading={isUserTracksLoading || isQueryTracksLoading}
-        setIsLoading={setIsUserTracksLoading}
-        totalTracks={totalTracks}
-        header="У вас пока нет добавленных треков :("
-      />
-    )
+    <TrackList
+      tracks={userTracks}
+      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      setIsLoading={setIsUserTracksLoading}
+      totalTracks={totalTracks}
+      header="У вас пока нет добавленных треков :("
+    />
   );
 });
 
