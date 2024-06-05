@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 
+import { modalActionButtons } from '@/common/constants';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -10,8 +11,6 @@ import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
-import { TrackShareButton } from '@/ui/Button';
-import TrackFavoriteButton from '@/ui/Button/MenuButton/TrackFavoriteButton/TrackFavoriteButton';
 import { Container } from '@/ui/Container';
 import { Spinner } from '@/ui/Spinner';
 
@@ -155,16 +154,15 @@ const TrackList: React.FC<Props> = React.memo(
             setShowModal={setShowModal}
             actionButtons={
               <>
-                <Menu.Item
-                  as={TrackFavoriteButton}
-                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                />
-                <Menu.Item
-                  as={TrackShareButton}
-                  className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                  trackName="mokAuthor"
-                  trackUrl="mokUrl"
-                />
+                {modalActionButtons.map((button) => {
+                  return (
+                    <Menu.Item
+                      as={button.button}
+                      selectedTrack={selectedTrack!}
+                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                    />
+                  );
+                })}
               </>
             }
             trackAuthor={selectedTrack! && selectedTrack.author}

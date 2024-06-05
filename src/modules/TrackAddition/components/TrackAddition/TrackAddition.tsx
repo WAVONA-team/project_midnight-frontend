@@ -1,6 +1,7 @@
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { modalActionButtons } from '@/common/constants';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
@@ -16,14 +17,13 @@ import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
-import TrackFavoriteButton from '@/ui/Button/MenuButton/TrackFavoriteButton/TrackFavoriteButton';
-import TrackShareButton from '@/ui/Button/MenuButton/TrackShareButton/TrackShareButton';
 import { Container } from '@/ui/Container';
 import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
 const TrackAddition: React.FC = memo(() => {
+  const [isTrackSave, setIsTrackSave] = useState(false);
   const {
     user,
     parsedTrack,
@@ -37,6 +37,7 @@ const TrackAddition: React.FC = memo(() => {
     changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
+    checkTrack,
   } = useStore(
     ({
       user,
@@ -51,6 +52,7 @@ const TrackAddition: React.FC = memo(() => {
       changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
+      checkTrack,
     }) => ({
       user,
       parsedTrack,
@@ -64,6 +66,7 @@ const TrackAddition: React.FC = memo(() => {
       changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
+      checkTrack,
     }),
   );
 
@@ -88,6 +91,19 @@ const TrackAddition: React.FC = memo(() => {
 
   const newTrackRef = useRef<ReactPlayer>(null);
   const debounceValue = useDebounce(watch('url'), 600);
+
+  const handlerProtectedModal = async (
+    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+  ) => {
+    if (user && e.trackId) {
+      checkTrack(e.trackId, user?.id)
+        .then(() => {
+          setIsTrackSave(false);
+        })
+        .catch(() => setIsTrackSave(true));
+      if (handlerTrackModal) handlerTrackModal(e);
+    }
+  };
 
   useEffect(() => {
     clearParsedTrack();
@@ -163,7 +179,7 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={handlerTrackModal!}
+              handlerModal={handlerProtectedModal!}
               modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
@@ -181,7 +197,7 @@ const TrackAddition: React.FC = memo(() => {
                 changeCurrentTrack(parsedTrack);
                 changePlayerState(!playerState);
               }}
-              handlerModal={handlerTrackModal!}
+              handlerModal={handlerProtectedModal!}
               modalOnBlurHandler={modalOnBlurHandler}
             />
           </div>
@@ -224,16 +240,19 @@ const TrackAddition: React.FC = memo(() => {
           setShowModal={setShowModal}
           actionButtons={
             <>
-              <Menu.Item
-                as={TrackFavoriteButton}
-                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-              />
-              <Menu.Item
-                as={TrackShareButton}
-                className="border-none first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                trackName="mokAuthor"
-                trackUrl="mokUrl"
-              />
+              {modalActionButtons
+                .filter((button) =>
+                  isTrackSave ? button.id !== 3 : button.id !== 2,
+                )
+                .map((button) => {
+                  return (
+                    <Menu.Item
+                      as={button.button}
+                      selectedTrack={parsedTrack!}
+                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                    />
+                  );
+                })}
             </>
           }
           trackAuthor={parsedTrack && parsedTrack.author}

@@ -133,11 +133,11 @@ const TrackPageDropdown: React.FC = React.memo(() => {
               icon={control.icon}
               title={control.title}
               className="
-              last:border-b-0
+               last:border-b-0
               last:rounded-b-xl
               first:rounded-t-xl
               first:hover:rounded-t-xl
-            "
+              "
             />
           ))}
         </Dropdown>

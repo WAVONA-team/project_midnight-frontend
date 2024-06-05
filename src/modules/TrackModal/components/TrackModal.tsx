@@ -56,9 +56,8 @@ const TrackModal: FC<Props> = ({
         className="
                 sm:right-0
                 sm:top-8
-                sm:w-[254px]
-                sm:absolute
-                
+                sm:min-w-[265px]
+                sm:absolute        
                 py-4
                 sm:py-0
                 shadow-[16px_-16px_16px_0px_#0C0D0B80]

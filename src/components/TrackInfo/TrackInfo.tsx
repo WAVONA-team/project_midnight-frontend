@@ -1,5 +1,4 @@
-import React, { RefObject, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
 
 import dot from '@/../public/dot.svg';
 import { useStore } from '@/store';
@@ -9,8 +8,6 @@ import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
 
 import kebab from '@/assets/kebab/kebab.svg';
-
-import './style.css';
 
 type Props = {
   isDesktop?: boolean;

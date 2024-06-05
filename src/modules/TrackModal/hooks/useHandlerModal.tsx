@@ -11,7 +11,6 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
     currentTarget,
     trackId,
   }: React.MouseEvent<HTMLDivElement> & { trackId?: string }) => {
-    console.log('хук Trackshandler');
     if (currentTarget === childElement) {
       setShowModal((state) => !state);
     } else {
@@ -27,7 +26,6 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
   const handlerTrackModal = ({
     currentTarget,
   }: React.MouseEvent<HTMLDivElement>) => {
-    console.log('хук Trackshandler');
     if (currentTarget === childElement) {
       setShowModal((state) => !state);
     } else {

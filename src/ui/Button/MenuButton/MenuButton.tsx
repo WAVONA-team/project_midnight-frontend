@@ -5,10 +5,11 @@ type Props = {
   icon: string;
   title: string;
   handler: React.MouseEventHandler<HTMLButtonElement>;
+  ref: React.ForwardedRef<HTMLButtonElement>;
 };
 
 const MenuButton: React.FC<Props> = React.memo(
-  React.forwardRef(({ className = '', handler, icon, title }, ref: any) => {
+  React.forwardRef(({ className = '', handler, icon, title }, ref) => {
     return (
       <button
         ref={ref}
@@ -16,7 +17,7 @@ const MenuButton: React.FC<Props> = React.memo(
         className={`
           ${className}
           bg-[inherit]
-          w-full
+          w-full 
           border-t-0
           border-l-0
           border-r-0
@@ -31,17 +32,19 @@ const MenuButton: React.FC<Props> = React.memo(
       >
         <div className="flex p-4">
           <img src={icon} alt={title} />
-          <span
+
+          <div
             className="
               text-on-primary-anti-flash-white
-              ml-4
+              pl-4
               font-normal
               text-base
               tracking-widest
+              whitespace-nowrap
             "
           >
             {title}
-          </span>
+          </div>
         </div>
       </button>
     );
