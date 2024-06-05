@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 
@@ -11,11 +11,12 @@ import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPag
 
 export const TracksPage: React.FC = React.memo(() => {
   // const navigate = useNavigate();
-  const { currentTrack } = useStore(({ currentTrack }) => ({
-    currentTrack,
-  }));
-
-  const [isFavouriteTracks, setIsFavouriteTracks] = useState(false);
+  const { currentTrack, isFavouriteTracksLoading } = useStore(
+    ({ currentTrack, isFavouriteTracksLoading }) => ({
+      currentTrack,
+      isFavouriteTracksLoading,
+    }),
+  );
 
   return (
     <div
@@ -28,16 +29,13 @@ export const TracksPage: React.FC = React.memo(() => {
         text-on-primary-anti-flash-white
       `}
     >
-      <TrackPageHeader
-        isFavouriteTracks={isFavouriteTracks}
-        setIsFavouriteTracks={setIsFavouriteTracks}
-      />
+      <TrackPageHeader />
       <div className="sticky pt-1 top-0 bg-background-hight z-10">
         <TrackPageControls
-          title={!isFavouriteTracks ? 'Все треки' : 'Избранные'}
+          title={!isFavouriteTracksLoading ? 'Все треки' : 'Избранные'}
         />
       </div>
-      <TracksContainer isFavourite={isFavouriteTracks} />
+      <TracksContainer />
       {/*<div>*/}
       {/*  <MainButton*/}
       {/*    className="sm:max-w-[285px] z-0"*/}
