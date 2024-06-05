@@ -5,22 +5,28 @@ import { useStore } from '@/store';
 type Props = {
   leftTitle: string;
   rightTitle: string;
-  isFavoriteTracks: boolean;
-  setIsFavoriteTracks: React.Dispatch<React.SetStateAction<boolean>>;
+  isFavouriteTracksLoading: boolean;
+  setIsFavouriteTracksLoading: (state: boolean) => void;
 };
 
 const ToggleButton: React.FC<Props> = React.memo(
-  ({ leftTitle, rightTitle, isFavoriteTracks, setIsFavoriteTracks }) => {
-    const { setIsUserTracksLoading, clearUserTracks } = useStore(
-      ({ setIsUserTracksLoading, clearUserTracks }) => ({
+  ({
+    leftTitle,
+    rightTitle,
+    isFavouriteTracksLoading,
+    setIsFavouriteTracksLoading,
+  }) => {
+    const { setIsUserTracksLoading, clearUserTracks, tracks } = useStore(
+      ({ setIsUserTracksLoading, clearUserTracks, tracks }) => ({
         setIsUserTracksLoading,
         clearUserTracks,
+        tracks,
       }),
     );
 
     const handleChange = (value: boolean) => {
-      if (isFavoriteTracks === value) return;
-      setIsFavoriteTracks(value);
+      if (isFavouriteTracksLoading === value) return;
+      setIsFavouriteTracksLoading(value);
       clearUserTracks();
       setIsUserTracksLoading(true);
     };
@@ -35,7 +41,10 @@ const ToggleButton: React.FC<Props> = React.memo(
         "
       >
         <label className="cursor-pointer">
-          <button onClick={() => handleChange(false)} />
+          <button
+            disabled={!tracks?.length}
+            onClick={() => handleChange(false)}
+          />
           <span
             className={`
               transition-all 
@@ -47,12 +56,12 @@ const ToggleButton: React.FC<Props> = React.memo(
               py-3 
               text-sm 
               font-medium
-              ${!isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${!isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${isFavoriteTracks && 'text-secondary-cadet-gray'} 
+                ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'} 
                 transition-all 
                 duration-200 
                 text-on-primary-lavender-blush 
@@ -68,7 +77,10 @@ const ToggleButton: React.FC<Props> = React.memo(
         </label>
 
         <label className="cursor-pointer">
-          <button onClick={() => handleChange(true)} />
+          <button
+            disabled={!tracks?.length}
+            onClick={() => handleChange(true)}
+          />
           <span
             className={`
               transition-all 
@@ -80,12 +92,12 @@ const ToggleButton: React.FC<Props> = React.memo(
               py-3 
               text-sm 
               font-medium
-              ${isFavoriteTracks ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+              ${isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
               `}
           >
             <p
               className={`
-                ${!isFavoriteTracks && 'text-secondary-cadet-gray'} 
+                ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'} 
                 transition-all 
                 duration-200 
                 text-on-primary-lavender-blush 

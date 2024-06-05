@@ -48,7 +48,7 @@ const TrackList: React.FC<Props> = React.memo(
       ) {
         setIsLoading(true);
       }
-    }, [tracks, totalTracks]);
+    }, [tracks.length, totalTracks, setIsLoading]);
 
     useEffect(() => {
       document.addEventListener('scroll', scrollHandler);
@@ -59,6 +59,8 @@ const TrackList: React.FC<Props> = React.memo(
         document.removeEventListener('resize', scrollHandler);
       };
     }, [scrollHandler]);
+
+    console.log(tracks.map((track) => track));
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
@@ -81,7 +83,7 @@ const TrackList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {tracks && !isLoading && (
+          {(tracks || !isLoading) && (
             <div>
               {tracks.map((track) => (
                 <motion.div
