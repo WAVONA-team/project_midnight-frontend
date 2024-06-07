@@ -11,12 +11,9 @@ import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPag
 
 export const TracksPage: React.FC = React.memo(() => {
   // const navigate = useNavigate();
-  const { currentTrack, isFavouriteTracksLoading } = useStore(
-    ({ currentTrack, isFavouriteTracksLoading }) => ({
-      currentTrack,
-      isFavouriteTracksLoading,
-    }),
-  );
+  const { currentTrack } = useStore(({ currentTrack }) => ({
+    currentTrack,
+  }));
 
   return (
     <div
@@ -31,9 +28,7 @@ export const TracksPage: React.FC = React.memo(() => {
     >
       <TrackPageHeader />
       <div className="sticky pt-1 top-0 bg-background-hight z-10">
-        <TrackPageControls
-          title={!isFavouriteTracksLoading ? 'Все треки' : 'Избранные'}
-        />
+        <TrackPageControls />
       </div>
       <TracksContainer />
       {/*<div>*/}

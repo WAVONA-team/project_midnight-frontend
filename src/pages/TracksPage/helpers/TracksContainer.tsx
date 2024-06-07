@@ -47,7 +47,6 @@ const TracksContainer: React.FC = React.memo(() => {
   useEffect(() => {
     if (isUserTracksLoading) {
       getTracksByUser(user!.id, currentPage, {
-        // TODO Добавить динамичность фильтров
         query: '',
         sortType: 'updatedAt',
         order: 'desc',
