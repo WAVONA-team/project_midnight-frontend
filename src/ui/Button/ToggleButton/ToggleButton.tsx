@@ -16,11 +16,10 @@ const ToggleButton: React.FC<Props> = React.memo(
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
   }) => {
-    const { setIsUserTracksLoading, clearUserTracks, tracks } = useStore(
-      ({ setIsUserTracksLoading, clearUserTracks, tracks }) => ({
+    const { setIsUserTracksLoading, clearUserTracks } = useStore(
+      ({ setIsUserTracksLoading, clearUserTracks }) => ({
         setIsUserTracksLoading,
         clearUserTracks,
-        tracks,
       }),
     );
 
@@ -41,10 +40,7 @@ const ToggleButton: React.FC<Props> = React.memo(
         "
       >
         <label className="cursor-pointer">
-          <button
-            disabled={!tracks?.length}
-            onClick={() => handleChange(false)}
-          />
+          <button onClick={() => handleChange(false)} />
           <span
             className={`
               transition-all
@@ -77,10 +73,7 @@ const ToggleButton: React.FC<Props> = React.memo(
         </label>
 
         <label className="cursor-pointer">
-          <button
-            disabled={!tracks?.length}
-            onClick={() => handleChange(true)}
-          />
+          <button onClick={() => handleChange(true)} />
           <span
             className={`
               transition-all

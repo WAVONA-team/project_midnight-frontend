@@ -1,17 +1,19 @@
 import React from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { useStore } from '@/store';
 
 import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
 import { ShuffleButton } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 
-type Props = {
-  title: string;
-};
+const TrackPageControls: React.FC = React.memo(() => {
+  const { isFavouriteTracksLoading } = useStore(
+    ({ isFavouriteTracksLoading }) => ({
+      isFavouriteTracksLoading,
+    }),
+  );
 
-const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
   return (
     <Container
       className="
@@ -21,16 +23,9 @@ const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
         lg:flex-row
       "
     >
-      <AnimatePresence>
-        <motion.div
-          className="mr-5 xl:mr-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.h1
-            className="
+      <div className="mr-5 xl:mr-20">
+        <h1
+          className="
             font-rubik
             font-semibold
             text-2xl
@@ -40,15 +35,10 @@ const TrackPageControls: React.FC<Props> = React.memo(({ title }) => {
             lg:font-normal
             lg:font-3xl
           "
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {title}
-          </motion.h1>
-        </motion.div>
-      </AnimatePresence>
+        >
+          {isFavouriteTracksLoading ? 'Все треки' : 'Избранные'}
+        </h1>
+      </div>
 
       <div
         className="
