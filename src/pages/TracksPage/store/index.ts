@@ -29,7 +29,12 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
       isFavourite: false,
     },
   ) => {
-    const { query, sortType, order, isFavourite } = filterOptions;
+    const {
+      query = '',
+      sortType = 'updatedAt',
+      order = 'desc',
+      isFavourite = false,
+    } = filterOptions;
 
     return await httpClient
       .get<Track[]>(

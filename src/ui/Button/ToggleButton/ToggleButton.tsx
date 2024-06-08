@@ -39,71 +39,71 @@ const ToggleButton: React.FC<Props> = React.memo(
           text-nowrap
         "
       >
-        <label className="cursor-pointer">
-          <button onClick={() => handleChange(false)} />
+        <button
+          className={`
+            transition-all
+            duration-200
+            flex
+            outline-none
+            items-center
+            rounded-l
+            px-6
+            py-3
+            text-sm
+            font-medium
+            focus:outline-none
+            ${!isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+          `}
+          onClick={() => handleChange(false)}
+        >
           <span
             className={`
+              ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
               transition-all
               duration-200
-              flex
-              items-center
-              rounded-l
-              px-6
-              py-3
+              text-on-primary-lavender-blush
+              font-rubik
+              font-normal
               text-sm
-              font-medium
-              ${!isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
-              `}
+              tracking-wide
+            `}
           >
-            <p
-              className={`
-                ${isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
-                transition-all
-                duration-200
-                text-on-primary-lavender-blush
-                font-rubik
-                font-normal
-                text-sm
-                tracking-wide
-              `}
-            >
-              {leftTitle}
-            </p>
+            {leftTitle}
           </span>
-        </label>
+        </button>
 
-        <label className="cursor-pointer">
-          <button onClick={() => handleChange(true)} />
+        <button
+          className={`
+            transition-all
+            duration-200
+            flex
+            outline-none
+            items-center
+            rounded-r
+            px-6
+            py-3
+            text-sm
+            font-medium
+            focus:outline-none
+            ${isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
+          `}
+          onClick={() => handleChange(true)}
+        >
           <span
             className={`
+              ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
               transition-all
               duration-200
-              flex
-              items-center
-              rounded-r
-              px-6
-              py-3
+              text-on-primary-lavender-blush
+              font-rubik
+              font-normal
               text-sm
-              font-medium
-              ${isFavouriteTracksLoading ? 'bg-surface-eerie_black sm:bg-primary-madder' : 'bg-[transparent] sm:bg-secondary-eerie-black-light'}
-              `}
+              tracking-wide
+            `}
           >
-            <p
-              className={`
-                ${!isFavouriteTracksLoading && 'text-secondary-cadet-gray'}
-                transition-all
-                duration-200
-                text-on-primary-lavender-blush
-                font-rubik
-                font-normal
-                text-sm
-                tracking-wide
-              `}
-            >
-              {rightTitle}
-            </p>
+            {rightTitle}
           </span>
-        </label>
+        </button>
       </div>
     );
   },
