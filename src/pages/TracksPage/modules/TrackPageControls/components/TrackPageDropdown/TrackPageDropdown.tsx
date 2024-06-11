@@ -126,7 +126,6 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           sm:py-0
           shadow-[16px_-16px_16px_0px_#0C0D0B80]
           "
-          isOpen={isOpen}
           modalOnCloseHandler={modalOnCloseHandler}
         >
           {sortControls.map((control) => (

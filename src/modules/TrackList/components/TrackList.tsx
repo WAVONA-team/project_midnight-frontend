@@ -107,14 +107,14 @@ const TrackList: React.FC<Props> = React.memo(
           <Container>
             <h2
               className="
-            font-rubik
-            font-semibold
-            text-secondary-cadet-gray
-            text-2xl
-            sm:text-2xl
-            lg:text-xl
-            tracking-wide
-          "
+                font-rubik
+                font-semibold
+              text-secondary-cadet-gray
+                text-2xl
+                sm:text-2xl
+                lg:text-xl
+                tracking-wide
+              "
             >
               {header}
             </h2>

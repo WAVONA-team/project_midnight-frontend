@@ -128,17 +128,17 @@ const TrackAddition: React.FC = memo(() => {
 
         <h2
           className="
-          mb-6
+            mb-6
           text-[white]
-          font-rubik
-          font-semibold
-          text-[22px]
-          tracking-wider
-          lg:mb-0
-          lg:font-openSans
-          lg:text-[28px]
-          lg:font-normal
-        "
+            font-rubik
+            font-semibold
+            text-[22px]
+            tracking-wider
+            lg:mb-0
+            lg:font-openSans
+            lg:text-[28px]
+            lg:font-normal
+          "
         >
           Добавление трека
         </h2>
