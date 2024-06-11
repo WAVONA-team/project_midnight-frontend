@@ -15,6 +15,7 @@ const TracksContainer: React.FC = React.memo(() => {
     currentPage,
     totalTracks,
     setTracks,
+    isFavouriteTracksLoading,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ const TracksContainer: React.FC = React.memo(() => {
       currentPage,
       setTracks,
       totalTracks,
+      isFavouriteTracksLoading,
     }) => ({
       user,
       isUserTracksLoading,
@@ -36,27 +38,31 @@ const TracksContainer: React.FC = React.memo(() => {
       currentPage,
       setTracks,
       totalTracks,
+      isFavouriteTracksLoading,
     }),
   );
 
+  const isFavourite = isFavouriteTracksLoading;
+
   useEffect(() => {
     if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage).then((tracks) =>
-        setTracks(tracks),
-      );
+      getTracksByUser(user!.id, currentPage, {
+        query: '',
+        sortType: 'updatedAt',
+        order: 'desc',
+        isFavourite,
+      }).then((tracks) => setTracks(tracks));
     }
   }, [isUserTracksLoading]);
 
   return (
-    !!userTracks.length && (
-      <TrackList
-        tracks={userTracks}
-        isLoading={isUserTracksLoading || isQueryTracksLoading}
-        setIsLoading={setIsUserTracksLoading}
-        totalTracks={totalTracks}
-        header="У вас пока нет добавленных треков :("
-      />
-    )
+    <TrackList
+      tracks={userTracks}
+      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      setIsLoading={setIsUserTracksLoading}
+      totalTracks={totalTracks}
+      header="У вас пока нет добавленных треков :("
+    />
   );
 });
 

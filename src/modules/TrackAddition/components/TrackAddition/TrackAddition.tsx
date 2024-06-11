@@ -142,7 +142,7 @@ const TrackAddition: React.FC = memo(() => {
             exit={{ display: 'none' }}
             transition={{ duration: 0.2 }}
           >
-            <Spinner width="w-12" height="h-12" />
+            <Spinner className="relative bg-surface-eerie_black" />
           </motion.div>
         )}
       </AnimatePresence>
