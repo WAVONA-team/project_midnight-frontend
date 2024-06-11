@@ -36,6 +36,10 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
   };
 
   const modalOnBlurHandler = () => {
+    if (showModal) setShowModal(false);
+  };
+
+  const modalOnCloseHandler = () => {
     setShowModal(false);
   };
 
@@ -44,7 +48,7 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
       showModal,
       selectedTrack,
       childElement,
-      setShowModal,
+      modalOnCloseHandler,
       handlerTracksModal,
       modalOnBlurHandler,
     };
@@ -52,7 +56,7 @@ const useHandlerModal = (tracks: Track | Track[] | null) => {
 
   return {
     showModal,
-    setShowModal,
+    modalOnCloseHandler,
     childElement,
     handlerTrackModal,
     modalOnBlurHandler,

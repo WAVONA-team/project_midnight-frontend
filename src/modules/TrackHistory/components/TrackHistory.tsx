@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { modalActionButtons } from '@/common/constants';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
+import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
@@ -12,8 +12,11 @@ import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 
+const { ShareButton } = modalButtons;
+
 export const TrackHistory: React.FC = React.memo(() => {
   const [isTrackSave, setIsTrackSave] = useState(false);
+
   const {
     userSearchHistory,
     updateHistoryOrder,
@@ -47,7 +50,7 @@ export const TrackHistory: React.FC = React.memo(() => {
   const {
     modalOnBlurHandler,
     handlerTracksModal,
-    setShowModal,
+    modalOnCloseHandler,
     showModal,
     selectedTrack,
     childElement,
@@ -65,8 +68,12 @@ export const TrackHistory: React.FC = React.memo(() => {
         .then(() => {
           setIsTrackSave(false);
         })
-        .catch(() => setIsTrackSave(true));
-      if (handlerTracksModal) handlerTracksModal(e);
+        .catch(() => {
+          setIsTrackSave(true);
+        })
+        .finally(() => {
+          handlerTracksModal!(e);
+        });
     }
   };
 
@@ -110,22 +117,14 @@ export const TrackHistory: React.FC = React.memo(() => {
       <Portal openPortal={showModal} element={childElement}>
         <TrackModal
           showModal={showModal}
-          setShowModal={setShowModal}
+          modalOnCloseHandler={modalOnCloseHandler!}
           actionButtons={
             <>
-              {modalActionButtons
-                .filter((button) =>
-                  isTrackSave ? button.id !== 3 : button.id !== 2,
-                )
-                .map((button) => {
-                  return (
-                    <Menu.Item
-                      as={button.button}
-                      selectedTrack={selectedTrack!}
-                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                    />
-                  );
-                })}
+              <Menu.Item
+                as={ShareButton}
+                selectedTrack={selectedTrack!}
+                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+              />
             </>
           }
           trackAuthor={selectedTrack! && selectedTrack.author}

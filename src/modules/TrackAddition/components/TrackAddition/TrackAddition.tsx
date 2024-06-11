@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { modalActionButtons } from '@/common/constants';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
@@ -11,6 +10,7 @@ import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { getUrl } from '@/modules/TrackAddition/helpers';
+import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
@@ -22,8 +22,11 @@ import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
+const { ShareButton } = modalButtons;
+
 const TrackAddition: React.FC = memo(() => {
   const [isTrackSave, setIsTrackSave] = useState(false);
+
   const {
     user,
     parsedTrack,
@@ -84,7 +87,7 @@ const TrackAddition: React.FC = memo(() => {
   const {
     modalOnBlurHandler,
     handlerTrackModal,
-    setShowModal,
+    modalOnCloseHandler,
     showModal,
     childElement,
   } = useHandlerModal(parsedTrack);
@@ -95,13 +98,15 @@ const TrackAddition: React.FC = memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && e.trackId) {
-      checkTrack(e.trackId, user?.id)
+    if (user && parsedTrack) {
+      checkTrack(parsedTrack?.id, user?.id)
         .then(() => {
           setIsTrackSave(false);
         })
-        .catch(() => setIsTrackSave(true));
-      if (handlerTrackModal) handlerTrackModal(e);
+        .catch(() => setIsTrackSave(true))
+        .finally(() => {
+          handlerTrackModal!(e);
+        });
     }
   };
 
@@ -237,22 +242,14 @@ const TrackAddition: React.FC = memo(() => {
       <Portal openPortal={showModal} element={childElement}>
         <TrackModal
           showModal={showModal}
-          setShowModal={setShowModal}
+          modalOnCloseHandler={modalOnCloseHandler!}
           actionButtons={
             <>
-              {modalActionButtons
-                .filter((button) =>
-                  isTrackSave ? button.id !== 3 : button.id !== 2,
-                )
-                .map((button) => {
-                  return (
-                    <Menu.Item
-                      as={button.button}
-                      selectedTrack={parsedTrack!}
-                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                    />
-                  );
-                })}
+              <Menu.Item
+                as={ShareButton}
+                selectedTrack={parsedTrack!}
+                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+              />
             </>
           }
           trackAuthor={parsedTrack && parsedTrack.author}

@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 
 import dot from '@/../public/dot.svg';
+import kebab from '@/../public/kebab/kebab.svg';
 import { useStore } from '@/store';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
-
-import kebab from '@/assets/kebab/kebab.svg';
 
 type Props = {
   isDesktop?: boolean;
@@ -111,7 +110,7 @@ const TrackInfo: React.FC<Props> = React.memo(
             >
               <button
                 type="button"
-                className="flex gap-1 w-6 h-6"
+                className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
                 onMouseDown={handlerKebabFocus}
               >
                 <img src={kebab} alt="kebab" />
@@ -181,7 +180,7 @@ const TrackInfo: React.FC<Props> = React.memo(
             >
               <button
                 type="button"
-                className="flex gap-1 w-6 h-6 "
+                className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
                 onMouseDown={handlerKebabFocus}
               >
                 <img src={kebab} alt="kebab" />

@@ -86,6 +86,10 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     setIsOpen(false);
   };
 
+  const modalOnCloseHandler = () => {
+    setIsOpen(false);
+  };
+
   const handlerButtonFocus = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
@@ -123,7 +127,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           shadow-[16px_-16px_16px_0px_#0C0D0B80]
           "
           isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          modalOnCloseHandler={modalOnCloseHandler}
         >
           {sortControls.map((control) => (
             <Menu.Item

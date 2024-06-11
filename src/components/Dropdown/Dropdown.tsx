@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import cross from '@/../public/cross/cross.svg';
 import { Menu } from '@headlessui/react';
@@ -10,13 +10,12 @@ type Props = {
   title?: React.ReactNode;
   headerItem?: React.ReactNode;
   className?: string;
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalOnCloseHandler: () => void;
   width?: string;
 };
 
 const Dropdown: React.FC<Props> = React.memo(
-  ({ children, title, headerItem, className = '', isOpen, setIsOpen }) => {
+  ({ children, title, headerItem, className = '', modalOnCloseHandler }) => {
     return (
       <motion.div
         initial={{
@@ -26,36 +25,35 @@ const Dropdown: React.FC<Props> = React.memo(
           opacity: 1,
         }}
         transition={{
-          duration: 0.01,
-          ease: 'easeInOut',
+          duration: 0.2,
         }}
         exit={{
           opacity: 0,
         }}
-        className={`${isOpen ? 'fixed opacity-100 sm:static' : 'opacity-0'} 
+        className={`
+          fixed
+          sm:static
           z-20 
-          transition-all 
-          duration-200 
           left-0 
           top-0 
           w-full 
           h-full 
         bg-surface-eerie_black/60  
           `}
-        onClick={() => setIsOpen(false)}
+        onClick={modalOnCloseHandler}
       >
         <motion.div
           className={`${className}
-          fixed
-          bottom-0
-          right-0
-          w-full
-          rounded-t-xl
-          flex-col
-          bg-surface-eerie_black
-          h-fit
-          sm:rounded-xl
-          z-20
+            fixed
+            bottom-0
+            right-0
+            w-full
+            rounded-t-xl
+            flex-col
+            bg-surface-eerie_black
+            h-fit
+            sm:rounded-xl
+            z-20
           `}
           initial={{
             opacity: 0,
@@ -64,8 +62,7 @@ const Dropdown: React.FC<Props> = React.memo(
             opacity: 1,
           }}
           transition={{
-            duration: 0.06,
-            ease: 'easeInOut',
+            duration: 0.1,
           }}
           exit={{
             opacity: 0,
@@ -84,11 +81,11 @@ const Dropdown: React.FC<Props> = React.memo(
               )}
             >
               {title}
-              <img src={cross} alt="cross" onClick={() => setIsOpen(false)} />
+              <img src={cross} alt="cross" onClick={modalOnCloseHandler} />
             </div>
             {headerItem}
           </div>
-          <Menu.Items onClick={() => setIsOpen(false)} as="div" static>
+          <Menu.Items onClick={modalOnCloseHandler} as="div" static>
             {children}
           </Menu.Items>
         </motion.div>

@@ -11,6 +11,7 @@ type Props = {
 
 const Portal: FC<Props> = ({ element, children, openPortal }) => {
   const [currentElem, setCurrentElem] = useState<HTMLElement>();
+  const [isOpenPortal, setIsOpenPortal] = useState<boolean | undefined>(false);
 
   useLayoutEffect(() => {
     if (element) {
@@ -18,10 +19,15 @@ const Portal: FC<Props> = ({ element, children, openPortal }) => {
     }
   }, [element]);
 
+  useLayoutEffect(() => {
+    openPortal ? setIsOpenPortal(true) : setIsOpenPortal(false);
+  }, [openPortal]);
+
   return (
+    currentElem === element &&
     currentElem &&
     createPortal(
-      <AnimatePresence>{openPortal && children}</AnimatePresence>,
+      <AnimatePresence>{isOpenPortal && children}</AnimatePresence>,
       currentElem,
     )
   );

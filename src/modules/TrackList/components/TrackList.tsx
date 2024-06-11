@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 
-import { modalActionButtons } from '@/common/constants';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
+import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -23,6 +23,8 @@ type Props = {
   currentPage: number;
   header?: string;
 };
+
+const { ShareButton } = modalButtons;
 
 const TrackList: React.FC<Props> = React.memo(
   ({
@@ -62,11 +64,15 @@ const TrackList: React.FC<Props> = React.memo(
     const {
       modalOnBlurHandler,
       handlerTracksModal,
-      setShowModal,
+      modalOnCloseHandler,
       showModal,
       selectedTrack,
       childElement,
     } = useHandlerModal(tracks);
+
+    useEffect(() => {
+      return () => changeCurrentTrack(null);
+    }, []);
 
     useEffect(() => {
       if (isLoading) {
@@ -151,18 +157,14 @@ const TrackList: React.FC<Props> = React.memo(
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal
             showModal={showModal}
-            setShowModal={setShowModal}
+            modalOnCloseHandler={modalOnCloseHandler!}
             actionButtons={
               <>
-                {modalActionButtons.map((button) => {
-                  return (
-                    <Menu.Item
-                      as={button.button}
-                      selectedTrack={selectedTrack!}
-                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                    />
-                  );
-                })}
+                <Menu.Item
+                  as={ShareButton}
+                  selectedTrack={selectedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
               </>
             }
             trackAuthor={selectedTrack! && selectedTrack.author}

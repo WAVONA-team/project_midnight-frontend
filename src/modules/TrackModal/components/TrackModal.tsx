@@ -8,7 +8,7 @@ import DropdownTrackInfo from './DropdownTrackInfo';
 
 type Props = {
   showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modalOnCloseHandler: () => void;
   trackAuthor: string | null;
   trackImgUrl: string | null;
   trackTitle: string | null;
@@ -18,7 +18,7 @@ type Props = {
 
 const TrackModal: FC<Props> = ({
   showModal,
-  setShowModal,
+  modalOnCloseHandler,
   trackAuthor,
   trackImgUrl,
   trackTitle,
@@ -62,8 +62,7 @@ const TrackModal: FC<Props> = ({
                 sm:py-0
                 shadow-[16px_-16px_16px_0px_#0C0D0B80]
                 "
-        isOpen={showModal}
-        setIsOpen={setShowModal}
+        modalOnCloseHandler={modalOnCloseHandler}
       >
         {actionButtons}
       </Dropdown>
