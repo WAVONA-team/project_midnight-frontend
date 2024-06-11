@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import { useStore } from '@/store';
 import debounce from 'lodash.debounce';
@@ -10,8 +10,6 @@ import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
 const TrackPageHeader: React.FC = React.memo(() => {
-  const [value, setValue] = useState<string>('');
-
   const {
     user,
     getTracksByUser,
@@ -20,6 +18,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
     clearUserTracks,
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
+    query,
+    setQuery,
+    setIsQueryTracksLoading,
   } = useStore(
     ({
       user,
@@ -29,6 +30,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
       clearUserTracks,
       isFavouriteTracksLoading,
       setIsFavouriteTracksLoading,
+      query,
+      setQuery,
+      setIsQueryTracksLoading,
     }) => ({
       user,
       getTracksByUser,
@@ -37,6 +41,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
       clearUserTracks,
       isFavouriteTracksLoading,
       setIsFavouriteTracksLoading,
+      query,
+      setQuery,
+      setIsQueryTracksLoading,
     }),
   );
 
@@ -53,12 +60,14 @@ const TrackPageHeader: React.FC = React.memo(() => {
   ]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    clearUserTracks();
+    setIsQueryTracksLoading(true);
+    setQuery(e.target.value);
     debouncedGet(e.target.value);
   };
 
   const clearValueHandler = () => {
-    setValue('');
+    setQuery('');
     clearUserTracks();
 
     getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
@@ -76,7 +85,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
             className={'lg:max-w-[398px] col-span-3'}
             clearValue={clearValueHandler}
             placeholder="Название, исполнитель..."
-            value={value}
+            value={query}
             onChange={onChangeHandler}
           />
         </div>

@@ -17,6 +17,7 @@ export const Search: React.FC = React.memo(() => {
     query,
     setQuery,
     setTracks,
+    setIsQueryTracksLoading,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setTracks,
+      setIsQueryTracksLoading,
     }) => ({
       user,
       getTracksByUser,
@@ -34,6 +36,7 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setTracks,
+      setIsQueryTracksLoading,
     }),
   );
 
@@ -51,6 +54,8 @@ export const Search: React.FC = React.memo(() => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    clearUserTracks();
+    setIsQueryTracksLoading(true);
     debouncedGet(e.target.value);
   };
 

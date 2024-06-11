@@ -15,10 +15,11 @@ type Props = {
   tracks: Track[];
   totalTracks: number;
   header?: string;
+  headerCondition?: boolean;
 };
 
 const TrackList: React.FC<Props> = React.memo(
-  ({ isLoading, setIsLoading, tracks, totalTracks, header }) => {
+  ({ isLoading, setIsLoading, tracks, totalTracks, header, headerCondition = true }) => {
     const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
       useStore(
         ({
@@ -62,18 +63,18 @@ const TrackList: React.FC<Props> = React.memo(
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+        {!isLoading && !tracks.length && headerCondition && (
           <Container>
             <h2
               className="
-            font-rubik
-            font-semibold
-            text-secondary-cadet-gray
-            text-2xl
-            sm:text-2xl
-            lg:text-xl
-            tracking-wide
-          "
+                font-rubik
+                font-semibold
+                text-secondary-cadet-gray
+                text-2xl
+                sm:text-2xl
+                lg:text-xl
+                tracking-wide
+              "
             >
               {header}
             </h2>
@@ -108,8 +109,8 @@ const TrackList: React.FC<Props> = React.memo(
         </AnimatePresence>
 
         {isLoading && (
-          <Container>
-            <Spinner className="relative bg-surface-eerie_black" />
+          <Container className="flex justify-center">
+            <Spinner />
           </Container>
         )}
       </div>
