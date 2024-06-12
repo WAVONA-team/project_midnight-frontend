@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import logo from '../../../public/logo.svg';
 
@@ -17,23 +17,8 @@ const Logo: React.FC<Props> = React.memo(
     textSize = 'text-3xl lg:text-5xl',
     directionPathname = '/tracks',
   }) => {
-    const location = useLocation();
-
-    const checkPathname = (
-      pathname: string,
-      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    ) => {
-      if (pathname === '/') event.preventDefault();
-      if (pathname === '/login') event.preventDefault();
-      if (pathname === '/register') event.preventDefault();
-    };
-
     return (
-      <Link
-        onClick={(event) => checkPathname(location.pathname, event)}
-        to={directionPathname}
-        className={`${(location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/') && 'cursor-default'}`}
-      >
+      <Link to={directionPathname}>
         <div className={`${className} flex items-center gap-2`}>
           <img src={logo} alt="Logo" className={`${logoWidth}`} />
 

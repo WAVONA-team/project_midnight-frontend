@@ -21,7 +21,7 @@ export const RegistrationPage: React.FC = React.memo(() => {
     >
       <main className="lg:grid lg:grid-cols-2 items-center">
         <Container>
-          <Logo className="hidden lg:flex" />
+          <Logo className="hidden lg:flex" directionPathname="/register" />
         </Container>
 
         <RegistrationForm />
