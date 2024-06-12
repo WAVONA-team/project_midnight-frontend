@@ -157,6 +157,7 @@ const TrackAddition: React.FC = memo(() => {
               error={errors.url?.message}
               className="mb-8 max-w-sm lg:mb-12"
               onChange={(event) => {
+                clearErrors('url');
                 onChange(event.target.value);
                 clearErrors('url');
 
