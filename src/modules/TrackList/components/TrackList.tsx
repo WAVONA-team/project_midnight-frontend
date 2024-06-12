@@ -119,7 +119,7 @@ const TrackList: React.FC<Props> = React.memo(
               className="
                 font-rubik
                 font-semibold
-                text-secondary-cadet-gray
+              text-secondary-cadet-gray
                 text-2xl
                 sm:text-2xl
                 lg:text-xl
