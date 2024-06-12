@@ -34,41 +34,26 @@ const TrackList: React.FC<Props> = React.memo(
     header,
     headerCondition = true,
   }) => {
-    const {
-      currentTrack,
-      changeCurrentTrack,
-      changePlayerState,
-      playerState,
-      user,
-      getTracksByUser,
-      currentPage,
-      setTracks,
-    } = useStore(
-      ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
-        user,
-        getTracksByUser,
-        currentPage,
-        setTracks,
-      }) => ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
-        user,
-        getTracksByUser,
-        currentPage,
-        setTracks,
-      }),
-    );
+    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
+      useStore(
+        ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }) => ({
+          currentTrack,
+          changeCurrentTrack,
+          changePlayerState,
+          playerState,
+        }),
+      );
 
     const handleTrack = (track: Track) => {
       changeCurrentTrack(track);
       changePlayerState(track.url === currentTrack?.url ? !playerState : true);
     };
+
     const {
       modalOnBlurHandler,
       handlerTracksModal,
@@ -81,14 +66,6 @@ const TrackList: React.FC<Props> = React.memo(
     useEffect(() => {
       return () => changeCurrentTrack(null);
     }, []);
-
-    useEffect(() => {
-      if (isLoading) {
-        getTracksByUser(user!.id, currentPage).then((tracks) =>
-          setTracks(tracks),
-        );
-      }
-    }, [isLoading]);
 
     const scrollHandler = useCallback(() => {
       if (
