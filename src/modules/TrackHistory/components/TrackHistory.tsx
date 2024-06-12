@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
@@ -85,35 +86,43 @@ export const TrackHistory: React.FC = React.memo(() => {
   }, [showModal]);
 
   return (
-    <div className="mt-8">
+    <div>
       <Container>
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
           История Поиска
         </h2>
       </Container>
       <div className="flex flex-col gap-3 mt-3">
-        {userSearchHistory?.map((track) => (
-          <TrackInfo
-            key={track.id}
-            id={track.id}
-            name={track.title}
-            artist={track.author as string}
-            provider={track.source}
-            duration={track.duration}
-            imgUrl={track.imgUrl as string}
-            isPlay={currentTrack?.url === track.url}
-            handlerPlay={() => {
-              changeCurrentTrack(track);
-              changePlayerState(
-                currentTrack?.url !== track.url ? true : !playerState,
-              );
+        <AnimatePresence>
+          {userSearchHistory?.map((track) => (
+            <motion.div
+              key={track.id}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TrackInfo
+                name={track.title}
+                artist={track.author as string}
+                provider={track.source}
+                duration={track.duration}
+                imgUrl={track.imgUrl as string}
+                isPlay={currentTrack?.url === track.url}
+                handlerPlay={() => {
+                  changeCurrentTrack(track);
+                  changePlayerState(
+                    currentTrack?.url !== track.url ? true : !playerState,
+                  );
 
-              updateHistoryOrder(track.id);
-            }}
-            handlerModal={handlerProtectedModal!}
-            modalOnBlurHandler={modalOnBlurHandler}
-          />
-        ))}
+                  updateHistoryOrder(track.id);
+                }}
+                handlerModal={handlerProtectedModal!}
+                modalOnBlurHandler={modalOnBlurHandler}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <Portal openPortal={showModal} element={childElement}>
         <TrackModal

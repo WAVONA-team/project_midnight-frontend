@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import ReactPlayer from '@/lib/ReactPlayer';
 
@@ -78,6 +79,7 @@ const TrackAddition: React.FC = memo(() => {
     watch,
     control,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -94,7 +96,7 @@ const TrackAddition: React.FC = memo(() => {
   } = useHandlerModal(parsedTrack);
 
   const newTrackRef = useRef<ReactPlayer>(null);
-  const debounceValue = useDebounce(watch('url'), 600);
+  const debounceValue = useDebounce(watch('url'), 500);
 
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
@@ -155,7 +157,9 @@ const TrackAddition: React.FC = memo(() => {
               error={errors.url?.message}
               className="mb-8 max-w-sm lg:mb-12"
               onChange={(event) => {
+                clearErrors('url');
                 onChange(event.target.value);
+                clearErrors('url');
 
                 if (!event.target.value.length) {
                   clearParsedTrack();
@@ -169,87 +173,127 @@ const TrackAddition: React.FC = memo(() => {
         />
       </Container>
 
-      {isParsedTrackLoading && <Spinner />}
+      <AnimatePresence>
+        {isParsedTrackLoading && (
+          <motion.div
+            className="flex justify-center"
+            initial={{ display: 'none' }}
+            animate={{ display: 'flex' }}
+            exit={{ display: 'none' }}
+            transition={{ duration: 0.2 }}
+          >
+            <Spinner className="relative" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {parsedTrack && !isParsedTrackLoading && (
         <>
           <div className="xl:hidden">
-            <TrackInfo
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={handlerProtectedModal!}
-              modalOnBlurHandler={modalOnBlurHandler}
-            />
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10, display: 'none' }}
+                transition={{ duration: 0.2 }}
+              >
+                <TrackInfo
+                  artist={parsedTrack.author as string}
+                  name={parsedTrack.title}
+                  provider={parsedTrack.source}
+                  duration={parsedTrackDuration || parsedTrack.duration}
+                  imgUrl={parsedTrack.imgUrl as string}
+                  isPlay={parsedTrack.url === currentTrack?.url}
+                  handlerPlay={() => {
+                    changeCurrentTrack(parsedTrack);
+                    changePlayerState(!playerState);
+                  }}
+                  handlerModal={handlerProtectedModal!}
+                  modalOnBlurHandler={modalOnBlurHandler}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <div className="hidden xl:block">
-            <TrackInfo
-              isDesktop={true}
-              artist={parsedTrack.author as string}
-              name={parsedTrack.title}
-              provider={parsedTrack.source}
-              duration={parsedTrackDuration || parsedTrack.duration}
-              imgUrl={parsedTrack.imgUrl as string}
-              isPlay={parsedTrack.url === currentTrack?.url}
-              handlerPlay={() => {
-                changeCurrentTrack(parsedTrack);
-                changePlayerState(!playerState);
-              }}
-              handlerModal={handlerProtectedModal!}
-              modalOnBlurHandler={modalOnBlurHandler}
-            />
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, y: -10, display: 'none' }}
+                animate={{ opacity: 1, y: 0, display: 'block' }}
+                exit={{ opacity: 0, y: -10, display: 'none' }}
+                transition={{ duration: 0.2, delay: 0.1 }}
+              >
+                <TrackInfo
+                  isDesktop={true}
+                  artist={parsedTrack.author as string}
+                  name={parsedTrack.title}
+                  provider={parsedTrack.source}
+                  duration={parsedTrackDuration || parsedTrack.duration}
+                  imgUrl={parsedTrack.imgUrl as string}
+                  isPlay={parsedTrack.url === currentTrack?.url}
+                  handlerPlay={() => {
+                    changeCurrentTrack(parsedTrack);
+                    changePlayerState(!playerState);
+                  }}
+                  handlerModal={handlerProtectedModal!}
+                  modalOnBlurHandler={modalOnBlurHandler}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </>
       )}
 
-      <ReactPlayer
-        url={getUrl(debounceValue)}
-        onReady={() => {
-          const duration = format(newTrackRef.current?.getDuration() as number);
+      <AnimatePresence>
+        <ReactPlayer
+          url={getUrl(debounceValue)}
+          onReady={() => {
+            const duration = format(
+              newTrackRef.current?.getDuration() as number,
+            );
 
-          if (duration === '0:00') {
-            setParsedTrackDuration(null);
-          } else {
-            setParsedTrackDuration(duration);
-          }
+            if (duration === '0:00') {
+              setParsedTrackDuration(null);
+            } else {
+              setParsedTrackDuration(duration);
+            }
 
-          parseTrack(debounceValue, user?.id as string, duration)
-            .then((track) => setParsedTrackDuration(track.duration))
-            .catch(({ formErrors }) => {
-              setError('url', {
-                message: formErrors,
+            parseTrack(debounceValue, user?.id as string, duration)
+              .then((track) => setParsedTrackDuration(track.duration))
+              .catch(({ formErrors }) => {
+                setError('url', {
+                  message: formErrors,
+                });
               });
-            });
 
-          setIsParsedTrackLoading(false);
-        }}
-        ref={newTrackRef}
-        onError={() =>
-          setError('url', {
-            message: 'Некорректный формат. Попробуйте снова',
-          })
-        }
-        width="0"
-        height="0"
-      />
+            setIsParsedTrackLoading(true);
+          }}
+          ref={newTrackRef}
+          onError={() =>
+            setError('url', {
+              message: 'Некорректный формат. Попробуйте снова',
+            })
+          }
+          width="0"
+          height="0"
+          style={{
+            display: 'none',
+            transition: 'all',
+            transitionDuration: '0.2s',
+          }}
+        />
+      </AnimatePresence>
+
       <Portal openPortal={showModal} element={childElement}>
         <TrackModal
           showModal={showModal}
-          modalOnCloseHandler={modalOnCloseHandler!}
+          modalOnCloseHandler={modalOnCloseHandler}
           actionButtons={
             <>
               <Menu.Item
                 as={ShareButton}
                 selectedTrack={parsedTrack!}
-                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
               />
             </>
           }

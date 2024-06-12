@@ -1,15 +1,26 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useStore } from '@/store';
 
 import { MainButtonLink } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 import { Logo } from '@/ui/Logo';
 
 export const HomePage: React.FC = React.memo(() => {
+  const { user } = useStore(({ user }) => ({
+    user,
+  }));
+
+  if (user) {
+    return <Navigate to="/tracks" replace />;
+  }
+
   return (
     <div
       className="
         app
-        h-screen
+        h-dvh
         bg-[url('/home_bg_mobile.webp')]
         lg:bg-[url('/home_bg_desktop.webp')]
         bg-no-repeat
@@ -29,6 +40,7 @@ export const HomePage: React.FC = React.memo(() => {
 
         <main
           className="
+            h-fit
             row-start-1
             row-end-2
             flex

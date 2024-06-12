@@ -1,11 +1,19 @@
 import React from 'react';
 
+import { useStore } from '@/store';
+
 import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
 import { ShuffleButton } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
+  const { isFavouriteTracksLoading } = useStore(
+    ({ isFavouriteTracksLoading }) => ({
+      isFavouriteTracksLoading,
+    }),
+  );
+
   return (
     <Container
       className="
@@ -28,7 +36,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          Сохраненные треки
+          {isFavouriteTracksLoading ? 'Все треки' : 'Избранные'}
         </h1>
       </div>
 

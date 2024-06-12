@@ -34,41 +34,43 @@ const SearchInput: React.FC<Props> = React.memo(
           </p>
         )}
 
-        <img
-          src={searchIcon}
-          alt="search"
-          className="absolute top-[10px] left-4"
-        />
+        <div className="relative mt-7">
+          <img
+            src={searchIcon}
+            alt="search"
+            className="absolute top-[10px] left-4"
+          />
 
-        {!!value.length && (
-          <button type="button" onClick={clearValue}>
-            <img
-              src={clearIcon}
-              alt="clear"
-              className="absolute top-9 right-4"
-            />
-          </button>
-        )}
-
-        <input
-          className={classNames(
-            `
-            mt-7
-            pr-4
-            pl-11
-            py-2
-            ${inputClassnames.input}
-            `,
-            {
-              'border-error-imperial-red': error,
-              'border-secondary-eerie-black-light': !error,
-            },
+          {!!value.length && (
+            <button
+              type="button"
+              onClick={clearValue}
+              className="absolute top-2 right-4"
+            >
+              <img src={clearIcon} alt="clear" />
+            </button>
           )}
-          type="search"
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
+
+          <input
+            className={classNames(
+              `
+              mt-7
+              pr-4
+              pl-11
+              py-2
+              ${inputClassnames.input}
+            `,
+              {
+                'border-error-imperial-red': error,
+                'border-secondary-eerie-black-light': !error,
+              },
+            )}
+            type="search"
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+          />
+        </div>
       </label>
     );
   },

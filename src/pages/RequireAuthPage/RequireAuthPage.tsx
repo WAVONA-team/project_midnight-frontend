@@ -22,8 +22,10 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   return (
     <div
       className="
+        h-dvh
         grid
-        grid-rows-[1fr_min-content]
+        grid-rows-[1fr_max-content]
+        lg:h-fit
         lg:grid-cols-[min-content_1fr]
         lg:grid-rows-none
       "
@@ -33,7 +35,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
       <main className="order-1 lg:order-0">
         {children || <Outlet />}
         {currentTrack && (
-          <div className="sticky bottom-0 z-10">
+          <div className="sticky z-10 bottom-14 lg:bottom-0">
             <Controls />
           </div>
         )}

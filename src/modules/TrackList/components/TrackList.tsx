@@ -16,12 +16,11 @@ import { Spinner } from '@/ui/Spinner';
 
 type Props = {
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
+  setIsLoading: (state: boolean) => void;
   tracks: Track[];
   totalTracks: number;
-  getTracks: (userId: string, page: number) => Promise<Track[]>;
-  currentPage: number;
   header?: string;
+  headerCondition?: boolean;
 };
 
 const { ShareButton } = modalButtons;
@@ -29,38 +28,47 @@ const { ShareButton } = modalButtons;
 const TrackList: React.FC<Props> = React.memo(
   ({
     isLoading,
+    setIsLoading,
     tracks,
     totalTracks,
-    getTracks,
-    currentPage,
-    setIsLoading,
     header,
+    headerCondition = true,
   }) => {
     const {
       currentTrack,
       changeCurrentTrack,
-      playerState,
       changePlayerState,
+      playerState,
       user,
+      getTracksByUser,
+      currentPage,
       setTracks,
     } = useStore(
       ({
         currentTrack,
         changeCurrentTrack,
-        playerState,
         changePlayerState,
+        playerState,
         user,
+        getTracksByUser,
+        currentPage,
         setTracks,
       }) => ({
         currentTrack,
         changeCurrentTrack,
-        playerState,
         changePlayerState,
+        playerState,
         user,
+        getTracksByUser,
+        currentPage,
         setTracks,
       }),
     );
 
+    const handleTrack = (track: Track) => {
+      changeCurrentTrack(track);
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    };
     const {
       modalOnBlurHandler,
       handlerTracksModal,
@@ -76,7 +84,9 @@ const TrackList: React.FC<Props> = React.memo(
 
     useEffect(() => {
       if (isLoading) {
-        getTracks(user!.id, currentPage).then((tracks) => setTracks(tracks));
+        getTracksByUser(user!.id, currentPage).then((tracks) =>
+          setTracks(tracks),
+        );
       }
     }, [isLoading]);
 
@@ -89,7 +99,7 @@ const TrackList: React.FC<Props> = React.memo(
       ) {
         setIsLoading(true);
       }
-    }, [tracks, totalTracks]);
+    }, [tracks.length, totalTracks, setIsLoading]);
 
     useEffect(() => {
       document.addEventListener('scroll', scrollHandler);
@@ -103,7 +113,7 @@ const TrackList: React.FC<Props> = React.memo(
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && (
+        {!isLoading && !tracks.length && headerCondition && (
           <Container>
             <h2
               className="
@@ -122,7 +132,7 @@ const TrackList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {tracks && (
+          {(tracks || !isLoading) && (
             <div>
               {tracks.map((track) => (
                 <motion.div
@@ -136,12 +146,7 @@ const TrackList: React.FC<Props> = React.memo(
                     id={track.id}
                     artist={track.author as string}
                     name={track.title}
-                    handlerPlay={() => {
-                      changeCurrentTrack(track);
-                      changePlayerState(
-                        track.url === currentTrack?.url ? !playerState : true,
-                      );
-                    }}
+                    handlerPlay={() => handleTrack(track)}
                     handlerModal={handlerTracksModal!}
                     modalOnBlurHandler={modalOnBlurHandler}
                     duration={track.duration}
@@ -154,6 +159,7 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
+
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal
             showModal={showModal}
@@ -175,11 +181,8 @@ const TrackList: React.FC<Props> = React.memo(
         </Portal>
 
         {isLoading && (
-          <Container>
-            <Spinner
-              className="relative"
-              backgroundColor="bg-surface-eerie_black"
-            />
+          <Container className="flex justify-center">
+            <Spinner />
           </Container>
         )}
       </div>

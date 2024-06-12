@@ -9,6 +9,11 @@ export const LoadingPage: React.FC = React.memo(() => {
         h-screen
         w-screen
         bg-background-hight
+      "
+    >
+      <div
+        className="flex
+        h-full
         relative
         after:content-['']
         after:block
@@ -18,19 +23,14 @@ export const LoadingPage: React.FC = React.memo(() => {
         after:bg-gradient-to-br
         after:from-primary-fire-brick
         after:opacity-20
-        after:z-10
-      "
-    >
-      <Spinner
-        width="w-12"
-        height="h-12"
-        thicknessWidth="w-9"
-        thicknessHeight="h-9"
-      />
+        after:z-10 items-center justify-center"
+      >
+        <Spinner className="mr-5" width="w-12" height="h-12" />
 
-      <p className="block w-full text-center absolute z-20 top-1/2 left-1/2 -translate-x-1/2 translate-y-12 font-rubik font-semibold text-on-primary-lavender-blush text-base">
-        Подождите, идет загрузка
-      </p>
+        <p className="font-rubik font-semibold text-on-primary-lavender-blush text-base">
+          Подождите, идет загрузка
+        </p>
+      </div>
     </div>
   );
 });
