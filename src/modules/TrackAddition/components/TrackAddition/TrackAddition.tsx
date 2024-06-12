@@ -25,6 +25,7 @@ import { Spinner } from '@/ui/Spinner';
 const { ShareButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isTrackSave, setIsTrackSave] = useState(false);
 
   const {

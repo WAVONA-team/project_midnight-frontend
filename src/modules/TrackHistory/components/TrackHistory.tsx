@@ -15,6 +15,7 @@ import { Container } from '@/ui/Container';
 const { ShareButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isTrackSave, setIsTrackSave] = useState(false);
 
   const {
