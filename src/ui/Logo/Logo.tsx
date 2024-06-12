@@ -7,6 +7,7 @@ type Props = {
   className?: string;
   logoWidth?: string;
   textSize?: string;
+  directionPathname?: string;
 };
 
 const Logo: React.FC<Props> = React.memo(
@@ -14,6 +15,7 @@ const Logo: React.FC<Props> = React.memo(
     className = '',
     logoWidth = 'w-10 lg:w-14',
     textSize = 'text-3xl lg:text-5xl',
+    directionPathname = '/tracks',
   }) => {
     const location = useLocation();
 
@@ -29,7 +31,7 @@ const Logo: React.FC<Props> = React.memo(
     return (
       <Link
         onClick={(event) => checkPathname(location.pathname, event)}
-        to="/tracks"
+        to={directionPathname}
         className={`${(location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/') && 'cursor-default'}`}
       >
         <div className={`${className} flex items-center gap-2`}>
