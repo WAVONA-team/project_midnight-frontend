@@ -26,9 +26,9 @@ export const Controls: React.FC = React.memo(() => {
         flex-col-reverse
         lg:block
         bg-surface-eerie_black
-        lg:backdrop-filter
-        lg:backdrop-blur-lg
-        lg:bg-opacity-90
+        backdrop-filter
+        backdrop-blur-lg
+        bg-opacity-70
         lg:rounded-lg
         lg:w-11/12
         lg:left-1/2
