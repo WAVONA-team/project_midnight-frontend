@@ -17,6 +17,6 @@ export { default as ShuffleButton } from './ShuffleButton/ShuffleButton';
 
 export { default as PlayButton } from './PlayButton/PlayButton';
 
-export { default as TrackShareButton } from './MenuButton/TrackShareButton/TrackShareButton';
+export { default as TrackShareButton } from '../../modules/TrackModal/components/buttons/TrackShareButton/TrackShareButton';
 export { default as MenuButton } from './MenuButton/MenuButton';
 export { default as SortButton } from './SortButton/SortButton';

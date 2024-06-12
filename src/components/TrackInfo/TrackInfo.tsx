@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
+import dot from '@/../public/dot.svg';
+import kebab from '@/../public/kebab/kebab.svg';
 import { useStore } from '@/store';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
 import Streamline from '@/ui/Streamline/Streamline';
 
-import dot from '../../../public/dot.svg';
-
 type Props = {
   isDesktop?: boolean;
+  id?: string;
   name: string;
-  artist: string;
+  artist: string | null;
   provider: string;
   imgUrl: string;
   duration: string;
   isPlay: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
-  handlerModal: React.MouseEventHandler<HTMLButtonElement>;
+
+  handlerModal: (
+    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+  ) => void;
+  modalOnBlurHandler: () => void;
 };
 
 const TrackInfo: React.FC<Props> = React.memo(
   ({
     isDesktop = false,
+    id,
     name,
     artist,
     provider,
@@ -31,8 +37,32 @@ const TrackInfo: React.FC<Props> = React.memo(
     isPlay,
     handlerPlay,
     handlerModal,
+    modalOnBlurHandler,
   }) => {
     const { playerState } = useStore(({ playerState }) => ({ playerState }));
+    const ref = useRef(null);
+
+    const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (id) {
+        const customEvent = {
+          ...e,
+          trackId: id,
+        };
+        handlerModal(customEvent);
+      } else {
+        handlerModal(e);
+      }
+    };
+
+    const handlerKebabFocus = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (ref.current) {
+        (ref.current as HTMLDivElement).focus();
+      }
+    };
 
     return isDesktop ? (
       <div className="px-20">
@@ -72,47 +102,20 @@ const TrackInfo: React.FC<Props> = React.memo(
               <PlayButton />
             </div>
 
-            <button
-              type="button"
-              className="flex gap-1 focus:outline-none focus-visible:outline-none w-6 h-6"
-              onClick={handlerModal}
+            <div
+              className="relative "
+              onClick={handlerModalEvent}
+              onBlur={modalOnBlurHandler}
+              tabIndex={0}
             >
-              <svg
-                width="24"
-                height="25"
-                viewBox="0 0 24 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <button
+                type="button"
+                className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
+                onMouseDown={handlerKebabFocus}
               >
-                <rect
-                  x="18"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-                <rect
-                  x="10.5"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-                <rect
-                  x="3"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </button>
+                <img src={kebab} alt="kebab" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -123,8 +126,7 @@ const TrackInfo: React.FC<Props> = React.memo(
           className={classNames(
             'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2',
             {
-              'bg-background-trackInfo':
-                isPlay && playerState,
+              'bg-background-trackInfo': isPlay && playerState,
             },
           )}
         >
@@ -169,47 +171,21 @@ const TrackInfo: React.FC<Props> = React.memo(
             onClick={(e) => e.stopPropagation()}
             className="flex flex-1 justify-end items-center lg:justify-center cursor-pointer "
           >
-            <button
-              type="button"
-              className="flex gap-1 focus:outline-none focus-visible:outline-none w-6 h-6"
-              onClick={handlerModal}
+            <div
+              className="relative"
+              onClick={handlerModalEvent}
+              onBlur={modalOnBlurHandler}
+              tabIndex={0}
+              ref={ref}
             >
-              <svg
-                width="24"
-                height="25"
-                viewBox="0 0 24 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <button
+                type="button"
+                className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
+                onMouseDown={handlerKebabFocus}
               >
-                <rect
-                  x="18"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-                <rect
-                  x="10.5"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-                <rect
-                  x="3"
-                  y="11.1678"
-                  width="3"
-                  height="3"
-                  rx="1"
-                  stroke="#A09F9F"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </button>
+                <img src={kebab} alt="kebab" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

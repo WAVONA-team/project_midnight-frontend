@@ -11,6 +11,8 @@ import {
 
 import { type UserState, createUserSlice } from '@/modules/Authorization/store';
 import { type PlayerState, createPlayerSlice } from '@/modules/Player/store';
+import { trackActionsSlice } from '@/modules/TrackActions';
+import { TrackActionsState } from '@/modules/TrackActions/store/types.ts';
 import {
   type TrackAdditionState,
   parseTrackSlice,
@@ -26,7 +28,8 @@ export const useStore = create<
     TrackAdditionState &
     userSearchHistoryState &
     TracksPageState &
-    TracksSearchPageState
+    TracksSearchPageState &
+    TrackActionsState
 >((...a) => ({
   ...createUserSlice(...a),
   ...createPlayerSlice(...a),
@@ -34,4 +37,5 @@ export const useStore = create<
   ...userSearchHistorySlice(...a),
   ...tracksPageSlice(...a),
   ...tracksSearchPageSlice(...a),
+  ...trackActionsSlice(...a),
 }));

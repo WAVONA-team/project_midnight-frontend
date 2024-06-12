@@ -1,9 +1,14 @@
 import React, { useCallback, useEffect } from 'react';
 
 import { useStore } from '@/store';
+import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
+import { modalButtons } from '@/modules/TrackModal';
+import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
+
+import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
@@ -18,27 +23,72 @@ type Props = {
   headerCondition?: boolean;
 };
 
+const { ShareButton } = modalButtons;
+
 const TrackList: React.FC<Props> = React.memo(
-  ({ isLoading, setIsLoading, tracks, totalTracks, header, headerCondition = true }) => {
-    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
-      useStore(
-        ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }) => ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }),
-      );
+  ({
+    isLoading,
+    setIsLoading,
+    tracks,
+    totalTracks,
+    header,
+    headerCondition = true,
+  }) => {
+    const {
+      currentTrack,
+      changeCurrentTrack,
+      changePlayerState,
+      playerState,
+      user,
+      getTracksByUser,
+      currentPage,
+      setTracks,
+    } = useStore(
+      ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        user,
+        getTracksByUser,
+        currentPage,
+        setTracks,
+      }) => ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        user,
+        getTracksByUser,
+        currentPage,
+        setTracks,
+      }),
+    );
 
     const handleTrack = (track: Track) => {
       changeCurrentTrack(track);
       changePlayerState(track.url === currentTrack?.url ? !playerState : true);
     };
+    const {
+      modalOnBlurHandler,
+      handlerTracksModal,
+      modalOnCloseHandler,
+      showModal,
+      selectedTrack,
+      childElement,
+    } = useHandlerModal(tracks);
+
+    useEffect(() => {
+      return () => changeCurrentTrack(null);
+    }, []);
+
+    useEffect(() => {
+      if (isLoading) {
+        getTracksByUser(user!.id, currentPage).then((tracks) =>
+          setTracks(tracks),
+        );
+      }
+    }, [isLoading]);
 
     const scrollHandler = useCallback(() => {
       if (
@@ -93,10 +143,12 @@ const TrackList: React.FC<Props> = React.memo(
                   transition={{ duration: 0.3 }}
                 >
                   <TrackInfo
+                    id={track.id}
                     artist={track.author as string}
                     name={track.title}
                     handlerPlay={() => handleTrack(track)}
-                    handlerModal={() => {}}
+                    handlerModal={handlerTracksModal!}
+                    modalOnBlurHandler={modalOnBlurHandler}
                     duration={track.duration}
                     provider={track.source}
                     imgUrl={track.imgUrl!}
@@ -107,6 +159,26 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
+
+        <Portal openPortal={showModal} element={childElement}>
+          <TrackModal
+            showModal={showModal}
+            modalOnCloseHandler={modalOnCloseHandler!}
+            actionButtons={
+              <>
+                <Menu.Item
+                  as={ShareButton}
+                  selectedTrack={selectedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+              </>
+            }
+            trackAuthor={selectedTrack! && selectedTrack.author}
+            trackImgUrl={selectedTrack! && selectedTrack.imgUrl}
+            trackTitle={selectedTrack! && selectedTrack.title}
+            trackSource={selectedTrack! && selectedTrack.source}
+          />
+        </Portal>
 
         {isLoading && (
           <Container className="flex justify-center">
