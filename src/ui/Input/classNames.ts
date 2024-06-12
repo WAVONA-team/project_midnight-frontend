@@ -19,5 +19,6 @@ export const classNames = {
   icon: `
     absolute
     top-[65px]
+    focus:outline-none
   `,
 };
