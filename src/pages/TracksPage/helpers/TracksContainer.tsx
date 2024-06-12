@@ -16,6 +16,7 @@ const TracksContainer: React.FC = React.memo(() => {
     totalTracks,
     setTracks,
     isFavouriteTracksLoading,
+    clearUserTracks,
   } = useStore(
     ({
       user,
@@ -28,6 +29,7 @@ const TracksContainer: React.FC = React.memo(() => {
       setTracks,
       totalTracks,
       isFavouriteTracksLoading,
+      clearUserTracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -39,10 +41,17 @@ const TracksContainer: React.FC = React.memo(() => {
       setTracks,
       totalTracks,
       isFavouriteTracksLoading,
+      clearUserTracks,
     }),
   );
 
   const isFavourite = isFavouriteTracksLoading;
+
+  useEffect(() => {
+    setIsUserTracksLoading(true);
+
+    return () => clearUserTracks();
+  }, []);
 
   useEffect(() => {
     if (isUserTracksLoading) {
