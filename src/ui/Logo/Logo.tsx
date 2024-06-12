@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../../../public/logo.svg';
 
@@ -14,16 +15,23 @@ const Logo: React.FC<Props> = React.memo(
     logoWidth = 'w-10 lg:w-14',
     textSize = 'text-3xl lg:text-5xl',
   }) => {
-    return (
-      <div className={`${className} flex items-center gap-2`}>
-        <img src={logo} alt="Logo" className={`${logoWidth}`} />
+    const location = useLocation();
 
-        <p
-          className={`${textSize} font-ubuntu text-on-primary-anti-flash-white font-medium`}
-        >
-          Midnight
-        </p>
-      </div>
+    return (
+      <Link
+        to={location.pathname !== '/login' ? '/tracks' : ''}
+        className={`${location.pathname === '/login' && 'cursor-default'}`}
+      >
+        <div className={`${className} flex items-center gap-2`}>
+          <img src={logo} alt="Logo" className={`${logoWidth}`} />
+
+          <p
+            className={`${textSize} font-ubuntu text-on-primary-anti-flash-white font-medium`}
+          >
+            Midnight
+          </p>
+        </div>
+      </Link>
     );
   },
 );
