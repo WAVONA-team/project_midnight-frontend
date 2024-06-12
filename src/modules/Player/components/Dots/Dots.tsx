@@ -25,24 +25,25 @@ export const Dots: React.FC = React.memo(() => {
       <button type="button" onClick={openMenu} className="focus:outline-none">
         <DotsIcon active={isOpen} />
       </button>
+
       <Menu as="div" className="relative ">
-        <Dropdown className="" isOpen={isOpen} setIsOpen={openMenu}>
+        <Dropdown className="" modalOnCloseHandler={() => {}}>
           <div
             className="
-            bg-surface-eerie_black
-          w-[370px]
-          right-5
-          bottom-20
-          absolute
-          shadow-dropdown-bottom-shadow
-          z-10"
+              bg-surface-eerie_black
+              w-[370px]
+              right-5
+              bottom-20
+              absolute
+              shadow-dropdown-bottom-shadow
+              z-10
+            "
           >
             <TrackSaveOnMainButton className="" />
             <AddToPlaylist className="rounded-none" />
             <AddToQueueButton className="rounded-none" />
             <TrackShareButton
-              trackName={currentTrack?.title || ''}
-              trackUrl={currentTrack?.url || ''}
+              selectedTrack={currentTrack!}
               className="rounded-none"
             />
             <DeleteTrackButton className="" />

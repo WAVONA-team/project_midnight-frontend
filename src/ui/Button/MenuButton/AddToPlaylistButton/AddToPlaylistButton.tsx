@@ -8,21 +8,24 @@ type Props = {
   className?: string;
 };
 
-const AddToPlaylistButton: React.FC<Props> = React.memo(({ className }) => {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+const AddToPlaylistButton: React.FC<Props> = React.memo(
+  React.forwardRef(({ className }, ref) => {
+    const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const addToPlaylist = async () => {
-    setIsClicked(true);
-  };
+    const addToPlaylist = async () => {
+      setIsClicked(true);
+    };
 
-  return (
-    <MenuButton
-      title={isClicked ? 'Добавлено в плейлист!' : 'Добавить в плейлист'}
-      icon={addToPlaylistIcon}
-      className={`${className} whitespace-nowrap` }
-      handler={addToPlaylist}
-    />
-  );
-});
+    return (
+      <MenuButton
+        ref={ref as React.ForwardedRef<HTMLButtonElement>}
+        title={isClicked ? 'Добавлено в плейлист!' : 'Добавить в плейлист'}
+        icon={addToPlaylistIcon}
+        className={`${className} whitespace-nowrap`}
+        handler={addToPlaylist}
+      />
+    );
+  }),
+);
 
 export default AddToPlaylistButton;

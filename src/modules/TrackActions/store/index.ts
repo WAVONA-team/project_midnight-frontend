@@ -6,10 +6,10 @@ import { ServerErrors } from '@/shared/types/ServerErrors.ts';
 
 import { TrackActionsState } from './types.ts';
 
-export const trackActionsSlice: StateCreator<TrackActionsState> = (set) => ({
+export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   checkTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .get<Track>('check-track', { trackId, userId })
+      .get<Track>(`check-track/${userId}/${trackId}`)
       .then((res) => {
         return res.data as Track;
       })
