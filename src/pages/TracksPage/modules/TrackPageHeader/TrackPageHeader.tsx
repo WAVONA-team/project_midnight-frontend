@@ -80,9 +80,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
       </div>
 
       <div className="flex justify-between flex-col pt-8 sm:flex-row">
-        <div className="overflow-hidden hidden sm:block">
+        <div className="w-full overflow-hidden hidden lg:block">
           <SearchInput
-            className={'lg:max-w-[398px] col-span-3'}
+            className={'lg:max-w-[398px] mr-3 col-span-3'}
             clearValue={clearValueHandler}
             placeholder="Название, исполнитель..."
             value={query}

@@ -36,7 +36,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {isFavouriteTracksLoading ? 'Все треки' : 'Избранные'}
+          {isFavouriteTracksLoading ? 'Избранные' : 'Все треки'}
         </h1>
       </div>
 

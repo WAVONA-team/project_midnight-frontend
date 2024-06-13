@@ -53,7 +53,7 @@ export const HomePage: React.FC = React.memo(() => {
             items-start
           "
         >
-          <Logo className="md:mt-10" />
+          <Logo className="md:mt-10" directionPathname="/" />
 
           <h1 className="font-openSans text-on-primary-anti-flash-white text-4xl lg:text-6xl">
             Слушайте треки со всех площадок в одном месте
