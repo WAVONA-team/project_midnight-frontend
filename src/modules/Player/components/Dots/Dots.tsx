@@ -13,6 +13,8 @@ import DeleteTrackButton from '@/ui/Button/MenuButton/DeleteTrackButton/DeleteTr
 import TrackSaveOnMainButton from '@/ui/Button/MenuButton/TrackSaveOnMainButton/TrackSaveOnMainButton';
 import DotsIcon from '@/ui/icons/DotsIcon/DotsIcon';
 
+import { classNamesBase } from './classNames';
+
 export const Dots: React.FC = React.memo(() => {
   const { currentTrack } = useStore(({ currentTrack }) => ({
     currentTrack,
@@ -55,37 +57,36 @@ export const Dots: React.FC = React.memo(() => {
           <Dropdown
             className="
               sm:right-0
-              sm:top-8
-              sm:w-[254px]
-              sm:absolute
+              sm:bottom-10
+              sm:min-w-[265px]
+              sm:absolute        
               py-4
               sm:py-0
               shadow-[16px_-16px_16px_0px_#0C0D0B80]
             "
             modalOnCloseHandler={() => setIsOpen(false)}
           >
-            <Menu.Item as="div">
-              <TrackSaveOnMainButton className="" />
-            </Menu.Item>
-
-            <Menu.Item as="div">
-              <AddToPlaylist className="rounded-none" />
-            </Menu.Item>
-
-            <Menu.Item as="div">
-              <AddToQueueButton className="rounded-none" />
-            </Menu.Item>
-
-            <Menu.Item as="div">
-              <TrackShareButton
-                selectedTrack={currentTrack!}
-                className="rounded-none"
-              />
-            </Menu.Item>
-
-            <Menu.Item as="div">
-              <DeleteTrackButton className="" />
-            </Menu.Item>
+            <Menu.Item
+              as={TrackSaveOnMainButton}
+              className={classNamesBase.modalItemButtons}
+            />
+            <Menu.Item
+              as={AddToPlaylist}
+              className={classNamesBase.modalItemButtons}
+            />
+            <Menu.Item
+              as={AddToQueueButton}
+              className={classNamesBase.modalItemButtons}
+            />
+            <Menu.Item
+              as={TrackShareButton}
+              selectedTrack={currentTrack!}
+              className={classNamesBase.modalItemButtons}
+            />
+            <Menu.Item
+              as={DeleteTrackButton}
+              className={classNamesBase.modalItemButtons}
+            />
           </Dropdown>
         </Portal>
       </Menu>
