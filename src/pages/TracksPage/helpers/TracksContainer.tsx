@@ -14,8 +14,12 @@ const TracksContainer: React.FC = React.memo(() => {
     getTracksByUser,
     currentPage,
     totalTracks,
+    order,
+    query,
+    sortType,
     setTracks,
     clearUserTracks,
+    isFiltering,
   } = useStore(
     ({
       user,
@@ -28,6 +32,10 @@ const TracksContainer: React.FC = React.memo(() => {
       setTracks,
       totalTracks,
       clearUserTracks,
+      query,
+      isFiltering,
+      order,
+      sortType,
     }) => ({
       user,
       isUserTracksLoading,
@@ -39,6 +47,10 @@ const TracksContainer: React.FC = React.memo(() => {
       setTracks,
       totalTracks,
       clearUserTracks,
+      isFiltering,
+      query,
+      order,
+      sortType,
     }),
   );
 
@@ -49,12 +61,12 @@ const TracksContainer: React.FC = React.memo(() => {
   }, []);
 
   useEffect(() => {
-    if (isUserTracksLoading) {
-      getTracksByUser(user!.id, currentPage).then((tracks) =>
+    if (isUserTracksLoading || isFiltering) {
+      getTracksByUser(user!.id, currentPage, {query:query, order: order, sortType: sortType}).then((tracks) =>
         setTracks(tracks),
       );
     }
-  }, [isUserTracksLoading]);
+  }, [isUserTracksLoading, isFiltering]);
 
   return (
     (!isUserTracksLoading || !isQueryTracksLoading) && (
