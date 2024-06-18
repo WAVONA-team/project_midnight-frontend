@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
+import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
+import { Track } from 'project_midnight';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
@@ -9,10 +11,33 @@ import { MenuButton, SortButton } from '@/ui/Button';
 
 import alphaSortIcon from '../../../../../../../public/buttons/actionButtons/alphaSortIcon.svg';
 import dateSortIcon from '../../../../../../../public/buttons/actionButtons/dateSortIcon.svg';
-import defaultSortIcon from '../../../../../../../public/buttons/actionButtons/defaultSortIcon.svg';
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
+  const {
+    setCurrentPage,
+    setOrder,
+    setSortType,
+    clearUserTracks,
+    setIsUserTracksLoading,
+    setIsFiltering,
+  } = useStore(
+    ({
+      setCurrentPage,
+      setOrder,
+      setSortType,
+      clearUserTracks,
+      setIsUserTracksLoading,
+      setIsFiltering,
+    }) => ({
+      setCurrentPage,
+      setOrder,
+      setSortType,
+      clearUserTracks,
+      setIsUserTracksLoading,
+      setIsFiltering,
+    }),
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
@@ -34,37 +59,39 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   const sortControls = [
     {
       id: 1,
-      title: 'По умолчанию',
-      icon: defaultSortIcon,
-      handler: (id: number) => sortHandler(id),
+      title: 'По дате загрузки',
+      icon: dateSortIcon,
+      handler: (title: string) => setSortingInfo(title, 'createdAt', 'desc'),
     },
     {
       id: 2,
-      title: 'По дате загрузки',
-      icon: dateSortIcon,
-      handler: (id: number) => sortHandler(id),
+      title: 'По алфавиту',
+      icon: alphaSortIcon,
+      handler: (titles: string) => setSortingInfo(titles, 'title', 'asc'),
     },
     {
       id: 3,
-      title: 'По алфавиту',
-      icon: alphaSortIcon,
-      handler: (id: number) => sortHandler(id),
-    },
-    {
-      id: 4,
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: (id: number) => sortHandler(id),
+      handler: (title: string) => setSortingInfo(title, 'source', 'desc'),
     },
   ];
 
   const [currentTitle, setCurrentTitle] = useState<string>(
     sortControls[0].title,
   );
-
-  const sortHandler = (id: number) => {
-    const control = sortControls.find((control) => control.id === id);
-    setCurrentTitle(control!.title);
+  const setSortingInfo = (
+    title: string,
+    sortType: keyof Track,
+    order: 'desc' | 'asc',
+  ) => {
+    setIsUserTracksLoading(true);
+    setIsFiltering(true);
+    clearUserTracks();
+    setCurrentPage(1);
+    setSortType(sortType);
+    setOrder(order);
+    setCurrentTitle(title);
     setIsOpen(!isOpen);
   };
 
@@ -133,7 +160,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
             <Menu.Item
               as={MenuButton}
               key={control.title}
-              handler={() => control.handler(control.id)}
+              handler={() => control.handler(control.title)}
               icon={control.icon}
               title={control.title}
               className="
