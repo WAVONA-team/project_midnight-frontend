@@ -68,9 +68,12 @@ const TracksContainer: React.FC = React.memo(() => {
   useEffect(() => {
     if (isUserTracksLoading || isFiltering) {
       getTracksByUser(user!.id, currentPage, {query:query, order: order, sortType: sortType}).then((tracks) =>
+    if (isUserTracksLoading || isFiltering) {
+      getTracksByUser(user!.id, currentPage, {query:query, order: order, sortType: sortType}).then((tracks) =>
         setTracks(tracks),
       );
     }
+  }, [isUserTracksLoading, isFiltering]);
   }, [isUserTracksLoading, isFiltering]);
 
   return (
