@@ -17,6 +17,7 @@ const TracksContainer: React.FC = React.memo(() => {
     setTracks,
     isFavouriteTracksLoading,
     clearUserTracks,
+    query,
   } = useStore(
     ({
       user,
@@ -30,6 +31,7 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserTracks,
+      query,
     }) => ({
       user,
       isUserTracksLoading,
@@ -42,6 +44,7 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserTracks,
+      query,
     }),
   );
 
@@ -70,7 +73,11 @@ const TracksContainer: React.FC = React.memo(() => {
       isLoading={isUserTracksLoading || isQueryTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
-      header="У вас пока нет добавленных треков :("
+      header={
+        query.length
+          ? 'Трек не найден :('
+          : 'У вас пока нет добавленных треков :('
+      }
     />
   );
 });
