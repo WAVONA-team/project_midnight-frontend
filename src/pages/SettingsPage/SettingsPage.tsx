@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useStore } from '@/store';
+
+import ExitModalContent from '@/pages/SettingsPage/components/ExitModalContent.tsx';
 
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 
 import arrowIcon from '../../../public/arrows/arrowIcon.svg';
+import Modal from '../../ui/Modal/Modal.tsx';
 
 export const SettingsPage: React.FC = React.memo(() => {
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
   const { logout, setTracks, changePlayerState, changeCurrentTrack } = useStore(
     ({ logout, setTracks, changePlayerState, changeCurrentTrack }) => ({
       logout,
@@ -23,6 +28,16 @@ export const SettingsPage: React.FC = React.memo(() => {
     changePlayerState(false);
     changeCurrentTrack(null);
     logout();
+  };
+
+  const enableModal = () => {
+    setIsModalActive(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const disableModal = () => {
+    setIsModalActive(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -109,11 +124,18 @@ export const SettingsPage: React.FC = React.memo(() => {
             text-start
             focus:outline-none
           "
-            onClick={logoutHandler}
+            onClick={enableModal}
           >
             <span>Выйти</span>
           </button>
         </div>
+
+        <Modal isModalActive={isModalActive} disableModal={disableModal}>
+          <ExitModalContent
+            disableModal={disableModal}
+            exitHandler={logoutHandler}
+          />
+        </Modal>
       </div>
     </Container>
   );
