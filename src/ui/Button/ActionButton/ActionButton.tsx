@@ -1,16 +1,15 @@
 import React from 'react';
 
-import shuffleIcon from '../../../../public/buttons/playerButtons/shuffleIcon.svg';
-
 type Props = {
-  title: string;
+  icon: string;
+  title?: string;
   className?: string;
   disabled?: boolean;
   handler: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const ShuffleButton: React.FC<Props> = React.memo(
-  ({ title, className, disabled = false, handler = () => {} }) => {
+const ActionButton: React.FC<Props> = React.memo(
+  ({ icon, title, className = '', disabled = false, handler = () => {} }) => {
     return (
       <button
         onClick={handler}
@@ -39,8 +38,9 @@ const ShuffleButton: React.FC<Props> = React.memo(
           md:focus:border-secondary-picton-blue
           md:hover:border-background-hight
           disabled:bg-secondary-cadet-gray
-          disabled:cursor-not-allowed
           disabled:shadow-button-default
+          disabled:hover:bg-secondary-cadet-gray
+          disabled:active:shadow-button-default
           sm:bg-primary-poppy
           sm:py-1.5
           sm:px-4
@@ -52,7 +52,7 @@ const ShuffleButton: React.FC<Props> = React.memo(
         `}
       >
         <div className="flex">
-          <img className={title && 'mr-4'} src={shuffleIcon} alt="shuffle" />
+          <img className="mr-2" src={icon} alt="Play/Pause" />
           <span>{title}</span>
         </div>
       </button>
@@ -60,4 +60,4 @@ const ShuffleButton: React.FC<Props> = React.memo(
   },
 );
 
-export default ShuffleButton;
+export default ActionButton;
