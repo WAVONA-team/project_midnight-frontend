@@ -1,13 +1,14 @@
 import React from 'react';
 
 import {
+  Dots,
+  IsFavouriteButton,
   LoopButton,
   TimeRange,
   TrackControlButtons,
+  TrackInformation,
   VolumeChanger,
 } from '@/modules/Player/components';
-import { Dots } from '@/modules/Player/components/Dots/Dots';
-import { TrackInformation } from '@/modules/Player/components/TrackInformation/TrackInformation';
 
 import { PlayButton } from '@/ui/Button';
 
@@ -38,11 +39,15 @@ export const Controls: React.FC = React.memo(() => {
     >
       <TimeRange />
 
-      <div className="grid max-sm:grid-cols-4 md:grid-cols-[1fr_min-content] lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
+      <div className="grid grid-cols-[1fr_24px_40px] gap-x-5 lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
         <TrackInformation />
 
-        <div className="lg:hidden flex justify-end w-full">
-          <PlayButton />
+        <div className="lg:hidden">
+          <IsFavouriteButton />
+        </div>
+
+        <div className="lg:hidden w-full h-10">
+          <PlayButton className="w-full h-full" />
         </div>
 
         <div className="hidden lg:block">
@@ -51,6 +56,7 @@ export const Controls: React.FC = React.memo(() => {
 
         <div className="lg:flex justify-end w-full hidden gap-6">
           <VolumeChanger />
+          <IsFavouriteButton />
           <LoopButton />
           <Dots />
         </div>

@@ -15,7 +15,7 @@ const DropdownTrackInfo: FC<Props> = ({ name, artist, provider, imgUrl }) => {
           src={imgUrl}
           alt="Cover"
           className="w-full h-full object-cover rounded-[4px]"
-        ></img>
+        />
       </div>
       <div className=" font-rubik font-normal text-start  overflow-hidden text-ellipsis whitespace-nowrap  flex-0 basis-[60%] ">
         <p className="block text-sm text-on-primary-anti-flash-white ">
