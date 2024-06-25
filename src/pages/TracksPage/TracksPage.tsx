@@ -3,14 +3,10 @@ import React from 'react';
 import { useStore } from '@/store';
 
 import TracksContainer from '@/pages/TracksPage/helpers/TracksContainer.tsx';
-// import { useNavigate } from 'react-router-dom';
 import TrackPageControls from '@/pages/TracksPage/modules/TrackPageControls/TrackPageControls';
 import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPageHeader';
 
-// import { MainButton } from '@/ui/Button';
-
 export const TracksPage: React.FC = React.memo(() => {
-  // const navigate = useNavigate();
   const { currentTrack } = useStore(({ currentTrack }) => ({
     currentTrack,
   }));
@@ -31,13 +27,6 @@ export const TracksPage: React.FC = React.memo(() => {
         <TrackPageControls />
       </div>
       <TracksContainer />
-      {/*<div>*/}
-      {/*  <MainButton*/}
-      {/*    className="sm:max-w-[285px] z-0"*/}
-      {/*    title="Добавить"*/}
-      {/*    handler={() => navigate('/tracks/new')}*/}
-      {/*  />*/}
-      {/*</div>*/}
     </div>
   );
 });

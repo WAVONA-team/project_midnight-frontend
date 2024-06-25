@@ -12,6 +12,7 @@ import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import { MainButtonLink } from '@/ui/Button';
 import { Container } from '@/ui/Container';
 import { Spinner } from '@/ui/Spinner';
 
@@ -20,7 +21,6 @@ type Props = {
   setIsLoading: (state: boolean) => void;
   tracks: Track[];
   totalTracks: number;
-  header?: string;
   headerCondition?: boolean;
 };
 
@@ -32,7 +32,6 @@ const TrackList: React.FC<Props> = React.memo(
     setIsLoading,
     tracks,
     totalTracks,
-    header,
     headerCondition = true,
   }) => {
     const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
@@ -93,19 +92,17 @@ const TrackList: React.FC<Props> = React.memo(
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
         {!isLoading && !tracks.length && headerCondition && (
           <Container>
-            <h2
-              className="
-                font-rubik
-                font-semibold
-              text-secondary-cadet-gray
-                text-2xl
-                sm:text-2xl
-                lg:text-xl
-                tracking-wide
-              "
-            >
-              {header}
-            </h2>
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="font-openSans text-2xl font-normal mb-4">
+                Здесь пока нет ни одного трека
+              </h1>
+              <p className="font-rubik text-base font-normal text-on-secondary-dim-gray mb-5">
+                Добавьте любимые треки прямо сейчас
+              </p>
+              <div>
+                <MainButtonLink title="Добавить трек" path="/tracks/new" />
+              </div>
+            </div>
           </Container>
         )}
 

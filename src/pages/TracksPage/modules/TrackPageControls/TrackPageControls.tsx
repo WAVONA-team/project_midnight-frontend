@@ -1,18 +1,49 @@
 import React from 'react';
 
+import pauseIcon from '@/../public/buttons/playerButtons/mainPagePauseIcon.svg';
+import playIcon from '@/../public/buttons/playerButtons/mainPagePlayIcon.svg';
 import { useStore } from '@/store';
+import { Track } from 'project_midnight';
 
 import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
 
-import { ShuffleButton } from '@/ui/Button';
+import ActionButton from '@/ui/Button/ActionButton/ActionButton.tsx';
 import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
-  const { isFavouriteTracksLoading } = useStore(
-    ({ isFavouriteTracksLoading }) => ({
+  const {
+    isFavouriteTracksLoading,
+    changeCurrentTrack,
+    changePlayerState,
+    currentTrack,
+    playerState,
+    tracks,
+  } = useStore(
+    ({
       isFavouriteTracksLoading,
+      changeCurrentTrack,
+      changePlayerState,
+      currentTrack,
+      playerState,
+      tracks,
+    }) => ({
+      isFavouriteTracksLoading,
+      changeCurrentTrack,
+      changePlayerState,
+      currentTrack,
+      playerState,
+      tracks,
     }),
   );
+
+  const favouriteTracks = tracks?.filter((track) => track.isFavourite);
+
+  console.log(currentTrack?.playlist);
+
+  const handleTrack = (track: Track) => {
+    changeCurrentTrack(track);
+    changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+  };
 
   return (
     <Container
@@ -20,10 +51,9 @@ const TrackPageControls: React.FC = React.memo(() => {
         flex
         flex-col
         mb-12
-        lg:flex-row
       "
     >
-      <div className="mr-5 xl:mr-20">
+      <div className="mr-5 mb-6 xl:mr-20">
         <h1
           className="
             font-rubik
@@ -36,7 +66,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {isFavouriteTracksLoading ? 'Избранные' : 'Все треки'}
+          {isFavouriteTracksLoading ? 'Избранные' : 'Сохраненные треки'}
         </h1>
       </div>
 
@@ -50,7 +80,17 @@ const TrackPageControls: React.FC = React.memo(() => {
           items-center
         "
       >
-        <ShuffleButton handler={() => {}} title="Перемешать" />
+        <ActionButton
+          // TODO Плейлист (все треки и избранные)
+          icon={pauseIcon}
+          title={'Пауза'}
+          handler={() =>
+            handleTrack(
+              isFavouriteTracksLoading ? favouriteTracks![0] : tracks![0],
+            )
+          }
+          disabled={!tracks?.length}
+        />
         <TrackPageDropdown />
       </div>
     </Container>
