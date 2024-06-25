@@ -111,6 +111,7 @@ export const TrackHistory: React.FC = React.memo(() => {
                 duration={track.duration}
                 imgUrl={track.imgUrl as string}
                 isPlay={currentTrack?.url === track.url}
+                isFavourite={track.isFavourite}
                 handlerPlay={() => {
                   changeCurrentTrack(track);
                   changePlayerState(
