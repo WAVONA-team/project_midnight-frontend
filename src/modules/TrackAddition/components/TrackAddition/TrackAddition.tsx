@@ -232,12 +232,14 @@ const TrackAddition: React.FC = memo(() => {
                 transition={{ duration: 0.2 }}
               >
                 <TrackInfo
+                  id={parsedTrack.id}
                   artist={parsedTrack.author as string}
                   name={parsedTrack.title}
                   provider={parsedTrack.source}
                   duration={parsedTrackDuration || parsedTrack.duration}
                   imgUrl={parsedTrack.imgUrl as string}
                   isPlay={parsedTrack.url === currentTrack?.url}
+                  isFavourite={parsedTrack.isFavourite}
                   handlerPlay={() => {
                     changeCurrentTrack(parsedTrack);
                     changePlayerState(!playerState);
@@ -259,12 +261,14 @@ const TrackAddition: React.FC = memo(() => {
               >
                 <TrackInfo
                   isDesktop={true}
+                  id={parsedTrack.id}
                   artist={parsedTrack.author as string}
                   name={parsedTrack.title}
                   provider={parsedTrack.source}
                   duration={parsedTrackDuration || parsedTrack.duration}
                   imgUrl={parsedTrack.imgUrl as string}
                   isPlay={parsedTrack.url === currentTrack?.url}
+                  isFavourite={parsedTrack.isFavourite}
                   handlerPlay={() => {
                     changeCurrentTrack(parsedTrack);
                     changePlayerState(!playerState);

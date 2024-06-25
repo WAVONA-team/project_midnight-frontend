@@ -4,3 +4,6 @@ export { TrackControlButtons } from '@/modules/Player/components/TrackControlBut
 export { TimeRange } from '@/modules/Player/components/TimeRange/TimeRange';
 export { VolumeChanger } from '@/modules/Player/components/VolumeChanger/VolumeChanger';
 export { Playback } from '@/modules/Player/components/Playback/Playback';
+export { IsFavouriteButton } from '@/modules/Player/components/IsFavouriteButton/IsFavouriteButton';
+export { Dots } from '@/modules/Player/components/Dots/Dots';
+export { TrackInformation } from '@/modules/Player/components/TrackInformation/TrackInformation';

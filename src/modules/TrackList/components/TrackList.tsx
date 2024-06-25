@@ -130,6 +130,7 @@ const TrackList: React.FC<Props> = React.memo(
                     provider={track.source}
                     imgUrl={track.imgUrl!}
                     isPlay={track.url === currentTrack?.url}
+                    isFavourite={track.isFavourite}
                   />
                 </motion.div>
               ))}
