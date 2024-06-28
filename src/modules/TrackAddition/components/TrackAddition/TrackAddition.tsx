@@ -304,7 +304,7 @@ const TrackAddition: React.FC = memo(() => {
           })
         }
         style={{
-          position: 'absolute',
+          position: 'fixed',
           zIndex: -10,
         }}
       />
