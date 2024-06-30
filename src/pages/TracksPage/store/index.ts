@@ -24,14 +24,14 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
     page: number,
     filterOptions = {
       query: '',
-      sortType: 'updatedAt',
+      sortType: 'createdAt',
       order: 'desc',
       isFavourite: false,
     },
   ) => {
     const {
       query = '',
-      sortType = 'updatedAt',
+      sortType = 'createdAt',
       order = 'desc',
       isFavourite = false,
     } = filterOptions;
