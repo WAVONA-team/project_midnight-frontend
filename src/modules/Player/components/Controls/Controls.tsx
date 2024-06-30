@@ -54,7 +54,7 @@ export const Controls: React.FC = React.memo(() => {
           <TrackControlButtons />
         </div>
 
-        <div className="lg:flex justify-end w-full hidden gap-6">
+        <div className="lg:grid grid-cols-[1fr_24px_24px_24px] items-center w-full hidden gap-6">
           <VolumeChanger />
           <IsFavouriteButton />
           <LoopButton />
