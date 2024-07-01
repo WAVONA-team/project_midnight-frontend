@@ -13,7 +13,7 @@ const SortButton: React.FC<Props> = React.memo(
     return (
       <button
         onMouseDown={onMouseDown}
-        className={`${className} focus:outline-none`}
+        className={`${className} focus:outline-none focus-visible:outline-none`}
         disabled={disabled}
       >
         <div className="flex gap-3.5 items-center">

@@ -114,8 +114,10 @@ const TrackAddition: React.FC = memo(() => {
         .then(() => {
           setIsTrackSave(false);
         })
-        .catch(() => setIsTrackSave(true))
-        .finally(() => handlerTrackModal!(e));
+        .catch(() => {
+          setIsTrackSave(true);
+        });
+      handlerTrackModal!(e);
     }
   };
 
@@ -313,25 +315,27 @@ const TrackAddition: React.FC = memo(() => {
         }}
       />
 
-      <Portal openPortal={showModal} element={childElement}>
-        <TrackModal
-          showModal={showModal}
-          modalOnCloseHandler={modalOnCloseHandler}
-          actionButtons={
-            <>
-              <Menu.Item
-                as={ShareButton}
-                selectedTrack={parsedTrack!}
-                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
-              />
-            </>
-          }
-          trackAuthor={parsedTrack && parsedTrack.author}
-          trackImgUrl={parsedTrack && parsedTrack.imgUrl}
-          trackTitle={parsedTrack && parsedTrack.title}
-          trackSource={parsedTrack && parsedTrack.source}
-        />
-      </Portal>
+      <Menu>
+        <Portal openPortal={showModal} element={childElement}>
+          <TrackModal
+            showModal={showModal}
+            modalOnCloseHandler={modalOnCloseHandler}
+            actionButtons={
+              <>
+                <Menu.Item
+                  as={ShareButton}
+                  selectedTrack={parsedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
+                />
+              </>
+            }
+            trackAuthor={parsedTrack && parsedTrack.author}
+            trackImgUrl={parsedTrack && parsedTrack.imgUrl}
+            trackTitle={parsedTrack && parsedTrack.title}
+            trackSource={parsedTrack && parsedTrack.source}
+          />
+        </Portal>
+      </Menu>
     </div>
   );
 });
