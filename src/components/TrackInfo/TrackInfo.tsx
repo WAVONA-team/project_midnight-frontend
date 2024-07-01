@@ -197,7 +197,7 @@ const TrackInfo: React.FC<Props> = React.memo(
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="flex flex-1 justify-end items-center lg:justify-center cursor-pointer opacity-0 hover:opacity-100 transition"
+            className="hidden lg:flex flex-1 justify-end items-center lg:justify-center cursor-pointer opacity-0 hover:opacity-100 transition"
           >
             <button
               type="button"
