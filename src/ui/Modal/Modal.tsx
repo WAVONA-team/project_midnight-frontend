@@ -35,6 +35,7 @@ const Modal: React.FC<Props> = React.memo(
           onClick={(e) => e.stopPropagation()}
           className={`
             ${isModalActive ? 'scale-100' : 'scale-0'}
+            rounded
             transition-all
             duration-200
             p-6

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -10,7 +11,6 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
-import { getUrl } from '@/modules/TrackAddition/helpers';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
@@ -42,6 +42,9 @@ const TrackAddition: React.FC = memo(() => {
     parsedTrackDuration,
     setParsedTrackDuration,
     checkTrack,
+    resolvedUrl,
+    resolveShortUrl,
+    setResolvedUrl,
   } = useStore(
     ({
       user,
@@ -57,6 +60,9 @@ const TrackAddition: React.FC = memo(() => {
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
+      resolvedUrl,
+      resolveShortUrl,
+      setResolvedUrl,
     }) => ({
       user,
       parsedTrack,
@@ -71,6 +77,9 @@ const TrackAddition: React.FC = memo(() => {
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
+      resolvedUrl,
+      resolveShortUrl,
+      setResolvedUrl,
     }),
   );
 
@@ -116,6 +125,35 @@ const TrackAddition: React.FC = memo(() => {
     clearParsedTrack();
   }, []);
 
+  useEffect(() => {
+    if (!debounceValue) return;
+
+    switch (true) {
+      case debounceValue.includes('spotify'): {
+        if (debounceValue.split(':').length === 3) {
+          setResolvedUrl(debounceValue);
+          break;
+        }
+
+        const urlId = debounceValue.match(
+          /(?:spotify\.com\/track\/)([a-zA-Z0-9]+)/,
+        )?.[1];
+
+        setResolvedUrl(`spotify:track:${urlId}`);
+        break;
+      }
+
+      case debounceValue.includes('on.soundcloud'): {
+        resolveShortUrl(debounceValue);
+        break;
+      }
+
+      default: {
+        setResolvedUrl(debounceValue);
+      }
+    }
+  }, [debounceValue]);
+
   return (
     <div
       className="
@@ -158,7 +196,6 @@ const TrackAddition: React.FC = memo(() => {
               onChange={(event) => {
                 clearErrors('url');
                 onChange(event.target.value);
-                clearErrors('url');
 
                 if (!event.target.value.length) {
                   clearParsedTrack();
@@ -243,45 +280,36 @@ const TrackAddition: React.FC = memo(() => {
         </>
       )}
 
-      <AnimatePresence>
-        <ReactPlayer
-          url={getUrl(debounceValue)}
-          onReady={() => {
-            const duration = format(
-              newTrackRef.current?.getDuration() as number,
-            );
+      <ReactPlayer
+        url={resolvedUrl as string}
+        onReady={() => {
+          const duration = format(newTrackRef.current?.getDuration() as number);
 
-            if (duration === '0:00') {
-              setParsedTrackDuration(null);
-            } else {
-              setParsedTrackDuration(duration);
-            }
-
-            parseTrack(debounceValue, user?.id as string, duration)
-              .then((track) => setParsedTrackDuration(track.duration))
-              .catch(({ formErrors }) => {
-                setError('url', {
-                  message: formErrors,
-                });
-              });
-
-            setIsParsedTrackLoading(true);
-          }}
-          ref={newTrackRef}
-          onError={() =>
-            setError('url', {
-              message: 'Некорректный формат. Попробуйте снова',
-            })
+          if (duration === '0:00') {
+            setParsedTrackDuration(null);
+          } else {
+            setParsedTrackDuration(duration);
           }
-          width="0"
-          height="0"
-          style={{
-            display: 'none',
-            transition: 'all',
-            transitionDuration: '0.2s',
-          }}
-        />
-      </AnimatePresence>
+
+          parseTrack(resolvedUrl as string, user?.id as string, duration)
+            .then((track) => setParsedTrackDuration(track.duration))
+            .catch(({ formErrors }) => {
+              setError('url', {
+                message: formErrors,
+              });
+            });
+        }}
+        ref={newTrackRef}
+        onError={() =>
+          setError('url', {
+            message: 'Некорректный формат. Попробуйте снова',
+          })
+        }
+        style={{
+          position: 'absolute',
+          zIndex: -10,
+        }}
+      />
       <Menu>
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal

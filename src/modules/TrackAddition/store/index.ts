@@ -39,6 +39,22 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
       })
       .finally(() => set({ isParsedTrackLoading: false }));
   },
+  resolvedUrl: null,
+  setResolvedUrl: (url) => set({ resolvedUrl: url }),
+  resolveShortUrl: async (shortUrl) => {
+    set({ isParsedTrackLoading: true });
+
+    return await httpClient
+      .post<string>('/track/resolve', {
+        url: shortUrl,
+      })
+      .then(({ data }) => set({ resolvedUrl: data }))
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+        throw { fieldErrors, formErrors };
+      });
+  },
 });
 
 export { type TrackAdditionState };
