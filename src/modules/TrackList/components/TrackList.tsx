@@ -136,26 +136,27 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
-
-        <Portal openPortal={showModal} element={childElement}>
-          <TrackModal
-            showModal={showModal}
-            modalOnCloseHandler={modalOnCloseHandler!}
-            actionButtons={
-              <>
-                <Menu.Item
-                  as={ShareButton}
-                  selectedTrack={selectedTrack!}
-                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                />
-              </>
-            }
-            trackAuthor={selectedTrack! && selectedTrack.author}
-            trackImgUrl={selectedTrack! && selectedTrack.imgUrl}
-            trackTitle={selectedTrack! && selectedTrack.title}
-            trackSource={selectedTrack! && selectedTrack.source}
-          />
-        </Portal>
+        <Menu>
+          <Portal openPortal={showModal} element={childElement}>
+            <TrackModal
+              showModal={showModal}
+              modalOnCloseHandler={modalOnCloseHandler!}
+              actionButtons={
+                <>
+                  <Menu.Item
+                    as={ShareButton}
+                    selectedTrack={selectedTrack!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                </>
+              }
+              trackAuthor={selectedTrack! && selectedTrack.author}
+              trackImgUrl={selectedTrack! && selectedTrack.imgUrl}
+              trackTitle={selectedTrack! && selectedTrack.title}
+              trackSource={selectedTrack! && selectedTrack.source}
+            />
+          </Portal>
+        </Menu>
 
         {isLoading && (
           <Container className="flex justify-center">

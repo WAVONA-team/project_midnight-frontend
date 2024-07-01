@@ -37,21 +37,26 @@ export const Dots: React.FC = React.memo(() => {
       setIsOpen((state) => !state);
     }
   };
+  const onBlurHandler = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div>
-      <Menu as="div">
-        <div
-          onClick={handlerModal}
-          className="relative"
-          ref={ref}
-          onBlur={() => setIsOpen(false)}
-          tabIndex={0}
+      <Menu
+        as="div"
+        className="relative"
+        ref={ref}
+        onClick={handlerModal}
+        onBlur={onBlurHandler}
+        tabIndex={0}
+      >
+        <button
+          type="button"
+          className="focus:outline-none focus-visible:outline-none"
         >
-          <button type="button" className="focus:outline-none">
-            <DotsIcon active={isOpen} />
-          </button>
-        </div>
+          <DotsIcon active={isOpen} />
+        </button>
 
         <Portal openPortal={isOpen} element={childElement}>
           <Dropdown
@@ -63,6 +68,7 @@ export const Dots: React.FC = React.memo(() => {
               py-4
               sm:py-0
               shadow-[16px_-16px_16px_0px_#0C0D0B80]
+              overflow-hidden
             "
             modalOnCloseHandler={() => setIsOpen(false)}
           >
