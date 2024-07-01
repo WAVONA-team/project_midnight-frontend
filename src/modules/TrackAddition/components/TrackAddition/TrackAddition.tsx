@@ -314,7 +314,6 @@ const TrackAddition: React.FC = memo(() => {
           zIndex: -10,
         }}
       />
-
       <Menu>
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal
