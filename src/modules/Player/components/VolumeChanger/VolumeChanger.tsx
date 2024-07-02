@@ -25,7 +25,7 @@ export const VolumeChanger: React.FC = React.memo(() => {
 
   return (
     <div
-      className="flex items-center gap-6"
+      className="flex items-center h-6 relative"
       onMouseEnter={() => setShowInput(true)}
       onMouseLeave={() => setShowInput(false)}
     >
@@ -36,15 +36,22 @@ export const VolumeChanger: React.FC = React.memo(() => {
         value={volume}
         multiplier={100}
         onChange={VolumeChange}
-        className={classNames('bg-secondary-cadet-gray h-[2px]', {
-          visible: showInput,
-          invisible: !showInput,
-        })}
+        className={classNames(
+          '!absolute bg-secondary-cadet-gray right-8 h-[2px]',
+          {
+            visible: showInput,
+            invisible: !showInput,
+          },
+        )}
         inputClassName="[&::-webkit-slider-thumb]:bg-on-primary-anti-flash-white"
         rangeColor="bg-on-primary-anti-flash-white"
       />
 
-      <button onClick={handleMute} type="button" className="focus:outline-none">
+      <button
+        onClick={handleMute}
+        type="button"
+        className="focus:outline-none w-6 h-6 absolute right-0"
+      >
         <VolumeIcon />
       </button>
     </div>

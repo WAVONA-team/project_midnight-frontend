@@ -101,20 +101,20 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   };
 
   return (
-    <Menu as="div">
-      <div
-        className="relative"
-        ref={ref}
-        onClick={handlerModal}
-        onBlur={modalOnBlurHandler}
-        tabIndex={0}
-      >
-        <SortButton
-          title={currentTitle}
-          isOpen={isOpen}
-          onMouseDown={handlerButtonFocus}
-        />
-      </div>
+    <Menu
+      as="div"
+      className="relative"
+      ref={ref}
+      onClick={handlerModal}
+      onBlur={modalOnBlurHandler}
+      tabIndex={0}
+    >
+      <SortButton
+        title={currentTitle}
+        isOpen={isOpen}
+        onMouseDown={handlerButtonFocus}
+      />
+
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="
@@ -125,6 +125,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           py-4
           sm:py-0
           shadow-[16px_-16px_16px_0px_#0C0D0B80]
+          overflow-hidden
           "
           modalOnCloseHandler={modalOnCloseHandler}
         >

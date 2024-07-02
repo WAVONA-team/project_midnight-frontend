@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 import cross from '@/../public/cross/cross.svg';
 import { Menu } from '@headlessui/react';
@@ -16,6 +16,10 @@ type Props = {
 
 const Dropdown: React.FC<Props> = React.memo(
   ({ children, title, headerItem, className = '', modalOnCloseHandler }) => {
+    const overlayClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
+      if (e.currentTarget === e.target) modalOnCloseHandler();
+    };
+
     return (
       <motion.div
         initial={{
@@ -31,16 +35,16 @@ const Dropdown: React.FC<Props> = React.memo(
           opacity: 0,
         }}
         className={`
-          fixed
-          sm:static
-          z-20 
-          left-0 
-          top-0 
-          w-full 
-          h-full 
-        bg-surface-eerie_black/60  
-          `}
-        onClick={modalOnCloseHandler}
+            fixed
+            sm:static
+            z-50
+            left-0
+            top-0
+            w-full
+            h-full
+          bg-surface-eerie_black/60
+    `}
+        onClick={overlayClickHandler}
       >
         <motion.div
           className={`${className}
@@ -68,24 +72,31 @@ const Dropdown: React.FC<Props> = React.memo(
             opacity: 0,
           }}
         >
-          <div
-            className="sm:hidden px-4 mb-3 "
-            onClick={(e) => e.stopPropagation()}
+          <Menu.Items
+            onMouseDown={(e) => {
+              e.preventDefault();
+            }}
+            as="div"
+            static
           >
-            <div
-              className={classNames(
-                'font-rubik text-on-primary-anti-flash-white text-base font-semibold tracking-wide flex justify-end',
-                {
-                  ['justify-between items-center']: title,
-                },
-              )}
+            <Menu.Item
+              as="div"
+              className="sm:hidden px-4 mb-3 "
+              onClick={(e) => e.stopPropagation()}
             >
-              {title}
-              <img src={cross} alt="cross" onClick={modalOnCloseHandler} />
-            </div>
-            {headerItem}
-          </div>
-          <Menu.Items onClick={modalOnCloseHandler} as="div" static>
+              <div
+                className={classNames(
+                  'font-rubik text-on-primary-anti-flash-white text-base font-semibold tracking-wide flex justify-end',
+                  {
+                    ['justify-between items-center']: title,
+                  },
+                )}
+              >
+                {title}
+                <img src={cross} alt="cross" onClick={modalOnCloseHandler} />
+              </div>
+              {headerItem}
+            </Menu.Item>
             {children}
           </Menu.Items>
         </motion.div>

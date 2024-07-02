@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Track } from 'project_midnight';
 
-const useTestHandlerModal = (tracks: Track | Track[] | null) => {
+const useHandlerModal = (tracks: Track | Track[] | null) => {
   const [showModal, setShowModal] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
@@ -19,7 +19,7 @@ const useTestHandlerModal = (tracks: Track | Track[] | null) => {
         Array.isArray(tracks) && tracks?.find((item) => item.id === trackId);
       track && setSelectedTrack(track);
       setChildElement(element);
-      setShowModal((state) => !state);
+      setShowModal(true);
     }
   };
 
@@ -31,7 +31,7 @@ const useTestHandlerModal = (tracks: Track | Track[] | null) => {
     } else {
       const element = currentTarget as HTMLElement;
       setChildElement(element);
-      setShowModal((state) => !state);
+      setShowModal(true);
     }
   };
 
@@ -63,4 +63,4 @@ const useTestHandlerModal = (tracks: Track | Track[] | null) => {
   };
 };
 
-export default useTestHandlerModal;
+export default useHandlerModal;

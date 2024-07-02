@@ -102,12 +102,14 @@ export const TrackHistory: React.FC = React.memo(() => {
               transition={{ duration: 0.3 }}
             >
               <TrackInfo
+                id={track.id}
                 name={track.title}
                 artist={track.author as string}
                 provider={track.source}
                 duration={track.duration}
                 imgUrl={track.imgUrl as string}
                 isPlay={currentTrack?.url === track.url}
+                isFavourite={track.isFavourite}
                 handlerPlay={() => {
                   changeCurrentTrack(track);
                   changePlayerState(
@@ -123,25 +125,27 @@ export const TrackHistory: React.FC = React.memo(() => {
           ))}
         </AnimatePresence>
       </div>
-      <Portal openPortal={showModal} element={childElement}>
-        <TrackModal
-          showModal={showModal}
-          modalOnCloseHandler={modalOnCloseHandler!}
-          actionButtons={
-            <>
-              <Menu.Item
-                as={ShareButton}
-                selectedTrack={selectedTrack!}
-                className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-              />
-            </>
-          }
-          trackAuthor={selectedTrack! && selectedTrack.author}
-          trackImgUrl={selectedTrack! && selectedTrack.imgUrl}
-          trackTitle={selectedTrack! && selectedTrack.title}
-          trackSource={selectedTrack! && selectedTrack.source}
-        />
-      </Portal>
+      <Menu>
+        <Portal openPortal={showModal} element={childElement}>
+          <TrackModal
+            showModal={showModal}
+            modalOnCloseHandler={modalOnCloseHandler!}
+            actionButtons={
+              <>
+                <Menu.Item
+                  as={ShareButton}
+                  selectedTrack={selectedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+              </>
+            }
+            trackAuthor={selectedTrack! && selectedTrack.author}
+            trackImgUrl={selectedTrack! && selectedTrack.imgUrl}
+            trackTitle={selectedTrack! && selectedTrack.title}
+            trackSource={selectedTrack! && selectedTrack.source}
+          />
+        </Portal>
+      </Menu>
     </div>
   );
 });

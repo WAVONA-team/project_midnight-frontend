@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import shareIcon from '@/../public/buttons/actionButtons/shareIcon.svg';
+import copy from 'copy-to-clipboard';
 import { Track } from 'project_midnight';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
@@ -22,10 +23,9 @@ const TrackShareButton: React.FC<Props> = React.memo(
 
       let timeId: NodeJS.Timeout | null;
 
-      const copyToClipboard = async () => {
-        if (!navigator.share) {
-          await navigator.clipboard.writeText(selectedTrack.url);
-
+      const copyToClipboard = () => {
+        if (selectedTrack.url) {
+          copy(selectedTrack.url);
           if (timeId) {
             clearTimeout(timeId);
           }
@@ -35,13 +35,6 @@ const TrackShareButton: React.FC<Props> = React.memo(
           timeId = setTimeout(() => {
             setIsClicked(false);
           }, TIME_DELAY);
-        } else {
-          const shareData = {
-            title: selectedTrack.title,
-            url: selectedTrack.url,
-          };
-
-          await navigator.share(shareData);
         }
       };
 

@@ -12,7 +12,7 @@ import {
 import { type UserState, createUserSlice } from '@/modules/Authorization/store';
 import { type PlayerState, createPlayerSlice } from '@/modules/Player/store';
 import { trackActionsSlice } from '@/modules/TrackActions';
-import { TrackActionsState } from '@/modules/TrackActions/store/types.ts';
+import { TrackActionsState } from '@/modules/TrackActions/store/types';
 import {
   type TrackAdditionState,
   parseTrackSlice,
