@@ -102,12 +102,14 @@ export const TrackHistory: React.FC = React.memo(() => {
               transition={{ duration: 0.3 }}
             >
               <TrackInfo
+                id={track.id}
                 name={track.title}
                 artist={track.author as string}
                 provider={track.source}
                 duration={track.duration}
                 imgUrl={track.imgUrl as string}
                 isPlay={currentTrack?.url === track.url}
+                isFavourite={track.isFavourite}
                 handlerPlay={() => {
                   changeCurrentTrack(track);
                   changePlayerState(

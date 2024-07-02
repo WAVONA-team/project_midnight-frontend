@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import dot from '@/../public/dot.svg';
+import checked from '@/../public/isFavourite/checked.svg';
+import uncheked from '@/../public/isFavourite/unchecked.svg';
 import kebab from '@/../public/kebab/kebab.svg';
 import { useStore } from '@/store';
 import classNames from 'classnames';
@@ -10,13 +12,14 @@ import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
   isDesktop?: boolean;
-  id?: string;
+  id: string;
   name: string;
   artist: string | null;
   provider: string;
   imgUrl: string;
   duration: string;
   isPlay: boolean;
+  isFavourite: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
 
   handlerModal: (
@@ -35,11 +38,36 @@ const TrackInfo: React.FC<Props> = React.memo(
     imgUrl,
     duration,
     isPlay,
+    isFavourite,
     handlerPlay,
     handlerModal,
     modalOnBlurHandler,
   }) => {
-    const { playerState } = useStore(({ playerState }) => ({ playerState }));
+    const [isTrackFavourite, setIsTrackFavourite] = useState(isFavourite);
+    const {
+      playerState,
+      updateIsFavourite,
+      isFavouriteTracksLoading,
+      setIsUserTracksLoading,
+      clearUserTracks,
+      user,
+    } = useStore(
+      ({
+        playerState,
+        updateIsFavourite,
+        isFavouriteTracksLoading,
+        setIsUserTracksLoading,
+        clearUserTracks,
+        user,
+      }) => ({
+        playerState,
+        updateIsFavourite,
+        isFavouriteTracksLoading,
+        setIsUserTracksLoading,
+        clearUserTracks,
+        user,
+      }),
+    );
     const ref = useRef(null);
 
     const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -124,7 +152,7 @@ const TrackInfo: React.FC<Props> = React.memo(
         <div
           onClick={handlerPlay}
           className={classNames(
-            'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2',
+            'cursor-pointer relative w-full grid grid-cols-[64px_1fr_24px] gap-x-4 lg:grid-cols-[64px_1fr_1fr_1fr_48px_24px] lg:rounded-[4px] items-center py-2 px-4 lg:px-2',
             {
               'bg-background-trackInfo': isPlay && playerState,
             },
@@ -166,6 +194,31 @@ const TrackInfo: React.FC<Props> = React.memo(
           <p className="text-on-primary-lavender-blush text-sm items-center hidden lg:flex">
             {duration} <img src={dot} alt="separator" /> {provider}
           </p>
+
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="hidden lg:flex flex-1 justify-end items-center lg:justify-center cursor-pointer opacity-0 hover:opacity-100 transition"
+          >
+            <button
+              type="button"
+              className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
+              onClick={() => {
+                updateIsFavourite(id, user?.id as string).then(() => {
+                  setIsTrackFavourite((prev) => !prev);
+
+                  if (isFavouriteTracksLoading) {
+                    clearUserTracks();
+                    setIsUserTracksLoading(true);
+                  }
+                });
+              }}
+            >
+              <img
+                src={isTrackFavourite ? checked : uncheked}
+                alt="favourite"
+              />
+            </button>
+          </div>
 
           <div
             onClick={(e) => e.stopPropagation()}

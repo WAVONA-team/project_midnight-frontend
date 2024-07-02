@@ -12,6 +12,7 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
     userSearchHistory,
     getUserSearchHistory,
     isParsedTrackLoading,
+    currentTrack,
   } = useStore(
     ({
       user,
@@ -19,12 +20,14 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
       userSearchHistory,
       getUserSearchHistory,
       isParsedTrackLoading,
+      currentTrack,
     }) => ({
       user,
       parsedTrack,
       userSearchHistory,
       getUserSearchHistory,
       isParsedTrackLoading,
+      currentTrack,
     }),
   );
 
@@ -34,14 +37,15 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
 
   return (
     <div
-      className="
+      className={`
+        ${currentTrack && 'pb-28'}
         bg-background-hight
         pt-8
         h-full
         overflow-auto
         lg:p-0
         lg:bg-background-desktop
-      "
+      `}
     >
       <TrackAddition />
 
