@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 
 import {
+  type TracksPlaylistControlsState,
+  tracksPlaylistControls,
+} from '@/pages/TracksPage/modules/TrackPageControls/store';
+import {
   type TracksPageState,
   tracksPageSlice,
 } from '@/pages/TracksPage/store';
@@ -25,7 +29,8 @@ export const useStore = create<
     userSearchHistoryState &
     TracksPageState &
     TracksPageState &
-    TrackActionsState
+    TrackActionsState &
+    TracksPlaylistControlsState
 >((...a) => ({
   ...createUserSlice(...a),
   ...createPlayerSlice(...a),
@@ -34,4 +39,5 @@ export const useStore = create<
   ...tracksPageSlice(...a),
   ...tracksPageSlice(...a),
   ...trackActionsSlice(...a),
+  ...tracksPlaylistControls(...a),
 }));

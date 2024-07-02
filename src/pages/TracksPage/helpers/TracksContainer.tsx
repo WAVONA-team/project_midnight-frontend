@@ -84,11 +84,6 @@ const TracksContainer: React.FC = React.memo(() => {
       isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
-      header={
-        query.length
-          ? 'Трек не найден :('
-          : 'У вас пока нет добавленных треков :('
-      }
     />
   );
 });

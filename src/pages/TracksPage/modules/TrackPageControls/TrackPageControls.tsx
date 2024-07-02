@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import pauseIcon from '@/../public/buttons/playerButtons/mainPagePauseIcon.svg';
 import playIcon from '@/../public/buttons/playerButtons/mainPagePlayIcon.svg';
@@ -18,6 +18,14 @@ const TrackPageControls: React.FC = React.memo(() => {
     currentTrack,
     playerState,
     tracks,
+    allTracksTitle,
+    favouriteTracksTitle,
+    allTracksIcon,
+    favouriteTracksIcon,
+    setAllTracksTitle,
+    setFavouriteTracksTitle,
+    setAllTracksIcon,
+    setFavouriteTracksIcon,
   } = useStore(
     ({
       isFavouriteTracksLoading,
@@ -26,6 +34,15 @@ const TrackPageControls: React.FC = React.memo(() => {
       currentTrack,
       playerState,
       tracks,
+      user,
+      allTracksTitle,
+      favouriteTracksTitle,
+      allTracksIcon,
+      favouriteTracksIcon,
+      setAllTracksTitle,
+      setFavouriteTracksTitle,
+      setAllTracksIcon,
+      setFavouriteTracksIcon,
     }) => ({
       isFavouriteTracksLoading,
       changeCurrentTrack,
@@ -33,17 +50,53 @@ const TrackPageControls: React.FC = React.memo(() => {
       currentTrack,
       playerState,
       tracks,
+      user,
+      allTracksTitle,
+      favouriteTracksTitle,
+      allTracksIcon,
+      favouriteTracksIcon,
+      setAllTracksTitle,
+      setFavouriteTracksTitle,
+      setAllTracksIcon,
+      setFavouriteTracksIcon,
     }),
   );
-
-  const favouriteTracks = tracks?.filter((track) => track.isFavourite);
-
-  console.log(currentTrack?.playlist);
 
   const handleTrack = (track: Track) => {
     changeCurrentTrack(track);
     changePlayerState(track.url === currentTrack?.url ? !playerState : true);
   };
+
+  const handlePlaylistStateButton = () => {
+    setAllTracksTitle('Слушать');
+    setAllTracksIcon(playIcon);
+    setFavouriteTracksTitle('Слушать');
+    setFavouriteTracksIcon(playIcon);
+
+    if (!isFavouriteTracksLoading && (playerState || !playerState)) {
+      setAllTracksTitle('Пауза');
+      setAllTracksIcon(pauseIcon);
+    }
+
+    if (!isFavouriteTracksLoading && !playerState) {
+      setAllTracksTitle('Слушать');
+      setAllTracksIcon(playIcon);
+    }
+
+    if (isFavouriteTracksLoading && (playerState || !playerState)) {
+      setFavouriteTracksTitle('Пауза');
+      setFavouriteTracksIcon(pauseIcon);
+    }
+
+    if (isFavouriteTracksLoading && !playerState) {
+      setFavouriteTracksTitle('Слушать');
+      setFavouriteTracksIcon(playIcon);
+    }
+  };
+
+  useEffect(() => {
+    handlePlaylistStateButton();
+  }, [playerState]);
 
   return (
     <Container
@@ -81,14 +134,11 @@ const TrackPageControls: React.FC = React.memo(() => {
         "
       >
         <ActionButton
-          // TODO Плейлист (все треки и избранные)
-          icon={pauseIcon}
-          title={'Пауза'}
-          handler={() =>
-            handleTrack(
-              isFavouriteTracksLoading ? favouriteTracks![0] : tracks![0],
-            )
+          icon={isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon}
+          title={
+            isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
           }
+          handler={() => handleTrack(tracks![0])}
           disabled={!tracks?.length}
         />
         <TrackPageDropdown />

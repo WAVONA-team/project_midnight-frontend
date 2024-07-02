@@ -35,6 +35,10 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
 
+  const { tracks } = useStore(({ tracks }) => ({
+    tracks,
+  }));
+
   useLayoutEffect(() => {
     if (window.innerWidth < 640) {
       if (isOpen) {
@@ -129,6 +133,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       <SortButton
         title={sortType.name}
         isOpen={isOpen}
+        disabled={!tracks?.length}
         onMouseDown={handlerButtonFocus}
       />
 
