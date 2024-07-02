@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
+import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
@@ -16,6 +17,10 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
+
+  const { tracks } = useStore(({ tracks }) => ({
+    tracks,
+  }));
 
   useLayoutEffect(() => {
     if (window.innerWidth < 640) {
@@ -112,6 +117,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       <SortButton
         title={currentTitle}
         isOpen={isOpen}
+        disabled={!tracks?.length}
         onMouseDown={handlerButtonFocus}
       />
 
