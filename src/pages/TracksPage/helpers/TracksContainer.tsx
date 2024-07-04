@@ -84,7 +84,6 @@ const TracksContainer: React.FC = React.memo(() => {
         .finally(() => setIsFiltering(false));
     }
   }, [isUserTracksLoading, isFiltering]);
-  }, [isUserTracksLoading, isFiltering]);
 
   return (
     <TrackList
