@@ -6,6 +6,8 @@ import { Menu } from '@headlessui/react';
 import { Track } from 'project_midnight';
 import { Track } from 'project_midnight';
 
+import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
+
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
 
@@ -16,27 +18,16 @@ import dateSortIcon from '../../../../../../../public/buttons/actionButtons/date
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 const TrackPageDropdown: React.FC = React.memo(() => {
-  const {
-    setCurrentPage,
-    setOrder,
-    setSortType,
-    clearUserTracks,
-    setIsUserTracksLoading,
-    setIsFiltering,
-  } = useStore(
-    ({
+  const { setCurrentPage, clearUserTracks } = useStore(
+    ({ setCurrentPage, clearUserTracks }) => ({
       setCurrentPage,
+      clearUserTracks,
+    }),
+  );
+  const { setOrder, setSortType, setIsFiltering } = tracksSearchPageSlice(
+    ({ setOrder, setSortType, setIsFiltering }) => ({
       setOrder,
       setSortType,
-      clearUserTracks,
-      setIsUserTracksLoading,
-      setIsFiltering,
-    }) => ({
-      setCurrentPage,
-      setOrder,
-      setSortType,
-      clearUserTracks,
-      setIsUserTracksLoading,
       setIsFiltering,
     }),
   );
@@ -82,19 +73,21 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   const [currentTitle, setCurrentTitle] = useState<string>(
     sortControls[0].title,
   );
+  const reset = () => {
+    clearUserTracks();
+    setCurrentPage(1);
+    setIsFiltering(true);
+  };
   const setSortingInfo = (
     title: string,
     sortType: keyof Track,
     order: 'desc' | 'asc',
   ) => {
-    setIsUserTracksLoading(true);
-    setIsFiltering(true);
-    clearUserTracks();
-    setCurrentPage(1);
     setSortType(sortType);
     setOrder(order);
     setCurrentTitle(title);
     setIsOpen(!isOpen);
+    reset();
   };
 
   const handlerModal = ({
