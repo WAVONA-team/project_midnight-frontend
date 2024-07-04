@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 
 import {
-  type TracksSearchPageState,
-  tracksSearchPageSlice,
-} from '@/pages/TrackSearchPage/store';
-import {
   type TracksPageState,
   tracksPageSlice,
 } from '@/pages/TracksPage/store';
