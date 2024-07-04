@@ -59,8 +59,6 @@ const TracksContainer: React.FC = React.memo(() => {
 
   const isFavourite = isFavouriteTracksLoading;
 
-  const isFavourite = isFavouriteTracksLoading;
-
   useEffect(() => {
     setIsUserTracksLoading(true);
 
@@ -73,6 +71,7 @@ const TracksContainer: React.FC = React.memo(() => {
         query: query,
         order: order,
         sortType: sortType,
+        isFavourite,
       })
         .then((tracks) => setTracks(tracks))
         .finally(() => setIsFiltering(false));

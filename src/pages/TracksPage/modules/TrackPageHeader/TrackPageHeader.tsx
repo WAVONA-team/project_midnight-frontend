@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useStore } from '@/store';
 import debounce from 'lodash.debounce';
 
+import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
 import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
@@ -18,8 +19,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
     clearUserTracks,
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
-    query,
-    setQuery,
     setIsQueryTracksLoading,
   } = useStore(
     ({
@@ -30,8 +29,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
       clearUserTracks,
       isFavouriteTracksLoading,
       setIsFavouriteTracksLoading,
-      query,
-      setQuery,
       setIsQueryTracksLoading,
     }) => ({
       user,
@@ -41,11 +38,14 @@ const TrackPageHeader: React.FC = React.memo(() => {
       clearUserTracks,
       isFavouriteTracksLoading,
       setIsFavouriteTracksLoading,
-      query,
-      setQuery,
       setIsQueryTracksLoading,
     }),
   );
+
+  const { query, setQuery } = tracksSearchPageSlice(({ query, setQuery }) => ({
+    query,
+    setQuery,
+  }));
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserTracks();

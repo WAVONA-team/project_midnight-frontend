@@ -123,7 +123,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   return (
     <Menu as="div">
       <div
-        className="relative"
+        className="relative outline-none"
         ref={ref}
         onClick={handlerModal}
         onBlur={modalOnBlurHandler}
@@ -133,6 +133,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
           title={currentTitle}
           isOpen={isOpen}
           onMouseDown={handlerButtonFocus}
+          className=''
         />
       </div>
       <Portal openPortal={isOpen} element={childElement}>
