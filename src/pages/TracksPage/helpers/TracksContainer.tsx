@@ -22,7 +22,6 @@ const TracksContainer: React.FC = React.memo(() => {
     sortType,
     isFavouriteTracksLoading,
     clearUserTracks,
-    isFiltering,
   } = useStore(
     ({
       user,
@@ -36,10 +35,6 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserTracks,
-      query,
-      isFiltering,
-      order,
-      sortType,
     }) => ({
       user,
       isUserTracksLoading,
