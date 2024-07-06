@@ -15,7 +15,7 @@ import alphaSortIcon from '../../../../../../../public/buttons/actionButtons/alp
 import dateSortIcon from '../../../../../../../public/buttons/actionButtons/dateSortIcon.svg';
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
-const TrackPageDropdown: React.FC = React.memo(() => {
+export const TrackPageDropdown: React.FC = React.memo(() => {
   const { setCurrentPage, clearUserTracks } = useStore(
     ({ setCurrentPage, clearUserTracks }) => ({
       setCurrentPage,
@@ -140,14 +140,15 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="
-          sm:right-0
-          sm:top-8
-          sm:w-[254px]
-          sm:absolute
-          py-4
-          sm:py-0
-          shadow-[16px_-16px_16px_0px_#0C0D0B80]
-          overflow-hidden
+            sm:right-0
+            sm:top-8
+            sm:w-[254px]
+            sm:absolute
+            bottom-[54px]
+            py-4
+            sm:py-0
+            shadow-[16px_-16px_16px_0px_#0C0D0B80]
+            overflow-hidden
           "
           modalOnCloseHandler={modalOnCloseHandler}
         >
@@ -173,5 +174,3 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     </Menu>
   );
 });
-
-export default TrackPageDropdown;

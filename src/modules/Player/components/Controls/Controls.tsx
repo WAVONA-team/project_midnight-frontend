@@ -21,6 +21,7 @@ export const Controls: React.FC = React.memo(() => {
         lg:p-4
         absolute
         bottom-0
+        z-10
         w-full
         py-3
         flex

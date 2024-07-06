@@ -5,7 +5,8 @@ import playIcon from '@/../public/buttons/playerButtons/mainPagePlayIcon.svg';
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
 
-import TrackPageDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageDropdown/TrackPageDropdown.tsx';
+import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
+import TrackPageFiltersDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown.tsx';
 
 import ActionButton from '@/ui/Button/ActionButton/ActionButton.tsx';
 import { Container } from '@/ui/Container';
@@ -133,15 +134,22 @@ const TrackPageControls: React.FC = React.memo(() => {
           items-center
         "
       >
-        <ActionButton
-          icon={isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon}
-          title={
-            isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
-          }
-          handler={() => handleTrack(tracks![0])}
-          disabled={!tracks?.length}
-        />
-        <TrackPageDropdown />
+        <div className="flex w-[184px] items-center">
+          <ActionButton
+            icon={
+              isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
+            }
+            title={
+              isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
+            }
+            handler={() => handleTrack(tracks![0])}
+            disabled={!tracks?.length}
+          />
+
+          <TrackPageAdditionActionsDropdown />
+        </div>
+
+        <TrackPageFiltersDropdown />
       </div>
     </Container>
   );

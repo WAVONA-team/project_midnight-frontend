@@ -17,6 +17,7 @@ const ActionButton: React.FC<Props> = React.memo(
         className={`
           ${className}
           font-rubik
+
           transition-all
           duration-290
           font-normal
@@ -42,8 +43,10 @@ const ActionButton: React.FC<Props> = React.memo(
           disabled:hover:bg-secondary-cadet-gray
           disabled:active:shadow-button-default
           sm:bg-primary-poppy
-          sm:py-1.5
-          sm:px-4
+          px-2
+          py-1
+          lg:py-2
+          lg:px-4
           sm:shadow-button-default
           sm:active:shadow-button-active
           sm:active:bg-primary-madder
@@ -52,7 +55,7 @@ const ActionButton: React.FC<Props> = React.memo(
         `}
       >
         <div className="flex">
-          <img className="mr-2" src={icon} alt="Play/Pause" />
+          <img className={`${title && 'mr-2'}`} src={icon} alt="Play/Pause" />
           <span>{title}</span>
         </div>
       </button>
