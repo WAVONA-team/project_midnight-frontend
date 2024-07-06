@@ -33,6 +33,13 @@ const TrackPageHeader: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      favouriteTracksIcon,
+      allTracksIcon,
+      tracks,
+      changeCurrentTrack,
+      changePlayerState,
+      currentTrack,
+      playerState,
     }) => ({
       user,
       getTracksByUser,
@@ -44,6 +51,13 @@ const TrackPageHeader: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      favouriteTracksIcon,
+      allTracksIcon,
+      tracks,
+      changeCurrentTrack,
+      changePlayerState,
+      currentTrack,
+      playerState,
     }),
   );
 

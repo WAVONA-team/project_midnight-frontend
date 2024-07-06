@@ -13,7 +13,7 @@ import dateSortIcon from '../../../../../../../public/buttons/actionButtons/date
 import defaultSortIcon from '../../../../../../../public/buttons/actionButtons/defaultSortIcon.svg';
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
-const TrackPageDropdown: React.FC = React.memo(() => {
+const TrackPageFiltersDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
@@ -124,14 +124,15 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="
-          sm:right-0
-          sm:top-8
-          sm:w-[254px]
-          sm:absolute
-          py-4
-          sm:py-0
-          shadow-[16px_-16px_16px_0px_#0C0D0B80]
-          overflow-hidden
+            sm:right-0
+            sm:top-8
+            sm:w-[254px]
+            sm:absolute
+            bottom-[54px]
+            py-4
+            sm:py-0
+            shadow-[16px_-16px_16px_0px_#0C0D0B80]
+            overflow-hidden
           "
           modalOnCloseHandler={modalOnCloseHandler}
         >
@@ -156,4 +157,4 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   );
 });
 
-export default TrackPageDropdown;
+export default TrackPageFiltersDropdown;

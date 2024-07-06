@@ -41,8 +41,7 @@ const PlayButton: React.FC<Props> = React.memo(({ className }) => {
       ref={scope}
       className={`
         ${className}
-        w-8
-        h-8
+        
         lg:h-[62px]
         lg:w-[62px]
         flex
