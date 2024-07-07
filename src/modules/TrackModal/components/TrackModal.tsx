@@ -1,7 +1,5 @@
 import { FC, ReactNode, useLayoutEffect } from 'react';
 
-import { Menu } from '@headlessui/react';
-
 import Dropdown from '@/components/Dropdown/Dropdown';
 
 import DropdownTrackInfo from './DropdownTrackInfo';
@@ -38,35 +36,34 @@ const TrackModal: FC<Props> = ({
   }, []);
 
   return (
-    <Menu>
-      <Dropdown
-        headerItem={
-          trackTitle &&
-          trackSource &&
-          trackAuthor &&
-          trackImgUrl && (
-            <DropdownTrackInfo
-              artist={trackAuthor}
-              imgUrl={trackImgUrl}
-              name={trackTitle}
-              provider={trackSource}
-            />
-          )
-        }
-        className="
+    <Dropdown
+      headerItem={
+        trackTitle &&
+        trackSource &&
+        trackAuthor &&
+        trackImgUrl && (
+          <DropdownTrackInfo
+            artist={trackAuthor}
+            imgUrl={trackImgUrl}
+            name={trackTitle}
+            provider={trackSource}
+          />
+        )
+      }
+      className="
           sm:right-0
           sm:top-8
           sm:min-w-[265px]
-          sm:absolute        
+          sm:absolute
           py-4
           sm:py-0
           shadow-[16px_-16px_16px_0px_#0C0D0B80]
+          overflow-hidden
         "
-        modalOnCloseHandler={modalOnCloseHandler}
-      >
-        {actionButtons}
-      </Dropdown>
-    </Menu>
+      modalOnCloseHandler={modalOnCloseHandler}
+    >
+      {actionButtons}
+    </Dropdown>
   );
 };
 
