@@ -44,8 +44,8 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
         set((state) => ({
           userTracks: [...state.userTracks, ...data],
           currentPage: state.currentPage + 1,
+          totalTracks: headers['x-total-count'],
         }));
-        set({ totalTracks: headers['x-total-count'] });
 
         return get().userTracks;
       })
