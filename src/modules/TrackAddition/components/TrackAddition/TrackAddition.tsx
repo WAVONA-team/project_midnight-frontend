@@ -123,6 +123,11 @@ const TrackAddition: React.FC = memo(() => {
 
   useEffect(() => {
     clearParsedTrack();
+
+    return () => {
+      setResolvedUrl(null);
+      clearParsedTrack();
+    };
   }, []);
 
   useEffect(() => {
