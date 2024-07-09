@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 
 import {
-  type TracksSearchPageState,
-  tracksSearchPageSlice,
-} from '@/pages/TrackSearchPage/store';
-import {
   type TracksPageState,
   tracksPageSlice,
 } from '@/pages/TracksPage/store';
@@ -28,7 +24,7 @@ export const useStore = create<
     TrackAdditionState &
     userSearchHistoryState &
     TracksPageState &
-    TracksSearchPageState &
+    TracksPageState &
     TrackActionsState
 >((...a) => ({
   ...createUserSlice(...a),
@@ -36,6 +32,6 @@ export const useStore = create<
   ...parseTrackSlice(...a),
   ...userSearchHistorySlice(...a),
   ...tracksPageSlice(...a),
-  ...tracksSearchPageSlice(...a),
+  ...tracksPageSlice(...a),
   ...trackActionsSlice(...a),
 }));

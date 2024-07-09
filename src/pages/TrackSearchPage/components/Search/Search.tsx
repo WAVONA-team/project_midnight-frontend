@@ -2,6 +2,9 @@ import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
+
+import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
+
 import debounce from 'lodash.debounce';
 
 import { SearchInput } from '@/ui/Input';
@@ -14,8 +17,6 @@ export const Search: React.FC = React.memo(() => {
     getTracksByUser,
     currentPage,
     clearUserTracks,
-    query,
-    setQuery,
     setTracks,
     setIsQueryTracksLoading,
   } = useStore(
@@ -24,8 +25,6 @@ export const Search: React.FC = React.memo(() => {
       getTracksByUser,
       currentPage,
       clearUserTracks,
-      query,
-      setQuery,
       setTracks,
       setIsQueryTracksLoading,
     }) => ({
@@ -33,12 +32,15 @@ export const Search: React.FC = React.memo(() => {
       getTracksByUser,
       currentPage,
       clearUserTracks,
-      query,
-      setQuery,
       setTracks,
       setIsQueryTracksLoading,
     }),
   );
+
+  const { query, setQuery } = tracksSearchPageSlice(({ query, setQuery }) => ({
+    query,
+    setQuery,
+  }));
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserTracks();
