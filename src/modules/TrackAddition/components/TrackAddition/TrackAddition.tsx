@@ -109,7 +109,7 @@ const TrackAddition: React.FC = memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && parsedTrack) {
+    if (user && parsedTrack && !showModal) {
       checkTrack(parsedTrack?.id, user?.id)
         .then(() => {
           setIsTrackSave(false);
@@ -117,6 +117,8 @@ const TrackAddition: React.FC = memo(() => {
         .catch(() => {
           setIsTrackSave(true);
         });
+      handlerTrackModal!(e);
+    } else {
       handlerTrackModal!(e);
     }
   };
