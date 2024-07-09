@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
 import { modalButtons } from '@/modules/TrackModal';
-import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
+import { TrackModal } from '@/modules/TrackModal';
+import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
