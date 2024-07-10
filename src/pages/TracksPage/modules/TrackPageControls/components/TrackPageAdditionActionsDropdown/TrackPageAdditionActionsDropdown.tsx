@@ -12,7 +12,6 @@ import { MenuButton } from '@/ui/Button';
 import addToQueueIcon from '../../../../../../../public/buttons/actionButtons/addToQueueIcon.svg';
 import addTrackIcon from '../../../../../../../public/buttons/actionButtons/addTrackIcon.svg';
 import repeatIcon from '../../../../../../../public/buttons/actionButtons/repeatIcon.svg';
-import shuffleIcon from '../../../../../../../public/buttons/actionButtons/shuffleIcon.svg';
 import kebabIcon from '../../../../../../../public/kebab/kebab.svg';
 
 const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
@@ -42,12 +41,6 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
     },
     {
       id: 3,
-      title: 'Вперемешку',
-      icon: shuffleIcon,
-      handler: () => {},
-    },
-    {
-      id: 4,
       title: 'Повторить',
       icon: repeatIcon,
       handler: () => {},
@@ -83,14 +76,14 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
         disabled={!tracks?.length}
         className="
           p-1
-          border-2
-          border-solid
+          sm:border-2
+          sm:border-solid
           rounded-full
           ml-3.5
-          border-on-secondary-davys-gray
-          hover:border-on-secondary-davys-gray
+          sm:border-on-secondary-davys-gray
+          hover:sm:border-on-secondary-davys-gray
           focus:outline-none
-          "
+        "
       >
         <img src={kebabIcon} alt="Addition Actions" />
       </button>
@@ -98,10 +91,11 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="
-            sm:left-3
-            sm:top-10
-            sm:w-[254px]
-            sm:absolute
+            hover:border-t-xl
+            md:left-3
+            md:top-12
+            md:w-[254px]
+            md:absolute
             bottom-[54px]
             py-4
             sm:py-0

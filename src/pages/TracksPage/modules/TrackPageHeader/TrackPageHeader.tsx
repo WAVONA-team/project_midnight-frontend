@@ -5,7 +5,6 @@ import debounce from 'lodash.debounce';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
-import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
@@ -16,8 +15,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     currentPage,
     setTracks,
     clearUserTracks,
-    isFavouriteTracksLoading,
-    setIsFavouriteTracksLoading,
+
     query,
     setQuery,
     setIsQueryTracksLoading,
@@ -101,15 +99,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
             placeholder="Название, исполнитель..."
             value={query}
             onChange={onChangeHandler}
-          />
-        </div>
-
-        <div className="flex justify-center sm:self-end">
-          <ToggleButton
-            leftTitle="Все треки"
-            rightTitle="Избранные"
-            isFavouriteTracksLoading={isFavouriteTracksLoading}
-            setIsFavouriteTracksLoading={setIsFavouriteTracksLoading}
           />
         </div>
       </div>

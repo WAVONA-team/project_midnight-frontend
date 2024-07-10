@@ -107,7 +107,7 @@ const TrackPageControls: React.FC = React.memo(() => {
         mb-12
       "
     >
-      <div className="mr-5 mb-6 xl:mr-20">
+      <div className="mr-5 mb-6 xl:mr-20 hidden sm:block">
         <h1
           className="
             font-rubik
@@ -134,22 +134,28 @@ const TrackPageControls: React.FC = React.memo(() => {
           items-center
         "
       >
-        <div className="flex w-[184px] items-center">
-          <ActionButton
-            icon={
-              isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
-            }
-            title={
-              isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
-            }
-            handler={() => handleTrack(tracks![0])}
-            disabled={!tracks?.length}
-          />
+        <div className="flex sm:justify-start justify-between w-full">
+          <div className="hidden sm:flex">
+            <ActionButton
+              icon={
+                isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
+              }
+              title={
+                isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
+              }
+              handler={() => handleTrack(tracks![0])}
+              disabled={!tracks?.length}
+            />
+          </div>
 
-          <TrackPageAdditionActionsDropdown />
+          <div className="order-2 sm:order-1 self-center">
+            <TrackPageAdditionActionsDropdown />
+          </div>
+
+          <div className="order-1 sm:order-1 sm:ml-auto self-center">
+            <TrackPageFiltersDropdown />
+          </div>
         </div>
-
-        <TrackPageFiltersDropdown />
       </div>
     </Container>
   );

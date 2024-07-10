@@ -108,7 +108,7 @@ const TrackPageFiltersDropdown: React.FC = React.memo(() => {
   return (
     <Menu
       as="div"
-      className="relative"
+      className="relative outline-none"
       ref={ref}
       onClick={handlerModal}
       onBlur={modalOnBlurHandler}
