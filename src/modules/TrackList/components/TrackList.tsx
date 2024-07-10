@@ -34,20 +34,27 @@ const TrackList: React.FC<Props> = React.memo(
     totalTracks,
     headerCondition = true,
   }) => {
-    const { currentTrack, changeCurrentTrack, changePlayerState, playerState } =
-      useStore(
-        ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }) => ({
-          currentTrack,
-          changeCurrentTrack,
-          changePlayerState,
-          playerState,
-        }),
-      );
+    const {
+      currentTrack,
+      changeCurrentTrack,
+      changePlayerState,
+      playerState,
+      isFavouriteTracksLoading,
+    } = useStore(
+      ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        isFavouriteTracksLoading,
+      }) => ({
+        currentTrack,
+        changeCurrentTrack,
+        changePlayerState,
+        playerState,
+        isFavouriteTracksLoading,
+      }),
+    );
 
     const handleTrack = (track: Track) => {
       changeCurrentTrack(track);
@@ -93,8 +100,10 @@ const TrackList: React.FC<Props> = React.memo(
         {!isLoading && !tracks.length && headerCondition && (
           <Container>
             <div className="flex flex-col items-center justify-center">
-              <h1 className="font-openSans text-2xl font-normal mb-4">
-                Здесь пока нет ни одного трека
+              <h1 className="font-openSans text-2xl font-normal mb-4 text-center">
+                {!isFavouriteTracksLoading
+                  ? 'Здесь пока нет ни одного трека'
+                  : 'Вы не добавили ни одного трека в избранное'}
               </h1>
               <p className="font-rubik text-base font-normal text-on-secondary-dim-gray mb-5">
                 Добавьте любимые треки прямо сейчас

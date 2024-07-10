@@ -17,18 +17,19 @@ const ActionButton: React.FC<Props> = React.memo(
         className={`
           ${className}
           font-rubik
-
           transition-all
           duration-290
           font-normal
           text-base
-          rounded-3xl
+          rounded-full
           tracking-wider
           outline-none
           text-on-primary-anti-flash-white
           border-2
-          border-solid
-          border-background-hight
+          sm:border-solid
+          bg-surface-eerie_black
+          border-none
+          sm:border-background-hight
           focus:outline-none
           focus:border-2
           focus:border-solid
@@ -54,7 +55,7 @@ const ActionButton: React.FC<Props> = React.memo(
           lg:hover:bg-primary-fire-brick
         `}
       >
-        <div className="flex">
+        <div className="flex justify-center">
           <img className={`${title && 'mr-2'}`} src={icon} alt="Play/Pause" />
           <span>{title}</span>
         </div>
