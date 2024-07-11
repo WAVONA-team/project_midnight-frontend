@@ -64,7 +64,7 @@ export const TrackHistory: React.FC = React.memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && e.trackId) {
+    if (user && e.trackId && !showModal) {
       checkTrack(e.trackId, user?.id)
         .then(() => {
           setIsTrackSave(false);
@@ -75,6 +75,8 @@ export const TrackHistory: React.FC = React.memo(() => {
         .finally(() => {
           handlerTracksModal!(e);
         });
+    } else {
+      handlerTracksModal!(e);
     }
   };
 
