@@ -9,10 +9,8 @@ import { TrackActionsState } from './types/index.ts';
 export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   checkTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .get<Track>(`check-track/${userId}/${trackId}`)
-      .then((res) => {
-        return res.data as Track;
-      })
+      .get<Track>(`/track/check-track/${userId}/${trackId}`)
+      .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;

@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
@@ -23,11 +23,9 @@ import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
-const { ShareButton } = modalButtons;
+const { ShareButton, FavoriteButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
-  const [, setIsTrackSave] = useState(false);
-
   const {
     user,
     parsedTrack,
@@ -109,15 +107,10 @@ const TrackAddition: React.FC = memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && parsedTrack && !showModal) {
-      checkTrack(parsedTrack?.id, user?.id)
-        .then(() => {
-          setIsTrackSave(false);
-        })
-        .catch(() => {
-          setIsTrackSave(true);
-        });
-      handlerTrackModal!(e);
+    if (user && parsedTrack) {
+      checkTrack(parsedTrack?.id, user?.id).finally(() =>
+        handlerTrackModal!(e),
+      );
     }
   };
 
@@ -327,6 +320,13 @@ const TrackAddition: React.FC = memo(() => {
             modalOnCloseHandler={modalOnCloseHandler}
             actionButtons={
               <>
+                <Menu.Item
+                  as={FavoriteButton}
+                  selectedTrack={parsedTrack!}
+                  closeModal={modalOnCloseHandler!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+
                 <Menu.Item
                   as={ShareButton}
                   selectedTrack={parsedTrack!}
