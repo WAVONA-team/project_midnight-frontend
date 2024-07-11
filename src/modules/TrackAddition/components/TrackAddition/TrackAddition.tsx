@@ -23,11 +23,9 @@ import { DefaultInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
-const { ShareButton } = modalButtons;
+const { ShareButton, FavoriteButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
-  const [, setIsTrackSave] = useState(false);
-
   const {
     user,
     parsedTrack,
@@ -110,14 +108,9 @@ const TrackAddition: React.FC = memo(() => {
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
     if (user && parsedTrack) {
-      checkTrack(parsedTrack?.id, user?.id)
-        .then(() => {
-          setIsTrackSave(false);
-        })
-        .catch(() => {
-          setIsTrackSave(true);
-        });
-      handlerTrackModal!(e);
+      checkTrack(parsedTrack?.id, user?.id).finally(() =>
+        handlerTrackModal!(e),
+      );
     }
   };
 
@@ -319,6 +312,7 @@ const TrackAddition: React.FC = memo(() => {
           zIndex: -10,
         }}
       />
+
       <Menu>
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal
@@ -326,6 +320,13 @@ const TrackAddition: React.FC = memo(() => {
             modalOnCloseHandler={modalOnCloseHandler}
             actionButtons={
               <>
+                <Menu.Item
+                  as={FavoriteButton}
+                  selectedTrack={parsedTrack!}
+                  closeModal={modalOnCloseHandler!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+
                 <Menu.Item
                   as={ShareButton}
                   selectedTrack={parsedTrack!}

@@ -137,6 +137,7 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
+
         <Menu>
           <Portal openPortal={showModal} element={childElement}>
             <TrackModal
