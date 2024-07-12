@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useStore } from '@/store';
@@ -13,6 +13,7 @@ import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
+import { DeleteButton } from '@/modules/TrackModal/components/buttons';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -27,6 +28,8 @@ import { Spinner } from '@/ui/Spinner';
 const { ShareButton, FavoriteButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
+  const [isTrackSave, setIsTrackSave] = useState(false);
+
   const {
     user,
     parsedTrack,
@@ -110,9 +113,14 @@ const TrackAddition: React.FC = memo(() => {
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
     if (user && parsedTrack) {
-      checkTrack(parsedTrack?.id, user?.id).finally(() =>
-        handlerTrackModal!(e),
-      );
+      checkTrack(parsedTrack?.id, user?.id)
+        .then(() => {
+          setIsTrackSave(true);
+        })
+        .catch(() => {
+          setIsTrackSave(false);
+        });
+      handlerTrackModal!(e);
     }
   };
 
@@ -361,6 +369,13 @@ const TrackAddition: React.FC = memo(() => {
                   selectedTrack={parsedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
                 />
+                {isTrackSave && (
+                  <Menu.Item
+                    as={DeleteButton}
+                    selectedTrack={parsedTrack!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                )}
               </>
             }
             trackAuthor={parsedTrack && parsedTrack.author}
