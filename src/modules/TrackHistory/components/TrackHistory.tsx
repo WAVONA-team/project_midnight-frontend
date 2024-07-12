@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
+import { DeleteButton } from '@/modules/TrackModal/components/buttons';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -17,6 +18,8 @@ import { Container } from '@/ui/Container';
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
+  const [isTrackSave, setIsTrackSave] = useState(false);
+
   const {
     user,
     userSearchHistory,
@@ -26,6 +29,7 @@ export const TrackHistory: React.FC = React.memo(() => {
     playerState,
     changePlayerState,
     currentTrack,
+    checkTrack,
   } = useStore(
     ({
       user,
@@ -36,6 +40,7 @@ export const TrackHistory: React.FC = React.memo(() => {
       playerState,
       changePlayerState,
       currentTrack,
+      checkTrack,
     }) => ({
       user,
       userSearchHistory,
@@ -45,6 +50,7 @@ export const TrackHistory: React.FC = React.memo(() => {
       playerState,
       changePlayerState,
       currentTrack,
+      checkTrack,
     }),
   );
   const {
@@ -58,7 +64,23 @@ export const TrackHistory: React.FC = React.memo(() => {
 
   const clearHistory = () => {
     clearUserSearchHistory(user?.id as string);
+  };
 
+  const handlerProtectedModal = async (
+    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+  ) => {
+    if (user && e.trackId) {
+      checkTrack(e.trackId, user?.id)
+        .then(() => {
+          setIsTrackSave(true);
+        })
+        .catch(() => {
+          setIsTrackSave(false);
+        })
+        .finally(() => {
+          handlerTracksModal!(e);
+        });
+    }
   };
 
   return (
@@ -129,6 +151,13 @@ export const TrackHistory: React.FC = React.memo(() => {
                   selectedTrack={selectedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                 />
+                {isTrackSave && (
+                  <Menu.Item
+                    as={DeleteButton}
+                    selectedTrack={selectedTrack!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                )}
               </>
             }
             trackAuthor={selectedTrack! && selectedTrack.author}
