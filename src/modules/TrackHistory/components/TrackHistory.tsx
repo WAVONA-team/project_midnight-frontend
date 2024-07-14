@@ -102,12 +102,14 @@ export const TrackHistory: React.FC = React.memo(() => {
             modalOnCloseHandler={modalOnCloseHandler!}
             actionButtons={
               <>
-                <Menu.Item
-                  as={FavoriteButton}
-                  selectedTrack={selectedTrack!}
-                  closeModal={modalOnCloseHandler!}
-                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                />
+                <div className="lg:hidden">
+                  <Menu.Item
+                    as={FavoriteButton}
+                    selectedTrack={selectedTrack!}
+                    closeModal={modalOnCloseHandler!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                </div>
 
                 <Menu.Item
                   as={ShareButton}
