@@ -23,7 +23,7 @@ type Props = {
   headerCondition?: boolean;
 };
 
-const { ShareButton } = modalButtons;
+const { FavoriteButton, ShareButton } = modalButtons;
 
 const TrackList: React.FC<Props> = React.memo(
   ({
@@ -145,6 +145,15 @@ const TrackList: React.FC<Props> = React.memo(
               modalOnCloseHandler={modalOnCloseHandler!}
               actionButtons={
                 <>
+                  <div className="lg:hidden">
+                    <Menu.Item
+                      as={FavoriteButton}
+                      selectedTrack={selectedTrack!}
+                      closeModal={modalOnCloseHandler!}
+                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                    />
+                  </div>
+
                   <Menu.Item
                     as={ShareButton}
                     selectedTrack={selectedTrack!}
