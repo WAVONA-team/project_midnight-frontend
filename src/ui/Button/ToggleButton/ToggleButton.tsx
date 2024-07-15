@@ -16,17 +16,17 @@ const ToggleButton: React.FC<Props> = React.memo(
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
   }) => {
-    const { setIsUserTracksLoading, clearUserTracks } = useStore(
-      ({ setIsUserTracksLoading, clearUserTracks }) => ({
+    const { setIsUserTracksLoading, clearUserPlaylist } = useStore(
+      ({ setIsUserTracksLoading, clearUserPlaylist }) => ({
         setIsUserTracksLoading,
-        clearUserTracks,
+        clearUserPlaylist,
       }),
     );
 
     const handleChange = (value: boolean) => {
       if (isFavouriteTracksLoading === value) return;
       setIsFavouriteTracksLoading(value);
-      clearUserTracks();
+      clearUserPlaylist();
       setIsUserTracksLoading(true);
     };
 

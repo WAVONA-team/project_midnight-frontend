@@ -18,7 +18,7 @@ export const TracksPage: React.FC = React.memo(() => {
     setIsFavouriteTracksLoading,
     favouriteTracksIcon,
     allTracksIcon,
-    tracks,
+    userPlaylist,
     changeCurrentTrack,
     changePlayerState,
     playerState,
@@ -31,7 +31,7 @@ export const TracksPage: React.FC = React.memo(() => {
       allTracksIcon,
       allTracksTitle,
       favouriteTracksTitle,
-      tracks,
+      userPlaylist,
       changeCurrentTrack,
       changePlayerState,
       playerState,
@@ -43,7 +43,7 @@ export const TracksPage: React.FC = React.memo(() => {
       allTracksIcon,
       allTracksTitle,
       favouriteTracksTitle,
-      tracks,
+      userPlaylist,
       changeCurrentTrack,
       changePlayerState,
       playerState,
@@ -77,8 +77,8 @@ export const TracksPage: React.FC = React.memo(() => {
             icon={
               isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
             }
-            handler={() => handleTrack(tracks![0])}
-            disabled={!tracks?.length}
+            handler={() => handleTrack(userPlaylist!.tracks![0])}
+            disabled={!userPlaylist?.tracks?.length}
           />
         </div>
 
