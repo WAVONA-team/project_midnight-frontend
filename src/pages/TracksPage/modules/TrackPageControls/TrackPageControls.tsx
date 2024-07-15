@@ -68,36 +68,27 @@ const TrackPageControls: React.FC = React.memo(() => {
     changePlayerState(track.url === currentTrack?.url ? !playerState : true);
   };
 
-  const handlePlaylistStateButton = () => {
-    setAllTracksTitle('Слушать');
-    setAllTracksIcon(playIcon);
-    setFavouriteTracksTitle('Слушать');
-    setFavouriteTracksIcon(playIcon);
-
-    if (!isFavouriteTracksLoading && (playerState || !playerState)) {
-      setAllTracksTitle('Пауза');
-      setAllTracksIcon(pauseIcon);
-    }
-
-    if (!isFavouriteTracksLoading && !playerState) {
+  const handlePlaylistStateButton = (playlistId: string) => {
+    if (userPlaylist?.id === playlistId && (playerState || !playerState)) {
       setAllTracksTitle('Слушать');
       setAllTracksIcon(playIcon);
-    }
 
-    if (isFavouriteTracksLoading && (playerState || !playerState)) {
-      setFavouriteTracksTitle('Пауза');
-      setFavouriteTracksIcon(pauseIcon);
-    }
-
-    if (isFavouriteTracksLoading && !playerState) {
       setFavouriteTracksTitle('Слушать');
       setFavouriteTracksIcon(playIcon);
+    } else {
+      setAllTracksTitle('Пауза');
+      setAllTracksIcon(pauseIcon);
+
+      setFavouriteTracksTitle('Пауза');
+      setFavouriteTracksIcon(pauseIcon);
     }
   };
 
   useEffect(() => {
-    handlePlaylistStateButton();
-  }, [playerState]);
+    if (userPlaylist) {
+      handlePlaylistStateButton(userPlaylist!.id);
+    }
+  }, [playerState, userPlaylist?.name]);
 
   return (
     <Container
@@ -120,7 +111,9 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {isFavouriteTracksLoading ? 'Избранные' : 'Сохраненные треки'}
+          {userPlaylist?.name === 'Избранные треки'
+            ? 'Избранные треки'
+            : 'Сохраненные треки'}
         </h1>
       </div>
 
