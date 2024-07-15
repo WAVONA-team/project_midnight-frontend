@@ -1,7 +1,7 @@
+/* eslint-disable indent */
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
-import { Track } from 'project_midnight';
 
 import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 
@@ -22,6 +22,8 @@ const TracksContainer: React.FC = React.memo(() => {
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
+    setTracks,
+    tracks,
   } = useStore(
     ({
       user,
@@ -34,6 +36,8 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
+      setTracks,
+      tracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -45,6 +49,8 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
+      setTracks,
+      tracks,
     }),
   );
   const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
@@ -71,7 +77,7 @@ const TracksContainer: React.FC = React.memo(() => {
         order: order,
         sortType: sortType.type,
         isFavourite,
-      });
+      }).then((playlist) => setTracks(playlist.tracks!));
     }
   }, [isUserTracksLoading, isFiltering]);
 
@@ -82,7 +88,7 @@ const TracksContainer: React.FC = React.memo(() => {
     </Container>
   ) : (
     <TrackList
-      tracks={userPlaylist?.tracks as Track[]}
+      tracks={tracks}
       isLoading={isUserTracksLoading || isQueryTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
