@@ -1,6 +1,7 @@
 import { Track } from 'project_midnight';
 
 export type PlayerState = {
+  tracks: Track[];
   playerState: boolean;
   isLoop: boolean;
   volume: number;
@@ -10,6 +11,7 @@ export type PlayerState = {
   duration: number;
   seekTo: number;
   seeking: boolean;
+  setTracks: (tracks: Track[]) => void;
   changePlayerState: (playerState: boolean) => void;
   changeIsLoop: (isLoop: boolean) => void;
   changeVolume: (volume: number) => void;

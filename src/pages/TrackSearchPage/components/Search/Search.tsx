@@ -17,6 +17,7 @@ export const Search: React.FC = React.memo(() => {
     query,
     setQuery,
     setIsQueryTracksLoading,
+    setTracks,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }) => ({
       user,
       getTracksByUser,
@@ -34,13 +36,16 @@ export const Search: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage, { query });
+    getTracksByUser(user!.id, currentPage, { query }).then((playlist) =>
+      setTracks(playlist.tracks!),
+    );
   }, []);
 
   const debouncedGet = useCallback(debounce(getTracksByUserWrapper, 500), [
@@ -74,7 +79,10 @@ export const Search: React.FC = React.memo(() => {
         type="button"
         onClick={() => {
           clearUserPlaylist();
-          getTracksByUser(user!.id, currentPage).then(() => navigate(-1));
+          getTracksByUser(user!.id, currentPage).then((playlist) => {
+            setTracks(playlist.tracks!);
+            navigate(-1);
+          });
         }}
       >
         Отмена

@@ -1,7 +1,7 @@
+/* eslint-disable indent */
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
-import { Track } from 'project_midnight';
 
 import { TrackList } from '@/modules/TrackList';
 
@@ -20,6 +20,8 @@ const TracksContainer: React.FC = React.memo(() => {
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
+    setTracks,
+    tracks,
   } = useStore(
     ({
       user,
@@ -32,6 +34,8 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
+      setTracks,
+      tracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -43,6 +47,8 @@ const TracksContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
+      setTracks,
+      tracks,
     }),
   );
 
@@ -61,23 +67,23 @@ const TracksContainer: React.FC = React.memo(() => {
         sortType: 'updatedAt',
         order: 'desc',
         isFavourite,
-      });
+      }).then((playlist) => setTracks(playlist.tracks!));
     }
   }, [isUserTracksLoading]);
 
   return (isUserTracksLoading || isQueryTracksLoading) &&
     !userPlaylist?.tracks?.length ? (
-      <Container className="flex justify-center">
-        <Spinner width="w-10" height="h-10" />
-      </Container>
-    ) : (
-      <TrackList
-        tracks={userPlaylist?.tracks as Track[]}
-        isLoading={isUserTracksLoading || isQueryTracksLoading}
-        setIsLoading={setIsUserTracksLoading}
-        totalTracks={totalTracks}
-      />
-    );
+    <Container className="flex justify-center">
+      <Spinner width="w-10" height="h-10" />
+    </Container>
+  ) : (
+    <TrackList
+      tracks={tracks}
+      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      setIsLoading={setIsUserTracksLoading}
+      totalTracks={totalTracks}
+    />
+  );
 });
 
 export default TracksContainer;

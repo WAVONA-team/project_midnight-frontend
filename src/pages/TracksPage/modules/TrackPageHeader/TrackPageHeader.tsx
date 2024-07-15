@@ -17,6 +17,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     query,
     setQuery,
     setIsQueryTracksLoading,
+    setTracks,
   } = useStore(
     ({
       user,
@@ -26,6 +27,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }) => ({
       user,
       getTracksByUser,
@@ -34,13 +36,16 @@ const TrackPageHeader: React.FC = React.memo(() => {
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage, { query });
+    getTracksByUser(user!.id, currentPage, { query }).then((playlist) =>
+      setTracks(playlist.tracks!),
+    );
   }, []);
 
   const debouncedGet = useCallback(debounce(getTracksByUserWrapper, 500), [
@@ -58,7 +63,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
     setQuery('');
     clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage);
+    getTracksByUser(user!.id, currentPage).then((playlist) =>
+      setTracks(playlist.tracks!),
+    );
   };
 
   return (
