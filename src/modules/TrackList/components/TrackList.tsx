@@ -94,8 +94,6 @@ const TrackList: React.FC<Props> = React.memo(
       };
     }, [scrollHandler]);
 
-    console.log(tracks);
-
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
         {!isLoading && !tracks.length && headerCondition && (
