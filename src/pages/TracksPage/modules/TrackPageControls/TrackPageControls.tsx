@@ -18,7 +18,7 @@ const TrackPageControls: React.FC = React.memo(() => {
     changePlayerState,
     currentTrack,
     playerState,
-    tracks,
+    userPlaylist,
     allTracksTitle,
     favouriteTracksTitle,
     allTracksIcon,
@@ -34,7 +34,7 @@ const TrackPageControls: React.FC = React.memo(() => {
       changePlayerState,
       currentTrack,
       playerState,
-      tracks,
+      userPlaylist,
       user,
       allTracksTitle,
       favouriteTracksTitle,
@@ -50,7 +50,7 @@ const TrackPageControls: React.FC = React.memo(() => {
       changePlayerState,
       currentTrack,
       playerState,
-      tracks,
+      userPlaylist,
       user,
       allTracksTitle,
       favouriteTracksTitle,
@@ -143,8 +143,8 @@ const TrackPageControls: React.FC = React.memo(() => {
               title={
                 isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
               }
-              handler={() => handleTrack(tracks![0])}
-              disabled={!tracks?.length}
+              handler={() => handleTrack(userPlaylist!.tracks![0])}
+              disabled={!userPlaylist?.tracks?.length}
             />
           </div>
 

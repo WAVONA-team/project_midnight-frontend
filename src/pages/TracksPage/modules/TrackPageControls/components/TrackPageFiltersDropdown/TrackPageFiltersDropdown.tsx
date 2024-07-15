@@ -18,8 +18,8 @@ const TrackPageFiltersDropdown: React.FC = React.memo(() => {
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
 
-  const { tracks } = useStore(({ tracks }) => ({
-    tracks,
+  const { userPlaylist } = useStore(({ userPlaylist }) => ({
+    userPlaylist,
   }));
 
   useLayoutEffect(() => {
@@ -117,7 +117,7 @@ const TrackPageFiltersDropdown: React.FC = React.memo(() => {
       <SortButton
         title={currentTitle}
         isOpen={isOpen}
-        disabled={!tracks?.length}
+        disabled={!userPlaylist?.tracks?.length}
         onMouseDown={handlerButtonFocus}
       />
 
