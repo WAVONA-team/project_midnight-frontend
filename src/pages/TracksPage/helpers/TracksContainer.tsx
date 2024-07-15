@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
+import { Track } from 'project_midnight';
 
 import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 
 import { TrackList } from '@/modules/TrackList';
+
+import { Container } from '@/ui/Container';
+import { Spinner } from '@/ui/Spinner';
 
 const TracksContainer: React.FC = React.memo(() => {
   const {
@@ -12,57 +16,52 @@ const TracksContainer: React.FC = React.memo(() => {
     isUserTracksLoading,
     isQueryTracksLoading,
     setIsUserTracksLoading,
-    userTracks,
+    userPlaylist,
     getTracksByUser,
     currentPage,
-    setTracks,
     totalTracks,
     isFavouriteTracksLoading,
-    clearUserTracks,
+    clearUserPlaylist,
   } = useStore(
     ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userTracks,
+      userPlaylist,
       getTracksByUser,
       currentPage,
-      setTracks,
       totalTracks,
       isFavouriteTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
     }) => ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userTracks,
+      userPlaylist,
       getTracksByUser,
       currentPage,
-      setTracks,
       totalTracks,
       isFavouriteTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
     }),
   );
-  const { order, query, sortType, isFiltering, setIsFiltering } =
-    tracksSearchPageSlice(
-      ({ query, isFiltering, order, sortType, setIsFiltering }) => ({
-        isFiltering,
-        query,
-        order,
-        sortType,
-        setIsFiltering,
-      }),
-    );
+  const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
+    ({ query, isFiltering, order, sortType }) => ({
+      isFiltering,
+      query,
+      order,
+      sortType,
+    }),
+  );
 
   const isFavourite = isFavouriteTracksLoading;
 
   useEffect(() => {
     setIsUserTracksLoading(true);
 
-    return () => clearUserTracks();
+    return () => clearUserPlaylist();
   }, []);
 
   useEffect(() => {
@@ -72,16 +71,19 @@ const TracksContainer: React.FC = React.memo(() => {
         order: order,
         sortType: sortType.type,
         isFavourite,
-      })
-        .then((tracks) => setTracks(tracks))
-        .finally(() => setIsFiltering(false));
+      });
     }
   }, [isUserTracksLoading, isFiltering]);
 
-  return (
+  return (isUserTracksLoading || isQueryTracksLoading) &&
+    !userPlaylist?.tracks?.length ? (
+    <Container className="flex justify-center">
+      <Spinner width="w-10" height="h-10" />
+    </Container>
+  ) : (
     <TrackList
-      tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
+      tracks={userPlaylist?.tracks as Track[]}
+      isLoading={isUserTracksLoading || isQueryTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
     />

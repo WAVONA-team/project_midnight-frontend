@@ -14,18 +14,18 @@ export const TracksContainer: React.FC = React.memo(() => {
   const {
     isQueryTracksLoading,
     setIsQueryTracksLoading,
-    userTracks,
+    userPlaylist,
     totalTracks,
   } = useStore(
     ({
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userTracks,
+      userPlaylist,
       totalTracks,
     }) => ({
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userTracks,
+      userPlaylist,
       totalTracks,
     }),
   );
@@ -40,11 +40,10 @@ export const TracksContainer: React.FC = React.memo(() => {
     </Container>
   ) : (
     <TrackList
-      tracks={userTracks}
+      tracks={userPlaylist?.tracks?.slice(0, 5) || []}
       isLoading={isQueryTracksLoading}
       setIsLoading={setIsQueryTracksLoading}
       totalTracks={totalTracks}
-      header="Трек не найден :("
       headerCondition={!!query.length}
     />
   );

@@ -7,43 +7,45 @@ import BackTrackIcon from '@/ui/icons/BackTrackIcon/BackTrackIcon';
 import NextTrackIcon from '@/ui/icons/NextTrackIcon/NextTrackIcon';
 
 export const TrackControlButtons: React.FC = React.memo(() => {
-  const { tracks, currentTrack, changeCurrentTrack } = useStore(
-    ({ tracks, currentTrack, changeCurrentTrack }) => ({
-      tracks,
+  const { userPlaylist, currentTrack, changeCurrentTrack } = useStore(
+    ({ userPlaylist, currentTrack, changeCurrentTrack }) => ({
+      userPlaylist,
       currentTrack,
       changeCurrentTrack,
     }),
   );
 
   const NextTrack = () => {
-    const currentTrackIndex = tracks?.findIndex(
+    const currentTrackIndex = userPlaylist?.tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
-    const nextTrack = tracks![currentTrackIndex + 1];
+    const nextTrack = userPlaylist?.tracks![currentTrackIndex + 1];
 
-    if (tracks && nextTrack) {
+    if (userPlaylist?.tracks && nextTrack) {
       return changeCurrentTrack(nextTrack);
     }
 
-    if (tracks && !nextTrack) {
-      return changeCurrentTrack(tracks[0]);
+    if (userPlaylist?.tracks && !nextTrack) {
+      return changeCurrentTrack(userPlaylist.tracks[0]);
     }
   };
 
   const PreviosTrack = () => {
-    const currentTrackIndex = tracks?.findIndex(
+    const currentTrackIndex = userPlaylist?.tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
-    const previousTrack = tracks![currentTrackIndex - 1];
+    const previousTrack = userPlaylist?.tracks![currentTrackIndex - 1];
 
-    if (tracks && previousTrack) {
+    if (userPlaylist?.tracks && previousTrack) {
       return changeCurrentTrack(previousTrack);
     }
 
-    if (tracks && !previousTrack) {
-      return changeCurrentTrack(tracks[tracks.length - 1]);
+    if (userPlaylist?.tracks && !previousTrack) {
+      return changeCurrentTrack(
+        userPlaylist.tracks[userPlaylist.tracks.length - 1],
+      );
     }
   };
 
