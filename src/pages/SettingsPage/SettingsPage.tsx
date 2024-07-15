@@ -14,17 +14,23 @@ import Modal from '../../ui/Modal/Modal.tsx';
 export const SettingsPage: React.FC = React.memo(() => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
-  const { logout, setTracks, changePlayerState, changeCurrentTrack } = useStore(
-    ({ logout, setTracks, changePlayerState, changeCurrentTrack }) => ({
-      logout,
-      setTracks,
-      changePlayerState,
-      changeCurrentTrack,
-    }),
-  );
+  const { logout, changePlayerState, changeCurrentTrack, clearUserPlaylist } =
+    useStore(
+      ({
+        logout,
+        changePlayerState,
+        changeCurrentTrack,
+        clearUserPlaylist,
+      }) => ({
+        logout,
+        changePlayerState,
+        changeCurrentTrack,
+        clearUserPlaylist,
+      }),
+    );
 
   const logoutHandler = async () => {
-    setTracks([]);
+    clearUserPlaylist();
     changePlayerState(false);
     changeCurrentTrack(null);
     logout();

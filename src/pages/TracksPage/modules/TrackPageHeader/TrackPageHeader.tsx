@@ -13,9 +13,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     user,
     getTracksByUser,
     currentPage,
-    setTracks,
-    clearUserTracks,
-
+    clearUserPlaylist,
     query,
     setQuery,
     setIsQueryTracksLoading,
@@ -24,47 +22,25 @@ const TrackPageHeader: React.FC = React.memo(() => {
       user,
       getTracksByUser,
       currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
       query,
       setQuery,
       setIsQueryTracksLoading,
-      favouriteTracksIcon,
-      allTracksIcon,
-      tracks,
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
       query,
       setQuery,
       setIsQueryTracksLoading,
-      favouriteTracksIcon,
-      allTracksIcon,
-      tracks,
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
-    clearUserTracks();
+    clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-      setTracks(tracks),
-    );
+    getTracksByUser(user!.id, currentPage, { query });
   }, []);
 
   const debouncedGet = useCallback(debounce(getTracksByUserWrapper, 500), [
@@ -72,7 +48,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
   ]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearUserTracks();
+    clearUserPlaylist();
     setIsQueryTracksLoading(true);
     setQuery(e.target.value);
     debouncedGet(e.target.value);
@@ -80,9 +56,9 @@ const TrackPageHeader: React.FC = React.memo(() => {
 
   const clearValueHandler = () => {
     setQuery('');
-    clearUserTracks();
+    clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
+    getTracksByUser(user!.id, currentPage);
   };
 
   return (

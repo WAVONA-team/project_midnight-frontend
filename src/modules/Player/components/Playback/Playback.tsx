@@ -20,7 +20,7 @@ export const Playback: React.FC = React.memo(() => {
     changeSeeking,
     changeCurrentTrack,
     changePlayerState,
-    tracks,
+    userPlaylist,
   } = useStore(
     ({
       playerState,
@@ -35,7 +35,7 @@ export const Playback: React.FC = React.memo(() => {
       changeSeeking,
       changeCurrentTrack,
       changePlayerState,
-      tracks,
+      userPlaylist,
     }) => ({
       playerState,
       volume,
@@ -49,7 +49,7 @@ export const Playback: React.FC = React.memo(() => {
       changeSeeking,
       changeCurrentTrack,
       changePlayerState,
-      tracks,
+      userPlaylist,
     }),
   );
 
@@ -71,12 +71,12 @@ export const Playback: React.FC = React.memo(() => {
   };
 
   const handlerOnEnded = () => {
-    const currentTrackIndex = tracks?.findIndex(
+    const currentTrackIndex = userPlaylist?.tracks?.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
-    if (tracks && tracks[currentTrackIndex + 1]) {
-      changeCurrentTrack(tracks[currentTrackIndex + 1]);
+    if (userPlaylist?.tracks && userPlaylist.tracks[currentTrackIndex + 1]) {
+      changeCurrentTrack(userPlaylist.tracks[currentTrackIndex + 1]);
     } else {
       changePlayerState(false);
       changeCurrentTrack(null);

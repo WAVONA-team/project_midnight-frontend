@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
+import { Track } from 'project_midnight';
 
 import { TrackList } from '@/modules/TrackList';
+
+import { Container } from '@/ui/Container';
+import { Spinner } from '@/ui/Spinner';
 
 const TracksContainer: React.FC = React.memo(() => {
   const {
@@ -10,38 +14,35 @@ const TracksContainer: React.FC = React.memo(() => {
     isQueryTracksLoading,
     setIsUserTracksLoading,
     user,
-    userTracks,
+    userPlaylist,
     getTracksByUser,
     currentPage,
     totalTracks,
-    setTracks,
     isFavouriteTracksLoading,
-    clearUserTracks,
+    clearUserPlaylist,
   } = useStore(
     ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userTracks,
+      userPlaylist,
       getTracksByUser,
       currentPage,
-      setTracks,
       totalTracks,
       isFavouriteTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
     }) => ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userTracks,
+      userPlaylist,
       getTracksByUser,
       currentPage,
-      setTracks,
       totalTracks,
       isFavouriteTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
     }),
   );
 
@@ -50,7 +51,7 @@ const TracksContainer: React.FC = React.memo(() => {
   useEffect(() => {
     setIsUserTracksLoading(true);
 
-    return () => clearUserTracks();
+    return () => clearUserPlaylist();
   }, []);
 
   useEffect(() => {
@@ -60,18 +61,23 @@ const TracksContainer: React.FC = React.memo(() => {
         sortType: 'updatedAt',
         order: 'desc',
         isFavourite,
-      }).then((tracks) => setTracks(tracks));
+      });
     }
   }, [isUserTracksLoading]);
 
-  return (
-    <TrackList
-      tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
-      setIsLoading={setIsUserTracksLoading}
-      totalTracks={totalTracks}
-    />
-  );
+  return (isUserTracksLoading || isQueryTracksLoading) &&
+    !userPlaylist?.tracks?.length ? (
+      <Container className="flex justify-center">
+        <Spinner width="w-10" height="h-10" />
+      </Container>
+    ) : (
+      <TrackList
+        tracks={userPlaylist?.tracks as Track[]}
+        isLoading={isUserTracksLoading || isQueryTracksLoading}
+        setIsLoading={setIsUserTracksLoading}
+        totalTracks={totalTracks}
+      />
+    );
 });
 
 export default TracksContainer;
