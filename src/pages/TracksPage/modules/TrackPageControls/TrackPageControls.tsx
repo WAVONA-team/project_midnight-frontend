@@ -111,9 +111,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {userPlaylist?.name === 'Избранные треки'
-            ? 'Избранные треки'
-            : 'Сохраненные треки'}
+          {userPlaylist?.name || 'Загрузка...'}
         </h1>
       </div>
 

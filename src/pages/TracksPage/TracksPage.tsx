@@ -55,8 +55,6 @@ export const TracksPage: React.FC = React.memo(() => {
     changePlayerState(track.url === currentTrack?.url ? !playerState : true);
   };
 
-  console.log(userPlaylist);
-
   return (
     <div
       className={`${currentTrack && 'pb-28'}

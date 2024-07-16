@@ -12,20 +12,20 @@ import { Spinner } from '@/ui/Spinner';
 export const TracksContainer: React.FC = React.memo(() => {
 
   const {
+    userTracks,
     isQueryTracksLoading,
     setIsQueryTracksLoading,
-    userPlaylist,
     totalTracks,
   } = useStore(
     ({
+      userTracks,
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userPlaylist,
       totalTracks,
     }) => ({
+      userTracks,
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userPlaylist,
       totalTracks,
     }),
   );
@@ -40,7 +40,7 @@ export const TracksContainer: React.FC = React.memo(() => {
     </Container>
   ) : (
     <TrackList
-      tracks={userPlaylist?.tracks?.slice(0, 5) || []}
+      tracks={userTracks}
       isLoading={isQueryTracksLoading}
       setIsLoading={setIsQueryTracksLoading}
       totalTracks={totalTracks}

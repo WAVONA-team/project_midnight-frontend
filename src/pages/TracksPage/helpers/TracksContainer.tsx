@@ -7,50 +7,41 @@ import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-import { Container } from '@/ui/Container';
-import { Spinner } from '@/ui/Spinner';
-
 const TracksContainer: React.FC = React.memo(() => {
   const {
     user,
     isUserTracksLoading,
     isQueryTracksLoading,
     setIsUserTracksLoading,
-    userPlaylist,
     getTracksByUser,
     currentPage,
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
-    setTracks,
-    tracks,
+    userTracks,
   } = useStore(
     ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userPlaylist,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      setTracks,
-      tracks,
+      userTracks,
     }) => ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userPlaylist,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      setTracks,
-      tracks,
+      userTracks,
     }),
   );
   const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
@@ -77,18 +68,13 @@ const TracksContainer: React.FC = React.memo(() => {
         order: order,
         sortType: sortType.type,
         isFavourite,
-      }).then((playlist) => setTracks(playlist.tracks!));
+      });
     }
   }, [isUserTracksLoading, isFiltering]);
 
-  return (isUserTracksLoading || isQueryTracksLoading) &&
-    !userPlaylist?.tracks?.length ? (
-    <Container className="flex justify-center">
-      <Spinner width="w-10" height="h-10" />
-    </Container>
-  ) : (
+  return (
     <TrackList
-      tracks={tracks}
+      tracks={userTracks}
       isLoading={isUserTracksLoading || isQueryTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
