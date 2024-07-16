@@ -53,7 +53,7 @@ const TrackModal: FC<Props> = ({
       className="
           sm:right-0
           sm:top-8
-          sm:min-w-[265px]
+          sm:min-w-[280px]
           sm:absolute
           py-4
           sm:py-0
