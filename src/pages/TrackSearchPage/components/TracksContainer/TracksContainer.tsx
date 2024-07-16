@@ -9,34 +9,34 @@ import { Spinner } from '@/ui/Spinner';
 
 export const TracksContainer: React.FC = React.memo(() => {
   const {
+    userTracks,
     isQueryTracksLoading,
     setIsQueryTracksLoading,
-    userPlaylist,
     totalTracks,
     query,
   } = useStore(
     ({
+      userTracks,
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userPlaylist,
       totalTracks,
       query,
     }) => ({
+      userTracks,
       isQueryTracksLoading,
       setIsQueryTracksLoading,
-      userPlaylist,
       totalTracks,
       query,
     }),
   );
 
-  return isQueryTracksLoading && !userPlaylist?.tracks?.length ? (
+  return isQueryTracksLoading ? (
     <Container className="flex justify-center absolute left-1/2 -translate-x-1/2 top-4">
       <Spinner width="w-10" height="h-10" />
     </Container>
   ) : (
     <TrackList
-      tracks={userPlaylist?.tracks?.slice(0, 5) || []}
+      tracks={userTracks}
       isLoading={isQueryTracksLoading}
       setIsLoading={setIsQueryTracksLoading}
       totalTracks={totalTracks}

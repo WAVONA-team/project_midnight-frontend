@@ -57,10 +57,6 @@ export const TrackHistory: React.FC = React.memo(() => {
     childElement,
   } = useHandlerModal(userSearchHistory);
 
-  useEffect(() => {
-    return () => changeCurrentTrack(null);
-  }, []);
-
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {

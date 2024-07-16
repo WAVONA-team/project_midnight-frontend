@@ -7,45 +7,43 @@ import BackTrackIcon from '@/ui/icons/BackTrackIcon/BackTrackIcon';
 import NextTrackIcon from '@/ui/icons/NextTrackIcon/NextTrackIcon';
 
 export const TrackControlButtons: React.FC = React.memo(() => {
-  const { userPlaylist, currentTrack, changeCurrentTrack } = useStore(
-    ({ userPlaylist, currentTrack, changeCurrentTrack }) => ({
-      userPlaylist,
+  const { userTracks, currentTrack, changeCurrentTrack } = useStore(
+    ({ userTracks, currentTrack, changeCurrentTrack }) => ({
+      userTracks,
       currentTrack,
       changeCurrentTrack,
     }),
   );
 
   const NextTrack = () => {
-    const currentTrackIndex = userPlaylist?.tracks?.findIndex(
+    const currentTrackIndex = userTracks.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
-    const nextTrack = userPlaylist?.tracks![currentTrackIndex + 1];
+    const nextTrack = userTracks[currentTrackIndex + 1];
 
-    if (userPlaylist?.tracks && nextTrack) {
+    if (userTracks && nextTrack) {
       return changeCurrentTrack(nextTrack);
     }
 
-    if (userPlaylist?.tracks && !nextTrack) {
-      return changeCurrentTrack(userPlaylist.tracks[0]);
+    if (userTracks && !nextTrack) {
+      return changeCurrentTrack(userTracks[0]);
     }
   };
 
   const PreviosTrack = () => {
-    const currentTrackIndex = userPlaylist?.tracks?.findIndex(
+    const currentTrackIndex = userTracks.findIndex(
       (track) => track.url === currentTrack?.url,
     ) as number;
 
-    const previousTrack = userPlaylist?.tracks![currentTrackIndex - 1];
+    const previousTrack = userTracks[currentTrackIndex - 1];
 
-    if (userPlaylist?.tracks && previousTrack) {
+    if (userTracks && previousTrack) {
       return changeCurrentTrack(previousTrack);
     }
 
-    if (userPlaylist?.tracks && !previousTrack) {
-      return changeCurrentTrack(
-        userPlaylist.tracks[userPlaylist.tracks.length - 1],
-      );
+    if (userTracks && !previousTrack) {
+      return changeCurrentTrack(userTracks[userTracks.length - 1]);
     }
   };
 
