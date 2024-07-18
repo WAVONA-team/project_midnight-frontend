@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Track } from 'project_midnight';
 
-const useTestHandlerModal = (tracks: Track | Track[] | null) => {
+const useHandlerModal = (tracks: Track | Track[] | null) => {
   const [showModal, setShowModal] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
@@ -63,4 +63,4 @@ const useTestHandlerModal = (tracks: Track | Track[] | null) => {
   };
 };
 
-export default useTestHandlerModal;
+export default useHandlerModal;

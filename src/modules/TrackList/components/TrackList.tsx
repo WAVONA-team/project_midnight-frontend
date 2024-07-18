@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
 import { modalButtons } from '@/modules/TrackModal';
-import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
+import { TrackModal } from '@/modules/TrackModal';
+import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
@@ -23,7 +24,7 @@ type Props = {
   headerCondition?: boolean;
 };
 
-const { ShareButton } = modalButtons;
+const { FavoriteButton, ShareButton } = modalButtons;
 
 const TrackList: React.FC<Props> = React.memo(
   ({
@@ -143,6 +144,7 @@ const TrackList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
+
         <Menu>
           <Portal openPortal={showModal} element={childElement}>
             <TrackModal
@@ -150,6 +152,15 @@ const TrackList: React.FC<Props> = React.memo(
               modalOnCloseHandler={modalOnCloseHandler!}
               actionButtons={
                 <>
+                  <div className="lg:hidden">
+                    <Menu.Item
+                      as={FavoriteButton}
+                      selectedTrack={selectedTrack!}
+                      closeModal={modalOnCloseHandler!}
+                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                    />
+                  </div>
+
                   <Menu.Item
                     as={ShareButton}
                     selectedTrack={selectedTrack!}

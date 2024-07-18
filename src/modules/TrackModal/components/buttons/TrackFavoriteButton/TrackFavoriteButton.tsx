@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import favoriteIcon from '@/../public/buttons/actionButtons/favoriteicon.svg';
+import checked from '@/../public/isFavourite/checked.svg';
+import uncheked from '@/../public/isFavourite/unchecked.svg';
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
 
@@ -9,33 +10,39 @@ import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 type Props = {
   className: string;
   selectedTrack: Track;
+  closeModal?: () => void;
 };
 
 const TrackFavoriteButton: React.FC<Props> = React.memo(
   React.forwardRef(
     (
-      { className, selectedTrack },
+      { className, selectedTrack, closeModal = () => {} },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
-      const { saveTrack, user } = useStore(({ saveTrack, user }) => ({
-        saveTrack,
-        user,
-      }));
+      const { updateIsFavourite, user } = useStore(
+        ({ updateIsFavourite, user }) => ({
+          updateIsFavourite,
+          user,
+        }),
+      );
 
-      const handler = async () => {
-        if (user?.id) {
-          saveTrack(selectedTrack, user.id)
-            .then(() => console.log('Трек добавлен'))
-            .catch(() => console.log('Трек НЕ добален'));
-        }
+      const [isFavourite, setIsFavourite] = useState(selectedTrack.isFavourite);
+
+      const handler = () => {
+        updateIsFavourite(selectedTrack.id, user?.id!)
+          .then(() => {
+            setIsFavourite((prev) => !prev);
+            closeModal();
+          })
+          .catch(() => setIsFavourite(false));
       };
 
       return (
         <MenuButton
           ref={ref}
           className={className}
-          title="Добавить в избранное"
-          icon={favoriteIcon}
+          title={isFavourite ? 'Удалить из избранного' : 'Добавить в избранное'}
+          icon={isFavourite ? checked : uncheked}
           handler={handler}
         />
       );

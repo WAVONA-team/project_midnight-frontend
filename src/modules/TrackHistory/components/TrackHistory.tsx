@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -13,11 +13,9 @@ import { TrackInfo } from '@/components/TrackInfo';
 
 import { Container } from '@/ui/Container';
 
-const { ShareButton } = modalButtons;
+const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const [, setIsTrackSave] = useState(false);
-
   const {
     userSearchHistory,
     updateHistoryOrder,
@@ -25,8 +23,6 @@ export const TrackHistory: React.FC = React.memo(() => {
     playerState,
     changePlayerState,
     currentTrack,
-    checkTrack,
-    user,
   } = useStore(
     ({
       userSearchHistory,
@@ -35,8 +31,6 @@ export const TrackHistory: React.FC = React.memo(() => {
       playerState,
       changePlayerState,
       currentTrack,
-      checkTrack,
-      user,
     }) => ({
       userSearchHistory,
       updateHistoryOrder,
@@ -44,8 +38,6 @@ export const TrackHistory: React.FC = React.memo(() => {
       playerState,
       changePlayerState,
       currentTrack,
-      checkTrack,
-      user,
     }),
   );
   const {
@@ -56,29 +48,6 @@ export const TrackHistory: React.FC = React.memo(() => {
     selectedTrack,
     childElement,
   } = useHandlerModal(userSearchHistory);
-
-  const handlerProtectedModal = async (
-    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
-  ) => {
-    if (user && e.trackId) {
-      checkTrack(e.trackId, user?.id)
-        .then(() => {
-          setIsTrackSave(false);
-        })
-        .catch(() => {
-          setIsTrackSave(true);
-        })
-        .finally(() => {
-          handlerTracksModal!(e);
-        });
-    }
-  };
-
-  useEffect(() => {
-    if (showModal) {
-      setIsTrackSave(false);
-    }
-  }, [showModal]);
 
   return (
     <div>
@@ -114,13 +83,14 @@ export const TrackHistory: React.FC = React.memo(() => {
 
                   updateHistoryOrder(track.id);
                 }}
-                handlerModal={handlerProtectedModal!}
+                handlerModal={handlerTracksModal!}
                 modalOnBlurHandler={modalOnBlurHandler}
               />
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
+
       <Menu>
         <Portal openPortal={showModal} element={childElement}>
           <TrackModal
@@ -128,6 +98,15 @@ export const TrackHistory: React.FC = React.memo(() => {
             modalOnCloseHandler={modalOnCloseHandler!}
             actionButtons={
               <>
+                <div className="lg:hidden">
+                  <Menu.Item
+                    as={FavoriteButton}
+                    selectedTrack={selectedTrack!}
+                    closeModal={modalOnCloseHandler!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                </div>
+
                 <Menu.Item
                   as={ShareButton}
                   selectedTrack={selectedTrack!}

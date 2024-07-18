@@ -17,7 +17,7 @@ const MenuButton: React.FC<Props> = React.memo(
         className={`
           ${className}
           bg-[inherit]
-          w-full 
+          w-full
           border-t-0
           border-l-0
           border-r-0
