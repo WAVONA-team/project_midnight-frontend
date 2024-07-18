@@ -29,9 +29,7 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
       id: 1,
       title: 'Добавить трек',
       icon: addTrackIcon,
-      handler: () => {
-        navigate('/tracks/new');
-      },
+      handler: () => navigate('/tracks/new'),
     },
     {
       id: 2,
