@@ -10,7 +10,7 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
     updateIsFavourite,
     isFavouriteTracksLoading,
     setIsUserTracksLoading,
-    clearUserTracks,
+    clearUserPlaylist,
     user,
   } = useStore(
     ({
@@ -18,14 +18,14 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
       updateIsFavourite,
       isFavouriteTracksLoading,
       setIsUserTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
       user,
     }) => ({
       currentTrack,
       updateIsFavourite,
       isFavouriteTracksLoading,
       setIsUserTracksLoading,
-      clearUserTracks,
+      clearUserPlaylist,
       user,
     }),
   );
@@ -51,7 +51,7 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
             setIsTrackFavourite((prev) => !prev);
 
             if (isFavouriteTracksLoading) {
-              clearUserTracks();
+              clearUserPlaylist();
               setIsUserTracksLoading(true);
             }
           });

@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
+import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
@@ -12,10 +13,14 @@ import dateSortIcon from '../../../../../../../public/buttons/actionButtons/date
 import defaultSortIcon from '../../../../../../../public/buttons/actionButtons/defaultSortIcon.svg';
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
-const TrackPageDropdown: React.FC = React.memo(() => {
+const TrackPageFiltersDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
+
+  const { tracks } = useStore(({ tracks }) => ({
+    tracks,
+  }));
 
   useLayoutEffect(() => {
     if (window.innerWidth < 640) {
@@ -103,7 +108,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   return (
     <Menu
       as="div"
-      className="relative"
+      className="relative outline-none"
       ref={ref}
       onClick={handlerModal}
       onBlur={modalOnBlurHandler}
@@ -112,20 +117,22 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       <SortButton
         title={currentTitle}
         isOpen={isOpen}
+        disabled={!tracks?.length}
         onMouseDown={handlerButtonFocus}
       />
 
       <Portal openPortal={isOpen} element={childElement}>
         <Dropdown
           className="
-          sm:right-0
-          sm:top-8
-          sm:w-[254px]
-          sm:absolute
-          py-4
-          sm:py-0
-          shadow-[16px_-16px_16px_0px_#0C0D0B80]
-          overflow-hidden
+            sm:right-0
+            sm:top-8
+            sm:w-[254px]
+            sm:absolute
+            bottom-[54px]
+            py-4
+            sm:py-0
+            shadow-[16px_-16px_16px_0px_#0C0D0B80]
+            overflow-hidden
           "
           modalOnCloseHandler={modalOnCloseHandler}
         >
@@ -137,10 +144,10 @@ const TrackPageDropdown: React.FC = React.memo(() => {
               icon={control.icon}
               title={control.title}
               className="
-               last:border-b-0
-              last:rounded-b-xl
-              first:rounded-t-xl
-              first:hover:rounded-t-xl
+                last:border-b-0
+                last:rounded-b-xl
+                first:rounded-t-xl
+                first:hover:rounded-t-xl
               "
             />
           ))}
@@ -150,4 +157,4 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   );
 });
 
-export default TrackPageDropdown;
+export default TrackPageFiltersDropdown;

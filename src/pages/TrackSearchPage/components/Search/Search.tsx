@@ -13,38 +13,38 @@ export const Search: React.FC = React.memo(() => {
     user,
     getTracksByUser,
     currentPage,
-    clearUserTracks,
+    clearUserPlaylist,
     query,
     setQuery,
-    setTracks,
     setIsQueryTracksLoading,
+    setTracks,
   } = useStore(
     ({
       user,
       getTracksByUser,
       currentPage,
-      clearUserTracks,
+      clearUserPlaylist,
       query,
       setQuery,
-      setTracks,
       setIsQueryTracksLoading,
+      setTracks,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
-      clearUserTracks,
+      clearUserPlaylist,
       query,
       setQuery,
-      setTracks,
       setIsQueryTracksLoading,
+      setTracks,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
-    clearUserTracks();
+    clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-      setTracks(tracks),
+    getTracksByUser(user!.id, currentPage, { query }).then((playlist) =>
+      setTracks(playlist.tracks!),
     );
   }, []);
 
@@ -54,14 +54,14 @@ export const Search: React.FC = React.memo(() => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    clearUserTracks();
+    clearUserPlaylist();
     setIsQueryTracksLoading(true);
     debouncedGet(e.target.value);
   };
 
   const clearValueHandler = () => {
     setQuery('');
-    clearUserTracks();
+    clearUserPlaylist();
   };
 
   return (
@@ -78,10 +78,9 @@ export const Search: React.FC = React.memo(() => {
         className="mt-6 text-xs text-secondary-cadet-gray p-1"
         type="button"
         onClick={() => {
-          clearUserTracks();
-
-          getTracksByUser(user!.id, currentPage).then((tracks) => {
-            setTracks(tracks);
+          clearUserPlaylist();
+          getTracksByUser(user!.id, currentPage).then((playlist) => {
+            setTracks(playlist.tracks!);
             navigate(-1);
           });
         }}

@@ -1,4 +1,4 @@
-import { Track } from 'project_midnight';
+import { Playlist } from 'project_midnight';
 import { StateCreator } from 'zustand';
 
 import { httpClient } from '@/shared/api/httpClient';
@@ -6,8 +6,8 @@ import { ServerErrors } from '@/shared/types/ServerErrors';
 
 import { TracksPageState } from './types';
 
-export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
-  userTracks: [],
+export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
+  userPlaylist: null,
   isFavouriteTracksLoading: false,
   totalTracks: 0,
   isUserTracksLoading: true,
@@ -18,7 +18,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
   setCurrentPage: (number: number) => set({ currentPage: number }),
   setIsUserTracksLoading: (state) => set({ isUserTracksLoading: state }),
   setIsQueryTracksLoading: (state) => set({ isQueryTracksLoading: state }),
-  clearUserTracks: () => set({ userTracks: [], currentPage: 1 }),
+  clearUserPlaylist: () => set({ userPlaylist: null, currentPage: 1 }),
   getTracksByUser: async (
     userId: string,
     page: number,
@@ -37,17 +37,23 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set, get) => ({
     } = filterOptions;
 
     return await httpClient
-      .get<Track[]>(
+      .get<Playlist>(
         `/users/tracks/${userId}?page=${page}&query=${query}&sortType=${sortType}&order=${order}&isFavourite=${isFavourite}`,
       )
       .then(({ data, headers }) => {
         set((state) => ({
-          userTracks: [...state.userTracks, ...data],
+          userPlaylist: {
+            ...data,
+            tracks: [
+              ...(state.userPlaylist?.tracks || []),
+              ...data.tracks!,
+            ],
+          },
           currentPage: state.currentPage + 1,
           totalTracks: headers['x-total-count'],
         }));
 
-        return get().userTracks;
+        return data;
       })
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =

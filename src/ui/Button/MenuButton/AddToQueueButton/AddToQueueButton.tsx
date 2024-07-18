@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
 
-import addToQueueIcon from '../../../../../public/buttons/actionButtons/addToQueueIcon.svg';
+import addToQueueIcon from '../../../../../public/buttons/actionButtons/addTrackIcon.svg';
 
 type Props = {
   className?: string;

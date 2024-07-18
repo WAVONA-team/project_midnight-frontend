@@ -5,7 +5,6 @@ import debounce from 'lodash.debounce';
 
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
-import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
@@ -14,44 +13,38 @@ const TrackPageHeader: React.FC = React.memo(() => {
     user,
     getTracksByUser,
     currentPage,
-    setTracks,
-    clearUserTracks,
-    isFavouriteTracksLoading,
-    setIsFavouriteTracksLoading,
+    clearUserPlaylist,
     query,
     setQuery,
     setIsQueryTracksLoading,
+    setTracks,
   } = useStore(
     ({
       user,
       getTracksByUser,
       currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
-      setTracks,
-      clearUserTracks,
-      isFavouriteTracksLoading,
-      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
       query,
       setQuery,
       setIsQueryTracksLoading,
+      setTracks,
     }),
   );
 
   const getTracksByUserWrapper = useCallback((query: string) => {
-    clearUserTracks();
+    clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage, { query }).then((tracks) =>
-      setTracks(tracks),
+    getTracksByUser(user!.id, currentPage, { query }).then((playlist) =>
+      setTracks(playlist.tracks!),
     );
   }, []);
 
@@ -60,7 +53,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
   ]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearUserTracks();
+    clearUserPlaylist();
     setIsQueryTracksLoading(true);
     setQuery(e.target.value);
     debouncedGet(e.target.value);
@@ -68,9 +61,11 @@ const TrackPageHeader: React.FC = React.memo(() => {
 
   const clearValueHandler = () => {
     setQuery('');
-    clearUserTracks();
+    clearUserPlaylist();
 
-    getTracksByUser(user!.id, currentPage).then((tracks) => setTracks(tracks));
+    getTracksByUser(user!.id, currentPage).then((playlist) =>
+      setTracks(playlist.tracks!),
+    );
   };
 
   return (
@@ -87,15 +82,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
             placeholder="Название, исполнитель..."
             value={query}
             onChange={onChangeHandler}
-          />
-        </div>
-
-        <div className="flex justify-center sm:self-end">
-          <ToggleButton
-            leftTitle="Все треки"
-            rightTitle="Избранные"
-            isFavouriteTracksLoading={isFavouriteTracksLoading}
-            setIsFavouriteTracksLoading={setIsFavouriteTracksLoading}
           />
         </div>
       </div>

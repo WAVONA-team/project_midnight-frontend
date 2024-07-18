@@ -1,9 +1,9 @@
-import { Track } from 'project_midnight';
+import { Playlist } from 'project_midnight';
 
 import { FilterOptions } from '@/pages/TracksPage/store/types/FilterOptions';
 
 export type TracksPageState = {
-  userTracks: Track[];
+  userPlaylist: Playlist | null;
   totalTracks: number;
   isFavouriteTracksLoading: boolean;
   isUserTracksLoading: boolean;
@@ -17,6 +17,6 @@ export type TracksPageState = {
     userId: string,
     page: number,
     filterOptions?: FilterOptions,
-  ) => Promise<Track[]>;
-  clearUserTracks: () => void;
+  ) => Promise<Playlist>;
+  clearUserPlaylist: () => void;
 };

@@ -1,7 +1,7 @@
 import { Track } from 'project_midnight';
 
 export type PlayerState = {
-  tracks: Track[] | null;
+  tracks: Track[];
   playerState: boolean;
   isLoop: boolean;
   volume: number;
