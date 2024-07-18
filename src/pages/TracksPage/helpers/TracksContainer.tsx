@@ -70,7 +70,7 @@ const TracksContainer: React.FC = React.memo(() => {
       getTracksByUser(user!.id, currentPage, {
         query: query,
         order: order,
-        sortType: sortType,
+        sortType: sortType.type,
         isFavourite,
       })
         .then((tracks) => setTracks(tracks))
@@ -81,7 +81,7 @@ const TracksContainer: React.FC = React.memo(() => {
   return (
     <TrackList
       tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
       header={

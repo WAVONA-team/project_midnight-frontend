@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
-import { Track } from 'project_midnight';
 
 import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
+import { SortType } from '@/pages/TrackSearchPage/store/types';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
@@ -22,8 +22,9 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       clearUserTracks,
     }),
   );
-  const { setOrder, setSortType, setIsFiltering } = tracksSearchPageSlice(
-    ({ setOrder, setSortType, setIsFiltering }) => ({
+  const {sortType, setOrder, setSortType, setIsFiltering } = tracksSearchPageSlice(
+    ({ sortType, setOrder, setSortType, setIsFiltering }) => ({
+      sortType,
       setOrder,
       setSortType,
       setIsFiltering,
@@ -52,38 +53,34 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       id: 1,
       title: 'По дате загрузки',
       icon: dateSortIcon,
-      handler: (title: string) => setSortingInfo(title, 'createdAt', 'desc'),
+      handler: (title: string) => setSortingInfo( {name: title, type: 'createdAt'}, 'desc'),
     },
     {
       id: 2,
       title: 'По алфавиту',
       icon: alphaSortIcon,
-      handler: (titles: string) => setSortingInfo(titles, 'title', 'asc'),
+      handler: (title: string) => setSortingInfo( {name: title, type: 'title'}, 'asc'),
     },
     {
       id: 3,
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: (title: string) => setSortingInfo(title, 'source', 'desc'),
+      handler: (title: string) => setSortingInfo( {name: title, type: 'source'}, 'desc'),
     },
   ];
 
-  const [currentTitle, setCurrentTitle] = useState<string>(
-    sortControls[0].title,
-  );
   const reset = () => {
     clearUserTracks();
     setCurrentPage(1);
     setIsFiltering(true);
   };
+
   const setSortingInfo = (
-    title: string,
-    sortType: keyof Track,
+    sortType: SortType,
     order: 'desc' | 'asc',
   ) => {
     setSortType(sortType);
     setOrder(order);
-    setCurrentTitle(title);
     setIsOpen(!isOpen);
     reset();
   };
@@ -123,14 +120,14 @@ const TrackPageDropdown: React.FC = React.memo(() => {
   return (
     <Menu
       as="div"
-      className="relative"
+      className="relative outline-none"
       ref={ref}
       onClick={handlerModal}
       onBlur={modalOnBlurHandler}
       tabIndex={0}
     >
       <SortButton
-        title={currentTitle}
+        title={sortType.name}
         isOpen={isOpen}
         onMouseDown={handlerButtonFocus}
       />
@@ -153,7 +150,7 @@ const TrackPageDropdown: React.FC = React.memo(() => {
             <Menu.Item
               as={MenuButton}
               key={control.title}
-              handler={() => control.handler(control.title)}
+              handler={() => control.handler(control.title || 'По дате загрузки')}
               icon={control.icon}
               title={control.title}
               className="

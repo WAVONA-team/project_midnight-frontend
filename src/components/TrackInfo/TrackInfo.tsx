@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import dot from '@/../public/dot.svg';
 import checked from '@/../public/isFavourite/checked.svg';
@@ -44,7 +44,31 @@ const TrackInfo: React.FC<Props> = React.memo(
     handlerModal,
     modalOnBlurHandler,
   }) => {
-    const { playerState } = useStore(({ playerState }) => ({ playerState }));
+    const [isTrackFavourite, setIsTrackFavourite] = useState(isFavourite);
+    const {
+      playerState,
+      updateIsFavourite,
+      isFavouriteTracksLoading,
+      setIsUserTracksLoading,
+      clearUserTracks,
+      user,
+    } = useStore(
+      ({
+        playerState,
+        updateIsFavourite,
+        isFavouriteTracksLoading,
+        setIsUserTracksLoading,
+        clearUserTracks,
+        user,
+      }) => ({
+        playerState,
+        updateIsFavourite,
+        isFavouriteTracksLoading,
+        setIsUserTracksLoading,
+        clearUserTracks,
+        user,
+      }),
+    );
 
     const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
       if (id) {
