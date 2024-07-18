@@ -22,14 +22,15 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       clearUserTracks,
     }),
   );
-  const {sortType, setOrder, setSortType, setIsFiltering } = tracksSearchPageSlice(
-    ({ sortType, setOrder, setSortType, setIsFiltering }) => ({
-      sortType,
-      setOrder,
-      setSortType,
-      setIsFiltering,
-    }),
-  );
+  const { sortType, setOrder, setSortType, setIsFiltering } =
+    tracksSearchPageSlice(
+      ({ sortType, setOrder, setSortType, setIsFiltering }) => ({
+        sortType,
+        setOrder,
+        setSortType,
+        setIsFiltering,
+      }),
+    );
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
@@ -53,19 +54,22 @@ const TrackPageDropdown: React.FC = React.memo(() => {
       id: 1,
       title: 'По дате загрузки',
       icon: dateSortIcon,
-      handler: (title: string) => setSortingInfo( {name: title, type: 'createdAt'}, 'desc'),
+      handler: (title: string) =>
+        setSortingInfo({ name: title, type: 'createdAt' }, 'desc'),
     },
     {
       id: 2,
       title: 'По алфавиту',
       icon: alphaSortIcon,
-      handler: (title: string) => setSortingInfo( {name: title, type: 'title'}, 'asc'),
+      handler: (title: string) =>
+        setSortingInfo({ name: title, type: 'title' }, 'asc'),
     },
     {
       id: 3,
       title: 'По источнику',
       icon: sourceSortIcon,
-      handler: (title: string) => setSortingInfo( {name: title, type: 'source'}, 'desc'),
+      handler: (title: string) =>
+        setSortingInfo({ name: title, type: 'source' }, 'desc'),
     },
   ];
 
@@ -75,13 +79,9 @@ const TrackPageDropdown: React.FC = React.memo(() => {
     setIsFiltering(true);
   };
 
-  const setSortingInfo = (
-    sortType: SortType,
-    order: 'desc' | 'asc',
-  ) => {
+  const setSortingInfo = (sortType: SortType, order: 'desc' | 'asc') => {
     setSortType(sortType);
     setOrder(order);
-    setIsOpen(!isOpen);
     reset();
   };
 
@@ -150,7 +150,9 @@ const TrackPageDropdown: React.FC = React.memo(() => {
             <Menu.Item
               as={MenuButton}
               key={control.title}
-              handler={() => control.handler(control.title || 'По дате загрузки')}
+              handler={() =>
+                control.handler(control.title || 'По дате загрузки')
+              }
               icon={control.icon}
               title={control.title}
               className="
