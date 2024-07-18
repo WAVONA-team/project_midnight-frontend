@@ -9,6 +9,8 @@ import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPag
 
 import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 
+import pauseIcon from '../../../public/buttons/playerButtons/mainPagePauseIcon.svg';
+import playIcon from '../../../public/buttons/playerButtons/mainPagePlayIcon.svg';
 import ActionButton from '../../ui/Button/ActionButton/ActionButton.tsx';
 
 export const TracksPage: React.FC = React.memo(() => {
@@ -16,8 +18,6 @@ export const TracksPage: React.FC = React.memo(() => {
     currentTrack,
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
-    favouriteTracksIcon,
-    allTracksIcon,
     userPlaylist,
     changeCurrentTrack,
     changePlayerState,
@@ -27,10 +27,6 @@ export const TracksPage: React.FC = React.memo(() => {
       setIsFavouriteTracksLoading,
       currentTrack,
       isFavouriteTracksLoading,
-      favouriteTracksIcon,
-      allTracksIcon,
-      allTracksTitle,
-      favouriteTracksTitle,
       userPlaylist,
       changeCurrentTrack,
       changePlayerState,
@@ -39,10 +35,6 @@ export const TracksPage: React.FC = React.memo(() => {
       currentTrack,
       isFavouriteTracksLoading,
       setIsFavouriteTracksLoading,
-      favouriteTracksIcon,
-      allTracksIcon,
-      allTracksTitle,
-      favouriteTracksTitle,
       userPlaylist,
       changeCurrentTrack,
       changePlayerState,
@@ -75,7 +67,12 @@ export const TracksPage: React.FC = React.memo(() => {
           <ActionButton
             className="w-[62px] h-[62px]"
             icon={
-              isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
+              playerState &&
+              userPlaylist?.tracks?.find(
+                (track) => track.id === currentTrack?.id,
+              )
+                ? pauseIcon
+                : playIcon
             }
             handler={() => handleTrack(userPlaylist!.tracks![0])}
             disabled={!userPlaylist?.tracks?.length}
