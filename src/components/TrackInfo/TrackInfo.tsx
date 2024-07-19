@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import dot from '@/../public/dot.svg';
 import checked from '@/../public/isFavourite/checked.svg';
@@ -52,6 +53,8 @@ const TrackInfo: React.FC<Props> = React.memo(
       setIsUserTracksLoading,
       clearUserTracks,
       user,
+      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
     } = useStore(
       ({
         playerState,
@@ -60,6 +63,8 @@ const TrackInfo: React.FC<Props> = React.memo(
         setIsUserTracksLoading,
         clearUserTracks,
         user,
+        setIsFavouriteTracksLoading,
+        clearUserPlaylist,
       }) => ({
         playerState,
         updateIsFavourite,
@@ -67,8 +72,17 @@ const TrackInfo: React.FC<Props> = React.memo(
         setIsUserTracksLoading,
         clearUserTracks,
         user,
+        setIsFavouriteTracksLoading,
+        clearUserPlaylist,
       }),
     );
+
+    const toggleFavourite = () => {
+      if (isFavouriteTracksLoading) return;
+      setIsFavouriteTracksLoading(true);
+      clearUserPlaylist();
+      setIsUserTracksLoading(true);
+    };
 
     const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
       if (id) {
@@ -209,6 +223,30 @@ const TrackInfo: React.FC<Props> = React.memo(
               onClick={() => {
                 updateIsFavourite(id, user?.id as string).then(() => {
                   setIsTrackFavourite((prev) => !prev);
+
+                  if (isTrackFavourite) {
+                    toast.custom(() => (
+                      <div className="rounded-xl px-3.5 py-4 bg-surface-eerie_black">
+                        <span className="font-rubik font-normal text-base">
+                          Удалено из избранного
+                        </span>
+                      </div>
+                    ));
+                  } else {
+                    toast.custom(() => (
+                      <div className="font-rubik font-normal text-base rounded-xl px-3.5 py-4 bg-surface-eerie_black">
+                        <span className="font-rubik font-normal text-base mr-4">
+                          Добавлено в избранное
+                        </span>
+                        <button
+                          className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
+                          onClick={() => toggleFavourite()}
+                        >
+                          Перейти в избранное
+                        </button>
+                      </div>
+                    ));
+                  }
 
                   if (isFavouriteTracksLoading) {
                     clearUserTracks();
