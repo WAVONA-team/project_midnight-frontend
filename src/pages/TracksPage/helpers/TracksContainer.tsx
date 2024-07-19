@@ -5,50 +5,41 @@ import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-import { Container } from '@/ui/Container';
-import { Spinner } from '@/ui/Spinner';
-
 const TracksContainer: React.FC = React.memo(() => {
   const {
     isUserTracksLoading,
     isQueryTracksLoading,
     setIsUserTracksLoading,
     user,
-    userPlaylist,
     getTracksByUser,
     currentPage,
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
-    setTracks,
-    tracks,
+    userTracks,
   } = useStore(
     ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userPlaylist,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      setTracks,
-      tracks,
+      userTracks,
     }) => ({
       user,
       isUserTracksLoading,
       isQueryTracksLoading,
       setIsUserTracksLoading,
-      userPlaylist,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      setTracks,
-      tracks,
+      userTracks,
     }),
   );
 
@@ -67,18 +58,13 @@ const TracksContainer: React.FC = React.memo(() => {
         sortType: 'updatedAt',
         order: 'desc',
         isFavourite,
-      }).then((playlist) => setTracks(playlist.tracks!));
+      });
     }
   }, [isUserTracksLoading]);
 
-  return (isUserTracksLoading || isQueryTracksLoading) &&
-    !userPlaylist?.tracks?.length ? (
-    <Container className="flex justify-center">
-      <Spinner width="w-10" height="h-10" />
-    </Container>
-  ) : (
+  return (
     <TrackList
-      tracks={tracks}
+      tracks={userTracks}
       isLoading={isUserTracksLoading || isQueryTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}

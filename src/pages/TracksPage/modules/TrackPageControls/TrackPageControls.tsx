@@ -13,53 +13,32 @@ import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
   const {
-    isFavouriteTracksLoading,
     changeCurrentTrack,
     changePlayerState,
     currentTrack,
     playerState,
-    tracks,
-    allTracksTitle,
-    favouriteTracksTitle,
-    allTracksIcon,
-    favouriteTracksIcon,
-    setAllTracksTitle,
-    setFavouriteTracksTitle,
-    setAllTracksIcon,
-    setFavouriteTracksIcon,
+    userPlaylist,
+    setTracksTitle,
+    setTracksIcon,
   } = useStore(
     ({
-      isFavouriteTracksLoading,
       changeCurrentTrack,
       changePlayerState,
       currentTrack,
       playerState,
-      tracks,
+      userPlaylist,
       user,
-      allTracksTitle,
-      favouriteTracksTitle,
-      allTracksIcon,
-      favouriteTracksIcon,
-      setAllTracksTitle,
-      setFavouriteTracksTitle,
-      setAllTracksIcon,
-      setFavouriteTracksIcon,
+      setTracksTitle,
+      setTracksIcon,
     }) => ({
-      isFavouriteTracksLoading,
       changeCurrentTrack,
       changePlayerState,
       currentTrack,
       playerState,
-      tracks,
+      userPlaylist,
       user,
-      allTracksTitle,
-      favouriteTracksTitle,
-      allTracksIcon,
-      favouriteTracksIcon,
-      setAllTracksTitle,
-      setFavouriteTracksTitle,
-      setAllTracksIcon,
-      setFavouriteTracksIcon,
+      setTracksTitle,
+      setTracksIcon,
     }),
   );
 
@@ -69,35 +48,21 @@ const TrackPageControls: React.FC = React.memo(() => {
   };
 
   const handlePlaylistStateButton = () => {
-    setAllTracksTitle('Слушать');
-    setAllTracksIcon(playIcon);
-    setFavouriteTracksTitle('Слушать');
-    setFavouriteTracksIcon(playIcon);
-
-    if (!isFavouriteTracksLoading && (playerState || !playerState)) {
-      setAllTracksTitle('Пауза');
-      setAllTracksIcon(pauseIcon);
-    }
-
-    if (!isFavouriteTracksLoading && !playerState) {
-      setAllTracksTitle('Слушать');
-      setAllTracksIcon(playIcon);
-    }
-
-    if (isFavouriteTracksLoading && (playerState || !playerState)) {
-      setFavouriteTracksTitle('Пауза');
-      setFavouriteTracksIcon(pauseIcon);
-    }
-
-    if (isFavouriteTracksLoading && !playerState) {
-      setFavouriteTracksTitle('Слушать');
-      setFavouriteTracksIcon(playIcon);
+    if (
+      playerState &&
+      userPlaylist?.tracks?.find((track) => track.id === currentTrack?.id)
+    ) {
+      setTracksTitle('Пауза');
+      setTracksIcon(pauseIcon);
+    } else {
+      setTracksTitle('Слушать');
+      setTracksIcon(playIcon);
     }
   };
 
   useEffect(() => {
     handlePlaylistStateButton();
-  }, [playerState]);
+  }, [playerState, userPlaylist]);
 
   return (
     <Container
@@ -120,7 +85,7 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {isFavouriteTracksLoading ? 'Избранные' : 'Сохраненные треки'}
+          {userPlaylist?.name || 'Загрузка...'}
         </h1>
       </div>
 
@@ -138,13 +103,23 @@ const TrackPageControls: React.FC = React.memo(() => {
           <div className="hidden sm:flex">
             <ActionButton
               icon={
-                isFavouriteTracksLoading ? favouriteTracksIcon : allTracksIcon
+                playerState &&
+                userPlaylist?.tracks?.find(
+                  (track) => track.id === currentTrack?.id,
+                )
+                  ? pauseIcon
+                  : playIcon
               }
               title={
-                isFavouriteTracksLoading ? favouriteTracksTitle : allTracksTitle
+                playerState &&
+                userPlaylist?.tracks?.find(
+                  (track) => track.id === currentTrack?.id,
+                )
+                  ? 'Пауза'
+                  : 'Слушать'
               }
-              handler={() => handleTrack(tracks![0])}
-              disabled={!tracks?.length}
+              handler={() => handleTrack(userPlaylist!.tracks![0])}
+              disabled={!userPlaylist?.tracks?.length}
             />
           </div>
 

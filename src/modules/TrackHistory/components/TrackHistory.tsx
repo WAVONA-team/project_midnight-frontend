@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -48,10 +48,6 @@ export const TrackHistory: React.FC = React.memo(() => {
     selectedTrack,
     childElement,
   } = useHandlerModal(userSearchHistory);
-
-  useEffect(() => {
-    return () => changeCurrentTrack(null);
-  }, []);
 
   return (
     <div>

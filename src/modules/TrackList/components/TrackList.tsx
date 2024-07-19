@@ -70,9 +70,9 @@ const TrackList: React.FC<Props> = React.memo(
       childElement,
     } = useHandlerModal(tracks);
 
-    useEffect(() => {
-      return () => changeCurrentTrack(null);
-    }, []);
+    // useEffect(() => {
+    // return () => changeCurrentTrack(null);
+    // }, []);
 
     const scrollHandler = useCallback(() => {
       if (
