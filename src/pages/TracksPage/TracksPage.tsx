@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
@@ -46,6 +47,18 @@ export const TracksPage: React.FC = React.memo(() => {
     changeCurrentTrack(track);
     changePlayerState(track.url === currentTrack?.url ? !playerState : true);
   };
+
+  const handleControlIsOpen = () => {
+    if (playerState) {
+      return 170;
+    } else {
+      return 15;
+    }
+  };
+
+  useEffect(() => {
+    handleControlIsOpen();
+  }, [playerState]);
 
   return (
     <div
@@ -103,6 +116,19 @@ export const TracksPage: React.FC = React.memo(() => {
       <div className="sticky pt-1 top-0 bg-background-hight z-10 h-fit">
         <TrackPageControls />
       </div>
+
+      <Toaster
+        position={'bottom-center'}
+        containerStyle={{
+          bottom: handleControlIsOpen(),
+          left: 300,
+        }}
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          duration: 1000,
+        }}
+      />
 
       <TracksContainer />
     </div>
