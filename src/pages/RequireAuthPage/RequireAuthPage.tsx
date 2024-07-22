@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -15,9 +16,27 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     currentTrack,
   }));
 
+  const [notificationGapControl, setNotificationGapControl] =
+    useState<number>(15);
+  const [notificationGapModal, setNotificationGapModal] = useState<number>(65);
+
   if (!user) {
     return <Navigate to="/login" replace />;
   }
+
+  const handleControlIsOpen = () => {
+    if (currentTrack) {
+      setNotificationGapControl(170);
+      setNotificationGapModal(230);
+    } else {
+      setNotificationGapControl(15);
+      setNotificationGapModal(65);
+    }
+  };
+
+  useEffect(() => {
+    handleControlIsOpen();
+  }, [currentTrack]);
 
   return (
     <div
@@ -31,6 +50,38 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
       "
     >
       <NavBar className="order-2 lg:order-none" />
+
+      <div className="fixed hidden lg:block">
+        <Toaster
+          position="bottom-center"
+          containerStyle={{
+            bottom: notificationGapControl,
+            left: 300,
+            color: 'rgba(235, 235, 235, 1)',
+          }}
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            duration: 1000,
+          }}
+        />
+      </div>
+
+      <div className="fixed block lg:hidden">
+        <Toaster
+          position="bottom-center"
+          containerStyle={{
+            bottom: notificationGapModal,
+            left: 0,
+            color: 'rgba(235, 235, 235, 1)',
+          }}
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            duration: 1000,
+          }}
+        />
+      </div>
 
       <main className="order-1 lg:order-0">
         {children || <Outlet />}
