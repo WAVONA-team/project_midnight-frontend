@@ -18,8 +18,9 @@ import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import TextButton from '@/ui/Button/TextButtonWithIcon/TextButtonWithIcon';
 import { Container } from '@/ui/Container';
-import { DefaultInput } from '@/ui/Input';
+import { SearchInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { Spinner } from '@/ui/Spinner';
 
@@ -84,6 +85,7 @@ const TrackAddition: React.FC = memo(() => {
   const {
     watch,
     control,
+    setValue,
     setError,
     clearErrors,
     formState: { errors },
@@ -152,6 +154,22 @@ const TrackAddition: React.FC = memo(() => {
     }
   }, [debounceValue]);
 
+  const clearValueHandler = () => {
+    setValue('url', '');
+    clearErrors('url');
+  };
+
+  const getClipboardText = async () => {
+    navigator.permissions
+      .query({ name: 'clipboard-read' as PermissionName })
+      .then(async () => {
+        const clipText = await navigator.clipboard.readText();
+        setValue('url', clipText);
+      })
+      .catch((err) => {
+        console.error('Ошибка чтения буфера обмена: ', err);
+      });
+  };
   return (
     <div
       className="
@@ -180,17 +198,18 @@ const TrackAddition: React.FC = memo(() => {
         >
           Добавление трека
         </h2>
-
+        <p className="text-secondary-cadet-gray lg:hidden">
+          Вставьте ссылку на трек
+        </p>
         <Controller
           name="url"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <DefaultInput
-              labelText="Вставьте ссылку на трек"
-              withoutLabel={true}
+            <SearchInput
               placeholder="Ссылка на трек"
+              clearValue={clearValueHandler}
               error={errors.url?.message}
-              className="mb-8 max-w-sm lg:mb-12"
+              className=" mb-4 max-w-sm lg:mb-7"
               onChange={(event) => {
                 clearErrors('url');
                 onChange(event.target.value);
@@ -205,8 +224,18 @@ const TrackAddition: React.FC = memo(() => {
             />
           )}
         />
+        <TextButton
+          title="Вставить из буфера обмена"
+          handler={getClipboardText}
+          className=" text-sm focus:text-secondary-satin-sheen-gold !w-fit mb-8 lg:mb-12"
+        />
+        {!parsedTrack && !isParsedTrackLoading && (
+          <p className=" text-secondary-cadet-gray mb-8 lg:mb-12">
+            Вставьте ссылку на трек из стримингового сервиса и добавьте его в
+            свою библиотеку!
+          </p>
+        )}
       </Container>
-
       <AnimatePresence>
         {isParsedTrackLoading && (
           <motion.div
