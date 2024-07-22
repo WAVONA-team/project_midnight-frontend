@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 
 import addToMainIcon from '../../../../../public/buttons/actionButtons/addToMainIcon.svg';
 
@@ -14,6 +16,10 @@ const TrackSaveOnMainButton: React.FC<Props> = React.memo(
 
     const saveOnMain = async () => {
       setIsClicked(true);
+
+      toast.custom(() => (
+        <NotificationMessage message="Добавлено в сохраненные треки" />
+      ));
     };
 
     return (

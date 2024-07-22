@@ -5,6 +5,8 @@ import checked from '@/../public/isFavourite/checked.svg';
 import uncheked from '@/../public/isFavourite/unchecked.svg';
 import { useStore } from '@/store';
 
+import { NotificationMessage } from '@/ui/NotificationMessage';
+
 export const IsFavouriteButton: React.FC = React.memo(() => {
   const {
     currentTrack,
@@ -60,27 +62,18 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
             user?.id as string,
           ).then(() => {
             setIsTrackFavourite((prev) => !prev);
+
             if (isTrackFavourite) {
               toast.custom(() => (
-                <div className="rounded-xl px-3.5 py-4 bg-surface-eerie_black">
-                  <span className="font-rubik font-normal text-base">
-                    Удалено из избранного
-                  </span>
-                </div>
+                <NotificationMessage message="Удалено из избранного" />
               ));
             } else {
               toast.custom(() => (
-                <div className="font-rubik font-normal text-base rounded-xl px-3.5 py-4 bg-surface-eerie_black">
-                  <span className="font-rubik font-normal text-base mr-4">
-                    Добавлено в избранное
-                  </span>
-                  <button
-                    className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
-                    onClick={() => toggleFavourite()}
-                  >
-                    Перейти в избранное
-                  </button>
-                </div>
+                <NotificationMessage
+                  message="Добавлено в избранное"
+                  handlerText="Перейти в избранное"
+                  handler={toggleFavourite}
+                />
               ));
             }
 
