@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -11,29 +11,36 @@ import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import TextButton from '@/ui/Button/TextButtonWithIcon/TextButtonWithIcon';
 import { Container } from '@/ui/Container';
 
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
   const {
+    user,
     userSearchHistory,
     updateHistoryOrder,
+    clearUserSearchHistory,
     changeCurrentTrack,
     playerState,
     changePlayerState,
     currentTrack,
   } = useStore(
     ({
+      user,
       userSearchHistory,
       updateHistoryOrder,
+      clearUserSearchHistory,
       changeCurrentTrack,
       playerState,
       changePlayerState,
       currentTrack,
     }) => ({
+      user,
       userSearchHistory,
       updateHistoryOrder,
+      clearUserSearchHistory,
       changeCurrentTrack,
       playerState,
       changePlayerState,
@@ -49,16 +56,21 @@ export const TrackHistory: React.FC = React.memo(() => {
     childElement,
   } = useHandlerModal(userSearchHistory);
 
-  useEffect(() => {
-    return () => changeCurrentTrack(null);
-  }, []);
+  const clearHistory = () => {
+    clearUserSearchHistory(user?.id as string);
+  };
 
   return (
     <div>
-      <Container>
+      <Container className=" justify-between flex">
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
           История Поиска
         </h2>
+        <TextButton
+          title="Очистить историю"
+          handler={clearHistory}
+          className=" focus:text-secondary-satin-sheen-gold !w-fit"
+        />
       </Container>
       <div className="flex flex-col gap-3 mt-3">
         <AnimatePresence>
