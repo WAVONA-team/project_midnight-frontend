@@ -156,16 +156,19 @@ const TrackAddition: React.FC = memo(() => {
 
   const clearValueHandler = () => {
     setValue('url', '');
+    clearErrors('url');
   };
 
   const getClipboardText = async () => {
-    navigator.permissions.query({ name: 'clipboard-read' });
-    try {
-      const clipText = await navigator.clipboard.readText();
-      setValue('url', clipText);
-    } catch (err) {
-      console.error('Ошибка чтения буфера обмена: ', err);
-    }
+    navigator.permissions
+      .query({ name: 'clipboard-read' as PermissionName })
+      .then(async () => {
+        const clipText = await navigator.clipboard.readText();
+        setValue('url', clipText);
+      })
+      .catch((err) => {
+        console.error('Ошибка чтения буфера обмена: ', err);
+      });
   };
   return (
     <div
@@ -226,11 +229,11 @@ const TrackAddition: React.FC = memo(() => {
           handler={getClipboardText}
           className=" text-sm focus:text-secondary-satin-sheen-gold !w-fit mb-8 lg:mb-12"
         />
-        { !parsedTrack && !isParsedTrackLoading && (
-            <p className=" text-secondary-cadet-gray mb-8 lg:mb-12">
-              Вставьте ссылку на трек из стримингового сервиса и добавьте его в
-              свою библиотеку!
-            </p>
+        {!parsedTrack && !isParsedTrackLoading && (
+          <p className=" text-secondary-cadet-gray mb-8 lg:mb-12">
+            Вставьте ссылку на трек из стримингового сервиса и добавьте его в
+            свою библиотеку!
+          </p>
         )}
       </Container>
       <AnimatePresence>
