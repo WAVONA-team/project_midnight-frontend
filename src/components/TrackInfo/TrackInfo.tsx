@@ -10,6 +10,7 @@ import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
@@ -226,25 +227,15 @@ const TrackInfo: React.FC<Props> = React.memo(
 
                   if (isTrackFavourite) {
                     toast.custom(() => (
-                      <div className="rounded-xl px-3.5 py-4 bg-surface-eerie_black">
-                        <span className="font-rubik font-normal text-base">
-                          Удалено из избранного
-                        </span>
-                      </div>
+                      <NotificationMessage message="Удалено из избранных" />
                     ));
                   } else {
                     toast.custom(() => (
-                      <div className="font-rubik font-normal text-base rounded-xl px-3.5 py-4 bg-surface-eerie_black">
-                        <span className="font-rubik font-normal text-base mr-4">
-                          Добавлено в избранное
-                        </span>
-                        <button
-                          className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
-                          onClick={() => toggleFavourite()}
-                        >
-                          Перейти в избранное
-                        </button>
-                      </div>
+                      <NotificationMessage
+                        message="Добавлено в избранное"
+                        handlerText="Перейти в избранное"
+                        handler={toggleFavourite}
+                      />
                     ));
                   }
 
