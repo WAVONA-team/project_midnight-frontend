@@ -40,15 +40,12 @@ export const Controls: React.FC = React.memo(() => {
     >
       <TimeRange />
 
-      <div className="grid grid-cols-[1fr_24px_40px] gap-x-5 lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
+      <div className="flex justify-between gap-x-5 lg:grid lg:grid-cols-3 justify-items-center items-center mt-3 px-4 lg:px-0">
         <TrackInformation />
 
-        <div className="lg:hidden">
+        <div className="lg:hidden flex gap-6 items-center">
           <IsFavouriteButton />
-        </div>
-
-        <div className="lg:hidden w-full h-10">
-          <PlayButton className="w-full h-full" />
+          <PlayButton className="w-10 h-10" />
         </div>
 
         <div className="hidden lg:block">
