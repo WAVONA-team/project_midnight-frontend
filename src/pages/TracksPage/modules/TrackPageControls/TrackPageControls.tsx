@@ -43,8 +43,13 @@ const TrackPageControls: React.FC = React.memo(() => {
   );
 
   const handleTrack = (track: Track) => {
-    changeCurrentTrack(track);
-    changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    if (track !== currentTrack) {
+      changePlayerState(track.url !== currentTrack?.url ? !playerState : false);
+      changeCurrentTrack(track);
+    } else {
+      changeCurrentTrack(userPlaylist!.tracks![0]);
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    }
   };
 
   const handlePlaylistStateButton = () => {
