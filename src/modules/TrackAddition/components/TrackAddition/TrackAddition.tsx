@@ -170,9 +170,7 @@ const TrackAddition: React.FC = memo(() => {
       })
       .catch(() => {
         toast.custom(() => (
-          <NotificationMessage
-            message={`Ошибка чтения буфера обмена, попробуйте другую ссылку`}
-          />
+          <NotificationMessage message={`Ошибка чтения буфера обмена`} />
         ));
       });
   };
