@@ -1,6 +1,6 @@
 import { Track } from 'project_midnight';
 import { type StateCreator } from 'zustand';
-import { PersistOptions, createJSONStorage, persist } from 'zustand/middleware';
+import { PersistOptions, persist } from 'zustand/middleware';
 
 import { PlayerState } from './types/PlayerState';
 
@@ -34,7 +34,6 @@ export const createPlayerSlice: StateCreator<PlayerState, []> = (
   }),
   {
     name: 'playerStorage',
-    storage: createJSONStorage(() => localStorage),
   },
 );
 
