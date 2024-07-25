@@ -13,7 +13,7 @@ const getUrl = (sub: string): string => {
 export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   checkTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .get<Track>(`/track/check-track/${userId}/${trackId}`)
+      .get<Track>(getUrl(`check-track/${userId}/${trackId}`))
       .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
