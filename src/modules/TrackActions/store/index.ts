@@ -44,9 +44,9 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
         throw { fieldErrors, formErrors };
       });
   },
-  deleteTrack: async (trackId: string) => {
+  deleteTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .delete(getUrl(`delete-from-saved/${trackId}`))
+      .delete(getUrl(`delete-from-saved/${userId}/${trackId}`))
       .then((res) => res.data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =

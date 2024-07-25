@@ -6,13 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
 import { modalButtons } from '@/modules/TrackModal';
-<<<<<<< HEAD
-import { TrackModal } from '@/modules/TrackModal';
-import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
-=======
 import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
 import { DeleteButton } from '@/modules/TrackModal/components/buttons';
->>>>>>> 6c81ec4 (feat(DEV-21): add delete modal button)
 
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
