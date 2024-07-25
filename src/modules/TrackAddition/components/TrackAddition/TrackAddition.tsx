@@ -14,6 +14,7 @@ import { useDebounce } from '@/shared/hooks/useDebounce';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import { DeleteButton } from '@/modules/TrackModal/components/buttons';
+import TrackFavoriteButton from '@/modules/TrackModal/components/buttons/TrackFavoriteButton/TrackFavoriteButton';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -113,14 +114,14 @@ const TrackAddition: React.FC = memo(() => {
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
     if (user && parsedTrack) {
-      checkTrack(parsedTrack?.id, user?.id)
-        .then(() => {
-          setIsTrackSave(true);
-        })
-        .catch(() => {
-          setIsTrackSave(false);
-        });
-      handlerTrackModal!(e);
+      try {
+        await checkTrack(parsedTrack?.id, user?.id);
+        setIsTrackSave(true);
+      } catch {
+        setIsTrackSave(false);
+      } finally {
+        handlerTrackModal!(e);
+      }
     }
   };
 
@@ -368,6 +369,11 @@ const TrackAddition: React.FC = memo(() => {
                   as={ShareButton}
                   selectedTrack={parsedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
+                />
+                <Menu.Item
+                  as={TrackFavoriteButton}
+                  selectedTrack={parsedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                 />
                 {isTrackSave && (
                   <Menu.Item
