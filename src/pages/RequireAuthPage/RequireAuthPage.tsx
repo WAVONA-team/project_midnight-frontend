@@ -51,7 +51,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     >
       <NavBar className="order-2 lg:order-none" />
 
-      <div className="fixed hidden lg:block">
+      <div className="absolute hidden lg:block">
         <Toaster
           position="bottom-center"
           containerStyle={{
@@ -63,11 +63,15 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
           gutter={8}
           toastOptions={{
             duration: 1000,
+            style: {
+              zIndex: 999,
+              backgroundColor: 'rgba(23, 25, 22, 1)',
+            },
           }}
         />
       </div>
 
-      <div className="fixed block lg:hidden">
+      <div className="absolute block lg:hidden">
         <Toaster
           position="bottom-center"
           containerStyle={{
