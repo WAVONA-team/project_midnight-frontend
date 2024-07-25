@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   message: string;
   handlerText?: string;
-  handler?: () => void;
+  handler?: React.MouseEvent<HTMLButtonElement, MouseEvent>;
 };
 
 const NotificationMessage: React.FC<Props> = React.memo(
