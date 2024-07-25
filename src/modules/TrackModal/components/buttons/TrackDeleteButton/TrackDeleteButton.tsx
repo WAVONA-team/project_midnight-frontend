@@ -17,13 +17,27 @@ const TrackDeleteButton: React.FC<Props> = React.memo(
       { className, selectedTrack },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
-      const { deleteTrack } = useStore(({ deleteTrack }) => ({
-        deleteTrack,
-      }));
+      const { deleteTrack, user, clearUserPlaylist, setIsUserTracksLoading } =
+        useStore(
+          ({
+            deleteTrack,
+            user,
+            clearUserPlaylist,
+            setIsUserTracksLoading,
+          }) => ({
+            deleteTrack,
+            user,
+            clearUserPlaylist,
+            setIsUserTracksLoading,
+          }),
+        );
 
       const handler = async () => {
-        deleteTrack(selectedTrack.id)
-          .then(() => console.log('Трэк удален'))
+        deleteTrack(selectedTrack.id, user?.id!)
+          .then(() => {
+            clearUserPlaylist();
+            setIsUserTracksLoading(true);
+          })
           .catch(() => console.log('Не удалось удалить трек'));
       };
       return (
