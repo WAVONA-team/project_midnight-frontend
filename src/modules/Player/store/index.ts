@@ -9,7 +9,7 @@ type MyPersist = (
   options: PersistOptions<PlayerState>,
 ) => StateCreator<PlayerState>;
 
-export const createPlayerSlice: StateCreator<PlayerState, []> = (
+export const createPlayerSlice: StateCreator<PlayerState> = (
   persist as MyPersist
 )(
   (set) => ({
