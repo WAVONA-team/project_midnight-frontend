@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import { useStore } from '@/store/index';
+import { createPlayerSlice } from '@/modules/Player/store';
 
 import { RangeInput } from '@/ui/Input';
 import VolumeIcon from '@/ui/icons/VolumeIcon/VolumeIcon';
 
 export const VolumeChanger: React.FC = React.memo(() => {
   const [showInput, setShowInput] = useState(false);
-  const { volume, changeVolume } = useStore(({ volume, changeVolume }) => ({
-    volume,
-    changeVolume,
-  }));
+  const { volume, changeVolume } = createPlayerSlice();
 
   const VolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(event.target.value);

@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { useStore } from '@/store/index';
+import { createPlayerSlice } from '@/modules/Player/store';
 
 export const TrackInformation: React.FC = React.memo(() => {
-  const { currentTrack } = useStore(({ currentTrack }) => ({
-    currentTrack,
-  }));
+  const { currentTrack } = createPlayerSlice();
   return (
     <div className="flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full">
       <img
