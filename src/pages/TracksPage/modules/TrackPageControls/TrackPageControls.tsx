@@ -6,7 +6,7 @@ import { useStore } from '@/store';
 import { Track } from 'project_midnight';
 
 import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
-import TrackPageFiltersDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown.tsx';
+import { TrackPageDropdown } from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 
@@ -17,24 +17,17 @@ const TrackPageControls: React.FC = React.memo(() => {
   const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
     createPlayerSlice();
 
-  const { userPlaylist, setTracksTitle, setTracksIcon, userTracks } = useStore(
-    ({ userPlaylist, user, setTracksTitle, setTracksIcon, userTracks }) => ({
+  const { userPlaylist, setTracksTitle, setTracksIcon } = useStore(
+    ({ userPlaylist, setTracksTitle, setTracksIcon }) => ({
       userPlaylist,
-      user,
       setTracksTitle,
       setTracksIcon,
-      userTracks,
     }),
   );
 
   const handleTrack = (track: Track) => {
-    if (track !== currentTrack) {
-      changePlayerState(track.url !== currentTrack?.url ? !playerState : false);
-      changeCurrentTrack(track);
-    } else {
-      changeCurrentTrack(userPlaylist!.tracks![0]);
-      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
-    }
+    changeCurrentTrack(track);
+    changePlayerState(track.url !== currentTrack?.url ? !playerState : false);
   };
 
   const handlePlaylistStateButton = () => {
@@ -108,8 +101,10 @@ const TrackPageControls: React.FC = React.memo(() => {
                   ? 'Пауза'
                   : 'Слушать'
               }
-              handler={() => handleTrack(userPlaylist!.tracks![0])}
-              disabled={!userTracks.length}
+              handler={() =>
+                handleTrack(currentTrack || userPlaylist!.tracks![0])
+              }
+              disabled={!userPlaylist?.tracks?.length}
             />
           </div>
 
@@ -118,7 +113,7 @@ const TrackPageControls: React.FC = React.memo(() => {
           </div>
 
           <div className="order-1 sm:order-1 sm:ml-auto self-center">
-            <TrackPageFiltersDropdown />
+            <TrackPageDropdown />
           </div>
         </div>
       </div>
