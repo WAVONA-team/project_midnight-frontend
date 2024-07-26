@@ -9,6 +9,8 @@ import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import { PlayButton } from '@/ui/Button';
 import { NotificationMessage } from '@/ui/NotificationMessage';
 import Streamline from '@/ui/Streamline/Streamline';
@@ -47,8 +49,9 @@ const TrackInfo: React.FC<Props> = React.memo(
     modalOnBlurHandler,
   }) => {
     const [isTrackFavourite, setIsTrackFavourite] = useState(isFavourite);
+    const { playerState } = createPlayerSlice();
+
     const {
-      playerState,
       updateIsFavourite,
       isFavouriteTracksLoading,
       setIsUserTracksLoading,
@@ -58,7 +61,6 @@ const TrackInfo: React.FC<Props> = React.memo(
       clearUserPlaylist,
     } = useStore(
       ({
-        playerState,
         updateIsFavourite,
         isFavouriteTracksLoading,
         setIsUserTracksLoading,
@@ -67,7 +69,6 @@ const TrackInfo: React.FC<Props> = React.memo(
         setIsFavouriteTracksLoading,
         clearUserPlaylist,
       }) => ({
-        playerState,
         updateIsFavourite,
         isFavouriteTracksLoading,
         setIsUserTracksLoading,

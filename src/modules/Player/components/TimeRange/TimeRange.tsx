@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useStore } from '@/store';
-
 import format from '@/shared/helpers/format';
+
+import { createPlayerSlice } from '@/modules/Player/store';
 
 import { RangeInput } from '@/ui/Input';
 
@@ -13,21 +13,7 @@ export const TimeRange: React.FC = React.memo(() => {
     changeSeeking,
     changeSeekTo,
     changeCurrentTime,
-  } = useStore(
-    ({
-      currentTime,
-      duration,
-      changeSeeking,
-      changeSeekTo,
-      changeCurrentTime,
-    }) => ({
-      currentTime,
-      duration,
-      changeSeeking,
-      changeSeekTo,
-      changeCurrentTime,
-    }),
-  );
+  } = createPlayerSlice();
 
   const elapsed = format(currentTime * duration);
   const fullness = format(duration);
