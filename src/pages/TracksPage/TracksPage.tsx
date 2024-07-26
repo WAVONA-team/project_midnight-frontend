@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
@@ -46,6 +46,10 @@ export const TracksPage: React.FC = React.memo(() => {
     changeCurrentTrack(track);
     changePlayerState(track.url === currentTrack?.url ? !playerState : true);
   };
+
+  useEffect(() => {
+    changePlayerState(false);
+  }, []);
 
   return (
     <div
