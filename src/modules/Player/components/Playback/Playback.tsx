@@ -5,8 +5,11 @@ import { OnProgressProps } from '@/lib/ReactPlayer/base';
 
 import { useStore } from '@/store/index';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 export const Playback: React.FC = React.memo(() => {
   const playerRef = useRef<ReactPlayer>(null);
+
   const {
     playerState,
     volume,
@@ -20,38 +23,11 @@ export const Playback: React.FC = React.memo(() => {
     changeSeeking,
     changeCurrentTrack,
     changePlayerState,
+  } = createPlayerSlice();
+
+  const { userTracks } = useStore(({ userTracks }) => ({
     userTracks,
-  } = useStore(
-    ({
-      playerState,
-      volume,
-      isLoop,
-      currentTrack,
-      seekTo,
-      seeking,
-      changeCurrentTime,
-      changeSecondsLoaded,
-      changeDuration,
-      changeSeeking,
-      changeCurrentTrack,
-      changePlayerState,
-      userTracks,
-    }) => ({
-      playerState,
-      volume,
-      isLoop,
-      currentTrack,
-      seekTo,
-      seeking,
-      changeCurrentTime,
-      changeSecondsLoaded,
-      changeDuration,
-      changeSeeking,
-      changeCurrentTrack,
-      changePlayerState,
-      userTracks,
-    }),
-  );
+  }));
 
   useEffect(() => {
     if (seeking) {

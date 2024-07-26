@@ -5,11 +5,14 @@ import checked from '@/../public/isFavourite/checked.svg';
 import uncheked from '@/../public/isFavourite/unchecked.svg';
 import { useStore } from '@/store';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import { NotificationMessage } from '@/ui/NotificationMessage';
 
 export const IsFavouriteButton: React.FC = React.memo(() => {
+  const { currentTrack } = createPlayerSlice();
+
   const {
-    currentTrack,
     updateIsFavourite,
     isFavouriteTracksLoading,
     setIsUserTracksLoading,
@@ -18,7 +21,6 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
     setIsFavouriteTracksLoading,
   } = useStore(
     ({
-      currentTrack,
       updateIsFavourite,
       isFavouriteTracksLoading,
       setIsUserTracksLoading,
@@ -26,7 +28,6 @@ export const IsFavouriteButton: React.FC = React.memo(() => {
       user,
       setIsFavouriteTracksLoading,
     }) => ({
-      currentTrack,
       updateIsFavourite,
       isFavouriteTracksLoading,
       setIsUserTracksLoading,

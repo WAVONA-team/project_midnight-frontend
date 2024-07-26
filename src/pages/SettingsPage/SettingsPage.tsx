@@ -5,6 +5,8 @@ import { useStore } from '@/store';
 
 import ExitModalContent from '@/pages/SettingsPage/components/ExitModalContent.tsx';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 
@@ -12,22 +14,15 @@ import arrowIcon from '../../../public/arrows/arrowIcon.svg';
 import Modal from '../../ui/Modal/Modal.tsx';
 
 export const SettingsPage: React.FC = React.memo(() => {
+  const { changePlayerState, changeCurrentTrack } = createPlayerSlice();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
-  const { logout, changePlayerState, changeCurrentTrack, clearUserPlaylist } =
-    useStore(
-      ({
-        logout,
-        changePlayerState,
-        changeCurrentTrack,
-        clearUserPlaylist,
-      }) => ({
-        logout,
-        changePlayerState,
-        changeCurrentTrack,
-        clearUserPlaylist,
-      }),
-    );
+  const { logout, clearUserPlaylist } = useStore(
+    ({ logout, clearUserPlaylist }) => ({
+      logout,
+      clearUserPlaylist,
+    }),
+  );
 
   const logoutHandler = async () => {
     clearUserPlaylist();
