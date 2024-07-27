@@ -16,9 +16,10 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     currentTrack,
   }));
 
-  const [notificationGapControl, setNotificationGapControl] =
+  const [notificationGapMobile, setNotificationGapMobile] =
+    useState<number>(65);
+  const [notificationGapDesktop, setNotificationGapDesktop] =
     useState<number>(15);
-  const [notificationGapModal, setNotificationGapModal] = useState<number>(65);
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -26,11 +27,11 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
   const handleControlIsOpen = () => {
     if (currentTrack) {
-      setNotificationGapControl(170);
-      setNotificationGapModal(230);
+      setNotificationGapMobile(173);
+      setNotificationGapDesktop(170);
     } else {
-      setNotificationGapControl(15);
-      setNotificationGapModal(65);
+      setNotificationGapMobile(65);
+      setNotificationGapDesktop(15);
     }
   };
 
@@ -51,27 +52,12 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
     >
       <NavBar className="order-2 lg:order-none" />
 
-      <div className="fixed hidden lg:block">
+      <main className="order-1 lg:order-0">
         <Toaster
+          containerClassName="absolute block lg:hidden"
           position="bottom-center"
           containerStyle={{
-            bottom: notificationGapControl,
-            left: 300,
-            color: 'rgba(235, 235, 235, 1)',
-          }}
-          reverseOrder={false}
-          gutter={8}
-          toastOptions={{
-            duration: 1000,
-          }}
-        />
-      </div>
-
-      <div className="fixed block lg:hidden">
-        <Toaster
-          position="bottom-center"
-          containerStyle={{
-            bottom: notificationGapModal,
+            bottom: notificationGapMobile,
             left: 0,
             color: 'rgba(235, 235, 235, 1)',
           }}
@@ -81,9 +67,22 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
             duration: 1000,
           }}
         />
-      </div>
 
-      <main className="order-1 lg:order-0">
+        <Toaster
+          containerClassName="absolute hidden lg:block"
+          position="bottom-center"
+          containerStyle={{
+            bottom: notificationGapDesktop,
+            left: 300,
+            color: 'rgba(235, 235, 235, 1)',
+          }}
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            duration: 1000,
+          }}
+        />
+
         {children || <Outlet />}
         {currentTrack && (
           <div className="sticky bottom-14 lg:bottom-0">
