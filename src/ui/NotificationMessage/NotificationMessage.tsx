@@ -18,7 +18,7 @@ const NotificationMessage: React.FC<Props> = React.memo(
         {handlerText && (
           <button
             className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
-            onClick={() => handler}
+            onClick={handler}
           >
             {handlerText}
           </button>
