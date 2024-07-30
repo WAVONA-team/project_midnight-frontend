@@ -16,6 +16,9 @@ const ActionButton: React.FC<Props> = React.memo(
         disabled={disabled}
         className={`
           ${className}
+          sm:w-[124px]
+          sm:flex
+          sm:box-border
           font-rubik
           transition-all
           duration-290
@@ -46,8 +49,6 @@ const ActionButton: React.FC<Props> = React.memo(
           sm:bg-primary-poppy
           px-2
           py-1
-          lg:py-2
-          lg:px-4
           sm:shadow-button-default
           sm:active:shadow-button-active
           sm:active:bg-primary-madder
@@ -55,7 +56,7 @@ const ActionButton: React.FC<Props> = React.memo(
           lg:hover:bg-primary-fire-brick
         `}
       >
-        <div className="flex justify-center">
+        <div className="flex justify-center sm:justify-start w-full">
           <img className={`${title && 'mr-2'}`} src={icon} alt="Play/Pause" />
           <span>{title}</span>
         </div>
