@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import dot from '@/../public/dot.svg';
 import checked from '@/../public/isFavourite/checked.svg';
@@ -9,6 +10,7 @@ import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
 
 import { PlayButton } from '@/ui/Button';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
@@ -52,6 +54,8 @@ const TrackInfo: React.FC<Props> = React.memo(
       setIsUserTracksLoading,
       clearUserTracks,
       user,
+      setIsFavouriteTracksLoading,
+      clearUserPlaylist,
     } = useStore(
       ({
         playerState,
@@ -60,6 +64,8 @@ const TrackInfo: React.FC<Props> = React.memo(
         setIsUserTracksLoading,
         clearUserTracks,
         user,
+        setIsFavouriteTracksLoading,
+        clearUserPlaylist,
       }) => ({
         playerState,
         updateIsFavourite,
@@ -67,8 +73,17 @@ const TrackInfo: React.FC<Props> = React.memo(
         setIsUserTracksLoading,
         clearUserTracks,
         user,
+        setIsFavouriteTracksLoading,
+        clearUserPlaylist,
       }),
     );
+
+    const toggleFavourite = () => {
+      if (isFavouriteTracksLoading) return;
+      setIsFavouriteTracksLoading(true);
+      clearUserPlaylist();
+      setIsUserTracksLoading(true);
+    };
 
     const handlerModalEvent = (e: React.MouseEvent<HTMLDivElement>) => {
       if (id) {
@@ -209,6 +224,20 @@ const TrackInfo: React.FC<Props> = React.memo(
               onClick={() => {
                 updateIsFavourite(id, user?.id as string).then(() => {
                   setIsTrackFavourite((prev) => !prev);
+
+                  if (isTrackFavourite) {
+                    toast.custom(() => (
+                      <NotificationMessage message="Удалено из избранных" />
+                    ));
+                  } else {
+                    toast.custom(() => (
+                      <NotificationMessage
+                        message="Добавлено в избранное"
+                        handlerText="Перейти в избранное"
+                        handler={toggleFavourite}
+                      />
+                    ));
+                  }
 
                   if (isFavouriteTracksLoading) {
                     clearUserTracks();
