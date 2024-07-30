@@ -18,6 +18,7 @@ import { Container } from '@/ui/Container';
 import { Spinner } from '@/ui/Spinner';
 
 type Props = {
+  onTrackPage?: boolean;
   isLoading: boolean;
   setIsLoading: (state: boolean) => void;
   tracks: Track[];
@@ -29,6 +30,7 @@ const { FavoriteButton, ShareButton } = modalButtons;
 
 const TrackList: React.FC<Props> = React.memo(
   ({
+    onTrackPage = false,
     isLoading,
     setIsLoading,
     tracks,
@@ -71,7 +73,7 @@ const TrackList: React.FC<Props> = React.memo(
       ) {
         setIsLoading(true);
       }
-    }, [tracks.length, totalTracks, setIsLoading]);
+    }, [, totalTracks, setIsLoading]);
 
     useEffect(() => {
       document.addEventListener('scroll', scrollHandler);
@@ -115,6 +117,8 @@ const TrackList: React.FC<Props> = React.memo(
                   transition={{ duration: 0.3 }}
                 >
                   <TrackInfo
+                    track={track}
+                    onTrackPage={onTrackPage}
                     id={track.id}
                     artist={track.author as string}
                     name={track.title}

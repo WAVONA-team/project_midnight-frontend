@@ -1,11 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 
 export const TrackInformation: React.FC = React.memo(() => {
   const { currentTrack } = createPlayerSlice();
+
+  const navigate = useNavigate();
+
   return (
-    <div className="flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full">
+    <div
+      onClick={() => navigate(`/tracks/${currentTrack!.id}`)}
+      className="flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full"
+    >
       <img
         src={currentTrack?.imgUrl as string}
         alt={currentTrack?.title}

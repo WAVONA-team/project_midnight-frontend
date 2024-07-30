@@ -1,14 +1,12 @@
-/* eslint-disable indent */
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
 import { TrackList } from '@/modules/TrackList';
 
-const TracksContainer: React.FC = React.memo(() => {
+const TrackPageContainer: React.FC = React.memo(() => {
   const {
     isUserTracksLoading,
-    isQueryTracksLoading,
     setIsUserTracksLoading,
     user,
     getTracksByUser,
@@ -16,30 +14,28 @@ const TracksContainer: React.FC = React.memo(() => {
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
-    userTracks,
+    userPlaylist,
   } = useStore(
     ({
       user,
       isUserTracksLoading,
-      isQueryTracksLoading,
       setIsUserTracksLoading,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      userTracks,
+      userPlaylist,
     }) => ({
       user,
       isUserTracksLoading,
-      isQueryTracksLoading,
       setIsUserTracksLoading,
       getTracksByUser,
       currentPage,
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      userTracks,
+      userPlaylist,
     }),
   );
 
@@ -64,13 +60,13 @@ const TracksContainer: React.FC = React.memo(() => {
 
   return (
     <TrackList
-      onTrackPage={false}
-      tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      onTrackPage={true}
+      tracks={userPlaylist?.tracks!}
+      isLoading={isUserTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
     />
   );
 });
 
-export default TracksContainer;
+export default TrackPageContainer;
