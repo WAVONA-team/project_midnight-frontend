@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   message: string;
   handlerText?: string;
-  handler?: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  handler?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const NotificationMessage: React.FC<Props> = React.memo(
@@ -18,7 +18,8 @@ const NotificationMessage: React.FC<Props> = React.memo(
         {handlerText && (
           <button
             className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
-            onClick={() => handler}
+            type="button"
+            onClick={handler}
           >
             {handlerText}
           </button>
