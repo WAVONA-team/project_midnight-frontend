@@ -11,7 +11,7 @@ export const TrackInformation: React.FC = React.memo(() => {
   return (
     <div
       onClick={() => navigate(`/tracks/${currentTrack!.id}`)}
-      className="flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full"
+      className="cursor-pointer flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full"
     >
       <img
         src={currentTrack?.imgUrl as string}
