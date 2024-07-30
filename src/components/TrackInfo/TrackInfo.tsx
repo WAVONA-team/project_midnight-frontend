@@ -8,6 +8,7 @@ import kebab from '@/../public/kebab/kebab.svg';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
+import { Track } from 'project_midnight';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 
@@ -16,6 +17,7 @@ import { NotificationMessage } from '@/ui/NotificationMessage';
 import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
+  track: Track;
   isDesktop?: boolean;
   id: string;
   name: string;
@@ -26,7 +28,7 @@ type Props = {
   isPlay: boolean;
   isFavourite: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
-
+  onTrackPage: boolean;
   handlerModal: (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => void;
@@ -35,6 +37,7 @@ type Props = {
 
 const TrackInfo: React.FC<Props> = React.memo(
   ({
+    track,
     isDesktop = false,
     id,
     name,
@@ -44,12 +47,14 @@ const TrackInfo: React.FC<Props> = React.memo(
     duration,
     isPlay,
     isFavourite,
+    onTrackPage,
     handlerPlay,
     handlerModal,
     modalOnBlurHandler,
   }) => {
     const [isTrackFavourite, setIsTrackFavourite] = useState(isFavourite);
-    const { playerState } = createPlayerSlice();
+    const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
+      createPlayerSlice();
 
     const {
       updateIsFavourite,
@@ -162,6 +167,65 @@ const TrackInfo: React.FC<Props> = React.memo(
                 </button>
               </Menu>
             </div>
+          </div>
+        </div>
+      );
+    }
+
+    const handleTrack = (track: Track) => {
+      changeCurrentTrack(track);
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    };
+
+    if (onTrackPage) {
+      return (
+        <div
+          onClick={() => handleTrack(track)}
+          className={`
+            flex 
+            mb-6 
+            justify-between 
+            cursor-pointer 
+            py-2 
+            px-2 
+            rounded-md
+            ${track.url === currentTrack?.url && playerState && '&& bg-background-trackInfo'}
+          `}
+        >
+          <div className="relative w-16 h-16 mr-4 rounded-md">
+            <img
+              className="w-full h-full object-cover"
+              src={track.imgUrl!}
+              alt="Track Image"
+            />
+
+            {track.url === currentTrack?.url && playerState && (
+              <div
+                className="absolute
+                  top-0
+                  right-0
+                  left-0
+                  bottom-0
+                  flex
+                  items-center
+                  justify-center
+                "
+              >
+                <Streamline />
+              </div>
+            )}
+          </div>
+          <div className="font-rubik text-on-primary-anti-flash-white break-words">
+            <div className="flex flex-col">
+              <h2 className="text-base font-normal max-w-[280px]">
+                {track.title}
+              </h2>
+              <h4>{track.author}</h4>
+              <p>{track.source}</p>
+            </div>
+          </div>
+          <div className="flex items-center text-on-primary-anti-flash-white">
+            <p>{track.duration}</p>
           </div>
         </div>
       );
