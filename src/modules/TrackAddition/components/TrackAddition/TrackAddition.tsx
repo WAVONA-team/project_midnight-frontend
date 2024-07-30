@@ -12,6 +12,7 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import { DeleteButton } from '@/modules/TrackModal/components/buttons';
@@ -36,14 +37,10 @@ const TrackAddition: React.FC = memo(() => {
   const {
     user,
     parsedTrack,
-    currentTrack,
     parseTrack,
     clearParsedTrack,
     isParsedTrackLoading,
     setIsParsedTrackLoading,
-    playerState,
-    changePlayerState,
-    changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
     checkTrack,
@@ -54,14 +51,10 @@ const TrackAddition: React.FC = memo(() => {
     ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -71,14 +64,10 @@ const TrackAddition: React.FC = memo(() => {
     }) => ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -87,6 +76,9 @@ const TrackAddition: React.FC = memo(() => {
       setResolvedUrl,
     }),
   );
+
+  const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
+    createPlayerSlice();
 
   const {
     watch,
