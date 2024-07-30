@@ -20,7 +20,6 @@ const TrackPageControls: React.FC = React.memo(() => {
     userPlaylist,
     setTracksTitle,
     setTracksIcon,
-    userTracks,
   } = useStore(
     ({
       changeCurrentTrack,
@@ -31,7 +30,6 @@ const TrackPageControls: React.FC = React.memo(() => {
       user,
       setTracksTitle,
       setTracksIcon,
-      userTracks,
     }) => ({
       changeCurrentTrack,
       changePlayerState,
@@ -41,7 +39,6 @@ const TrackPageControls: React.FC = React.memo(() => {
       user,
       setTracksTitle,
       setTracksIcon,
-      userTracks,
     }),
   );
 
