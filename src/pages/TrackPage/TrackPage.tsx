@@ -21,7 +21,7 @@ export const TrackPage: React.FC = React.memo(() => {
         <div className="flex items-center gap-12">
           <div className="">
             <img
-              className="w-[430px] h-[430px] object-cover"
+              className="w-[430px] h-[430px] rounded-xl object-cover"
               src={currentTrack?.imgUrl as string}
               alt="Track Image"
             />
