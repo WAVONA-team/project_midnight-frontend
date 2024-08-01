@@ -17,13 +17,12 @@ const TrackPageControls: React.FC = React.memo(() => {
   const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
     createPlayerSlice();
 
-  const { userPlaylist, setTracksTitle, setTracksIcon, userTracks } = useStore(
-    ({ userPlaylist, user, setTracksTitle, setTracksIcon, userTracks }) => ({
+  const { userPlaylist, setTracksTitle, setTracksIcon, } = useStore(
+    ({ userPlaylist, user, setTracksTitle, setTracksIcon }) => ({
       userPlaylist,
       user,
       setTracksTitle,
       setTracksIcon,
-      userTracks,
     }),
   );
 
