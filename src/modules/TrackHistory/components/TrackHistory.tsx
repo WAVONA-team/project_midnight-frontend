@@ -12,13 +12,26 @@ import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
 
+import TextButton from '@/ui/Button/TextButtonWithIcon/TextButtonWithIcon';
 import { Container } from '@/ui/Container';
 
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const { userSearchHistory, updateHistoryOrder } = useStore(
-    ({ userSearchHistory, updateHistoryOrder }) => ({
+  const {
+    user,
+    clearUserSearchHistory,
+    userSearchHistory,
+    updateHistoryOrder,
+  } = useStore(
+    ({
+      user,
+      clearUserSearchHistory,
+      userSearchHistory,
+      updateHistoryOrder,
+    }) => ({
+      user,
+      clearUserSearchHistory,
       userSearchHistory,
       updateHistoryOrder,
     }),
@@ -36,12 +49,21 @@ export const TrackHistory: React.FC = React.memo(() => {
     childElement,
   } = useHandlerModal(userSearchHistory);
 
+  const clearHistory = () => {
+    clearUserSearchHistory(user?.id as string);
+  };
+
   return (
     <div>
-      <Container>
+      <Container className=" justify-between flex">
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
           История Поиска
         </h2>
+        <TextButton
+          title="Очистить историю"
+          handler={clearHistory}
+          className=" focus:text-secondary-satin-sheen-gold !w-fit"
+        />
       </Container>
       <div className="flex flex-col gap-3 mt-3">
         <AnimatePresence>

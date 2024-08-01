@@ -21,6 +21,19 @@ export const userSearchHistorySlice: StateCreator<userSearchHistoryState> = (
         throw { fieldErrors, formErrors };
       });
   },
+  clearUserSearchHistory: async (userId: string) => {
+    return await httpClient
+      .get<Track[]>(`/users/search-history/remove/${userId}`)
+      .then(() => {
+        set({ userSearchHistory: null });
+      })
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
   updateHistoryOrder: async (trackId: string) => {
     return await httpClient
       .get<Track>(`/track/update-history-order/${trackId}`)
