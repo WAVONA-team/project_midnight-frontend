@@ -18,7 +18,7 @@ import { Container } from '@/ui/Container';
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const [isTrackSave, setIsTrackSave] = useState(false);
+  const [isTrackSave] = useState(false);
 
   const {
     user,
@@ -29,7 +29,7 @@ export const TrackHistory: React.FC = React.memo(() => {
     playerState,
     changePlayerState,
     currentTrack,
-    checkTrack,
+    // checkTrack,
   } = useStore(
     ({
       user,
@@ -66,22 +66,22 @@ export const TrackHistory: React.FC = React.memo(() => {
     clearUserSearchHistory(user?.id as string);
   };
 
-  const handlerProtectedModal = async (
-    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
-  ) => {
-    if (user && e.trackId) {
-      checkTrack(e.trackId, user?.id)
-        .then(() => {
-          setIsTrackSave(true);
-        })
-        .catch(() => {
-          setIsTrackSave(false);
-        })
-        .finally(() => {
-          handlerTracksModal!(e);
-        });
-    }
-  };
+  // const handlerProtectedModal = async (
+  //   e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+  // ) => {
+  //   if (user && e.trackId) {
+  //     checkTrack(e.trackId, user?.id)
+  //       .then(() => {
+  //         setIsTrackSave(true);
+  //       })
+  //       .catch(() => {
+  //         setIsTrackSave(false);
+  //       })
+  //       .finally(() => {
+  //         handlerTracksModal!(e);
+  //       });
+  //   }
+  // };
 
   return (
     <div>
