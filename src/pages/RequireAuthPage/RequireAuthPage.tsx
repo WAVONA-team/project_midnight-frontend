@@ -5,25 +5,23 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useStore } from '@/store';
 
 import { Controls, Playback } from '@/modules/Player';
+import { createPlayerSlice } from '@/modules/Player/store';
 
 import { NavBar } from '@/components/NavBar';
 
 export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const { user, currentTrack } = useStore(({ user, currentTrack }) => ({
+  const { currentTrack } = createPlayerSlice();
+
+  const { user } = useStore(({ user }) => ({
     user,
-    currentTrack,
   }));
 
   const [notificationGapMobile, setNotificationGapMobile] =
     useState<number>(65);
   const [notificationGapDesktop, setNotificationGapDesktop] =
     useState<number>(15);
-
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
 
   const handleControlIsOpen = () => {
     if (currentTrack) {
@@ -38,6 +36,10 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   useEffect(() => {
     handleControlIsOpen();
   }, [currentTrack]);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div

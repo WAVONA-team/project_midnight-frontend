@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { TrackAddition } from '@/modules/TrackAddition';
 import { TrackHistory } from '@/modules/TrackHistory';
 
 export const CreateNewTrackPage: React.FC = React.memo(() => {
+  const { currentTrack } = createPlayerSlice();
+
   const {
     user,
     parsedTrack,
     userSearchHistory,
     getUserSearchHistory,
     isParsedTrackLoading,
-    currentTrack,
   } = useStore(
     ({
       user,
@@ -20,14 +22,12 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
       userSearchHistory,
       getUserSearchHistory,
       isParsedTrackLoading,
-      currentTrack,
     }) => ({
       user,
       parsedTrack,
       userSearchHistory,
       getUserSearchHistory,
       isParsedTrackLoading,
-      currentTrack,
     }),
   );
 

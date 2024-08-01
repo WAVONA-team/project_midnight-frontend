@@ -2,18 +2,18 @@ import React from 'react';
 
 import { useStore } from '@/store/index';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import { PlayButton } from '@/ui/Button';
 import BackTrackIcon from '@/ui/icons/BackTrackIcon/BackTrackIcon';
 import NextTrackIcon from '@/ui/icons/NextTrackIcon/NextTrackIcon';
 
 export const TrackControlButtons: React.FC = React.memo(() => {
-  const { userTracks, currentTrack, changeCurrentTrack } = useStore(
-    ({ userTracks, currentTrack, changeCurrentTrack }) => ({
-      userTracks,
-      currentTrack,
-      changeCurrentTrack,
-    }),
-  );
+  const { changeCurrentTrack, currentTrack } = createPlayerSlice();
+
+  const { userTracks } = useStore(({ userTracks }) => ({
+    userTracks,
+  }));
 
   const NextTrack = () => {
     const currentTrackIndex = userTracks.findIndex(

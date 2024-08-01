@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import { useStore } from '@/store/index';
+import { createPlayerSlice } from '@/modules/Player/store';
 
 const VolumeIcon: React.FC = React.memo(() => {
-  const { volume } = useStore(({ volume }) => ({
-    volume,
-  }));
+  const { volume } = createPlayerSlice();
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
 

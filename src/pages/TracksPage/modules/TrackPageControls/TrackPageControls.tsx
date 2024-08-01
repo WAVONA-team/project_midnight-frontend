@@ -8,35 +8,17 @@ import { Track } from 'project_midnight';
 import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
 import TrackPageFiltersDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown.tsx';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import ActionButton from '@/ui/Button/ActionButton/ActionButton.tsx';
 import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
-  const {
-    changeCurrentTrack,
-    changePlayerState,
-    currentTrack,
-    playerState,
-    userPlaylist,
-    setTracksTitle,
-    setTracksIcon,
-    userTracks,
-  } = useStore(
-    ({
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
-      userPlaylist,
-      user,
-      setTracksTitle,
-      setTracksIcon,
-      userTracks,
-    }) => ({
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
+  const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
+    createPlayerSlice();
+
+  const { userPlaylist, setTracksTitle, setTracksIcon, userTracks } = useStore(
+    ({ userPlaylist, user, setTracksTitle, setTracksIcon, userTracks }) => ({
       userPlaylist,
       user,
       setTracksTitle,
