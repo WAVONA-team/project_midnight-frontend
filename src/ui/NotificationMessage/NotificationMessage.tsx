@@ -17,8 +17,8 @@ const NotificationMessage: React.FC<Props> = React.memo(
         </span>
         {handlerText && (
           <button
-            className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
             type="button"
+            className="text-sm focus:outline-none text-secondary-satin-sheen-gold"
             onClick={handler}
           >
             {handlerText}
