@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 
 import { useStore } from '@/store';
@@ -43,9 +44,9 @@ export const TrackPage: React.FC = React.memo(() => {
 
             <div
               className={`
-              ${userPlaylist?.tracks?.length! >= 6 && 'overflow-y-auto'} 
-              mt-4 
-              ${window.innerHeight <= 1000 ? 'max-h-[550px]' : 'max-h-[800px]'} 
+              ${userPlaylist?.tracks?.length! >= 6 && 'overflow-y-auto'}
+              mt-4
+              ${window.innerHeight <= 1000 ? 'max-h-[550px]' : 'max-h-[800px]'}
               min-w-[480px]
               `}
             >
