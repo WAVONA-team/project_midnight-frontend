@@ -26,10 +26,13 @@ const ServiceCard: React.FC<Props> = React.memo(
       <button
         type="button"
         onClick={handler}
-        className={classNames(classNamesBase.serviceCardButton, {
-          'bg-surface-eerie_black  ': isConnected,
-          'bg-secondary-eerie-black-light': !isConnected,
-        })}
+        className={classNames(
+          `${classNamesBase.serviceCardButton} ${supportedTitle && 'active:bg-none active:shadow-none cursor-default '} `,
+          {
+            'bg-surface-eerie_black  ': isConnected,
+            'bg-secondary-eerie-black-light': !isConnected,
+          },
+        )}
       >
         <div className={classNamesBase.serviceCardConnectBox}>
           {supportedTitle ? (
