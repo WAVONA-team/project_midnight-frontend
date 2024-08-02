@@ -17,7 +17,7 @@ import { NotificationMessage } from '@/ui/NotificationMessage';
 import Streamline from '@/ui/Streamline/Streamline';
 
 type Props = {
-  track: Track;
+  track?: Track;
   isDesktop?: boolean;
   id: string;
   name: string;
@@ -28,7 +28,7 @@ type Props = {
   isPlay: boolean;
   isFavourite: boolean;
   handlerPlay: React.MouseEventHandler<HTMLDivElement>;
-  onTrackPage: boolean;
+  onTrackPage?: boolean;
   handlerModal: (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => void;
@@ -180,26 +180,26 @@ const TrackInfo: React.FC<Props> = React.memo(
     if (onTrackPage) {
       return (
         <div
-          onClick={() => handleTrack(track)}
+          onClick={() => handleTrack(track!)}
           className={`
-            flex 
-            mb-6 
-            justify-between 
-            cursor-pointer 
-            py-2 
-            px-2 
+            flex
+            mb-6
+            justify-between
+            cursor-pointer
+            py-2
+            px-2
             rounded-md
-            ${track.url === currentTrack?.url && playerState && '&& bg-background-trackInfo'}
+            ${track?.url === currentTrack?.url && playerState && '&& bg-background-trackInfo'}
           `}
         >
           <div className="relative w-16 h-16 mr-4 rounded-md">
             <img
               className="w-full h-full object-cover"
-              src={track.imgUrl!}
+              src={track?.imgUrl!}
               alt="Track Image"
             />
 
-            {track.url === currentTrack?.url && playerState && (
+            {track?.url === currentTrack?.url && playerState && (
               <div
                 className="absolute
                   top-0
@@ -217,15 +217,15 @@ const TrackInfo: React.FC<Props> = React.memo(
           </div>
           <div className="font-rubik text-on-primary-anti-flash-white break-words">
             <div className="flex flex-col">
-              <h2 className="text-base font-normal max-w-[280px]">
-                {track.title}
+              <h2 className="text-base truncate font-normal max-w-[280px]">
+                {track?.title}
               </h2>
-              <h4>{track.author}</h4>
-              <p>{track.source}</p>
+              <h4>{track?.author}</h4>
+              <p>{track?.source}</p>
             </div>
           </div>
           <div className="flex items-center text-on-primary-anti-flash-white">
-            <p>{track.duration}</p>
+            <p>{track?.duration}</p>
           </div>
         </div>
       );

@@ -4,6 +4,7 @@ import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
@@ -17,34 +18,25 @@ import { Container } from '@/ui/Container';
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
+  const { changeCurrentTrack, playerState, changePlayerState, currentTrack } =
+    createPlayerSlice();
+
   const {
     user,
     userSearchHistory,
     updateHistoryOrder,
     clearUserSearchHistory,
-    changeCurrentTrack,
-    playerState,
-    changePlayerState,
-    currentTrack,
   } = useStore(
     ({
       user,
       userSearchHistory,
       updateHistoryOrder,
       clearUserSearchHistory,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
-      currentTrack,
     }) => ({
       user,
       userSearchHistory,
       updateHistoryOrder,
       clearUserSearchHistory,
-      changeCurrentTrack,
-      playerState,
-      changePlayerState,
-      currentTrack,
     }),
   );
   const {
@@ -58,7 +50,6 @@ export const TrackHistory: React.FC = React.memo(() => {
 
   const clearHistory = () => {
     clearUserSearchHistory(user?.id as string);
-
   };
 
   return (
