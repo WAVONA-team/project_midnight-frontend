@@ -25,6 +25,7 @@ import { SearchInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { NotificationMessage } from '@/ui/NotificationMessage';
 import { Spinner } from '@/ui/Spinner';
+import { createPlayerSlice } from '@/modules/Player/store';
 
 const { ShareButton, FavoriteButton } = modalButtons;
 
@@ -32,14 +33,10 @@ const TrackAddition: React.FC = memo(() => {
   const {
     user,
     parsedTrack,
-    currentTrack,
     parseTrack,
     clearParsedTrack,
     isParsedTrackLoading,
     setIsParsedTrackLoading,
-    playerState,
-    changePlayerState,
-    changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
     checkTrack,
@@ -50,14 +47,10 @@ const TrackAddition: React.FC = memo(() => {
     ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -67,14 +60,10 @@ const TrackAddition: React.FC = memo(() => {
     }) => ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -83,6 +72,9 @@ const TrackAddition: React.FC = memo(() => {
       setResolvedUrl,
     }),
   );
+
+  const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
+      createPlayerSlice();
 
   const {
     watch,
@@ -170,7 +162,7 @@ const TrackAddition: React.FC = memo(() => {
       })
       .catch(() => {
         toast.custom(() => (
-          <NotificationMessage message={`Ошибка чтения буфера обмена`} />
+          <NotificationMessage message="Ошибка чтения буфера обмена" />
         ));
       });
   };

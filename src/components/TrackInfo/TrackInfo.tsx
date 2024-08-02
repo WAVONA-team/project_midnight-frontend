@@ -195,7 +195,7 @@ const TrackInfo: React.FC<Props> = React.memo(
           <div className="relative w-16 h-16 mr-4 rounded-md">
             <img
               className="w-full h-full object-cover"
-              src={track?.imgUrl!}
+              src={track?.imgUrl as string}
               alt="Track Image"
             />
 
