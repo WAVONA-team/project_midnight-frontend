@@ -6,10 +6,14 @@ import { ServerErrors } from '@/shared/types/ServerErrors.ts';
 
 import { TrackActionsState } from './types/index.ts';
 
+const getUrl = (sub: string): string => {
+  return `/track/${sub}`;
+};
+
 export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   checkTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .get<Track>(`/track/check-track/${userId}/${trackId}`)
+      .get<Track>(getUrl(`check-track/${userId}/${trackId}`))
       .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
@@ -20,7 +24,7 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   },
   saveTrack: async (track: Track, userId: string) => {
     return await httpClient
-      .post('new', { ...track, userId })
+      .post(getUrl('new'), { ...track, userId })
       .then((res) => res.data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
@@ -31,7 +35,18 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   },
   updateIsFavourite: async (trackId, userId) => {
     return await httpClient
-      .patch<Track>('track/update-favourite', { trackId, userId })
+      .patch<Track>(getUrl('update-favourite'), { trackId, userId })
+      .then((res) => res.data)
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
+  deleteTrack: async (trackId: string, userId: string) => {
+    return await httpClient
+      .delete(getUrl(`delete-from-saved/${userId}/${trackId}`))
       .then((res) => res.data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =

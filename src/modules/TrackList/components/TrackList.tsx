@@ -7,8 +7,8 @@ import { Track } from 'project_midnight';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
-import { TrackModal } from '@/modules/TrackModal';
-import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
+import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
+import { DeleteButton } from '@/modules/TrackModal/components/buttons';
 
 import Portal from '@/components/Portal/Portal';
 import { TrackInfo } from '@/components/TrackInfo';
@@ -155,6 +155,11 @@ const TrackList: React.FC<Props> = React.memo(
 
                   <Menu.Item
                     as={ShareButton}
+                    selectedTrack={selectedTrack!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                  <Menu.Item
+                    as={DeleteButton}
                     selectedTrack={selectedTrack!}
                     className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                   />
