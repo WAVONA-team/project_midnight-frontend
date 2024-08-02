@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -11,6 +12,7 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
 import { DeleteButton } from '@/modules/TrackModal/components/buttons';
@@ -24,6 +26,7 @@ import TextButton from '@/ui/Button/TextButtonWithIcon/TextButtonWithIcon';
 import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 import { Spinner } from '@/ui/Spinner';
 
 const { ShareButton, FavoriteButton } = modalButtons;
@@ -34,14 +37,10 @@ const TrackAddition: React.FC = memo(() => {
   const {
     user,
     parsedTrack,
-    currentTrack,
     parseTrack,
     clearParsedTrack,
     isParsedTrackLoading,
     setIsParsedTrackLoading,
-    playerState,
-    changePlayerState,
-    changeCurrentTrack,
     parsedTrackDuration,
     setParsedTrackDuration,
     checkTrack,
@@ -52,14 +51,10 @@ const TrackAddition: React.FC = memo(() => {
     ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -69,14 +64,10 @@ const TrackAddition: React.FC = memo(() => {
     }) => ({
       user,
       parsedTrack,
-      currentTrack,
       parseTrack,
       clearParsedTrack,
       isParsedTrackLoading,
       setIsParsedTrackLoading,
-      playerState,
-      changePlayerState,
-      changeCurrentTrack,
       parsedTrackDuration,
       setParsedTrackDuration,
       checkTrack,
@@ -85,6 +76,9 @@ const TrackAddition: React.FC = memo(() => {
       setResolvedUrl,
     }),
   );
+
+  const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
+    createPlayerSlice();
 
   const {
     watch,
@@ -175,10 +169,13 @@ const TrackAddition: React.FC = memo(() => {
         const clipText = await navigator.clipboard.readText();
         setValue('url', clipText);
       })
-      .catch((err) => {
-        console.error('Ошибка чтения буфера обмена: ', err);
+      .catch(() => {
+        toast.custom(() => (
+          <NotificationMessage message={`Ошибка чтения буфера обмена`} />
+        ));
       });
   };
+
   return (
     <div
       className="

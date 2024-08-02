@@ -7,6 +7,8 @@ import TracksContainer from '@/pages/TracksPage/helpers/TracksContainer.tsx';
 import TrackPageControls from '@/pages/TracksPage/modules/TrackPageControls/TrackPageControls';
 import TrackPageHeader from '@/pages/TracksPage/modules/TrackPageHeader/TrackPageHeader';
 
+import { createPlayerSlice } from '@/modules/Player/store/index.ts';
+
 import ToggleButton from '@/ui/Button/ToggleButton/ToggleButton.tsx';
 
 import pauseIcon from '../../../public/buttons/playerButtons/mainPagePauseIcon.svg';
@@ -14,23 +16,18 @@ import playIcon from '../../../public/buttons/playerButtons/mainPagePlayIcon.svg
 import ActionButton from '../../ui/Button/ActionButton/ActionButton.tsx';
 
 export const TracksPage: React.FC = React.memo(() => {
+  const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
+    createPlayerSlice();
+
   const {
-    currentTrack,
     isFavouriteTracksLoading,
     setIsFavouriteTracksLoading,
     userPlaylist,
-    changeCurrentTrack,
-    changePlayerState,
-    playerState,
   } = useStore(
     ({
       setIsFavouriteTracksLoading,
-      currentTrack,
       isFavouriteTracksLoading,
       userPlaylist,
-      changeCurrentTrack,
-      changePlayerState,
-      playerState,
     }) => ({
       currentTrack,
       isFavouriteTracksLoading,

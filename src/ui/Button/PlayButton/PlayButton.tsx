@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { useStore } from '@/store';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
+
+import { createPlayerSlice } from '@/modules/Player/store';
 
 import pauseIcon from '../../../../public/buttons/playerButtons/pauseIcon.svg';
 import playIcon from '../../../../public/buttons/playerButtons/playIcon.svg';
@@ -11,14 +12,9 @@ type Props = {
 };
 
 const PlayButton: React.FC<Props> = React.memo(({ className }) => {
-  const [scope, animate] = useAnimate();
+  const { playerState, changePlayerState } = createPlayerSlice();
 
-  const { playerState, changePlayerState } = useStore(
-    ({ playerState, changePlayerState }) => ({
-      playerState,
-      changePlayerState,
-    }),
-  );
+  const [scope, animate] = useAnimate();
 
   const handleClick = async () => {
     changePlayerState(!playerState);

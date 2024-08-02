@@ -20,8 +20,8 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
 
   const navigate = useNavigate();
 
-  const { userPlaylist } = useStore(({ userPlaylist }) => ({
-    userPlaylist,
+  const { userTracks } = useStore(({ userTracks }) => ({
+    userTracks,
   }));
 
   const additionActions = [
@@ -71,7 +71,7 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
       onBlur={handleClose}
     >
       <button
-        disabled={!userPlaylist?.tracks?.length}
+        disabled={!userTracks.length}
         className="
           p-1
           sm:border-2

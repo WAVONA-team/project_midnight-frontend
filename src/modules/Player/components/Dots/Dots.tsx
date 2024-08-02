@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 
-import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
+
+import { createPlayerSlice } from '@/modules/Player/store';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
@@ -16,9 +17,7 @@ import DotsIcon from '@/ui/icons/DotsIcon/DotsIcon';
 import { classNamesBase } from './classNames';
 
 export const Dots: React.FC = React.memo(() => {
-  const { currentTrack } = useStore(({ currentTrack }) => ({
-    currentTrack,
-  }));
+  const { currentTrack } = createPlayerSlice();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);

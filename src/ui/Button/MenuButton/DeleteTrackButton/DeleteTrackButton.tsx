@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 
 import deleteIcon from '../../../../../public/buttons/actionButtons/deleteIcon.svg';
 
@@ -14,6 +16,8 @@ const DeleteTrackButton: React.FC<Props> = React.memo(
 
     const deleteTrack = async () => {
       setIsClicked(true);
+
+      toast.custom(() => <NotificationMessage message="Трек удалён" />);
     };
 
     return (

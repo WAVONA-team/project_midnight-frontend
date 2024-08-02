@@ -8,43 +8,32 @@ import { Track } from 'project_midnight';
 import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
 import TrackPageFiltersDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown.tsx';
 
+import { createPlayerSlice } from '@/modules/Player/store';
+
 import ActionButton from '@/ui/Button/ActionButton/ActionButton.tsx';
 import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
-  const {
-    changeCurrentTrack,
-    changePlayerState,
-    currentTrack,
-    playerState,
-    userPlaylist,
-    setTracksTitle,
-    setTracksIcon,
-  } = useStore(
-    ({
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
+  const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
+    createPlayerSlice();
+
+  const { userPlaylist, setTracksTitle, setTracksIcon, userTracks } = useStore(
+    ({ userPlaylist, user, setTracksTitle, setTracksIcon, userTracks }) => ({
       userPlaylist,
       user,
       setTracksTitle,
       setTracksIcon,
-    }) => ({
-      changeCurrentTrack,
-      changePlayerState,
-      currentTrack,
-      playerState,
-      userPlaylist,
-      user,
-      setTracksTitle,
-      setTracksIcon,
+      userTracks,
     }),
   );
 
   const handleTrack = (track: Track) => {
-    changeCurrentTrack(track);
-    changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    if (track !== currentTrack) {
+      changePlayerState(track.url !== currentTrack?.url ? !playerState : false);
+      changeCurrentTrack(track);
+    } else {
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    }
   };
 
   const handlePlaylistStateButton = () => {
@@ -118,7 +107,9 @@ const TrackPageControls: React.FC = React.memo(() => {
                   ? 'Пауза'
                   : 'Слушать'
               }
-              handler={() => handleTrack(userPlaylist!.tracks![0])}
+              handler={() =>
+                handleTrack(currentTrack || userPlaylist!.tracks![0])
+              }
               disabled={!userPlaylist?.tracks?.length}
             />
           </div>

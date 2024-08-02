@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import shareIcon from '@/../public/buttons/actionButtons/shareIcon.svg';
 import copy from 'copy-to-clipboard';
 import { Track } from 'project_midnight';
 
 import MenuButton from '@/ui/Button/MenuButton/MenuButton.tsx';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 
 type Props = {
   className?: string;
@@ -35,6 +37,10 @@ const TrackShareButton: React.FC<Props> = React.memo(
           timeId = setTimeout(() => {
             setIsClicked(false);
           }, TIME_DELAY);
+
+          toast.custom(() => (
+            <NotificationMessage message="Ссылка скопирована" />
+          ));
         }
       };
 

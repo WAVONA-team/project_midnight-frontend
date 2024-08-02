@@ -5,6 +5,7 @@ import { Menu } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal, useHandlerModal } from '@/modules/TrackModal';
 import { DeleteButton } from '@/modules/TrackModal/components/buttons';
@@ -34,24 +35,11 @@ const TrackList: React.FC<Props> = React.memo(
     totalTracks,
     headerCondition = true,
   }) => {
-    const {
-      currentTrack,
-      changeCurrentTrack,
-      changePlayerState,
-      playerState,
-      isFavouriteTracksLoading,
-    } = useStore(
-      ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
-        isFavouriteTracksLoading,
-      }) => ({
-        currentTrack,
-        changeCurrentTrack,
-        changePlayerState,
-        playerState,
+    const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
+      createPlayerSlice();
+
+    const { isFavouriteTracksLoading } = useStore(
+      ({ isFavouriteTracksLoading }) => ({
         isFavouriteTracksLoading,
       }),
     );
