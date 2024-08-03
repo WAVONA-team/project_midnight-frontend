@@ -10,18 +10,30 @@ import { ServiceCard } from '@/components/ServiceCard';
 import BackButton from '@/ui/Button/BackButton/BackButton.tsx';
 import { Container } from '@/ui/Container';
 import Modal from '@/ui/Modal/Modal';
-import { ServiceIconSpotify } from '@/ui/ServiceIcon';
+import {
+  ServiceIconApple,
+  ServiceIconSoundCloud,
+  ServiceIconSpotify,
+  ServiceIconYandex,
+  ServiceIconYoutube,
+} from '@/ui/ServiceIcon';
 
-type Service = {
+type RequiredAuthService = {
   title: string;
   icon: React.JSX.Element;
   token: string | null | undefined;
   register: () => void;
-  remove: () => Promise<NormalizedUser>;
+  remove: () => Promise<NormalizedUser | void>;
+};
+
+type NotRequiredAuthService = {
+  title: string;
+  icon: React.JSX.Element;
 };
 
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
-  const [currentService, setCurrentService] = useState<Service | null>(null);
+  const [currentService, setCurrentService] =
+    useState<RequiredAuthService | null>(null);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setError] = useState<string>('');
@@ -34,7 +46,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
     }),
   );
 
-  const services: Service[] = [
+  const requireAuthServices: RequiredAuthService[] = [
     {
       title: 'Spotify',
       icon: <ServiceIconSpotify />,
@@ -42,16 +54,34 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       register: registerSpotify,
       remove: async () => removeSpotify(user!.id),
     },
-    // {
-    //   title: 'Yandex Music',
-    //   icon: <ServiceIconYandex />,
-    //   token: user?.yandexOAUTH,
-    //   register: () => {},
-    //   remove: async () => removeSpotify(user!.id),
-    // },
+    {
+      title: 'Yandex Music',
+      icon: <ServiceIconYandex />,
+      token: user?.yandexOAUTH,
+      register: () => {},
+      remove: async () => {},
+    },
+    {
+      title: 'Apple Music',
+      icon: <ServiceIconApple />,
+      token: user?.appleOAUTH,
+      register: () => {},
+      remove: async () => {},
+    },
   ];
 
-  const enableModal = (service: Service) => {
+  const notRequireAuthServices: NotRequiredAuthService[] = [
+    {
+      title: 'YouTube Music',
+      icon: <ServiceIconYoutube />,
+    },
+    {
+      title: 'SoundCloud',
+      icon: <ServiceIconSoundCloud />,
+    },
+  ];
+
+  const enableModal = (service: RequiredAuthService) => {
     setCurrentService(service);
     setIsModalActive(true);
     document.body.style.overflow = 'hidden';
@@ -71,7 +101,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         setCurrentService(null);
         setIsModalActive(false);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         setError(error.formErrors);
       })
       .finally(() => {
@@ -117,23 +147,30 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         <div
           className="
           flex
+          flex-col
           flex-wrap
-          gap-5
           my-5
           sm:mt-10
         "
         >
-          {services.map((service) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              serviceIcon={service.icon}
-              isConnected={!!service.token}
-              handler={() =>
-                !service.token ? service.register() : enableModal(service)
-              }
-            />
-          ))}
+          <div className="mb-6">
+            <h2 className="font-openSans font-normal text-2xl">
+              Сервисы, требующие авторизацию
+            </h2>
+          </div>
+          <div className="flex gap-5 flex-wrap">
+            {requireAuthServices.map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                serviceIcon={service.icon}
+                isConnected={!!service.token}
+                handler={() =>
+                  !service.token ? service.register!() : enableModal(service)
+                }
+              />
+            ))}
+          </div>
 
           <Modal isModalActive={isModalActive} disableModal={disableModal}>
             <ServiceModalContent
@@ -144,6 +181,29 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
               disableService={disableService}
             />
           </Modal>
+        </div>
+
+        <div
+          className="
+          my-5
+          sm:mt-10
+        "
+        >
+          <div className="mb-6">
+            <h2 className="font-openSans font-normal text-2xl">
+              Сервисы, не требующие авторизацию
+            </h2>
+          </div>
+          <div className="flex gap-5 flex-wrap">
+            {notRequireAuthServices.map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                serviceIcon={service.icon}
+                supportedTitle="Поддерживается"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </Container>
