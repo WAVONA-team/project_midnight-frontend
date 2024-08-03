@@ -17,19 +17,22 @@ const TrackPageControls: React.FC = React.memo(() => {
   const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
     createPlayerSlice();
 
-  const { userPlaylist, setTracksTitle, setTracksIcon, userTracks } = useStore(
-    ({ userPlaylist, user, setTracksTitle, setTracksIcon, userTracks }) => ({
+  const { userPlaylist, setTracksTitle, setTracksIcon } = useStore(
+    ({ userPlaylist, user, setTracksTitle, setTracksIcon }) => ({
       userPlaylist,
       user,
       setTracksTitle,
       setTracksIcon,
-      userTracks,
     }),
   );
 
   const handleTrack = (track: Track) => {
-    changeCurrentTrack(track);
-    changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    if (track !== currentTrack) {
+      changePlayerState(track.url !== currentTrack?.url ? !playerState : false);
+      changeCurrentTrack(track);
+    } else {
+      changePlayerState(track.url === currentTrack?.url ? !playerState : true);
+    }
   };
 
   const handlePlaylistStateButton = () => {
@@ -103,8 +106,10 @@ const TrackPageControls: React.FC = React.memo(() => {
                   ? 'Пауза'
                   : 'Слушать'
               }
-              handler={() => handleTrack(userPlaylist!.tracks![0])}
-              disabled={!userTracks.length}
+              handler={() =>
+                handleTrack(currentTrack || userPlaylist!.tracks![0])
+              }
+              disabled={!userPlaylist?.tracks?.length}
             />
           </div>
 

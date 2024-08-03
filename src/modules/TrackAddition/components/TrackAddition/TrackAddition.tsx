@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -12,8 +12,11 @@ import ReactPlayer from '@/lib/ReactPlayer';
 import format from '@/shared/helpers/format';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
+import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
+import { DeleteButton } from '@/modules/TrackModal/components/buttons';
+import TrackFavoriteButton from '@/modules/TrackModal/components/buttons/TrackFavoriteButton/TrackFavoriteButton';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -25,11 +28,12 @@ import { SearchInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 import { NotificationMessage } from '@/ui/NotificationMessage';
 import { Spinner } from '@/ui/Spinner';
-import { createPlayerSlice } from '@/modules/Player/store';
 
 const { ShareButton, FavoriteButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
+  const [isTrackSave, setIsTrackSave] = useState(false);
+
   const {
     user,
     parsedTrack,
@@ -74,7 +78,7 @@ const TrackAddition: React.FC = memo(() => {
   );
 
   const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
-  createPlayerSlice();
+    createPlayerSlice();
 
   const {
     watch,
@@ -104,9 +108,14 @@ const TrackAddition: React.FC = memo(() => {
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
     if (user && parsedTrack) {
-      checkTrack(parsedTrack?.id, user?.id).finally(() =>
-        handlerTrackModal!(e),
-      );
+      try {
+        await checkTrack(parsedTrack?.id, user?.id);
+        setIsTrackSave(true);
+      } catch {
+        setIsTrackSave(false);
+      } finally {
+        handlerTrackModal!(e);
+      }
     }
   };
 
@@ -162,7 +171,7 @@ const TrackAddition: React.FC = memo(() => {
       })
       .catch(() => {
         toast.custom(() => (
-          <NotificationMessage message={`Ошибка чтения буфера обмена`} />
+          <NotificationMessage message="Ошибка чтения буфера обмена" />
         ));
       });
   };
@@ -358,6 +367,18 @@ const TrackAddition: React.FC = memo(() => {
                   selectedTrack={parsedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
                 />
+                <Menu.Item
+                  as={TrackFavoriteButton}
+                  selectedTrack={parsedTrack!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+                {isTrackSave && (
+                  <Menu.Item
+                    as={DeleteButton}
+                    selectedTrack={parsedTrack!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
+                )}
               </>
             }
             trackAuthor={parsedTrack && parsedTrack.author}
