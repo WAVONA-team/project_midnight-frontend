@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 
 import {
+  type PlaylistsPageState,
+  createPlaylistSlice,
+} from '@/pages/PlaylistsPage/store';
+import {
   type TracksSearchPageState,
   tracksSearchPageSlice,
 } from '@/pages/TrackSearchPage/store';
@@ -14,8 +18,10 @@ import {
 } from '@/pages/TracksPage/store';
 
 import { type UserState, createUserSlice } from '@/modules/Authorization/store';
-import { trackActionsSlice } from '@/modules/TrackActions';
-import { TrackActionsState } from '@/modules/TrackActions/store/types';
+import {
+  type TrackActionsState,
+  trackActionsSlice,
+} from '@/modules/TrackActions/store';
 import {
   type TrackAdditionState,
   parseTrackSlice,
@@ -32,7 +38,8 @@ export const useStore = create<
     TracksPageState &
     TracksSearchPageState &
     TrackActionsState &
-    TracksPlaylistControlsState
+    TracksPlaylistControlsState &
+    PlaylistsPageState
 >((...a) => ({
   ...createUserSlice(...a),
   ...parseTrackSlice(...a),
@@ -41,4 +48,5 @@ export const useStore = create<
   ...tracksSearchPageSlice(...a),
   ...trackActionsSlice(...a),
   ...tracksPlaylistControls(...a),
+  ...createPlaylistSlice(...a),
 }));

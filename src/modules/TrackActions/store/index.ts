@@ -56,3 +56,5 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
       });
   },
 });
+
+export { type TrackActionsState };
