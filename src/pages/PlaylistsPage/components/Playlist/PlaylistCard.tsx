@@ -58,7 +58,7 @@ export const PlaylistCard: React.FC<Props> = React.memo(
               {name}
             </h3>
 
-            <p className="font-rubik font-normal text-sm text-on-secondary-dim-gray md:text-on-primary-anti-flash-white">
+            <p className="text-left font-rubik font-normal text-sm text-on-secondary-dim-gray md:text-on-primary-anti-flash-white">
               {`${count} ${getCorrectSuffix(count)}`}
             </p>
           </div>
