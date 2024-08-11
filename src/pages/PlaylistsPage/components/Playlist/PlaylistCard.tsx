@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
+import { NotificationMessage } from '@/ui/NotificationMessage';
+
+// import { Link } from 'react-router-dom';
 import arrowIcon from '../../../../../public/arrows/arrowIcon.svg';
 
 type Props = {
@@ -11,7 +14,7 @@ type Props = {
 };
 
 export const PlaylistCard: React.FC<Props> = React.memo(
-  ({ id, name, count, image }) => {
+  ({ name, count, image }) => {
     const getCorrectSuffix = (number: number) => {
       const rules = new Intl.PluralRules('ru', {
         type: 'cardinal',
@@ -31,10 +34,17 @@ export const PlaylistCard: React.FC<Props> = React.memo(
       return `трек${suffix}`;
     };
 
+    const devToast = () =>
+      toast.custom(() => (
+        <NotificationMessage message="Страница плейлиста еще в разработке" />
+      ));
+
     return (
-      <Link
-        to={`/playlists/${id}`}
+      <button
+        // to={`/playlists/${id}`}
+        type="button"
         className="text-on-primary-anti-flash-white w-full flex md:flex-col items-center md:items-start gap-4 hover:text-on-primary-anti-flash-white"
+        onClick={devToast}
       >
         <img
           src={image}
@@ -64,7 +74,7 @@ export const PlaylistCard: React.FC<Props> = React.memo(
             alt="Arrow Icon"
           />
         </div>
-      </Link>
+      </button>
     );
   },
 );
