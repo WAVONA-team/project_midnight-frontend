@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
 
@@ -10,11 +12,13 @@ import { PlaylistInputs } from '@/pages/PlaylistsPage/components/CreatePlaylist/
 import { TextButton, TextSecondaryButton } from '@/ui/Button';
 import { DefaultInput } from '@/ui/Input';
 import { Modal } from '@/ui/Modal';
+import { NotificationMessage } from '@/ui/NotificationMessage';
 
 import playlistThumbnailNew from '../../../../../public/playlistThumbnailNew.jpg';
 
 export const CreatePlaylist: React.FC = React.memo(() => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const enableModal = () => {
     setIsModalActive(true);
@@ -53,11 +57,13 @@ export const CreatePlaylist: React.FC = React.memo(() => {
     const { playlistName } = formData;
 
     createPlaylist(playlistName, user?.id!)
-      .then(() => {
+      .then((playlist) => {
         setValue('playlistName', '');
         clearPlaylists();
         setIsPlaylistsLoading(true);
         disableModal();
+        toast.custom(() => <NotificationMessage message="Плейлист создан" />);
+        navigate(`/playlists/${playlist.id}`);
       })
       .catch(({ fieldErrors }: ServerErrors) => {
         if (fieldErrors) {
