@@ -8,11 +8,14 @@ export type PlaylistsPageState = {
   isQueryPlaylistsLoading: boolean;
   totalPlaylists: number;
   currentPlaylistPage: number;
+  playlistSearchQuery: string;
+  setPlaylistSearchQuery: (query: string) => void;
   setIsPlaylistsLoading: (state: boolean) => void;
+  setIsQueryPlaylistsLoading: (state: boolean) => void;
   getPlaylists: (
     userId: string,
     page: number,
-    filterOptions: FilterOptions,
+    filterOptions?: FilterOptions,
   ) => Promise<Playlist[]>;
   createPlaylist: (name: string, userId: string) => Promise<Playlist>;
   clearPlaylists: () => void;

@@ -18,3 +18,4 @@ export { TracksPage } from './TracksPage/TracksPage';
 export { CreateNewTrackPage } from './CreateNewTrackPage/CreateNewTrackPage';
 export { CreateNewPlaylistPage } from './CreateNewPlaylistPage/CreateNewPlaylistPage';
 export { TrackSearchPage } from './TrackSearchPage/TrackSearchPage';
+export { PlaylistSearchPage } from './PlaylistSearchPage/PlaylistSearchPage';

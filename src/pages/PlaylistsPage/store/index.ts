@@ -12,7 +12,11 @@ export const createPlaylistSlice: StateCreator<PlaylistsPageState> = (set) => ({
   isQueryPlaylistsLoading: false,
   totalPlaylists: 0,
   currentPlaylistPage: 1,
+  playlistSearchQuery: '',
+  setPlaylistSearchQuery: (query) => set({ playlistSearchQuery: query }),
   clearPlaylists: () => set({ playlists: [] }),
+  setIsQueryPlaylistsLoading: (state) =>
+    set({ isQueryPlaylistsLoading: state }),
   setIsPlaylistsLoading: (state) => set({ isPlaylistsLoading: state }),
   getPlaylists: async (
     userId: string,

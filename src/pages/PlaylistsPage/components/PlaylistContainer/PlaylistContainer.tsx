@@ -14,6 +14,7 @@ export const PlaylistContainer: React.FC = React.memo(() => {
     totalPlaylists,
     setIsPlaylistsLoading,
     getPlaylists,
+    playlistSearchQuery,
   } = useStore(
     ({
       user,
@@ -24,6 +25,7 @@ export const PlaylistContainer: React.FC = React.memo(() => {
       totalPlaylists,
       setIsPlaylistsLoading,
       getPlaylists,
+      playlistSearchQuery,
     }) => ({
       user,
       playlists,
@@ -33,14 +35,15 @@ export const PlaylistContainer: React.FC = React.memo(() => {
       totalPlaylists,
       setIsPlaylistsLoading,
       getPlaylists,
+      playlistSearchQuery,
     }),
   );
 
   useEffect(() => {
     if (isPlaylistsLoading) {
       getPlaylists(user!.id, currentPlaylistPage, {
-        query: '',
-        sortType: 'updatedAt',
+        query: playlistSearchQuery,
+        sortType: 'createdAt',
         order: 'desc',
       });
     }
