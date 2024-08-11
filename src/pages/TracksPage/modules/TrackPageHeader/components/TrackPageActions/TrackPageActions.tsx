@@ -4,13 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import settingsIcon from '../../../../../../../public/buttons/settingsIcon.svg';
 import searchIcon from '../../../../../../../public/inputs/searchIconWhite.svg';
 
-const TrackPageActions: React.FC = React.memo(() => {
+type Props = {
+  searchTo: string;
+};
+
+const TrackPageActions: React.FC<Props> = React.memo(({ searchTo }) => {
   const navigate = useNavigate();
 
   return (
     <div className="lg:hidden flex gap-3 justify-end">
       <Link
-        to="/tracks/search"
+        to={searchTo}
         className="active:outline-none focus:outline-none flex"
       >
         <img

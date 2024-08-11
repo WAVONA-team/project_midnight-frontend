@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PlaylistContainer } from '@/pages/PlaylistsPage/components/PlaylistContainer/PlaylistContainer';
+import { Search } from '@/pages/PlaylistsPage/components/Search/Search';
 
 import BackButton from '@/ui/Button/BackButton/BackButton';
 import { Container } from '@/ui/Container';
@@ -17,10 +18,13 @@ export const PlaylistsPage: React.FC = React.memo(() => {
         h-full
       "
     >
+      <Search />
+
       <div
         className="
           font-rubik
           text-on-primary-anti-flash-white
+          mt-8
         "
       >
         <div className="flex sm:mb-3">
