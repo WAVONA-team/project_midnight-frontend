@@ -6,7 +6,7 @@ import { useStore } from '@/store';
 import { Track } from 'project_midnight';
 
 import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
-import TrackPageFiltersDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown.tsx';
+import { TrackPageDropdown } from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 
@@ -18,9 +18,8 @@ const TrackPageControls: React.FC = React.memo(() => {
     createPlayerSlice();
 
   const { userPlaylist, setTracksTitle, setTracksIcon } = useStore(
-    ({ userPlaylist, user, setTracksTitle, setTracksIcon }) => ({
+    ({ userPlaylist, setTracksTitle, setTracksIcon }) => ({
       userPlaylist,
-      user,
       setTracksTitle,
       setTracksIcon,
     }),
@@ -118,7 +117,7 @@ const TrackPageControls: React.FC = React.memo(() => {
           </div>
 
           <div className="order-1 sm:order-1 sm:ml-auto self-center">
-            <TrackPageFiltersDropdown />
+            <TrackPageDropdown />
           </div>
         </div>
       </div>

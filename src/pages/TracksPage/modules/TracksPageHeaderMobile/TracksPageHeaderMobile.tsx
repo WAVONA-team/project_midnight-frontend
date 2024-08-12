@@ -9,7 +9,7 @@ const TracksPageHeaderMobile: React.FC = React.memo(() => {
     <div className="pt-6 flex justify-between">
       <Logo textSize="text-lg" logoWidth="w-6" />
 
-      <TrackPageActions />
+      <TrackPageActions searchTo="/tracks/search" />
     </div>
   );
 });

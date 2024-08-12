@@ -21,6 +21,7 @@ import {
   TrackSearchPage,
   TracksPage,
   UpdateResetPasswordPage,
+  PlaylistSearchPage,
 } from '@/pages';
 
 import App from './App';
@@ -54,6 +55,7 @@ export const Root: React.FC = React.memo(() => {
               <Route index element={<PlaylistsPage />} />
               <Route path="new" element={<CreateNewPlaylistPage />} />
               <Route path=":playlistId" element={<PlaylistPage />} />
+              <Route path="search" element={<PlaylistSearchPage />} />
             </Route>
 
             <Route path="tracks">

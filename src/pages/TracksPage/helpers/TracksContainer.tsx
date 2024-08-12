@@ -3,14 +3,16 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
 
+import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
+
 import { TrackList } from '@/modules/TrackList';
 
 const TracksContainer: React.FC = React.memo(() => {
   const {
+    user,
     isUserTracksLoading,
     isQueryTracksLoading,
     setIsUserTracksLoading,
-    user,
     getTracksByUser,
     currentPage,
     totalTracks,
@@ -43,6 +45,15 @@ const TracksContainer: React.FC = React.memo(() => {
     }),
   );
 
+  const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
+    ({ query, isFiltering, order, sortType }) => ({
+      isFiltering,
+      query,
+      order,
+      sortType,
+    }),
+  );
+
   const isFavourite = isFavouriteTracksLoading;
 
   useEffect(() => {
@@ -52,21 +63,21 @@ const TracksContainer: React.FC = React.memo(() => {
   }, []);
 
   useEffect(() => {
-    if (isUserTracksLoading) {
+    if (isUserTracksLoading || isFiltering) {
       getTracksByUser(user!.id, currentPage, {
-        query: '',
-        sortType: 'updatedAt',
-        order: 'desc',
+        query: query,
+        order: order,
+        sortType: sortType.type,
         isFavourite,
       });
     }
-  }, [isUserTracksLoading]);
+  }, [isUserTracksLoading, isFiltering]);
 
   return (
     <TrackList
       onTrackPage={false}
       tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
     />

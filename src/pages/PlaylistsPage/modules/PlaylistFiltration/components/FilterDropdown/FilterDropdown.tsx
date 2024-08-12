@@ -3,8 +3,8 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
-import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
-import { SortType } from '@/pages/TrackSearchPage/store/types';
+import { playlistsFilteringSlice } from '@/pages/PlaylistsPage/modules/PlaylistFiltration/store';
+import { SortType } from '@/pages/PlaylistsPage/store/types/SortType';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
@@ -13,31 +13,38 @@ import { MenuButton, SortButton } from '@/ui/Button';
 
 import alphaSortIcon from '../../../../../../../public/buttons/actionButtons/alphaSortIcon.svg';
 import dateSortIcon from '../../../../../../../public/buttons/actionButtons/dateSortIcon.svg';
-import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
-export const TrackPageDropdown: React.FC = React.memo(() => {
-  const { setCurrentPage, clearUserTracks } = useStore(
-    ({ setCurrentPage, clearUserTracks }) => ({
-      setCurrentPage,
-      clearUserTracks,
+export const FilterDropdown: React.FC = React.memo(() => {
+  const {
+    playlistSortType,
+    setPlaylistIsFiltering,
+    setPlaylistOrder,
+    setPlaylistSortType,
+  } = playlistsFilteringSlice(
+    ({
+      playlistSortType,
+      setPlaylistIsFiltering,
+      setPlaylistOrder,
+      setPlaylistSortType,
+    }) => ({
+      playlistSortType,
+      setPlaylistIsFiltering,
+      setPlaylistOrder,
+      setPlaylistSortType,
     }),
   );
-  const { sortType, setOrder, setSortType, setIsFiltering } =
-    tracksSearchPageSlice(
-      ({ sortType, setOrder, setSortType, setIsFiltering }) => ({
-        sortType,
-        setOrder,
-        setSortType,
-        setIsFiltering,
-      }),
-    );
+
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
 
-  const { userTracks } = useStore(({ userTracks }) => ({
-    userTracks,
-  }));
+  const { playlists, clearPlaylists, setCurrentPlaylistPage } = useStore(
+    ({ playlists, clearPlaylists, setCurrentPlaylistPage }) => ({
+      playlists,
+      clearPlaylists,
+      setCurrentPlaylistPage,
+    }),
+  );
 
   useLayoutEffect(() => {
     if (window.innerWidth < 640) {
@@ -66,26 +73,19 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
       title: 'По алфавиту',
       icon: alphaSortIcon,
       handler: (title: string) =>
-        setSortingInfo({ name: title, type: 'title' }, 'asc'),
-    },
-    {
-      id: 3,
-      title: 'По источнику',
-      icon: sourceSortIcon,
-      handler: (title: string) =>
-        setSortingInfo({ name: title, type: 'source' }, 'desc'),
+        setSortingInfo({ name: title, type: 'name' }, 'desc'),
     },
   ];
 
   const reset = () => {
-    clearUserTracks();
-    setCurrentPage(1);
-    setIsFiltering(true);
+    clearPlaylists();
+    setCurrentPlaylistPage(1);
+    setPlaylistIsFiltering(true);
   };
 
   const setSortingInfo = (sortType: SortType, order: 'desc' | 'asc') => {
-    setSortType(sortType);
-    setOrder(order);
+    setPlaylistSortType(sortType);
+    setPlaylistOrder(order);
     reset();
   };
 
@@ -131,9 +131,9 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
       tabIndex={0}
     >
       <SortButton
-        title={sortType.name}
+        title={playlistSortType.name}
         isOpen={isOpen}
-        disabled={!userTracks.length}
+        disabled={!playlists.length}
         onMouseDown={handlerButtonFocus}
       />
 

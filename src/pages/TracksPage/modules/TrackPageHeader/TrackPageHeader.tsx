@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useStore } from '@/store';
 import debounce from 'lodash.debounce';
 
+import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 import TracksPageHeaderMobile from '@/pages/TracksPage/modules/TracksPageHeaderMobile/TracksPageHeaderMobile.tsx';
 
 import { Container } from '@/ui/Container';
@@ -14,8 +15,6 @@ const TrackPageHeader: React.FC = React.memo(() => {
     getTracksByUser,
     currentPage,
     clearUserPlaylist,
-    query,
-    setQuery,
     setIsQueryTracksLoading,
   } = useStore(
     ({
@@ -23,19 +22,20 @@ const TrackPageHeader: React.FC = React.memo(() => {
       getTracksByUser,
       currentPage,
       clearUserPlaylist,
-      query,
-      setQuery,
       setIsQueryTracksLoading,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
       clearUserPlaylist,
-      query,
-      setQuery,
       setIsQueryTracksLoading,
     }),
   );
+
+  const { query, setQuery } = tracksSearchPageSlice(({ query, setQuery }) => ({
+    query,
+    setQuery,
+  }));
 
   const getTracksByUserWrapper = useCallback((query: string) => {
     clearUserPlaylist();
