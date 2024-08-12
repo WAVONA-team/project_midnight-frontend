@@ -2,6 +2,7 @@ import React from 'react';
 
 import { PlaylistContainer } from '@/pages/PlaylistsPage/components/PlaylistContainer/PlaylistContainer';
 import { Search } from '@/pages/PlaylistsPage/components/Search/Search';
+import { FilterDropdown } from '@/pages/PlaylistsPage/modules/PlaylistFiltration';
 
 import BackButton from '@/ui/Button/BackButton/BackButton';
 import { Container } from '@/ui/Container';
@@ -25,6 +26,9 @@ export const PlaylistsPage: React.FC = React.memo(() => {
           font-rubik
           text-on-primary-anti-flash-white
           mt-8
+          flex
+          justify-between
+          items-center
         "
       >
         <div className="flex sm:mb-3">
@@ -43,6 +47,8 @@ export const PlaylistsPage: React.FC = React.memo(() => {
             Плейлисты
           </h1>
         </div>
+
+        <FilterDropdown />
       </div>
 
       <PlaylistContainer />
