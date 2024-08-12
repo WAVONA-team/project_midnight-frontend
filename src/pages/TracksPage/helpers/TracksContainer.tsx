@@ -44,6 +44,7 @@ const TracksContainer: React.FC = React.memo(() => {
       userTracks,
     }),
   );
+
   const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
     ({ query, isFiltering, order, sortType }) => ({
       isFiltering,
@@ -75,7 +76,7 @@ const TracksContainer: React.FC = React.memo(() => {
   return (
     <TrackList
       tracks={userTracks}
-      isLoading={isUserTracksLoading || isQueryTracksLoading}
+      isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
     />

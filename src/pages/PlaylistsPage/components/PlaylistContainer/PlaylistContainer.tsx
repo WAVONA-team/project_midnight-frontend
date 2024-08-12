@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useStore } from '@/store';
 
 import { PlaylistList } from '@/pages/PlaylistsPage/components/PlaylistList/PlaylistList';
+import { playlistsFilteringSlice } from '@/pages/PlaylistsPage/modules/PlaylistFiltration/store';
 
 export const PlaylistContainer: React.FC = React.memo(() => {
   const {
@@ -39,20 +40,41 @@ export const PlaylistContainer: React.FC = React.memo(() => {
     }),
   );
 
+  const {
+    playlistIsFiltering,
+    playlistSortType,
+    playlistOrder,
+    setPlaylistIsFiltering,
+  } = playlistsFilteringSlice(
+    ({
+      playlistIsFiltering,
+      playlistSortType,
+      playlistOrder,
+      setPlaylistIsFiltering,
+    }) => ({
+      playlistIsFiltering,
+      playlistSortType,
+      playlistOrder,
+      setPlaylistIsFiltering,
+    }),
+  );
+
   useEffect(() => {
-    if (isPlaylistsLoading) {
+    if (isPlaylistsLoading || playlistIsFiltering) {
       getPlaylists(user!.id, currentPlaylistPage, {
         query: playlistSearchQuery,
-        sortType: 'createdAt',
-        order: 'desc',
-      });
+        sortType: playlistSortType.type,
+        order: playlistOrder,
+      }).finally(() => setPlaylistIsFiltering(false));
     }
-  }, [isPlaylistsLoading]);
+  }, [isPlaylistsLoading, playlistIsFiltering]);
 
   return (
     <PlaylistList
       playlists={playlists}
-      isLoading={isPlaylistsLoading || isQueryPlaylistsLoading}
+      isLoading={
+        isPlaylistsLoading || isQueryPlaylistsLoading || playlistIsFiltering
+      }
       setIsLoading={setIsPlaylistsLoading}
       totalPlaylists={totalPlaylists}
     />

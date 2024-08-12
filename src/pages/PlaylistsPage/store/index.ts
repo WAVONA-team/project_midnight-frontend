@@ -70,6 +70,7 @@ export const createPlaylistSlice: StateCreator<PlaylistsPageState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
+  setCurrentPlaylistPage: (page) => set({ currentPlaylistPage: page }),
 });
 
 export { type PlaylistsPageState };

@@ -54,7 +54,7 @@ export const PlaylistCard: React.FC<Props> = React.memo(
 
         <div className="md:mt-4 flex justify-between items-center w-full">
           <div className="flex flex-col gap-2">
-            <h3 className="font-rubik font-normal text-base md:font-semibold">
+            <h3 className="text-left font-rubik font-normal text-base md:font-semibold">
               {name}
             </h3>
 
