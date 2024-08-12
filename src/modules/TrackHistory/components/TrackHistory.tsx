@@ -23,20 +23,20 @@ export const TrackHistory: React.FC = React.memo(() => {
 
   const {
     user,
+    clearUserSearchHistory,
     userSearchHistory,
     updateHistoryOrder,
-    clearUserSearchHistory,
   } = useStore(
     ({
       user,
+      clearUserSearchHistory,
       userSearchHistory,
       updateHistoryOrder,
-      clearUserSearchHistory,
     }) => ({
       user,
+      clearUserSearchHistory,
       userSearchHistory,
       updateHistoryOrder,
-      clearUserSearchHistory,
     }),
   );
 
