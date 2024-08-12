@@ -17,10 +17,11 @@ export const SettingsPage: React.FC = React.memo(() => {
   const { changePlayerState, changeCurrentTrack } = createPlayerSlice();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
-  const { logout, clearUserPlaylist } = useStore(
-    ({ logout, clearUserPlaylist }) => ({
+  const { logout, clearUserPlaylist, user } = useStore(
+    ({ logout, clearUserPlaylist, user }) => ({
       logout,
       clearUserPlaylist,
+      user,
     }),
   );
 
@@ -74,61 +75,72 @@ export const SettingsPage: React.FC = React.memo(() => {
           </h1>
         </div>
 
-        <div
-          className="
-          py-5
-          border-b
-          border-secondary-jet
-          border-solid
-        "
-        >
-          <Link
-            className="
-            flex
-            font-normal
-            text-sm
-            tracking-wide
-            text-on-primary-anti-flash-white
-            hover:text-on-primary-anti-flash-white
-            whitespace-nowrap
-            sm:justify-between
-          "
-            to="connected-apps"
-          >
-            <span>Подключенные приложения</span>
-            <img
-              className="
-              px-1.5
-              ml-2
-              rotate-180
-            "
-              src={arrowIcon}
-              alt="Arrow Icon"
-            />
-          </Link>
+        <div>
+          <h3 className="font-rubik text-base font-normal">
+            Аккаунт:{' '}
+            <span className="text-secondary-satin-sheen-gold">
+              {user?.email}
+            </span>
+          </h3>
         </div>
 
-        <div
-          className="
-          py-4
-          font-normal
-          text-sm
-          tracking-wide
-          sm:border-b
-          sm:border-secondary-jet
-          sm:border-solid
-        "
-        >
-          <button
+        <div className="px-4">
+          <div
             className="
-            w-full
-            text-start
-            focus:outline-none
-          "
-            onClick={enableModal}
+              py-5
+              border-b
+              border-secondary-jet
+              border-solid
+            "
           >
-            <span>Выйти</span>
-          </button>
+            <Link
+              className="
+                flex
+                font-normal
+                text-sm
+                tracking-wide
+                text-on-primary-anti-flash-white
+                hover:text-on-primary-anti-flash-white
+                whitespace-nowrap
+                sm:justify-between
+              "
+              to="connected-apps"
+            >
+              <span>Подключенные приложения</span>
+              <img
+                className="
+                  px-1.5
+                  ml-2
+                  rotate-180
+                "
+                src={arrowIcon}
+                alt="Arrow Icon"
+              />
+            </Link>
+          </div>
+
+          <div
+            className="
+              py-4
+              font-normal
+              text-sm
+              tracking-wide
+              sm:border-b
+              sm:border-secondary-jet
+              sm:border-solid
+            "
+          >
+            <button
+              className="
+                w-full
+                text-start
+                focus:outline-none
+              "
+              onClick={enableModal}
+            >
+              <span>Выйти</span>
+            </button>
+          </div>
         </div>
 
         <Modal isModalActive={isModalActive} disableModal={disableModal}>
