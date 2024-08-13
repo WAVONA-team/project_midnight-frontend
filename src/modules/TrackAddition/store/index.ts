@@ -17,7 +17,7 @@ export const parseTrackSlice: StateCreator<TrackAdditionState> = (set) => ({
   clearParsedTrack: () => {
     set({ parsedTrack: null });
   },
-  setParsedTrack: (track: Track) => set({ parsedTrack: track }),
+  setParsedTrack: (track) => set({ parsedTrack: track }),
   parseTrack: async (url, userId, duration) => {
     set({ isParsedTrackLoading: true });
 

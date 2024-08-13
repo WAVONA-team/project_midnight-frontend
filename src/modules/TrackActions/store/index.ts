@@ -10,7 +10,8 @@ const getUrl = (sub: string): string => {
   return `/track/${sub}`;
 };
 
-export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
+export const trackActionsSlice: StateCreator<TrackActionsState> = (set) => ({
+  isUpdated: '',
   checkTrack: async (trackId: string, userId: string) => {
     return await httpClient
       .get<Track>(getUrl(`check-track/${userId}/${trackId}`))
@@ -35,8 +36,12 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = () => ({
   },
   updateIsFavourite: async (trackId, userId) => {
     return await httpClient
-      .patch<Track>(getUrl('update-favourite'), { trackId, userId })
-      .then((res) => res.data)
+      .patch<boolean>(getUrl('update-favourite'), { trackId, userId })
+      .then(({ data }) => {
+        set({ isUpdated: `${trackId}:${data}` });
+
+        return data;
+      })
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;

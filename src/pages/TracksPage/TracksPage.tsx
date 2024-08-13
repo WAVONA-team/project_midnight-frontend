@@ -79,6 +79,8 @@ export const TracksPage: React.FC = React.memo(() => {
         <div
           className="
             justify-self-center
+            mb-8
+            md:mb-0
             lg:pb-0
             lg:col-span-1
             lg:justify-self-end

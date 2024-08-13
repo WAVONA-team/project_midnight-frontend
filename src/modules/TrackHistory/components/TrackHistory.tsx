@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
-import { DeleteButton } from '@/modules/TrackModal/components/buttons';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -19,24 +18,27 @@ import { Container } from '@/ui/Container';
 const { ShareButton, FavoriteButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const [isTrackSave] = useState(false);
+  const [isTrackSave, setIsTrackSave] = useState(false);
 
   const {
     user,
     userSearchHistory,
     clearUserSearchHistory,
     updateHistoryOrder,
+    checkTrack,
   } = useStore(
     ({
       user,
       userSearchHistory,
       clearUserSearchHistory,
       updateHistoryOrder,
+      checkTrack,
     }) => ({
       user,
       userSearchHistory,
       clearUserSearchHistory,
       updateHistoryOrder,
+      checkTrack,
     }),
   );
 
@@ -56,22 +58,22 @@ export const TrackHistory: React.FC = React.memo(() => {
     clearUserSearchHistory(user?.id as string);
   };
 
-  // const handlerProtectedModal = async (
-  //   e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
-  // ) => {
-  //   if (user && e.trackId) {
-  //     checkTrack(e.trackId, user?.id)
-  //       .then(() => {
-  //         setIsTrackSave(true);
-  //       })
-  //       .catch(() => {
-  //         setIsTrackSave(false);
-  //       })
-  //       .finally(() => {
-  //         handlerTracksModal!(e);
-  //       });
-  //   }
-  // };
+  const handlerProtectedModal = async (
+    e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+  ) => {
+    if (user && e.trackId) {
+      checkTrack(e.trackId, user?.id)
+        .then(() => {
+          setIsTrackSave(true);
+        })
+        .catch(() => {
+          setIsTrackSave(false);
+        })
+        .finally(() => {
+          handlerTracksModal!(e);
+        });
+    }
+  };
 
   return (
     <div>
@@ -112,7 +114,7 @@ export const TrackHistory: React.FC = React.memo(() => {
 
                   updateHistoryOrder(track.id);
                 }}
-                handlerModal={handlerTracksModal!}
+                handlerModal={handlerProtectedModal!}
                 modalOnBlurHandler={modalOnBlurHandler}
               />
             </motion.div>
@@ -131,6 +133,8 @@ export const TrackHistory: React.FC = React.memo(() => {
                   <Menu.Item
                     as={FavoriteButton}
                     selectedTrack={selectedTrack!}
+                    trackIsFavourite={isTrackSave}
+                    setGlobalTrackIsFavourite={setIsTrackSave}
                     closeModal={modalOnCloseHandler!}
                     className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                   />
@@ -141,13 +145,6 @@ export const TrackHistory: React.FC = React.memo(() => {
                   selectedTrack={selectedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                 />
-                {isTrackSave && (
-                  <Menu.Item
-                    as={DeleteButton}
-                    selectedTrack={selectedTrack!}
-                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                  />
-                )}
               </>
             }
             trackAuthor={selectedTrack! && selectedTrack.author}

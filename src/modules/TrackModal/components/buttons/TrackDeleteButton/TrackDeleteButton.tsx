@@ -33,7 +33,7 @@ const TrackDeleteButton: React.FC<Props> = React.memo(
         );
 
       const handler = async () => {
-        deleteTrack(selectedTrack.id, user?.id!)
+        deleteTrack(selectedTrack.id, user!.id)
           .then(() => {
             clearUserPlaylist();
             setIsUserTracksLoading(true);

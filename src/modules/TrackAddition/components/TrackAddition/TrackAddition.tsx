@@ -15,8 +15,6 @@ import { useDebounce } from '@/shared/hooks/useDebounce';
 import { createPlayerSlice } from '@/modules/Player/store';
 import { modalButtons } from '@/modules/TrackModal';
 import { TrackModal } from '@/modules/TrackModal';
-import { DeleteButton } from '@/modules/TrackModal/components/buttons';
-import TrackFavoriteButton from '@/modules/TrackModal/components/buttons/TrackFavoriteButton/TrackFavoriteButton';
 import useHandlerModal from '@/modules/TrackModal/hooks/useHandlerModal';
 
 import Portal from '@/components/Portal/Portal';
@@ -47,6 +45,7 @@ const TrackAddition: React.FC = memo(() => {
     resolvedUrl,
     resolveShortUrl,
     setResolvedUrl,
+    setParsedTrack,
   } = useStore(
     ({
       user,
@@ -61,6 +60,7 @@ const TrackAddition: React.FC = memo(() => {
       resolvedUrl,
       resolveShortUrl,
       setResolvedUrl,
+      setParsedTrack,
     }) => ({
       user,
       parsedTrack,
@@ -74,6 +74,7 @@ const TrackAddition: React.FC = memo(() => {
       resolvedUrl,
       resolveShortUrl,
       setResolvedUrl,
+      setParsedTrack,
     }),
   );
 
@@ -108,14 +109,10 @@ const TrackAddition: React.FC = memo(() => {
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
     if (user && parsedTrack) {
-      try {
-        await checkTrack(parsedTrack?.id, user?.id);
-        setIsTrackSave(true);
-      } catch {
-        setIsTrackSave(false);
-      } finally {
-        handlerTrackModal!(e);
-      }
+      checkTrack(parsedTrack?.id, user?.id)
+        .then(() => setIsTrackSave(true))
+        .catch(() => setIsTrackSave(false))
+        .finally(() => handlerTrackModal!(e));
     }
   };
 
@@ -160,6 +157,7 @@ const TrackAddition: React.FC = memo(() => {
   const clearValueHandler = () => {
     setValue('url', '');
     clearErrors('url');
+    setParsedTrack(null);
   };
 
   const getClipboardText = async () => {
@@ -358,6 +356,8 @@ const TrackAddition: React.FC = memo(() => {
                 <Menu.Item
                   as={FavoriteButton}
                   selectedTrack={parsedTrack!}
+                  trackIsFavourite={isTrackSave}
+                  setGlobalTrackIsFavourite={setIsTrackSave}
                   closeModal={modalOnCloseHandler!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                 />
@@ -367,18 +367,6 @@ const TrackAddition: React.FC = memo(() => {
                   selectedTrack={parsedTrack!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl"
                 />
-                <Menu.Item
-                  as={TrackFavoriteButton}
-                  selectedTrack={parsedTrack!}
-                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                />
-                {isTrackSave && (
-                  <Menu.Item
-                    as={DeleteButton}
-                    selectedTrack={parsedTrack!}
-                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
-                  />
-                )}
               </>
             }
             trackAuthor={parsedTrack && parsedTrack.author}

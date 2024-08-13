@@ -23,10 +23,6 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   const [notificationGapDesktop, setNotificationGapDesktop] =
     useState<number>(15);
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
   const handleControlIsOpen = () => {
     if (currentTrack) {
       setNotificationGapMobile(173);
@@ -40,6 +36,10 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   useEffect(() => {
     handleControlIsOpen();
   }, [currentTrack]);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div
