@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import dot from '@/../public/dot.svg';
 import checked from '@/../public/isFavourite/checked.svg';
@@ -52,6 +53,7 @@ const TrackInfo: React.FC<Props> = React.memo(
     handlerModal,
     modalOnBlurHandler,
   }) => {
+    const navigate = useNavigate();
     const [isTrackFavourite, setIsTrackFavourite] = useState(isFavourite);
     const { playerState, currentTrack, changeCurrentTrack, changePlayerState } =
       createPlayerSlice();
@@ -64,6 +66,7 @@ const TrackInfo: React.FC<Props> = React.memo(
       user,
       setIsFavouriteTracksLoading,
       clearUserPlaylist,
+      isUpdated,
     } = useStore(
       ({
         updateIsFavourite,
@@ -73,6 +76,7 @@ const TrackInfo: React.FC<Props> = React.memo(
         user,
         setIsFavouriteTracksLoading,
         clearUserPlaylist,
+        isUpdated,
       }) => ({
         updateIsFavourite,
         isFavouriteTracksLoading,
@@ -81,10 +85,12 @@ const TrackInfo: React.FC<Props> = React.memo(
         user,
         setIsFavouriteTracksLoading,
         clearUserPlaylist,
+        isUpdated,
       }),
     );
 
     const toggleFavourite = () => {
+      navigate('/tracks');
       if (isFavouriteTracksLoading) return;
       setIsFavouriteTracksLoading(true);
       clearUserPlaylist();
@@ -102,6 +108,17 @@ const TrackInfo: React.FC<Props> = React.memo(
         handlerModal(e);
       }
     };
+
+    useEffect(() => {
+      if (
+        isUpdated.split(':')[0] === id &&
+        isUpdated.split(':')[1] === 'false'
+      ) {
+        setIsTrackFavourite(false);
+      } else {
+        setIsTrackFavourite(true);
+      }
+    }, [isUpdated]);
 
     if (isDesktop) {
       return (
@@ -287,8 +304,8 @@ const TrackInfo: React.FC<Props> = React.memo(
               type="button"
               className="flex gap-1 w-6 h-6 focus:outline-none focus:border-none"
               onClick={() => {
-                updateIsFavourite(id, user?.id as string).then(() => {
-                  setIsTrackFavourite((prev) => !prev);
+                updateIsFavourite(id, user?.id as string).then((res) => {
+                  setIsTrackFavourite(res);
 
                   if (isTrackFavourite) {
                     toast.custom(() => (

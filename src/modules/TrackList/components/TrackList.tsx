@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -37,12 +37,16 @@ const TrackList: React.FC<Props> = React.memo(
     totalTracks,
     headerCondition = true,
   }) => {
+    const [isTrackSave, setIsTrackSave] = useState(false);
+
     const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
       createPlayerSlice();
 
-    const { isFavouriteTracksLoading } = useStore(
-      ({ isFavouriteTracksLoading }) => ({
+    const { isFavouriteTracksLoading, user, checkTrack } = useStore(
+      ({ isFavouriteTracksLoading, user, checkTrack }) => ({
         isFavouriteTracksLoading,
+        user,
+        checkTrack,
       }),
     );
 
@@ -73,7 +77,7 @@ const TrackList: React.FC<Props> = React.memo(
       ) {
         setIsLoading(true);
       }
-    }, [, totalTracks, setIsLoading]);
+    }, [totalTracks, setIsLoading]);
 
     useEffect(() => {
       document.addEventListener('scroll', scrollHandler);
@@ -84,6 +88,23 @@ const TrackList: React.FC<Props> = React.memo(
         document.removeEventListener('resize', scrollHandler);
       };
     }, [scrollHandler]);
+
+    const handlerProtectedModal = async (
+      e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
+    ) => {
+      if (user && e.trackId) {
+        checkTrack(e.trackId, user?.id)
+          .then(() => {
+            setIsTrackSave(true);
+          })
+          .catch(() => {
+            setIsTrackSave(false);
+          })
+          .finally(() => {
+            handlerTracksModal!(e);
+          });
+      }
+    };
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
@@ -123,7 +144,7 @@ const TrackList: React.FC<Props> = React.memo(
                     artist={track.author as string}
                     name={track.title}
                     handlerPlay={() => handleTrack(track)}
-                    handlerModal={handlerTracksModal!}
+                    handlerModal={handlerProtectedModal!}
                     modalOnBlurHandler={modalOnBlurHandler}
                     duration={track.duration}
                     provider={track.source}
@@ -148,6 +169,8 @@ const TrackList: React.FC<Props> = React.memo(
                     <Menu.Item
                       as={FavoriteButton}
                       selectedTrack={selectedTrack!}
+                      trackIsFavourite={isTrackSave}
+                      setGlobalTrackIsFavourite={setIsTrackSave}
                       closeModal={modalOnCloseHandler!}
                       className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                     />
@@ -158,6 +181,7 @@ const TrackList: React.FC<Props> = React.memo(
                     selectedTrack={selectedTrack!}
                     className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                   />
+
                   <Menu.Item
                     as={DeleteButton}
                     selectedTrack={selectedTrack!}
