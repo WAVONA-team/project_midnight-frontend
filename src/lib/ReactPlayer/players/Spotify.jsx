@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { getSDK, callPlayer } from "../utils";
-import { canPlay } from "../patterns";
+import React, { Component } from 'react';
 
-const SDK_URL = "https://open.spotify.com/embed-podcast/iframe-api/v1";
-const SDK_GLOBAL = "SpotifyIframeApi";
-const SDK_GLOBAL_READY = "SpotifyIframeApi";
+import { canPlay } from '../patterns';
+import { callPlayer, getSDK } from '../utils';
+
+const SDK_URL = 'https://open.spotify.com/embed-podcast/iframe-api/v1';
+const SDK_GLOBAL = 'SpotifyIframeApi';
+const SDK_GLOBAL_READY = 'SpotifyIframeApi';
 
 export default class Spotify extends Component {
-  static displayName = "Spotify";
+  static displayName = 'Spotify';
   static loopOnEnded = true;
   static canPlay = canPlay.spotify;
   callPlayer = callPlayer;
@@ -24,13 +25,16 @@ export default class Spotify extends Component {
     if (window[SDK_GLOBAL] && !this.player) {
       this.initializePlayer(window[SDK_GLOBAL], url);
       return;
-    } else if (this.player) {
-      this.callPlayer("loadUri", this.props.url);
+    }
+
+    if (this.player) {
+      this.callPlayer('loadUri', this.props.url);
       return;
     }
 
     window.onSpotifyIframeApiReady = (IFrameAPI) =>
       this.initializePlayer(IFrameAPI, url);
+
     getSDK(SDK_URL, SDK_GLOBAL, SDK_GLOBAL_READY);
   }
 
@@ -38,15 +42,21 @@ export default class Spotify extends Component {
     if (!this.container) return;
 
     const options = {
-      width: "100%",
-      height: "100%",
+      width: '100%',
+      height: '100%',
       uri: url,
     };
+
     const callback = (EmbedController) => {
       this.player = EmbedController;
-      this.player.addListener("playback_update", this.onStateChange);
-      this.player.addListener("ready", this.props.onReady);
+      this.player.addListener('playback_update', this.onStateChange);
+      this.player.addListener('ready', this.props.onReady);
     };
+
+    if (typeof IFrameAPI.createController !== 'function') {
+      return;
+    }
+
     IFrameAPI.createController(this.container, options, callback);
   };
 
@@ -68,19 +78,19 @@ export default class Spotify extends Component {
   };
 
   play() {
-    this.callPlayer("resume");
+    this.callPlayer('resume');
   }
 
   pause() {
-    this.callPlayer("pause");
+    this.callPlayer('pause');
   }
 
   stop() {
-    this.callPlayer("destroy");
+    this.callPlayer('destroy');
   }
 
   seekTo(amount) {
-    this.callPlayer("seek", amount);
+    this.callPlayer('seek', amount);
     if (!this.props.playing) {
       this.pause();
     } else {
@@ -88,8 +98,7 @@ export default class Spotify extends Component {
     }
   }
 
-  setVolume(fraction) {
-  }
+  setVolume(fraction) {}
 
   mute() {
     // No volume support
@@ -125,9 +134,10 @@ export default class Spotify extends Component {
 
   render() {
     const style = {
-      width: "100%",
-      height: "100%",
+      width: '100%',
+      height: '100%',
     };
+
     return (
       <div style={style}>
         <div ref={this.ref} />
