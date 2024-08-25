@@ -13,8 +13,7 @@ import Modal from '@/ui/Modal/Modal';
 import {
   ServiceIconApple,
   ServiceIconSoundCloud,
-  ServiceIconSpotify,
-  ServiceIconYandex,
+  ServiceIconSpotify, // ServiceIconYandex,
   ServiceIconYoutube,
 } from '@/ui/ServiceIcon';
 
@@ -38,29 +37,25 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setError] = useState<string>('');
 
-  const { registerSpotify, removeSpotify, user } = useStore(
-    ({ registerSpotify, removeSpotify, user }) => ({
-      registerSpotify,
-      removeSpotify,
-      user,
-    }),
-  );
+  const { user } = useStore(({ user }) => ({
+    user,
+  }));
 
   const requireAuthServices: RequiredAuthService[] = [
     {
       title: 'Spotify',
       icon: <ServiceIconSpotify />,
       token: user?.spotifyOAUTH,
-      register: registerSpotify,
-      remove: async () => removeSpotify(user!.id),
-    },
-    {
-      title: 'Yandex Music',
-      icon: <ServiceIconYandex />,
-      token: user?.yandexOAUTH,
       register: () => {},
       remove: async () => {},
     },
+    // {
+    //   title: 'Yandex Music',
+    //   icon: <ServiceIconYandex />,
+    //   token: user?.yandexOAUTH,
+    //   register: () => {},
+    //   remove: async () => {},
+    // },
     {
       title: 'Apple Music',
       icon: <ServiceIconApple />,
@@ -101,6 +96,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         setCurrentService(null);
         setIsModalActive(false);
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .catch((error: any) => {
         setError(error.formErrors);
       })
@@ -146,6 +142,30 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
 
         <div
           className="
+            my-5
+            sm:mt-10
+          "
+        >
+          <div className="mb-6">
+            <h2 className="font-openSans font-normal text-sm md:text-2xl">
+              Сервисы, не требующие авторизацию
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:flex gap-5 flex-wrap">
+            {notRequireAuthServices.map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                serviceIcon={service.icon}
+                supportedTitle="Поддерживается"
+              />
+            ))}
+          </div>
+        </div>
+
+        <div
+          className="
           flex
           flex-col
           flex-wrap
@@ -154,17 +174,19 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         "
         >
           <div className="mb-6">
-            <h2 className="font-openSans font-normal text-2xl">
-              Сервисы, требующие авторизацию
+            <h2 className="font-openSans font-normal text-sm md:text-2xl">
+              Сервисы, находящиеся в разработке
             </h2>
           </div>
-          <div className="flex gap-5 flex-wrap">
+
+          <div className="grid grid-cols-2 md:flex gap-5 flex-wrap">
             {requireAuthServices.map((service) => (
               <ServiceCard
                 key={service.title}
                 title={service.title}
                 serviceIcon={service.icon}
                 isConnected={!!service.token}
+                supportedTitle="В разработке"
                 handler={() =>
                   !service.token ? service.register!() : enableModal(service)
                 }
@@ -181,29 +203,6 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
               disableService={disableService}
             />
           </Modal>
-        </div>
-
-        <div
-          className="
-          my-5
-          sm:mt-10
-        "
-        >
-          <div className="mb-6">
-            <h2 className="font-openSans font-normal text-2xl">
-              Сервисы, не требующие авторизацию
-            </h2>
-          </div>
-          <div className="flex gap-5 flex-wrap">
-            {notRequireAuthServices.map((service) => (
-              <ServiceCard
-                key={service.title}
-                title={service.title}
-                serviceIcon={service.icon}
-                supportedTitle="Поддерживается"
-              />
-            ))}
-          </div>
         </div>
       </div>
     </Container>
