@@ -16,6 +16,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
     currentPage,
     clearUserPlaylist,
     setIsQueryTracksLoading,
+    userPlaylist,
   } = useStore(
     ({
       user,
@@ -23,12 +24,14 @@ const TrackPageHeader: React.FC = React.memo(() => {
       currentPage,
       clearUserPlaylist,
       setIsQueryTracksLoading,
+      userPlaylist,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
       clearUserPlaylist,
       setIsQueryTracksLoading,
+      userPlaylist,
     }),
   );
 
@@ -72,6 +75,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
             className={'lg:max-w-[398px] mr-3 col-span-3'}
             clearValue={clearValueHandler}
             placeholder="Название, исполнитель..."
+            disabled={!userPlaylist?.tracks?.length && !query.length}
             value={query}
             onChange={onChangeHandler}
           />

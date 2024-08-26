@@ -56,7 +56,7 @@ export const CreatePlaylist: React.FC = React.memo(() => {
   const onSubmit: SubmitHandler<PlaylistInputs> = (formData) => {
     const { playlistName } = formData;
 
-    createPlaylist(playlistName, user?.id!)
+    createPlaylist(playlistName, user!.id)
       .then(() => {
         setValue('playlistName', '');
         clearPlaylists();

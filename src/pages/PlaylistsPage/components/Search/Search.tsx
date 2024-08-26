@@ -13,6 +13,7 @@ export const Search: React.FC = React.memo(() => {
     user,
     playlistSearchQuery,
     currentPlaylistPage,
+    playlists,
     setPlaylistSearchQuery,
     clearPlaylists,
     setIsQueryPlaylistsLoading,
@@ -22,6 +23,7 @@ export const Search: React.FC = React.memo(() => {
       user,
       playlistSearchQuery,
       currentPlaylistPage,
+      playlists,
       setPlaylistSearchQuery,
       clearPlaylists,
       setIsQueryPlaylistsLoading,
@@ -30,6 +32,7 @@ export const Search: React.FC = React.memo(() => {
       user,
       playlistSearchQuery,
       currentPlaylistPage,
+      playlists,
       setPlaylistSearchQuery,
       clearPlaylists,
       setIsQueryPlaylistsLoading,
@@ -57,7 +60,7 @@ export const Search: React.FC = React.memo(() => {
   const clearValueHandler = () => {
     setPlaylistSearchQuery('');
     clearPlaylists();
-    getPlaylists(user?.id!, currentPlaylistPage);
+    getPlaylists(user!.id, currentPlaylistPage);
   };
 
   return (
@@ -74,6 +77,7 @@ export const Search: React.FC = React.memo(() => {
         clearValue={clearValueHandler}
         placeholder="Название"
         className="!w-2/5 hidden md:block"
+        disabled={!playlists.length && !playlistSearchQuery.length}
       />
     </div>
   );

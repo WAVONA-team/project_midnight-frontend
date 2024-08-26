@@ -87,6 +87,7 @@ export const PlaylistSearchPage: React.FC = React.memo(() => {
           type="button"
           onClick={() => {
             clearPlaylists();
+            setPlaylistSearchQuery('');
             getPlaylists(user!.id, currentPlaylistPage).then(() =>
               navigate(-1),
             );
