@@ -209,6 +209,7 @@ const TrackList: React.FC<Props> = React.memo(
                   <Menu.Item
                     as={DeleteButton}
                     selectedTrack={selectedTrack!}
+                    closeModal={modalOnCloseHandler!}
                     className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                   />
                 </>

@@ -12,11 +12,9 @@ export const tracksSearchPageSlice = create<TracksSearchPageState>()(
         type: 'createdAt'
       },
       order: 'desc',
-      isFiltering: false,
       setQuery: (query) => set({ query }),
       setSortType: ({ name, type }: SortType) => set({ sortType: { name, type } }),
       setOrder: (order) => set({ order }),
-      setIsFiltering: (isFiltering) => set({ isFiltering }),
     }),
     {
       name: 'tracks-search-page-storage',

@@ -15,6 +15,7 @@ const NotificationMessage: React.FC<Props> = React.memo(
         >
           {message}
         </span>
+
         {handlerText && (
           <button
             type="button"

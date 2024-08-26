@@ -12,8 +12,10 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
   isFavouriteTracksLoading: false,
   totalTracks: 0,
   isUserTracksLoading: true,
+  isFiltering: false,
   isQueryTracksLoading: false,
   currentPage: 1,
+  setIsFiltering: (isFiltering) => set({ isFiltering }),
   clearUserTracks: () => set({ userTracks: [], currentPage: 1 }),
   setIsFavouriteTracksLoading: (state: boolean) =>
     set({ isFavouriteTracksLoading: state }),
@@ -51,7 +53,7 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
           },
           userTracks: [...state.userTracks, ...data.tracks!],
           currentPage: state.currentPage + 1,
-          totalTracks: headers['x-total-count'],
+          totalTracks: +headers['x-total-count'],
         }));
 
         return data;

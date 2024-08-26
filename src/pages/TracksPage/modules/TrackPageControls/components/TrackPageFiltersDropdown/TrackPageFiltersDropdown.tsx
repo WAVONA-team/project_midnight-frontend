@@ -16,21 +16,20 @@ import dateSortIcon from '../../../../../../../public/buttons/actionButtons/date
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 export const TrackPageDropdown: React.FC = React.memo(() => {
-  const { setCurrentPage, clearUserTracks } = useStore(
-    ({ setCurrentPage, clearUserTracks }) => ({
+  const { setCurrentPage, clearUserTracks, setIsFiltering } = useStore(
+    ({ setCurrentPage, clearUserTracks, setIsFiltering }) => ({
       setCurrentPage,
       clearUserTracks,
+      setIsFiltering,
     }),
   );
-  const { sortType, setOrder, setSortType, setIsFiltering } =
-    tracksSearchPageSlice(
-      ({ sortType, setOrder, setSortType, setIsFiltering }) => ({
-        sortType,
-        setOrder,
-        setSortType,
-        setIsFiltering,
-      }),
-    );
+  const { sortType, setOrder, setSortType } = tracksSearchPageSlice(
+    ({ sortType, setOrder, setSortType }) => ({
+      sortType,
+      setOrder,
+      setSortType,
+    }),
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);

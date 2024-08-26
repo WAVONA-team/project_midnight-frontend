@@ -19,16 +19,16 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
   }));
 
   const [notificationGapMobile, setNotificationGapMobile] =
-    useState<number>(65);
+    useState<number>(80);
   const [notificationGapDesktop, setNotificationGapDesktop] =
-    useState<number>(15);
+    useState<number>(30);
 
   const handleControlIsOpen = () => {
     if (currentTrack) {
-      setNotificationGapMobile(173);
+      setNotificationGapMobile(188);
       setNotificationGapDesktop(170);
     } else {
-      setNotificationGapMobile(65);
+      setNotificationGapMobile(80);
       setNotificationGapDesktop(15);
     }
   };
@@ -56,15 +56,16 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
       <main className="order-1 lg:order-0">
         <Toaster
-          containerClassName="absolute block lg:hidden"
+          containerClassName="lg:hidden"
           position="bottom-center"
           containerStyle={{
             bottom: notificationGapMobile,
             left: 0,
+            right: 0,
+            top: 0,
             color: 'rgba(235, 235, 235, 1)',
           }}
           reverseOrder={false}
-          gutter={8}
           toastOptions={{
             duration: 1000,
           }}
@@ -88,7 +89,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
         {children || <Outlet />}
 
         {currentTrack && (
-          <div className="sticky bottom-14 lg:bottom-0">
+          <div className="sticky bottom-[4.5rem] lg:bottom-0">
             <Controls />
           </div>
         )}

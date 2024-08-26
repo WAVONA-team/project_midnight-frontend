@@ -14,7 +14,7 @@ const TrackPageContainer: React.FC = React.memo(() => {
     totalTracks,
     isFavouriteTracksLoading,
     clearUserPlaylist,
-    userPlaylist,
+    userTracks,
   } = useStore(
     ({
       user,
@@ -25,7 +25,7 @@ const TrackPageContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      userPlaylist,
+      userTracks,
     }) => ({
       user,
       isUserTracksLoading,
@@ -35,7 +35,7 @@ const TrackPageContainer: React.FC = React.memo(() => {
       totalTracks,
       isFavouriteTracksLoading,
       clearUserPlaylist,
-      userPlaylist,
+      userTracks,
     }),
   );
 
@@ -61,7 +61,7 @@ const TrackPageContainer: React.FC = React.memo(() => {
   return (
     <TrackList
       onTrackPage={true}
-      tracks={userPlaylist?.tracks!}
+      tracks={userTracks}
       isLoading={isUserTracksLoading}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
