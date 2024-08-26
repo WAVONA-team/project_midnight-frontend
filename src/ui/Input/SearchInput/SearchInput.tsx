@@ -6,6 +6,7 @@ import { classNames as inputClassnames } from '@/ui/Input/classNames';
 
 import clearIcon from '../../../../public/inputs/clear.svg';
 import searchIcon from '../../../../public/inputs/search.svg';
+import searchDisabled from '../../../../public/inputs/searchDisabled.svg';
 
 type Props = {
   value: string;
@@ -14,6 +15,7 @@ type Props = {
 
   className?: string;
   placeholder?: string;
+  disabled?: boolean;
   error?: string;
 };
 
@@ -24,6 +26,7 @@ const SearchInput: React.FC<Props> = React.memo(
     clearValue,
     className = '',
     placeholder = '',
+    disabled = false,
     error,
   }) => {
     return (
@@ -36,7 +39,7 @@ const SearchInput: React.FC<Props> = React.memo(
 
         <div className="relative mt-7">
           <img
-            src={searchIcon}
+            src={disabled ? searchDisabled : searchIcon}
             alt="search"
             className="absolute top-[10px] left-4"
           />
@@ -69,6 +72,7 @@ const SearchInput: React.FC<Props> = React.memo(
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            disabled={disabled}
           />
         </div>
       </label>

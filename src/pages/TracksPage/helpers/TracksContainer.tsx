@@ -80,6 +80,8 @@ const TracksContainer: React.FC = React.memo(() => {
       isLoading={isUserTracksLoading || isQueryTracksLoading || isFiltering}
       setIsLoading={setIsUserTracksLoading}
       totalTracks={totalTracks}
+      headerCondition={!!query.length}
+      onMainPage
     />
   );
 });

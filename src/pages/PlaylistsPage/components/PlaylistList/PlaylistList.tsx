@@ -54,7 +54,7 @@ export const PlaylistList: React.FC<Props> = React.memo(
           </Container>
         )}
 
-        {!isLoading && !playlists.length && (
+        {!isLoading && !playlists.length && !!playlistSearchQuery.length && (
           <div className="text-on-primary-anti-flash-white">
             <p className="text-xl">
               Плейлист не найден. Попробуйте изменить поисковый запрос
@@ -63,7 +63,7 @@ export const PlaylistList: React.FC<Props> = React.memo(
         )}
 
         <AnimatePresence>
-          {!isLoading && !!playlists.length && (
+          {!isLoading && (
             <div className="grid md:grid-cols-4 mt-6 md:mt-12 gap-5">
               {!playlistSearchQuery.length && (
                 <motion.div
@@ -93,7 +93,7 @@ export const PlaylistList: React.FC<Props> = React.memo(
                         : playlistThumbnail
                     }
                     name={playlist.name}
-                    count={playlist.tracks?.length!}
+                    count={playlist.tracks!.length}
                   />
                 </motion.div>
               ))}

@@ -2,10 +2,9 @@ import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
+import debounce from 'lodash.debounce';
 
 import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
-
-import debounce from 'lodash.debounce';
 
 import { SearchInput } from '@/ui/Input';
 
@@ -18,6 +17,7 @@ export const Search: React.FC = React.memo(() => {
     currentPage,
     clearUserPlaylist,
     setIsQueryTracksLoading,
+    clearUserTracks,
   } = useStore(
     ({
       user,
@@ -25,12 +25,14 @@ export const Search: React.FC = React.memo(() => {
       currentPage,
       clearUserPlaylist,
       setIsQueryTracksLoading,
+      clearUserTracks,
     }) => ({
       user,
       getTracksByUser,
       currentPage,
       clearUserPlaylist,
       setIsQueryTracksLoading,
+      clearUserTracks,
     }),
   );
 
@@ -76,7 +78,9 @@ export const Search: React.FC = React.memo(() => {
         type="button"
         onClick={() => {
           clearUserPlaylist();
-          getTracksByUser(user!.id, currentPage).then(() => navigate(-1));
+          clearUserTracks();
+          setQuery('');
+          navigate(-1);
         }}
       >
         Отмена

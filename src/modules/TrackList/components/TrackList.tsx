@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
+import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Track } from 'project_midnight';
 
@@ -24,6 +25,7 @@ type Props = {
   tracks: Track[];
   totalTracks: number;
   headerCondition?: boolean;
+  onMainPage?: boolean;
 };
 
 const { FavoriteButton, ShareButton } = modalButtons;
@@ -36,6 +38,7 @@ const TrackList: React.FC<Props> = React.memo(
     tracks,
     totalTracks,
     headerCondition = true,
+    onMainPage = false,
   }) => {
     const [isTrackSave, setIsTrackSave] = useState(false);
 
@@ -108,21 +111,42 @@ const TrackList: React.FC<Props> = React.memo(
 
     return (
       <div className="mb-8 sm:mb-12 flex flex-col gap-11">
-        {!isLoading && !tracks.length && headerCondition && (
-          <Container>
-            <div className="flex flex-col items-center justify-center">
-              <h1 className="font-openSans text-2xl font-normal mb-4 text-center">
-                {!isFavouriteTracksLoading
-                  ? 'Здесь пока нет ни одного трека'
-                  : 'Вы не добавили ни одного трека в избранное'}
-              </h1>
-              <p className="font-rubik text-base font-normal text-on-secondary-dim-gray mb-5">
-                Добавьте любимые треки прямо сейчас
-              </p>
+        {!isLoading && !tracks.length && (
+          <Container
+            className={classNames('flex flex-col justify-center', {
+              'items-start': headerCondition,
+              'items-center': !headerCondition,
+            })}
+          >
+            {!headerCondition && onMainPage && (
               <div>
-                <MainButtonLink title="Добавить трек" path="/tracks/new" />
+                <h1 className="font-openSans text-xl md:text-2xl font-normal mb-4 text-center">
+                  {isFavouriteTracksLoading
+                    ? 'Вы не добавили ни одного трека в избранное'
+                    : 'Здесь пока нет ни одного трека'}
+                </h1>
               </div>
-            </div>
+            )}
+
+            {headerCondition && (
+              <h1 className="font-openSans text-xl md:text-2xl font-normal mb-4 text-left">
+                Трек не найден. Попробуйте изменить поисковый запрос
+              </h1>
+            )}
+
+            {!headerCondition && onMainPage && (
+              <div className="flex flex-col items-center">
+                <p className="font-rubik text-base font-normal text-on-secondary-dim-gray mb-5">
+                  Добавьте любимые треки прямо сейчас
+                </p>
+
+                <MainButtonLink
+                  title="Добавить трек"
+                  path="/tracks/new"
+                  className="w-fit"
+                />
+              </div>
+            )}
           </Container>
         )}
 

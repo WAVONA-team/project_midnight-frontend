@@ -36,7 +36,7 @@ export const PlaylistCard: React.FC<Props> = React.memo(
 
     const devToast = () =>
       toast.custom(() => (
-        <NotificationMessage message="Страница плейлиста еще в разработке" />
+        <NotificationMessage message="Страница плейлиста находится в разработке" />
       ));
 
     return (
