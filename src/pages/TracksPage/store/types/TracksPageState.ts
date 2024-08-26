@@ -7,10 +7,12 @@ export type TracksPageState = {
   userPlaylist: Playlist | null;
   totalTracks: number;
   isFavouriteTracksLoading: boolean;
+  isFiltering: boolean;
   isUserTracksLoading: boolean;
   isQueryTracksLoading: boolean;
   currentPage: number;
   clearUserTracks: () => void;
+  setIsFiltering: (state: boolean) => void;
   setIsFavouriteTracksLoading: (state: boolean) => void;
   setCurrentPage: (number: number) => void;
   setIsUserTracksLoading: (state: boolean) => void;

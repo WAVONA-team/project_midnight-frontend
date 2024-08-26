@@ -12,8 +12,8 @@ import { Container } from '@/ui/Container';
 export const TrackPage: React.FC = React.memo(() => {
   const { currentTrack } = createPlayerSlice();
 
-  const { userPlaylist } = useStore(({ userPlaylist }) => ({
-    userPlaylist,
+  const { userTracks } = useStore(({ userTracks }) => ({
+    userTracks,
   }));
 
   return (
@@ -44,7 +44,7 @@ export const TrackPage: React.FC = React.memo(() => {
 
             <div
               className={`
-              ${userPlaylist?.tracks?.length! >= 6 && 'overflow-y-auto'}
+              ${userTracks.length! >= 6 && 'overflow-y-auto'}
               mt-4
               ${window.innerHeight <= 1000 ? 'max-h-[550px]' : 'max-h-[800px]'}
               min-w-[480px]

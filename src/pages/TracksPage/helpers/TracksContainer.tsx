@@ -19,6 +19,7 @@ const TracksContainer: React.FC = React.memo(() => {
     isFavouriteTracksLoading,
     clearUserPlaylist,
     userTracks,
+    isFiltering,
   } = useStore(
     ({
       user,
@@ -31,6 +32,7 @@ const TracksContainer: React.FC = React.memo(() => {
       isFavouriteTracksLoading,
       clearUserPlaylist,
       userTracks,
+      isFiltering,
     }) => ({
       user,
       isUserTracksLoading,
@@ -42,12 +44,12 @@ const TracksContainer: React.FC = React.memo(() => {
       isFavouriteTracksLoading,
       clearUserPlaylist,
       userTracks,
+      isFiltering,
     }),
   );
 
-  const { order, query, sortType, isFiltering } = tracksSearchPageSlice(
-    ({ query, isFiltering, order, sortType }) => ({
-      isFiltering,
+  const { order, query, sortType } = tracksSearchPageSlice(
+    ({ query, order, sortType }) => ({
       query,
       order,
       sortType,

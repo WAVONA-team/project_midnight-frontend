@@ -9,9 +9,7 @@ export type TracksSearchPageState = {
   query: string;
   sortType: SortType;
   order: 'desc' | 'asc';
-  isFiltering: boolean;
   setQuery: (query: string) => void;
   setSortType: (sortType: SortType) => void;
   setOrder: (order: 'desc' | 'asc') => void;
-  setIsFiltering: (isFiltering: boolean) => void;
 };

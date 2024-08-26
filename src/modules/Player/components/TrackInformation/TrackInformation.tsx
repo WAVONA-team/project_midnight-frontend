@@ -10,7 +10,13 @@ export const TrackInformation: React.FC = React.memo(() => {
 
   return (
     <div
-      onClick={() => navigate(`/tracks/${currentTrack!.id}`)}
+      onClick={() => {
+        if (window.innerWidth < 640) {
+          return;
+        }
+
+        navigate(`/tracks/${currentTrack!.id}`);
+      }}
       className="cursor-pointer flex gap-4 items-center max-sm:w-6/12 w-10/12 lg:w-full"
     >
       <img

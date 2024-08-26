@@ -29,7 +29,24 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
   ];
   return (
     <aside
-      className={`${className} z-10 sticky bottom-0 w-full py-3 flex-row  bg-surface-eerie_black flex justify-between lg:w-72 lg:top-0 lg:h-screen lg:py-2 lg:flex-col font-rubik`}
+      className={`
+        ${className}
+        z-10
+        sticky
+        bottom-0
+        w-full
+        py-3
+        flex-row
+        bg-surface-eerie_black
+        flex
+        justify-between
+        lg:w-72
+        lg:top-0
+        lg:h-screen
+        lg:py-2
+        lg:flex-col
+        font-rubik
+      `}
     >
       <div className="relative w-full h-full">
         <Logo
@@ -46,7 +63,7 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
               <NavLink
                 className={({ isActive }) =>
                   classNames(
-                    'transition flex flex-col items-center pl-0 py-0 gap-0 lg:flex-row lg:pl-6 lg:py-4 lg:gap-5 hover:text-on-primary-lavender-blush',
+                    'transition flex flex-col items-center px-4 py-2 gap-0 lg:flex-row lg:pl-6 lg:py-4 lg:gap-5 hover:text-on-primary-lavender-blush',
                     {
                       'text-on-primary-anti-flash-white lg:bg-secondary-eerie-black-light':
                         isActive,
