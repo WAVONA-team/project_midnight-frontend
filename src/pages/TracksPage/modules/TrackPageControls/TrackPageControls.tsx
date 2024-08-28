@@ -5,7 +5,7 @@ import playIcon from '@/../public/buttons/playerButtons/mainPagePlayIcon.svg';
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
 
-import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
+// import TrackPageAdditionActionsDropdown from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageAdditionActionsDropdown/TrackPageAdditionActionsDropdown.tsx';
 import { TrackPageDropdown } from '@/pages/TracksPage/modules/TrackPageControls/components/TrackPageFiltersDropdown/TrackPageFiltersDropdown';
 
 import { createPlayerSlice } from '@/modules/Player/store';
@@ -112,9 +112,9 @@ const TrackPageControls: React.FC = React.memo(() => {
             />
           </div>
 
-          <div className="order-2 sm:order-1 self-center">
+          {/* <div className="order-2 sm:order-1 self-center">
             <TrackPageAdditionActionsDropdown />
-          </div>
+          </div> */}
 
           <div className="order-1 sm:order-1 sm:ml-auto self-center">
             <TrackPageDropdown />
