@@ -3,15 +3,13 @@ import React, { useRef, useState } from 'react';
 import { Menu } from '@headlessui/react';
 
 import { createPlayerSlice } from '@/modules/Player/store';
+import TrackDeleteButton from '@/modules/TrackModal/components/buttons/TrackDeleteButton/TrackDeleteButton';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
 
 import { TrackShareButton } from '@/ui/Button';
-import AddToPlaylist from '@/ui/Button/MenuButton/AddToPlaylistButton/AddToPlaylistButton';
-import AddToQueueButton from '@/ui/Button/MenuButton/AddToQueueButton/AddToQueueButton';
-import DeleteTrackButton from '@/ui/Button/MenuButton/DeleteTrackButton/DeleteTrackButton';
-import TrackSaveOnMainButton from '@/ui/Button/MenuButton/TrackSaveOnMainButton/TrackSaveOnMainButton';
+// import TrackSaveOnMainButton from '@/ui/Button/MenuButton/TrackSaveOnMainButton/TrackSaveOnMainButton';
 import DotsIcon from '@/ui/icons/DotsIcon/DotsIcon';
 
 import { classNamesBase } from './classNames';
@@ -36,6 +34,7 @@ export const Dots: React.FC = React.memo(() => {
       setIsOpen((state) => !state);
     }
   };
+
   const onBlurHandler = () => {
     setIsOpen(false);
   };
@@ -63,7 +62,7 @@ export const Dots: React.FC = React.memo(() => {
               sm:right-0
               sm:bottom-10
               sm:min-w-[265px]
-              sm:absolute        
+              sm:absolute
               py-4
               sm:py-0
               shadow-[16px_-16px_16px_0px_#0C0D0B80]
@@ -71,25 +70,20 @@ export const Dots: React.FC = React.memo(() => {
             "
             modalOnCloseHandler={() => setIsOpen(false)}
           >
-            <Menu.Item
+            {/* <Menu.Item
               as={TrackSaveOnMainButton}
               className={classNamesBase.modalItemButtons}
-            />
-            <Menu.Item
-              as={AddToPlaylist}
-              className={classNamesBase.modalItemButtons}
-            />
-            <Menu.Item
-              as={AddToQueueButton}
-              className={classNamesBase.modalItemButtons}
-            />
+            /> */}
+
             <Menu.Item
               as={TrackShareButton}
               selectedTrack={currentTrack!}
               className={classNamesBase.modalItemButtons}
             />
+
             <Menu.Item
-              as={DeleteTrackButton}
+              as={TrackDeleteButton}
+              selectedTrack={currentTrack!}
               className={classNamesBase.modalItemButtons}
             />
           </Dropdown>
