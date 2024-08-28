@@ -28,7 +28,7 @@ type Props = {
   onMainPage?: boolean;
 };
 
-const { FavoriteButton, ShareButton } = modalButtons;
+const { FavoriteButton, ShareButton, SaveOnMainButton } = modalButtons;
 
 const TrackList: React.FC<Props> = React.memo(
   ({
@@ -40,16 +40,28 @@ const TrackList: React.FC<Props> = React.memo(
     headerCondition = true,
     onMainPage = false,
   }) => {
-    const [isTrackSave, setIsTrackSave] = useState(false);
+    const [isTrackFavourite, setIsTrackFavourite] = useState(false);
+    const [isTrackSaved, setIsTrackSaved] = useState(false);
 
     const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
       createPlayerSlice();
 
-    const { isFavouriteTracksLoading, user, checkTrack } = useStore(
-      ({ isFavouriteTracksLoading, user, checkTrack }) => ({
+    const {
+      isFavouriteTracksLoading,
+      user,
+      checkFavouriteTrack,
+      checkSavedTrack,
+    } = useStore(
+      ({
         isFavouriteTracksLoading,
         user,
-        checkTrack,
+        checkFavouriteTrack,
+        checkSavedTrack,
+      }) => ({
+        isFavouriteTracksLoading,
+        user,
+        checkFavouriteTrack,
+        checkSavedTrack,
       }),
     );
 
@@ -95,18 +107,14 @@ const TrackList: React.FC<Props> = React.memo(
     const handlerProtectedModal = async (
       e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
     ) => {
-      if (user && e.trackId) {
-        checkTrack(e.trackId, user?.id)
-          .then(() => {
-            setIsTrackSave(true);
-          })
-          .catch(() => {
-            setIsTrackSave(false);
-          })
-          .finally(() => {
-            handlerTracksModal!(e);
-          });
-      }
+      await checkSavedTrack(e.trackId!, user!.id)
+        .then(() => setIsTrackSaved(true))
+        .catch(() => setIsTrackSaved(false));
+
+      checkFavouriteTrack(e.trackId!, user!.id)
+        .then(() => setIsTrackFavourite(true))
+        .catch(() => setIsTrackFavourite(false))
+        .finally(() => handlerTracksModal!(e));
     };
 
     return (
@@ -193,12 +201,21 @@ const TrackList: React.FC<Props> = React.memo(
                     <Menu.Item
                       as={FavoriteButton}
                       selectedTrack={selectedTrack!}
-                      trackIsFavourite={isTrackSave}
-                      setGlobalTrackIsFavourite={setIsTrackSave}
+                      trackIsFavourite={isTrackFavourite}
+                      setGlobalTrackIsFavourite={setIsTrackFavourite}
                       closeModal={modalOnCloseHandler!}
                       className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                     />
                   </div>
+
+                  <Menu.Item
+                    as={SaveOnMainButton}
+                    selectedTrack={selectedTrack!}
+                    trackIsSaved={isTrackSaved}
+                    setGlobalTrackIsSaved={setIsTrackSaved}
+                    closeModal={modalOnCloseHandler!}
+                    className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                  />
 
                   <Menu.Item
                     as={ShareButton}

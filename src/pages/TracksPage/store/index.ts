@@ -65,7 +65,11 @@ export const tracksPageSlice: StateCreator<TracksPageState> = (set) => ({
         throw { fieldErrors, formErrors };
       })
       .finally(() =>
-        set({ isUserTracksLoading: false, isQueryTracksLoading: false }),
+        set({
+          isUserTracksLoading: false,
+          isQueryTracksLoading: false,
+          isFiltering: false,
+        }),
       );
   },
 });

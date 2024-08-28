@@ -76,16 +76,12 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
     },
   ];
 
-  const reset = () => {
-    clearUserTracks();
-    setCurrentPage(1);
-    setIsFiltering(true);
-  };
-
   const setSortingInfo = (sortType: SortType, order: 'desc' | 'asc') => {
     setSortType(sortType);
     setOrder(order);
-    reset();
+    clearUserTracks();
+    setCurrentPage(1);
+    setIsFiltering(true);
   };
 
   const handlerModal = ({

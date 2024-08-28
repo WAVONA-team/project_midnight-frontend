@@ -27,10 +27,11 @@ import { Logo } from '@/ui/Logo';
 import { NotificationMessage } from '@/ui/NotificationMessage';
 import { Spinner } from '@/ui/Spinner';
 
-const { ShareButton, FavoriteButton } = modalButtons;
+const { ShareButton, FavoriteButton, SaveOnMainButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
-  const [isTrackSave, setIsTrackSave] = useState(false);
+  const [isTrackFavourite, setIsTrackFavourite] = useState(false);
+  const [isTrackSaved, setIsTrackSaved] = useState(false);
 
   const {
     user,
@@ -41,11 +42,12 @@ const TrackAddition: React.FC = memo(() => {
     setIsParsedTrackLoading,
     parsedTrackDuration,
     setParsedTrackDuration,
-    checkTrack,
+    checkFavouriteTrack,
     resolvedUrl,
     resolveShortUrl,
     setResolvedUrl,
     setParsedTrack,
+    checkSavedTrack,
   } = useStore(
     ({
       user,
@@ -56,11 +58,12 @@ const TrackAddition: React.FC = memo(() => {
       setIsParsedTrackLoading,
       parsedTrackDuration,
       setParsedTrackDuration,
-      checkTrack,
+      checkFavouriteTrack,
       resolvedUrl,
       resolveShortUrl,
       setResolvedUrl,
       setParsedTrack,
+      checkSavedTrack,
     }) => ({
       user,
       parsedTrack,
@@ -70,11 +73,12 @@ const TrackAddition: React.FC = memo(() => {
       setIsParsedTrackLoading,
       parsedTrackDuration,
       setParsedTrackDuration,
-      checkTrack,
+      checkFavouriteTrack,
       resolvedUrl,
       resolveShortUrl,
       setResolvedUrl,
       setParsedTrack,
+      checkSavedTrack,
     }),
   );
 
@@ -108,12 +112,14 @@ const TrackAddition: React.FC = memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && parsedTrack) {
-      checkTrack(parsedTrack?.id, user?.id)
-        .then(() => setIsTrackSave(true))
-        .catch(() => setIsTrackSave(false))
-        .finally(() => handlerTrackModal!(e));
-    }
+    await checkSavedTrack(parsedTrack!.id, user!.id)
+      .then(() => setIsTrackSaved(true))
+      .catch(() => setIsTrackSaved(false));
+
+    checkFavouriteTrack(parsedTrack!.id, user!.id)
+      .then(() => setIsTrackFavourite(true))
+      .catch(() => setIsTrackFavourite(false))
+      .finally(() => handlerTrackModal!(e));
   };
 
   useEffect(() => {
@@ -356,8 +362,17 @@ const TrackAddition: React.FC = memo(() => {
                 <Menu.Item
                   as={FavoriteButton}
                   selectedTrack={parsedTrack!}
-                  trackIsFavourite={isTrackSave}
-                  setGlobalTrackIsFavourite={setIsTrackSave}
+                  trackIsFavourite={isTrackFavourite}
+                  setGlobalTrackIsFavourite={setIsTrackFavourite}
+                  closeModal={modalOnCloseHandler!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
+
+                <Menu.Item
+                  as={SaveOnMainButton}
+                  selectedTrack={parsedTrack!}
+                  trackIsSaved={isTrackSaved}
+                  setGlobalTrackIsSaved={setIsTrackSaved}
                   closeModal={modalOnCloseHandler!}
                   className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                 />

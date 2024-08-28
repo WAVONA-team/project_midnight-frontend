@@ -48,12 +48,6 @@ export const PlaylistList: React.FC<Props> = React.memo(
 
     return (
       <div>
-        {isLoading && (
-          <Container className="flex justify-center">
-            <Spinner />
-          </Container>
-        )}
-
         {!isLoading && !playlists.length && !!playlistSearchQuery.length && (
           <div className="text-on-primary-anti-flash-white">
             <p className="text-xl">
@@ -100,6 +94,12 @@ export const PlaylistList: React.FC<Props> = React.memo(
             </div>
           )}
         </AnimatePresence>
+
+        {isLoading && (
+          <Container className="flex justify-center">
+            <Spinner />
+          </Container>
+        )}
       </div>
     );
   },
