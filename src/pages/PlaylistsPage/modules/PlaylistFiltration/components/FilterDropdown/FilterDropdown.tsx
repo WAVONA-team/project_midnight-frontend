@@ -77,16 +77,12 @@ export const FilterDropdown: React.FC = React.memo(() => {
     },
   ];
 
-  const reset = () => {
-    clearPlaylists();
-    setCurrentPlaylistPage(1);
-    setPlaylistIsFiltering(true);
-  };
-
   const setSortingInfo = (sortType: SortType, order: 'desc' | 'asc') => {
     setPlaylistSortType(sortType);
     setPlaylistOrder(order);
-    reset();
+    clearPlaylists();
+    setCurrentPlaylistPage(1);
+    setPlaylistIsFiltering(true);
   };
 
   const handlerModal = ({
