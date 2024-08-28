@@ -9,9 +9,9 @@ import Portal from '@/components/Portal/Portal.tsx';
 
 import { MenuButton } from '@/ui/Button';
 
-import addToQueueIcon from '../../../../../../../public/buttons/actionButtons/addToQueueIcon.svg';
+// import addToQueueIcon from '../../../../../../../public/buttons/actionButtons/addToQueueIcon.svg';
 import addTrackIcon from '../../../../../../../public/buttons/actionButtons/addTrackIcon.svg';
-import repeatIcon from '../../../../../../../public/buttons/actionButtons/repeatIcon.svg';
+// import repeatIcon from '../../../../../../../public/buttons/actionButtons/repeatIcon.svg';
 import kebabIcon from '../../../../../../../public/kebab/kebab.svg';
 
 const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
@@ -31,18 +31,18 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
       icon: addTrackIcon,
       handler: () => navigate('/tracks/new'),
     },
-    {
-      id: 2,
-      title: 'Добавить в очередь',
-      icon: addToQueueIcon,
-      handler: () => {},
-    },
-    {
-      id: 3,
-      title: 'Повторить',
-      icon: repeatIcon,
-      handler: () => {},
-    },
+    // {
+    //   id: 2,
+    //   title: 'Добавить в очередь',
+    //   icon: addToQueueIcon,
+    //   handler: () => {},
+    // },
+    // {
+    //   id: 3,
+    //   title: 'Повторить',
+    //   icon: repeatIcon,
+    //   handler: () => {},
+    // },
   ];
 
   const handleClose = () => {

@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
 
+import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
 
 import { createPlayerSlice } from '@/modules/Player/store';
 import TrackDeleteButton from '@/modules/TrackModal/components/buttons/TrackDeleteButton/TrackDeleteButton';
+import TrackSaveOnMainButton from '@/modules/TrackModal/components/buttons/TrackSaveOnMainButton/TrackSaveOnMainButton';
 
 import Dropdown from '@/components/Dropdown/Dropdown.tsx';
 import Portal from '@/components/Portal/Portal';
 
 import { TrackShareButton } from '@/ui/Button';
-// import TrackSaveOnMainButton from '@/ui/Button/MenuButton/TrackSaveOnMainButton/TrackSaveOnMainButton';
 import DotsIcon from '@/ui/icons/DotsIcon/DotsIcon';
 
 import { classNamesBase } from './classNames';
@@ -17,7 +18,13 @@ import { classNamesBase } from './classNames';
 export const Dots: React.FC = React.memo(() => {
   const { currentTrack } = createPlayerSlice();
 
+  const { checkSavedTrack, user } = useStore(({ checkSavedTrack, user }) => ({
+    checkSavedTrack,
+    user,
+  }));
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
   const ref = useRef(null);
 
@@ -25,13 +32,18 @@ export const Dots: React.FC = React.memo(() => {
     currentTarget,
   }: React.MouseEvent<HTMLDivElement> & { trackId?: string }) => {
     if (currentTarget === childElement) {
-      setIsOpen((state) => !state);
+      checkSavedTrack(currentTrack!.id, user!.id)
+        .then(() => setIsSaved(true))
+        .catch(() => setIsSaved(false))
+        .finally(() => setIsOpen((state) => !state));
     } else {
       const element = currentTarget as HTMLElement;
-
       setChildElement(element);
 
-      setIsOpen((state) => !state);
+      checkSavedTrack(currentTrack!.id, user!.id)
+        .then(() => setIsSaved(true))
+        .catch(() => setIsSaved(false))
+        .finally(() => setIsOpen((state) => !state));
     }
   };
 
@@ -70,10 +82,13 @@ export const Dots: React.FC = React.memo(() => {
             "
             modalOnCloseHandler={() => setIsOpen(false)}
           >
-            {/* <Menu.Item
+            <Menu.Item
               as={TrackSaveOnMainButton}
+              selectedTrack={currentTrack!}
+              trackIsSaved={isSaved}
+              setGlobalTrackIsSaved={setIsSaved}
               className={classNamesBase.modalItemButtons}
-            /> */}
+            />
 
             <Menu.Item
               as={TrackShareButton}

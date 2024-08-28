@@ -15,30 +15,34 @@ import { TrackInfo } from '@/components/TrackInfo';
 import TextButton from '@/ui/Button/TextButtonWithIcon/TextButtonWithIcon';
 import { Container } from '@/ui/Container';
 
-const { ShareButton, FavoriteButton } = modalButtons;
+const { ShareButton, FavoriteButton, SaveOnMainButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
-  const [isTrackSave, setIsTrackSave] = useState(false);
+  const [isTrackFavourite, setIsTrackFavourite] = useState(false);
+  const [isTrackSaved, setIsTrackSaved] = useState(false);
 
   const {
     user,
     userSearchHistory,
     clearUserSearchHistory,
     updateHistoryOrder,
-    checkTrack,
+    checkFavouriteTrack,
+    checkSavedTrack,
   } = useStore(
     ({
       user,
       userSearchHistory,
       clearUserSearchHistory,
       updateHistoryOrder,
-      checkTrack,
+      checkFavouriteTrack,
+      checkSavedTrack,
     }) => ({
       user,
       userSearchHistory,
       clearUserSearchHistory,
       updateHistoryOrder,
-      checkTrack,
+      checkFavouriteTrack,
+      checkSavedTrack,
     }),
   );
 
@@ -61,18 +65,14 @@ export const TrackHistory: React.FC = React.memo(() => {
   const handlerProtectedModal = async (
     e: React.MouseEvent<HTMLDivElement> & { trackId?: string },
   ) => {
-    if (user && e.trackId) {
-      checkTrack(e.trackId, user?.id)
-        .then(() => {
-          setIsTrackSave(true);
-        })
-        .catch(() => {
-          setIsTrackSave(false);
-        })
-        .finally(() => {
-          handlerTracksModal!(e);
-        });
-    }
+    await checkSavedTrack(e.trackId!, user!.id)
+      .then(() => setIsTrackSaved(true))
+      .catch(() => setIsTrackSaved(false));
+
+    checkFavouriteTrack(e.trackId!, user!.id)
+      .then(() => setIsTrackFavourite(true))
+      .catch(() => setIsTrackFavourite(false))
+      .finally(() => handlerTracksModal!(e));
   };
 
   return (
@@ -133,12 +133,21 @@ export const TrackHistory: React.FC = React.memo(() => {
                   <Menu.Item
                     as={FavoriteButton}
                     selectedTrack={selectedTrack!}
-                    trackIsFavourite={isTrackSave}
-                    setGlobalTrackIsFavourite={setIsTrackSave}
+                    trackIsFavourite={isTrackFavourite}
+                    setGlobalTrackIsFavourite={setIsTrackFavourite}
                     closeModal={modalOnCloseHandler!}
                     className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
                   />
                 </div>
+
+                <Menu.Item
+                  as={SaveOnMainButton}
+                  selectedTrack={selectedTrack!}
+                  trackIsSaved={isTrackSaved}
+                  setGlobalTrackIsSaved={setIsTrackSaved}
+                  closeModal={modalOnCloseHandler!}
+                  className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                />
 
                 <Menu.Item
                   as={ShareButton}

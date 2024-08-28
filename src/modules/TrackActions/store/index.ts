@@ -12,9 +12,9 @@ const getUrl = (sub: string): string => {
 
 export const trackActionsSlice: StateCreator<TrackActionsState> = (set) => ({
   isUpdated: '',
-  checkTrack: async (trackId: string, userId: string) => {
+  checkFavouriteTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .get<Track>(getUrl(`check-track/${userId}/${trackId}`))
+      .get<Track>(getUrl(`check-favourite-track/${userId}/${trackId}`))
       .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
@@ -23,10 +23,10 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = (set) => ({
         throw { fieldErrors, formErrors };
       });
   },
-  saveTrack: async (track: Track, userId: string) => {
+  checkSavedTrack: async (trackId: string, userId: string) => {
     return await httpClient
-      .post(getUrl('new'), { ...track, userId })
-      .then((res) => res.data)
+      .get<Track>(getUrl(`check-saved-track/${userId}/${trackId}`))
+      .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;
@@ -42,6 +42,17 @@ export const trackActionsSlice: StateCreator<TrackActionsState> = (set) => ({
 
         return data;
       })
+      .catch((serverErrors) => {
+        const { fieldErrors, formErrors }: ServerErrors =
+          serverErrors.response.data;
+
+        throw { fieldErrors, formErrors };
+      });
+  },
+  updateIsSaved: async (trackId, userId) => {
+    return await httpClient
+      .patch<boolean>(getUrl('update-saved'), { trackId, userId })
+      .then(({ data }) => data)
       .catch((serverErrors) => {
         const { fieldErrors, formErrors }: ServerErrors =
           serverErrors.response.data;

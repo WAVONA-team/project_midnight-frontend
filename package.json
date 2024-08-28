@@ -19,7 +19,7 @@
     "load-script": "^2.0.0",
     "lodash.debounce": "^4.0.8",
     "memoize-one": "^6.0.0",
-    "project_midnight": "^0.0.39",
+    "project_midnight": "^0.0.40",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-auth-code-input": "^3.2.1",

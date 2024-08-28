@@ -115,7 +115,12 @@ const TrackInfo: React.FC<Props> = React.memo(
         isUpdated.split(':')[1] === 'false'
       ) {
         setIsTrackFavourite(false);
-      } else {
+      }
+
+      if (
+        isUpdated.split(':')[0] === id &&
+        isUpdated.split(':')[1] === 'true'
+      ) {
         setIsTrackFavourite(true);
       }
     }, [isUpdated]);
