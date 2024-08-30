@@ -204,7 +204,7 @@ const TrackList: React.FC<Props> = React.memo(
                       trackIsFavourite={isTrackFavourite}
                       setGlobalTrackIsFavourite={setIsTrackFavourite}
                       closeModal={modalOnCloseHandler!}
-                      className="first:rounded-t-xl first:hover:rounded-t-xl last:border-b-0 last:hover:rounded-b-xl "
+                      className="first:rounded-t-xl first:hover:rounded-t-xl"
                     />
                   </div>
 

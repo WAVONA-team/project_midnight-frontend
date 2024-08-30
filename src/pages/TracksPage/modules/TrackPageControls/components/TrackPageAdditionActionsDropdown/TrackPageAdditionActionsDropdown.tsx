@@ -46,6 +46,7 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
   ];
 
   const handleClose = () => {
+    setChildElement(null);
     setIsOpen(false);
   };
 
@@ -94,7 +95,6 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
             md:top-12
             md:w-[254px]
             md:absolute
-            bottom-[54px]
             py-4
             sm:py-0
             shadow-[16px_-16px_16px_0px_#0C0D0B80]
