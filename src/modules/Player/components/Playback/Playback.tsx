@@ -15,6 +15,7 @@ export const Playback: React.FC = React.memo(() => {
     volume,
     isLoop,
     currentTrack,
+    currentTime,
     seekTo,
     seeking,
     changeCurrentTime,
@@ -39,6 +40,11 @@ export const Playback: React.FC = React.memo(() => {
     if (!seeking) {
       changeCurrentTime(state.played);
       changeSecondsLoaded(state.loadedSeconds);
+    }
+
+    if (isLoop && currentTime > 0.99) {
+      playerRef.current?.seekTo(0);
+      changeCurrentTime(0);
     }
   };
 
