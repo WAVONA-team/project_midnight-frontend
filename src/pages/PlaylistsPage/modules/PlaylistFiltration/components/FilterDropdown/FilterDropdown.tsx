@@ -89,12 +89,11 @@ export const FilterDropdown: React.FC = React.memo(() => {
     currentTarget,
   }: React.MouseEvent<HTMLDivElement> & { trackId?: string }) => {
     if (currentTarget === childElement) {
-      setIsOpen((state) => !state);
+      setIsOpen(false);
     } else {
       const element = currentTarget as HTMLElement;
 
       setChildElement(element);
-
       setIsOpen((state) => !state);
     }
   };
@@ -104,6 +103,7 @@ export const FilterDropdown: React.FC = React.memo(() => {
   };
 
   const modalOnCloseHandler = () => {
+    setChildElement(null);
     setIsOpen(false);
   };
 
@@ -140,7 +140,6 @@ export const FilterDropdown: React.FC = React.memo(() => {
             sm:top-8
             sm:w-[254px]
             sm:absolute
-            bottom-[54px]
             py-4
             sm:py-0
             shadow-[16px_-16px_16px_0px_#0C0D0B80]

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 import cross from '@/../public/cross/cross.svg';
 import { Menu } from '@headlessui/react';
@@ -16,10 +16,6 @@ type Props = {
 
 const Dropdown: React.FC<Props> = React.memo(
   ({ children, title, headerItem, className = '', modalOnCloseHandler }) => {
-    const overlayClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
-      if (e.currentTarget === e.target) modalOnCloseHandler();
-    };
-
     return (
       <motion.div
         initial={{
@@ -43,8 +39,8 @@ const Dropdown: React.FC<Props> = React.memo(
             w-full
             h-full
           bg-surface-eerie_black/60
-    `}
-        onClick={overlayClickHandler}
+        `}
+        onClick={() => modalOnCloseHandler()}
       >
         <motion.div
           className={`${className}

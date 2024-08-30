@@ -89,7 +89,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
         {children || <Outlet />}
 
         {currentTrack && (
-          <div className="sticky bottom-[4.5rem] lg:bottom-0">
+          <div className="sticky bottom-[4.5rem] lg:bottom-0 z-0">
             <Controls />
           </div>
         )}
