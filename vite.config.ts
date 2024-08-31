@@ -29,6 +29,7 @@ export default defineConfig({
         start_url: '/',
         scope: '/',
         orientation: 'portrait',
+        lang: 'ru',
         icons: [
           {
             src: 'android-chrome-192x192.png',
