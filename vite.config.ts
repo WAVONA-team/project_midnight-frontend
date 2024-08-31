@@ -32,52 +32,52 @@ export default defineConfig({
         lang: 'ru',
         icons: [
           {
-            src: 'android-chrome-192x192.png',
+            src: 'favicon/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'android-chrome-512x512.png',
+            src: 'favicon/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: 'apple-touch-icon.png',
+            src: 'favicon/apple-touch-icon.png',
             sizes: '180x180',
             type: 'image/png',
           },
           {
-            src: 'favicon-16x16.png',
+            src: 'favicon/favicon-16x16.png',
             sizes: '16x16',
             type: 'image/png',
           },
           {
-            src: 'favicon-32x32.png',
+            src: 'favicon/favicon-32x32.png',
             sizes: '32x32',
             type: 'image/png',
           },
           {
-            src: 'mstile-70x70.png',
+            src: 'favicon/mstile-70x70.png',
             sizes: '70x70',
             type: 'image/png',
           },
           {
-            src: 'mstile-144x144.png',
+            src: 'favicon/mstile-144x144.png',
             sizes: '144x144',
             type: 'image/png',
           },
           {
-            src: 'mstile-150x150.png',
+            src: 'favicon/mstile-150x150.png',
             sizes: '150x150',
             type: 'image/png',
           },
           {
-            src: 'mstile-310x150.png',
+            src: 'favicon/mstile-310x150.png',
             sizes: '310x150',
             type: 'image/png',
           },
           {
-            src: 'mstile-310x310.png',
+            src: 'favicon/mstile-310x310.png',
             sizes: '310x310',
             type: 'image/png',
           },
@@ -188,17 +188,17 @@ export default defineConfig({
           },
           {
             src: 'buttons/playerButtons/next.svg',
-            sizes: '24x24',
+            sizes: '27x28',
             type: 'image/svg+xml',
           },
           {
             src: 'buttons/playerButtons/pauseIcon.svg',
-            sizes: '26x26',
+            sizes: '150x150',
             type: 'image/svg+xml',
           },
           {
             src: 'buttons/playerButtons/playIcon.svg',
-            sizes: '16x18',
+            sizes: '133x150',
             type: 'image/svg+xml',
           },
           {
@@ -227,7 +227,7 @@ export default defineConfig({
             type: 'image/svg+xml',
           },
           {
-            src: 'buttons/cross/cross.svg',
+            src: 'cross/cross.svg',
             sizes: '16x16',
             type: 'image/svg+xml',
           },
