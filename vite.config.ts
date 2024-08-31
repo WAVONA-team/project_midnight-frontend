@@ -58,7 +58,7 @@ export default defineConfig({
           },
           {
             src: 'favicon/mstile-70x70.png',
-            sizes: '70x70',
+            sizes: '128x128',
             type: 'image/png',
           },
           {
@@ -68,17 +68,17 @@ export default defineConfig({
           },
           {
             src: 'favicon/mstile-150x150.png',
-            sizes: '150x150',
+            sizes: '270x270',
             type: 'image/png',
           },
           {
             src: 'favicon/mstile-310x150.png',
-            sizes: '310x150',
+            sizes: '558x270',
             type: 'image/png',
           },
           {
             src: 'favicon/mstile-310x310.png',
-            sizes: '310x310',
+            sizes: '558x558',
             type: 'image/png',
           },
           {
