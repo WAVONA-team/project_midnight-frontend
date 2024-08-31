@@ -332,6 +332,22 @@ export default defineConfig({
             type: 'image/jpeg',
           },
         ],
+        screenshots: [
+          {
+            src: 'screenshots/preview_desktop.jpg',
+            sizes: '1440x1024',
+            type: 'image/jpeg',
+            'form_factor': 'wide',
+            label: 'Main page desktop'
+          },
+          {
+            src: 'screenshots/preview_mobile.jpg',
+            sizes: '430x932',
+            type: 'image/jpeg',
+            'form_factor': 'narrow',
+            label: 'Main page mobile'
+          },
+        ],
       },
       // devOptions: { enabled: true }, // to run in dev mode
     }),
