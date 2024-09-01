@@ -13,7 +13,7 @@ import Modal from '@/ui/Modal/Modal';
 import {
   ServiceIconApple,
   ServiceIconSoundCloud,
-  ServiceIconSpotify, // ServiceIconYandex,
+  ServiceIconSpotify,
   ServiceIconYoutube,
 } from '@/ui/ServiceIcon';
 
@@ -49,13 +49,6 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
       register: () => {},
       remove: async () => {},
     },
-    // {
-    //   title: 'Yandex Music',
-    //   icon: <ServiceIconYandex />,
-    //   token: user?.yandexOAUTH,
-    //   register: () => {},
-    //   remove: async () => {},
-    // },
     {
       title: 'Apple Music',
       icon: <ServiceIconApple />,
