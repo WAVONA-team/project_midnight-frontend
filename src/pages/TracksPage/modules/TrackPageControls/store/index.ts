@@ -6,7 +6,7 @@ import { TracksPlaylistControlsState } from './types';
 export const tracksPlaylistControls: StateCreator<
   TracksPlaylistControlsState
 > = (set) => ({
-  tracksTitle: 'Слушать',
+  tracksTitle: 'listen',
   tracksIcon: playIcon,
   setTracksTitle: (title) => set({ tracksTitle: title }),
   setTracksIcon: (icon) => set({ tracksIcon: icon }),

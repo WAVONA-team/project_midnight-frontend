@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 import classNames from 'classnames';
@@ -10,23 +11,26 @@ type Props = {
 };
 
 const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
+  const { t } = useTranslation('translation', { keyPrefix: 'navBar' });
+
   const linksInfo = [
     {
       img: '/navBar/home.svg',
-      title: 'Главная',
+      title: t('main'),
       path: '/tracks',
     },
     {
       img: '/navBar/playlist.svg',
-      title: 'Плейлисты',
+      title: t('playlists'),
       path: '/playlists',
     },
     {
       img: '/navBar/addTrack.svg',
-      title: 'Добавить трек',
+      title: t('addTrack'),
       path: '/tracks/new',
     },
   ];
+
   return (
     <aside
       className={`
@@ -104,7 +108,7 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
               width={20}
             />
 
-            <p className="text-xs lg:text-sm">Настройки</p>
+            <p className="text-xs lg:text-sm">{t('settings')}</p>
           </NavLink>
         </div>
       </div>

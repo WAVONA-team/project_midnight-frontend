@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Track } from 'project_midnight';
@@ -16,6 +17,8 @@ import playIcon from '../../../public/buttons/playerButtons/mainPagePlayIcon.svg
 import ActionButton from '../../ui/Button/ActionButton/ActionButton.tsx';
 
 export const TracksPage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'toggleButton' });
+
   const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
     createPlayerSlice();
 
@@ -90,8 +93,8 @@ export const TracksPage: React.FC = React.memo(() => {
           "
         >
           <ToggleButton
-            leftTitle="Все треки"
-            rightTitle="Избранные"
+            leftTitle={t('leftTitle')}
+            rightTitle={t('rightTitle')}
             isFavouriteTracksLoading={isFavouriteTracksLoading}
             setIsFavouriteTracksLoading={setIsFavouriteTracksLoading}
           />

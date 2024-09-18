@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -18,6 +19,7 @@ import { Container } from '@/ui/Container';
 const { ShareButton, FavoriteButton, SaveOnMainButton } = modalButtons;
 
 export const TrackHistory: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'trackHistory' });
   const [isTrackFavourite, setIsTrackFavourite] = useState(false);
   const [isTrackSaved, setIsTrackSaved] = useState(false);
 
@@ -79,10 +81,10 @@ export const TrackHistory: React.FC = React.memo(() => {
     <div>
       <Container className=" justify-between flex">
         <h2 className="font-notoSans text-on-primary-anti-flash-white">
-          История Поиска
+          {t('title')}
         </h2>
         <TextButton
-          title="Очистить историю"
+          title={t('clear')}
           handler={clearHistory}
           className=" focus:text-secondary-satin-sheen-gold !w-fit"
         />

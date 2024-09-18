@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { PlaylistContainer } from '@/pages/PlaylistsPage/components/PlaylistContainer/PlaylistContainer';
 import { Search } from '@/pages/PlaylistsPage/components/Search/Search';
@@ -8,6 +9,8 @@ import BackButton from '@/ui/Button/BackButton/BackButton';
 import { Container } from '@/ui/Container';
 
 export const PlaylistsPage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'playlistsPage' });
+
   return (
     <Container
       className="
@@ -44,7 +47,7 @@ export const PlaylistsPage: React.FC = React.memo(() => {
             sm:font-openSans
           "
           >
-            Плейлисты
+            {t('title')}
           </h1>
         </div>
 

@@ -1,0 +1,168 @@
+{
+  "navBar": {
+    "main": "Home",
+    "playlists": "Playlists",
+    "addTrack": "Add Track",
+    "settings": "Settings"
+  },
+  "mainPage": {
+    "searchInputPlaceholder": "Title, artist...",
+    "cancel": "Cancel"
+  },
+  "toggleButton": {
+    "leftTitle": "All Tracks",
+    "rightTitle": "Favorites"
+  },
+  "tracksTitle": {
+    "pause": "Pause",
+    "listen": "Listen"
+  },
+  "loading": "Loading...",
+  "additionActions": {
+    "addTrack": "Add Track"
+  },
+  "tracksFilter": {
+    "date": "By Upload Date",
+    "alphabet": "Alphabetically",
+    "source": "By Source"
+  },
+  "trackList": {
+    "noFavouriteTracks": "You haven't added any tracks to favorites",
+    "noTracks": "There are no tracks here yet",
+    "noTracksByQuery": "Track not found. Try changing the search query",
+    "trackCTA": "Add your favorite tracks now",
+    "addTrack": "Add Track"
+  },
+  "playlistsPage": {
+    "searchPlaceholder": "Title",
+    "title": "Playlists",
+    "noPlaylistsByQuery": "Playlist not found. Try changing the search query",
+    "cancel": "Cancel"
+  },
+  "trackAdditionPage": {
+    "clipBoardError": "Clipboard read error",
+    "title": "Add Track",
+    "pasteLinkAnnotation": "Paste the track link",
+    "inputPlaceholder": "Track link",
+    "pasteLinkCTA": "Paste from clipboard",
+    "pasteLinkAnnotationDesktop": "Paste a track link from a streaming service and add it to your library!",
+    "inputError": "Invalid format. Please try again"
+  },
+  "trackModalButtons": {
+    "favourite": {
+      "add": "Add to Favorites",
+      "addSuccess": "Added to Favorites",
+      "goToFavourite": "Go to Favorites",
+      "remove": "Remove from Favorites",
+      "removeSuccess": "Removed from Favorites"
+    },
+    "main": {
+      "add": "Save to Home",
+      "addSuccess": "Saved to Home",
+      "addError": "An error occurred while trying to save the track",
+      "remove": "Remove from Home",
+      "removeSuccess": "Removed from Home"
+    },
+    "share": {
+      "copy": "Copied!",
+      "share": "Share",
+      "copySuccess": "Link copied"
+    },
+    "delete": {
+      "delete": "Delete",
+      "deleteSuccess": "Track deleted",
+      "deleteError": "An error occurred while trying to delete the track"
+    }
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "account": "Account:",
+    "connectedApps": "Connected Apps",
+    "logout": "Log Out",
+    "logoutTitle": "Are you sure you want to log out?",
+    "logoutYes": "Yes, log out",
+    "logoutNo": "Cancel"
+  },
+  "connectedAppsPage": {
+    "title": "Connected Apps",
+    "notRequireAuth": "Services not requiring authorization",
+    "supportedTitle": "Supported",
+    "requireAuth": "Services in development",
+    "requireTitle": "In development"
+  },
+  "createPlaylist": {
+    "title": "New Playlist",
+    "labelText": "New Playlist",
+    "placeholder": "Playlist Name",
+    "discard": "Cancel",
+    "submit": "Save",
+    "success": "Playlist created"
+  },
+  "trackHistory": {
+    "title": "Search History",
+    "clear": "Clear History"
+  },
+  "homePage": {
+    "title": "Listen to tracks from all platforms in one place",
+    "login": "Log In"
+  },
+  "loginPage": {
+    "cancel": "Cancel",
+    "title": "Log in to your account",
+    "CTAQuestion": "Don't have an account?",
+    "CTA": "Sign up",
+    "emailLabel": "Enter email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Enter password",
+    "passwordPlaceholder": "Password",
+    "forgetPassword": "Forgot password?",
+    "submit": "Continue"
+  },
+  "registrationPage": {
+    "cancel": "Cancel",
+    "title": "Create an account",
+    "CTAQuestion": "Already have an account?",
+    "CTA": "Log in",
+    "emailLabel": "Enter email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Enter password",
+    "passwordPlaceholder": "Password",
+    "submit": "Continue"
+  },
+  "confirmationRegister": {
+    "cancel": "Cancel",
+    "title": "Create an account",
+    "annotation": "Enter the code sent to the specified email",
+    "repeat": "Resend code",
+    "submit": "Continue"
+  },
+  "resetPassword": {
+    "cancel": "Cancel",
+    "title": "Password Recovery",
+    "CTAQuestion": "Don't have an account?",
+    "CTA": "Sign up",
+    "emailLabel": "Enter email",
+    "emailPlaceholder": "Email",
+    "submit": "Continue"
+  },
+  "confirmationReset": {
+    "cancel": "Cancel",
+    "title": "Password Recovery",
+    "annotation": "Enter the code sent to the specified email",
+    "repeat": "Resend code",
+    "submit": "Continue"
+  },
+  "updateReset": {
+    "cancel": "Cancel",
+    "title": "Create a new password",
+    "newPasswordLabel": "Enter new password",
+    "newPassword": "Password",
+    "repeatPasswordLabel": "Repeat password",
+    "repeatPassword": "Password",
+    "submit": "Continue"
+  },
+  "userPlaylists": {
+    "Сохраненные треки": "Saved Tracks",
+    "Избранные треки": "Favorite Tracks"
+  }
+}

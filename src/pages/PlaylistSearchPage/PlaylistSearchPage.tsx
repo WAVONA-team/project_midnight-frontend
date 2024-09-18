@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -11,6 +12,7 @@ import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
 export const PlaylistSearchPage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'playlistsPage' });
   const navigate = useNavigate();
 
   const {
@@ -79,7 +81,7 @@ export const PlaylistSearchPage: React.FC = React.memo(() => {
           value={playlistSearchQuery}
           onChange={onChangeHandler}
           clearValue={clearValueHandler}
-          placeholder="Название"
+          placeholder={t('searchPlaceholder')}
           className="w-full"
         />
 
@@ -94,7 +96,7 @@ export const PlaylistSearchPage: React.FC = React.memo(() => {
             );
           }}
         >
-          Отмена
+          {t('cancel')}
         </button>
       </header>
 

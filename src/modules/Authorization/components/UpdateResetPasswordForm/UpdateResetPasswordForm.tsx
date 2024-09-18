@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -14,6 +15,10 @@ import { MainButton } from '@/ui/Button';
 import { PasswordInput } from '@/ui/Input';
 
 const UpdateResetPasswordForm: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'updateReset',
+  });
+
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -88,10 +93,10 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
           onClick={handleDeleteResetToken}
           className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
         >
-          Отменить
+          {t('cancel')}
         </button>
 
-        <FormHeader title="Придумайте новый пароль" />
+        <FormHeader title={t('title')} />
 
         {errors.root?.formErrors && (
           <p className="text-error-imperial-red text-xs absolute top-40">
@@ -111,8 +116,8 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
           render={({ field }) => (
             <PasswordInput
               className="mt-14"
-              labelText="Введите новый пароль"
-              placeholder="Введите пароль"
+              labelText={t('newPasswordLabel')}
+              placeholder={t('newPassword')}
               onChange={(value) => field.onChange(value)}
               value={field.value}
               error={errors.root?.newPassword?.message}
@@ -126,8 +131,8 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
           render={({ field }) => (
             <PasswordInput
               className="mt-7"
-              labelText="Повторите пароль"
-              placeholder="Введите пароль"
+              labelText={t('repeatPasswordLabel')}
+              placeholder={t('repeatPassword')}
               onChange={(value) => field.onChange(value)}
               value={field.value}
               error={errors.root?.confirmationPassword?.message}
@@ -138,7 +143,7 @@ const UpdateResetPasswordForm: React.FC = React.memo(() => {
         <div className="mt-16 grid grid-cols-3">
           <MainButton
             type="submit"
-            title="Продолжить"
+            title={t('sumbit')}
             handler={() => {}}
             isLoading={isButtonLoading}
             className="col-start-1 col-end-4 lg:col-start-3"

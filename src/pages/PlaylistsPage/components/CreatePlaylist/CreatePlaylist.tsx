@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-// import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
+// import { useNavigate } from 'react-router-dom';
 import { useStore } from '@/store';
 
 import { ServerErrors } from '@/shared/types/ServerErrors';
@@ -17,6 +18,7 @@ import { NotificationMessage } from '@/ui/NotificationMessage';
 import playlistThumbnailNew from '../../../../../public/playlistThumbnailNew.jpg';
 
 export const CreatePlaylist: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'createPlaylist' });
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   // const navigate = useNavigate();
 
@@ -62,7 +64,7 @@ export const CreatePlaylist: React.FC = React.memo(() => {
         clearPlaylists();
         setIsPlaylistsLoading(true);
         disableModal();
-        toast.custom(() => <NotificationMessage message="Плейлист создан" />);
+        toast.custom(() => <NotificationMessage message={t('success')} />);
         // navigate(`/playlists/${playlist.id}`);
       })
       .catch(({ fieldErrors }: ServerErrors) => {
@@ -90,7 +92,7 @@ export const CreatePlaylist: React.FC = React.memo(() => {
         />
 
         <h3 className="font-rubik font-normal text-base md:font-semibold text-on-primary-anti-flash-white">
-          Новый плейлист
+          {t('title')}
         </h3>
       </button>
 
@@ -106,8 +108,8 @@ export const CreatePlaylist: React.FC = React.memo(() => {
                   clearErrors('root');
                   field.onChange(event.target.value);
                 }}
-                labelText="Новый плейлист"
-                placeholder="Название плейлиста"
+                labelText={t('labelText')}
+                placeholder={t('placeholder')}
                 error={
                   errors.root && errors.root.name
                     ? errors.root!.name.message
@@ -119,14 +121,14 @@ export const CreatePlaylist: React.FC = React.memo(() => {
 
           <div className="grid grid-cols-2 gap-12 mt-8">
             <TextButton
-              title="Отменить"
+              title={t('discard')}
               handler={disableModal}
               className="!text-left"
             />
 
             <TextSecondaryButton
               type="submit"
-              title="Сохранить"
+              title={t('submit')}
               handler={() => {}}
               className="!text-right"
             />

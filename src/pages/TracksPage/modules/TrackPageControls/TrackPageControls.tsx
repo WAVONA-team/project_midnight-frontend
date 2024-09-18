@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import pauseIcon from '@/../public/buttons/playerButtons/mainPagePauseIcon.svg';
 import playIcon from '@/../public/buttons/playerButtons/mainPagePlayIcon.svg';
@@ -15,6 +16,8 @@ import ActionButton from '@/ui/Button/ActionButton/ActionButton.tsx';
 import { Container } from '@/ui/Container';
 
 const TrackPageControls: React.FC = React.memo(() => {
+  const { t } = useTranslation();
+
   const { playerState, changePlayerState, changeCurrentTrack, currentTrack } =
     createPlayerSlice();
 
@@ -40,10 +43,10 @@ const TrackPageControls: React.FC = React.memo(() => {
       playerState &&
       userPlaylist?.tracks?.find((track) => track.id === currentTrack?.id)
     ) {
-      setTracksTitle('Пауза');
+      setTracksTitle(t('tracksTitle.pause'));
       setTracksIcon(pauseIcon);
     } else {
-      setTracksTitle('Слушать');
+      setTracksTitle(t('tracksTitle.listen'));
       setTracksIcon(playIcon);
     }
   };
@@ -73,7 +76,9 @@ const TrackPageControls: React.FC = React.memo(() => {
             lg:font-3xl
           "
         >
-          {userPlaylist?.name || 'Загрузка...'}
+          {userPlaylist?.name
+            ? t(`userPlaylists.${userPlaylist.name}`)
+            : t('loading')}
         </h1>
       </div>
 
@@ -103,8 +108,8 @@ const TrackPageControls: React.FC = React.memo(() => {
                 userPlaylist?.tracks?.find(
                   (track) => track.id === currentTrack?.id,
                 )
-                  ? 'Пауза'
-                  : 'Слушать'
+                  ? t('tracksTitle.pause')
+                  : t('tracksTitle.listen')
               }
               handler={() =>
                 handleTrack(currentTrack || userPlaylist!.tracks![0])

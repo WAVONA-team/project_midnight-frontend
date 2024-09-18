@@ -8,7 +8,7 @@ export const tracksSearchPageSlice = create<TracksSearchPageState>()(
     (set) => ({
       query: '',
       sortType: {
-        name: 'По дате загрузки',
+        name: 'date',
         type: 'createdAt'
       },
       order: 'desc',

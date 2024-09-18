@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -14,6 +15,8 @@ import arrowIcon from '../../../public/arrows/arrowIcon.svg';
 import Modal from '../../ui/Modal/Modal.tsx';
 
 export const SettingsPage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'settingsPage' });
+
   const { changePlayerState, changeCurrentTrack } = createPlayerSlice();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
@@ -71,13 +74,13 @@ export const SettingsPage: React.FC = React.memo(() => {
             sm:font-openSans
           "
           >
-            Настройки
+            {t('title')}
           </h1>
         </div>
 
         <div>
           <h3 className="font-rubik text-base font-normal">
-            Аккаунт:{' '}
+            {t('account')}{' '}
             <span className="text-secondary-satin-sheen-gold">
               {user?.email}
             </span>
@@ -106,7 +109,7 @@ export const SettingsPage: React.FC = React.memo(() => {
               "
               to="connected-apps"
             >
-              <span>Подключенные приложения</span>
+              <span>{t('connectedApps')}</span>
               <img
                 className="
                   px-1.5
@@ -138,7 +141,7 @@ export const SettingsPage: React.FC = React.memo(() => {
               "
               onClick={enableModal}
             >
-              <span>Выйти</span>
+              <span>{t('logout')}</span>
             </button>
           </div>
         </div>

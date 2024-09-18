@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -41,6 +42,8 @@ const TrackList: React.FC<Props> = React.memo(
     headerCondition = true,
     onMainPage = false,
   }) => {
+    const { t } = useTranslation('translation', { keyPrefix: 'trackList' });
+
     const [isTrackFavourite, setIsTrackFavourite] = useState(false);
     const [isTrackSaved, setIsTrackSaved] = useState(false);
 
@@ -131,26 +134,26 @@ const TrackList: React.FC<Props> = React.memo(
               <div>
                 <h1 className="font-openSans text-xl md:text-2xl font-normal mb-4 text-center">
                   {isFavouriteTracksLoading
-                    ? 'Вы не добавили ни одного трека в избранное'
-                    : 'Здесь пока нет ни одного трека'}
+                    ? t('noFavouriteTracks')
+                    : t('noTracks')}
                 </h1>
               </div>
             )}
 
             {headerCondition && (
               <h1 className="font-openSans text-xl md:text-2xl font-normal mb-4 text-left">
-                Трек не найден. Попробуйте изменить поисковый запрос
+                {t('noTracksByQuery')}
               </h1>
             )}
 
             {!headerCondition && onMainPage && (
               <div className="flex flex-col items-center">
                 <p className="font-rubik text-base font-normal text-on-secondary-dim-gray mb-5">
-                  Добавьте любимые треки прямо сейчас
+                  {t('trackCTA')}
                 </p>
 
                 <MainButtonLink
-                  title="Добавить трек"
+                  title={t('addTrack')}
                   path="/tracks/new"
                   className="w-fit"
                 />

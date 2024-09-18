@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -15,6 +16,10 @@ import { MainButton, TextButton } from '@/ui/Button';
 import { OTPInput } from '@/ui/Input';
 
 const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'confirmationReset',
+  });
+
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -97,25 +102,28 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-background-hight lg:bg-[transparent]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-background-hight lg:bg-[transparent]"
+    >
       <FormContainer className="relative">
         <button
           type="button"
           className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
           onClick={handleDeleteResetToken}
         >
-          Отменить
+          {t('cancel')}
         </button>
 
-        <FormHeader title="Восстановление пароля" />
+        <FormHeader title={t('title')} />
 
         <p className="text-on-primary-anti-flash-white text-sm block mt-3">
-          Введите код, отправленный на указанную почту
+          {t('annotation')}
         </p>
 
         <TextButton
           className="mt-16 !justify-start"
-          title="Отправить код еще раз"
+          title={t('repeat')}
           handler={handleResetResetToken}
         />
 
@@ -141,7 +149,7 @@ const ConfirmationResetPasswordForm: React.FC = React.memo(() => {
         <div className="mt-16 grid grid-cols-3">
           <MainButton
             type="submit"
-            title="Продолжить"
+            title={t('submit')}
             handler={() => {}}
             isLoading={isButtonLoading}
             className="col-start-1 col-end-4 lg:col-start-3"

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -10,6 +11,8 @@ import { tracksSearchPageSlice } from '@/pages/TrackSearchPage/store';
 import { SearchInput } from '@/ui/Input';
 
 export const Search: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'mainPage' });
+
   const navigate = useNavigate();
 
   const {
@@ -68,7 +71,7 @@ export const Search: React.FC = React.memo(() => {
     <header className="flex gap-4">
       <SearchInput
         clearValue={clearValueHandler}
-        placeholder="Название, исполнитель..."
+        placeholder={t('searchInputPlaceholder')}
         value={query}
         onChange={onChangeHandler}
         className="w-full"
@@ -84,7 +87,7 @@ export const Search: React.FC = React.memo(() => {
           navigate(-1);
         }}
       >
-        Отмена
+        {t('cancel')}
       </button>
     </header>
   );

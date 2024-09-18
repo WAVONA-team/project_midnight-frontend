@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -16,6 +17,8 @@ import dateSortIcon from '../../../../../../../public/buttons/actionButtons/date
 import sourceSortIcon from '../../../../../../../public/buttons/actionButtons/sourceSortIcon.svg';
 
 export const TrackPageDropdown: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'tracksFilter' });
+
   const { setCurrentPage, clearUserTracks, setIsFiltering } = useStore(
     ({ setCurrentPage, clearUserTracks, setIsFiltering }) => ({
       setCurrentPage,
@@ -55,21 +58,21 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
   const sortControls = [
     {
       id: 1,
-      title: 'По дате загрузки',
+      title: t('date'),
       icon: dateSortIcon,
       handler: (title: string) =>
         setSortingInfo({ name: title, type: 'createdAt' }, 'desc'),
     },
     {
       id: 2,
-      title: 'По алфавиту',
+      title: t('alphabet'),
       icon: alphaSortIcon,
       handler: (title: string) =>
         setSortingInfo({ name: title, type: 'title' }, 'asc'),
     },
     {
       id: 3,
-      title: 'По источнику',
+      title: t('source'),
       icon: sourceSortIcon,
       handler: (title: string) =>
         setSortingInfo({ name: title, type: 'source' }, 'desc'),
@@ -127,7 +130,7 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
       tabIndex={0}
     >
       <SortButton
-        title={sortType.name}
+        title={t(sortType.name)}
         isOpen={isOpen}
         disabled={!userTracks.length}
         onMouseDown={handlerButtonFocus}
@@ -151,9 +154,7 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
             <Menu.Item
               as={MenuButton}
               key={control.title}
-              handler={() =>
-                control.handler(control.title || 'По дате загрузки')
-              }
+              handler={() => control.handler(control.title || t('date'))}
               icon={control.icon}
               title={control.title}
               className="

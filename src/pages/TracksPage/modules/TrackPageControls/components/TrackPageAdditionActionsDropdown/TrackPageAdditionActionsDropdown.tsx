@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -18,6 +19,7 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [childElement, setChildElement] = useState<HTMLElement | null>(null);
 
+  const { t } = useTranslation('translation', { keyPrefix: 'additionActions' });
   const navigate = useNavigate();
 
   const { userTracks } = useStore(({ userTracks }) => ({
@@ -27,7 +29,7 @@ const TrackPageAdditionActionsDropdown: React.FC = React.memo(() => {
   const additionActions = [
     {
       id: 1,
-      title: 'Добавить трек',
+      title: t('addTrack'),
       icon: addTrackIcon,
       handler: () => navigate('/tracks/new'),
     },

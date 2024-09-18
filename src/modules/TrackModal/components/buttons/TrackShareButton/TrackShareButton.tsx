@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import shareIcon from '@/../public/buttons/actionButtons/shareIcon.svg';
 import copy from 'copy-to-clipboard';
@@ -21,6 +22,10 @@ const TrackShareButton: React.FC<Props> = React.memo(
       { className, selectedTrack },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
+      const { t } = useTranslation('translation', {
+        keyPrefix: 'trackModalButtons.share',
+      });
+
       const [isClicked, setIsClicked] = useState<boolean>(false);
 
       let timeId: NodeJS.Timeout | null;
@@ -39,7 +44,7 @@ const TrackShareButton: React.FC<Props> = React.memo(
           }, TIME_DELAY);
 
           toast.custom(() => (
-            <NotificationMessage message="Ссылка скопирована" />
+            <NotificationMessage message={t('copySuccess')} />
           ));
         }
       };
@@ -47,7 +52,7 @@ const TrackShareButton: React.FC<Props> = React.memo(
       return (
         <MenuButton
           ref={ref}
-          title={isClicked ? 'Скопировано!' : 'Поделиться'}
+          title={isClicked ? t('copy') : t('share')}
           icon={shareIcon}
           handler={copyToClipboard}
           className={className}
