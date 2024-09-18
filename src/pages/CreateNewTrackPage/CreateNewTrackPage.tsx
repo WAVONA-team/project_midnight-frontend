@@ -33,6 +33,7 @@ export const CreateNewTrackPage: React.FC = React.memo(() => {
 
   useEffect(() => {
     getUserSearchHistory(user?.id as string);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [parsedTrack]);
 
   return (

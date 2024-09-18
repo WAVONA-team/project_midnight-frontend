@@ -67,6 +67,7 @@ export const PlaylistContainer: React.FC = React.memo(() => {
         order: playlistOrder,
       }).finally(() => setPlaylistIsFiltering(false));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaylistsLoading, playlistIsFiltering]);
 
   return (
