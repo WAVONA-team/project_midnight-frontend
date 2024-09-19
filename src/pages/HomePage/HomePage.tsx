@@ -41,7 +41,7 @@ export const HomePage: React.FC = React.memo(() => {
           <MainButtonLink
             path="/login"
             title={t('login')}
-            className="lg:w-min"
+            className="lg:w-min text-nowrap"
           />
         </header>
 
