@@ -51,7 +51,7 @@ export const LanguagePage: React.FC = React.memo(() => {
         "
       >
         <div className="flex sm:mb-3">
-          <BackButton className="sm:hidden" />
+          <BackButton />
           <h1
             className="
               font-normal
