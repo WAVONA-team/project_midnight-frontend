@@ -37,7 +37,7 @@
     "searchPlaceholder": "Назва",
     "title": "Плейлисти",
     "noPlaylistsByQuery": "Плейлист не знайдено. Спробуйте змінити пошуковий запит",
-    "cancel":"Скасувати"
+    "cancel": "Скасувати"
   },
   "trackAdditionPage": {
     "clipBoardError": "Помилка читання буфера обміну",
@@ -81,7 +81,11 @@
     "logout": "Вийти",
     "logoutTitle": "Ви впевнені, що хочете вийти?",
     "logoutYes": "Так, вийти",
-    "logoutNo": "Скасувати"
+    "logoutNo": "Скасувати",
+    "language": "Мова"
+  },
+  "languagePage": {
+    "title": "Мова"
   },
   "connectedAppsPage": {
     "title": "Підключені додатки",

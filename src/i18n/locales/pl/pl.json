@@ -81,7 +81,11 @@
     "logout": "Wyloguj się",
     "logoutTitle": "Czy na pewno chcesz się wylogować?",
     "logoutYes": "Tak, wyloguj",
-    "logoutNo": "Anuluj"
+    "logoutNo": "Anuluj",
+    "language": "Język"
+  },
+  "languagePage": {
+    "title": "Język"
   },
   "connectedAppsPage": {
     "title": "Połączone aplikacje",

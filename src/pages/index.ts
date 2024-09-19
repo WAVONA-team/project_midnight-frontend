@@ -19,3 +19,4 @@ export { CreateNewTrackPage } from './CreateNewTrackPage/CreateNewTrackPage';
 export { CreateNewPlaylistPage } from './CreateNewPlaylistPage/CreateNewPlaylistPage';
 export { TrackSearchPage } from './TrackSearchPage/TrackSearchPage';
 export { PlaylistSearchPage } from './PlaylistSearchPage/PlaylistSearchPage';
+export { LanguagePage } from './LanguagePage/LanguagePage';

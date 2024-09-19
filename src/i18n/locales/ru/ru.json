@@ -81,7 +81,11 @@
     "logout": "Выйти",
     "logoutTitle": "Вы уверены, что хотите выйти?",
     "logoutYes": "Да, выйти",
-    "logoutNo": "Отменить"
+    "logoutNo": "Отменить",
+    "language": "Язык"
+  },
+  "languagePage": {
+    "title": "Язык"
   },
   "connectedAppsPage": {
     "title": "Подключенные приложения",

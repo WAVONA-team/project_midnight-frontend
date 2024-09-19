@@ -81,7 +81,11 @@
     "logout": "Log Out",
     "logoutTitle": "Are you sure you want to log out?",
     "logoutYes": "Yes, log out",
-    "logoutNo": "Cancel"
+    "logoutNo": "Cancel",
+    "language": "Language"
+  },
+  "languagePage": {
+    "title": "Language"
   },
   "connectedAppsPage": {
     "title": "Connected Apps",
