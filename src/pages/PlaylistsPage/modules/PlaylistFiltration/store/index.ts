@@ -7,7 +7,7 @@ export const playlistsFilteringSlice = create<playlistsFilteringState>()(
   persist(
     (set) => ({
       playlistSortType: {
-        name: 'По дате загрузки',
+        name: 'date',
         type: 'createdAt',
       },
       playlistOrder: 'desc',

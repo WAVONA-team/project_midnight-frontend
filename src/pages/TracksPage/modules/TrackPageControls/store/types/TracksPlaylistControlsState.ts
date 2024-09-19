@@ -1,6 +1,6 @@
 export type TracksPlaylistControlsState = {
-  tracksTitle: 'Пауза' | 'Слушать';
+  tracksTitle: string;
   tracksIcon: string;
-  setTracksTitle: (title: 'Пауза' | 'Слушать') => void;
+  setTracksTitle: (title: string) => void;
   setTracksIcon: (icon: string) => void;
 };

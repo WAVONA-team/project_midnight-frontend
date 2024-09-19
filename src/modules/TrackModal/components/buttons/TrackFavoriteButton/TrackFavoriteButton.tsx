@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import checked from '@/../public/isFavourite/checked.svg';
@@ -30,6 +31,10 @@ const TrackFavoriteButton: React.FC<Props> = React.memo(
       },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
+      const { t } = useTranslation('translation', {
+        keyPrefix: 'trackModalButtons.favourite',
+      });
+
       const navigate = useNavigate();
 
       const {
@@ -76,8 +81,8 @@ const TrackFavoriteButton: React.FC<Props> = React.memo(
             if (res) {
               toast.custom(() => (
                 <NotificationMessage
-                  message="Добавлено в избранное"
-                  handlerText="Перейти в избранное"
+                  message={t('addSuccess')}
+                  handlerText={t('goToFavourite')}
                   handler={toggleFavourite}
                 />
               ));
@@ -87,7 +92,7 @@ const TrackFavoriteButton: React.FC<Props> = React.memo(
               setIsUserTracksLoading(true);
 
               toast.custom(() => (
-                <NotificationMessage message="Удалено из избранного" />
+                <NotificationMessage message={t('removeSuccess')} />
               ));
             }
           })
@@ -98,7 +103,7 @@ const TrackFavoriteButton: React.FC<Props> = React.memo(
         <MenuButton
           ref={ref}
           className={className}
-          title={isFavourite ? 'Удалить из избранного' : 'Добавить в избранное'}
+          title={isFavourite ? t('remove') : t('add')}
           icon={isFavourite ? checked : uncheked}
           handler={handler}
         />

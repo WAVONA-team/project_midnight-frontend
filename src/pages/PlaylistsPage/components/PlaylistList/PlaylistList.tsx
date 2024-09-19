@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -21,6 +22,8 @@ type Props = {
 
 export const PlaylistList: React.FC<Props> = React.memo(
   ({ playlists, isLoading, setIsLoading, totalPlaylists }) => {
+    const { t } = useTranslation('translation', { keyPrefix: 'playlistsPage' });
+
     const scrollHandler = useCallback(() => {
       if (
         document.documentElement.scrollHeight -
@@ -50,9 +53,7 @@ export const PlaylistList: React.FC<Props> = React.memo(
       <div>
         {!isLoading && !playlists.length && !!playlistSearchQuery.length && (
           <div className="text-on-primary-anti-flash-white">
-            <p className="text-xl">
-              Плейлист не найден. Попробуйте изменить поисковый запрос
-            </p>
+            <p className="text-xl">{t('noPlaylistsByQuery')}</p>
           </div>
         )}
 

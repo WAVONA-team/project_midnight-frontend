@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { NormalizedUser } from 'project_midnight';
@@ -31,6 +32,10 @@ type NotRequiredAuthService = {
 };
 
 export const ConnectedAppsSettings: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'connectedAppsPage',
+  });
+
   const [currentService, setCurrentService] =
     useState<RequiredAuthService | null>(null);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
@@ -129,7 +134,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
             md:sm:text-3xl
           "
           >
-            Подключенные приложения
+            {t('title')}
           </h1>
         </div>
 
@@ -141,7 +146,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         >
           <div className="mb-6">
             <h2 className="font-openSans font-normal text-sm md:text-2xl">
-              Сервисы, не требующие авторизацию
+              {t('notRequireAuth')}
             </h2>
           </div>
 
@@ -151,7 +156,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
                 key={service.title}
                 title={service.title}
                 serviceIcon={service.icon}
-                supportedTitle="Поддерживается"
+                supportedTitle={t('supportedTitle')}
               />
             ))}
           </div>
@@ -168,7 +173,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
         >
           <div className="mb-6">
             <h2 className="font-openSans font-normal text-sm md:text-2xl">
-              Сервисы, находящиеся в разработке
+              {t('requireAuth')}
             </h2>
           </div>
 
@@ -179,7 +184,7 @@ export const ConnectedAppsSettings: React.FC = React.memo(() => {
                 title={service.title}
                 serviceIcon={service.icon}
                 isConnected={!!service.token}
-                supportedTitle="В разработке"
+                supportedTitle={t('requireTitle')}
                 handler={() =>
                   !service.token ? service.register!() : enableModal(service)
                 }

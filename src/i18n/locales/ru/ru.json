@@ -1,0 +1,172 @@
+{
+  "navBar": {
+    "main": "Главная",
+    "playlists": "Плейлисты",
+    "addTrack": "Добавить трек",
+    "settings": "Настройки"
+  },
+  "mainPage": {
+    "searchInputPlaceholder": "Название, исполнитель...",
+    "cancel": "Отмена"
+  },
+  "toggleButton": {
+    "leftTitle": "Все треки",
+    "rightTitle": "Избранные"
+  },
+  "tracksTitle": {
+    "pause": "Пауза",
+    "listen": "Слушать"
+  },
+  "loading": "Загрузка...",
+  "additionActions": {
+    "addTrack": "Добавить трек"
+  },
+  "tracksFilter": {
+    "date": "По дате загрузки",
+    "alphabet": "По алфавиту",
+    "source": "По источнику"
+  },
+  "trackList": {
+    "noFavouriteTracks": "Вы не добавили ни одного трека в избранное",
+    "noTracks": "Здесь пока нет ни одного трека",
+    "noTracksByQuery": "Трек не найден. Попробуйте изменить поисковый запрос",
+    "trackCTA": "Добавьте любимые треки прямо сейчас",
+    "addTrack": "Добавить трек"
+  },
+  "playlistsPage": {
+    "searchPlaceholder": "Название",
+    "title": "Плейлисты",
+    "noPlaylistsByQuery": "Плейлист не найден. Попробуйте изменить поисковый запрос",
+    "cancel": "Отмена"
+  },
+  "trackAdditionPage": {
+    "clipBoardError": "Ошибка чтения буфера обмена",
+    "title": "Добавление трека",
+    "pasteLinkAnnotation": "Вставьте ссылку на трек",
+    "inputPlaceholder": "Ссылка на трек",
+    "pasteLinkCTA": "Вставить из буфера обмена",
+    "pasteLinkAnnotationDesktop": "Вставьте ссылку на трек из стримингового сервиса и добавьте его в свою библиотеку!",
+    "inputError": "Некорректный формат. Попробуйте снова"
+  },
+  "trackModalButtons": {
+    "favourite": {
+      "add": "Добавить в избранное",
+      "addSuccess": "Добавлено в избранное",
+      "goToFavourite": "Перейти в избранное",
+      "remove": "Удалить из избранного",
+      "removeSuccess": "Удалено из избранного"
+    },
+    "main": {
+      "add": "Сохранить на главную",
+      "addSuccess": "Сохранено на главную",
+      "addError": "При попытке сохранения трека произошла ошибка",
+      "remove": "Удалить из главной",
+      "removeSuccess": "Удалено из главной"
+    },
+    "share": {
+      "copy": "Скопировано!",
+      "share": "Поделиться",
+      "copySuccess": "Ссылка скопирована"
+    },
+    "delete": {
+      "delete": "Удалить",
+      "deleteSuccess": "Трек удалён",
+      "deleteError": "При попытке удаления трека произошла ошибка"
+    }
+  },
+  "settingsPage": {
+    "title": "Настройки",
+    "account": "Аккаунт:",
+    "connectedApps": "Подключенные приложения",
+    "logout": "Выйти",
+    "logoutTitle": "Вы уверены, что хотите выйти?",
+    "logoutYes": "Да, выйти",
+    "logoutNo": "Отменить",
+    "language": "Язык"
+  },
+  "languagePage": {
+    "title": "Язык"
+  },
+  "connectedAppsPage": {
+    "title": "Подключенные приложения",
+    "notRequireAuth": "Сервисы, не требующие авторизацию",
+    "supportedTitle": "Поддерживается",
+    "requireAuth": "Сервисы, находящиеся в разработке",
+    "requireTitle": "В разработке"
+  },
+  "createPlaylist": {
+    "title": "Новый плейлист",
+    "labelText": "Новый плейлист",
+    "placeholder": "Название плейлиста",
+    "discard": "Отменить",
+    "submit": "Сохранить",
+    "success": "Плейлист создан"
+  },
+  "trackHistory": {
+    "title": "История Поиска",
+    "clear": "Очистить историю"
+  },
+  "homePage": {
+    "title": "Слушайте треки со всех площадок в одном месте",
+    "login": "Войти"
+  },
+  "loginPage": {
+    "cancel": "Отменить",
+    "title": "Войдите в аккаунт",
+    "CTAQuestion": "Еще нет аккаунта?",
+    "CTA": "Зарегистрироваться",
+    "emailLabel": "Введите email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Введите пароль",
+    "passwordPlaceholder": "Пароль",
+    "forgetPassword": "Забыли пароль?",
+    "submit": "Продолжить"
+  },
+  "registrationPage": {
+    "cancel": "Отменить",
+    "title": "Создайте аккаунт",
+    "CTAQuestion": "Уже есть аккаунт?",
+    "CTA": "Войти",
+    "emailLabel": "Введите email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Введите пароль",
+    "passwordPlaceholder": "Пароль",
+    "submit": "Продолжить"
+  },
+  "confirmationRegister": {
+    "cancel": "Отменить",
+    "title": "Создайте аккаунт",
+    "annotation": "Введите код, отправленный на указанную почту",
+    "repeat": "Отправить код еще раз",
+    "submit": "Продолжить"
+  },
+  "resetPassword": {
+    "cancel": "Отменить",
+    "title": "Восстановление пароля",
+    "CTAQuestion": "Еще нет аккаунта?",
+    "CTA": "Зарегистрироваться",
+    "emailLabel": "Введите email",
+    "emailPlaceholder": "Email",
+    "submit": "Продолжить"
+  },
+  "confirmationReset": {
+    "cancel": "Отменить",
+    "title": "Восстановление пароля",
+    "annotation": "Введите код, отправленный на указанную почту",
+    "repeat": "Отправить код еще раз",
+    "submit": "Продолжить"
+  },
+  "updateReset": {
+    "cancel": "Отменить",
+    "title": "Придумайте новый пароль",
+    "newPasswordLabel": "Введите новый пароль",
+    "newPassword": "Пароль",
+    "repeatPasswordLabel": "Повторите пароль",
+    "repeatPassword": "Пароль",
+    "submit": "Продолжить"
+  },
+  "userPlaylists": {
+    "Сохраненные треки": "Сохраненные треки",
+    "Избранные треки": "Избранные треки"
+  }
+}

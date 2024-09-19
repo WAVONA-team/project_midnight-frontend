@@ -1,0 +1,172 @@
+{
+  "navBar": {
+    "main": "Główna",
+    "playlists": "Playlisty",
+    "addTrack": "Dodaj utwór",
+    "settings": "Ustawienia"
+  },
+  "mainPage": {
+    "searchInputPlaceholder": "Tytuł, wykonawca...",
+    "cancel": "Anuluj"
+  },
+  "toggleButton": {
+    "leftTitle": "Wszystkie utwory",
+    "rightTitle": "Ulubione"
+  },
+  "tracksTitle": {
+    "pause": "Pauza",
+    "listen": "Słuchaj"
+  },
+  "loading": "Ładowanie...",
+  "additionActions": {
+    "addTrack": "Dodaj utwór"
+  },
+  "tracksFilter": {
+    "date": "Według daty dodania",
+    "alphabet": "Alfabetycznie",
+    "source": "Według źródła"
+  },
+  "trackList": {
+    "noFavouriteTracks": "Nie dodałeś jeszcze żadnych utworów do ulubionych",
+    "noTracks": "Nie ma tu jeszcze żadnych utworów",
+    "noTracksByQuery": "Nie znaleziono utworu. Spróbuj zmienić zapytanie",
+    "trackCTA": "Dodaj ulubione utwory już teraz",
+    "addTrack": "Dodaj utwór"
+  },
+  "playlistsPage": {
+    "searchPlaceholder": "Tytuł",
+    "title": "Playlisty",
+    "noPlaylistsByQuery": "Nie znaleziono playlisty. Spróbuj zmienić zapytanie",
+    "cancel":"Anuluj"
+  },
+  "trackAdditionPage": {
+    "clipBoardError": "Błąd odczytu schowka",
+    "title": "Dodaj utwór",
+    "pasteLinkAnnotation": "Wklej link do utworu",
+    "inputPlaceholder": "Link do utworu",
+    "pasteLinkCTA": "Wklej ze schowka",
+    "pasteLinkAnnotationDesktop": "Wklej link do utworu z serwisu streamingowego i dodaj go do swojej biblioteki!",
+    "inputError": "Nieprawidłowy format. Spróbuj ponownie"
+  },
+  "trackModalButtons": {
+    "favourite": {
+      "add": "Dodaj do ulubionych",
+      "addSuccess": "Dodano do ulubionych",
+      "goToFavourite": "Przejdź do ulubionych",
+      "remove": "Usuń z ulubionych",
+      "removeSuccess": "Usunięto z ulubionych"
+    },
+    "main": {
+      "add": "Zapisz na głównej",
+      "addSuccess": "Zapisano na głównej",
+      "addError": "Wystąpił błąd podczas próby zapisania utworu",
+      "remove": "Usuń z głównej",
+      "removeSuccess": "Usunięto z głównej"
+    },
+    "share": {
+      "copy": "Skopiowano!",
+      "share": "Udostępnij",
+      "copySuccess": "Link skopiowany"
+    },
+    "delete": {
+      "delete": "Usuń",
+      "deleteSuccess": "Utwór usunięty",
+      "deleteError": "Wystąpił błąd podczas próby usunięcia utworu"
+    }
+  },
+  "settingsPage": {
+    "title": "Ustawienia",
+    "account": "Konto:",
+    "connectedApps": "Połączone aplikacje",
+    "logout": "Wyloguj się",
+    "logoutTitle": "Czy na pewno chcesz się wylogować?",
+    "logoutYes": "Tak, wyloguj",
+    "logoutNo": "Anuluj",
+    "language": "Język"
+  },
+  "languagePage": {
+    "title": "Język"
+  },
+  "connectedAppsPage": {
+    "title": "Połączone aplikacje",
+    "notRequireAuth": "Usługi niewymagające autoryzacji",
+    "supportedTitle": "Obsługiwane",
+    "requireAuth": "Usługi w fazie rozwoju",
+    "requireTitle": "W fazie rozwoju"
+  },
+  "createPlaylist": {
+    "title": "Nowa playlista",
+    "labelText": "Nowa playlista",
+    "placeholder": "Nazwa playlisty",
+    "discard": "Anuluj",
+    "submit": "Zapisz",
+    "success": "Playlista utworzona"
+  },
+  "trackHistory": {
+    "title": "Historia wyszukiwania",
+    "clear": "Wyczyść historię"
+  },
+  "homePage": {
+    "title": "Słuchaj utworów ze wszystkich platform w jednym miejscu",
+    "login": "Zaloguj się"
+  },
+  "loginPage": {
+    "cancel": "Anuluj",
+    "title": "Zaloguj się do swojego konta",
+    "CTAQuestion": "Nie masz konta?",
+    "CTA": "Zarejestruj się",
+    "emailLabel": "Wprowadź email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Wprowadź hasło",
+    "passwordPlaceholder": "Hasło",
+    "forgetPassword": "Zapomniałeś hasła?",
+    "submit": "Kontynuuj"
+  },
+  "registrationPage": {
+    "cancel": "Anuluj",
+    "title": "Utwórz konto",
+    "CTAQuestion": "Masz już konto?",
+    "CTA": "Zaloguj się",
+    "emailLabel": "Wprowadź email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Wprowadź hasło",
+    "passwordPlaceholder": "Hasło",
+    "submit": "Kontynuuj"
+  },
+  "confirmationRegister": {
+    "cancel": "Anuluj",
+    "title": "Utwórz konto",
+    "annotation": "Wprowadź kod wysłany na podany adres email",
+    "repeat": "Wyślij kod ponownie",
+    "submit": "Kontynuuj"
+  },
+  "resetPassword": {
+    "cancel": "Anuluj",
+    "title": "Odzyskiwanie hasła",
+    "CTAQuestion": "Nie masz konta?",
+    "CTA": "Zarejestruj się",
+    "emailLabel": "Wprowadź email",
+    "emailPlaceholder": "Email",
+    "submit": "Kontynuuj"
+  },
+  "confirmationReset": {
+    "cancel": "Anuluj",
+    "title": "Odzyskiwanie hasła",
+    "annotation": "Wprowadź kod wysłany na podany adres email",
+    "repeat": "Wyślij kod ponownie",
+    "submit": "Kontynuuj"
+  },
+  "updateReset": {
+    "cancel": "Anuluj",
+    "title": "Wymyśl nowe hasło",
+    "newPasswordLabel": "Wprowadź nowe hasło",
+    "newPassword": "Hasło",
+    "repeatPasswordLabel": "Powtórz hasło",
+    "repeatPassword": "Hasło",
+    "submit": "Kontynuuj"
+  },
+  "userPlaylists": {
+    "Сохраненные треки": "Zapisane utwory",
+    "Избранные треки": "Ulubione utwory"
+  }
+}

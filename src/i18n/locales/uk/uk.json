@@ -1,0 +1,172 @@
+{
+  "navBar": {
+    "main": "Головна",
+    "playlists": "Плейлисти",
+    "addTrack": "Додати трек",
+    "settings": "Налаштування"
+  },
+  "mainPage": {
+    "searchInputPlaceholder": "Назва, виконавець...",
+    "cancel": "Скасувати"
+  },
+  "toggleButton": {
+    "leftTitle": "Усі треки",
+    "rightTitle": "Вибрані"
+  },
+  "tracksTitle": {
+    "pause": "Пауза",
+    "listen": "Слухати"
+  },
+  "loading": "Завантаження...",
+  "additionActions": {
+    "addTrack": "Додати трек"
+  },
+  "tracksFilter": {
+    "date": "За датою завантаження",
+    "alphabet": "За алфавітом",
+    "source": "За джерелом"
+  },
+  "trackList": {
+    "noFavouriteTracks": "Ви не додали жодного треку до вибраного",
+    "noTracks": "Тут поки що немає треків",
+    "noTracksByQuery": "Трек не знайдено. Спробуйте змінити пошуковий запит",
+    "trackCTA": "Додайте улюблені треки прямо зараз",
+    "addTrack": "Додати трек"
+  },
+  "playlistsPage": {
+    "searchPlaceholder": "Назва",
+    "title": "Плейлисти",
+    "noPlaylistsByQuery": "Плейлист не знайдено. Спробуйте змінити пошуковий запит",
+    "cancel": "Скасувати"
+  },
+  "trackAdditionPage": {
+    "clipBoardError": "Помилка читання буфера обміну",
+    "title": "Додавання треку",
+    "pasteLinkAnnotation": "Вставте посилання на трек",
+    "inputPlaceholder": "Посилання на трек",
+    "pasteLinkCTA": "Вставити з буфера обміну",
+    "pasteLinkAnnotationDesktop": "Вставте посилання на трек зі стримінгового сервісу і додайте його до своєї бібліотеки!",
+    "inputError": "Некоректний формат. Спробуйте ще раз"
+  },
+  "trackModalButtons": {
+    "favourite": {
+      "add": "Додати до вибраного",
+      "addSuccess": "Додано до вибраного",
+      "goToFavourite": "Перейти до вибраного",
+      "remove": "Видалити з вибраного",
+      "removeSuccess": "Видалено з вибраного"
+    },
+    "main": {
+      "add": "Зберегти на головну",
+      "addSuccess": "Збережено на головну",
+      "addError": "Під час спроби збереження треку сталася помилка",
+      "remove": "Видалити з головної",
+      "removeSuccess": "Видалено з головної"
+    },
+    "share": {
+      "copy": "Скопійовано!",
+      "share": "Поділитися",
+      "copySuccess": "Посилання скопійоване"
+    },
+    "delete": {
+      "delete": "Видалити",
+      "deleteSuccess": "Трек видалено",
+      "deleteError": "Під час спроби видалення треку сталася помилка"
+    }
+  },
+  "settingsPage": {
+    "title": "Налаштування",
+    "account": "Акаунт:",
+    "connectedApps": "Підключені додатки",
+    "logout": "Вийти",
+    "logoutTitle": "Ви впевнені, що хочете вийти?",
+    "logoutYes": "Так, вийти",
+    "logoutNo": "Скасувати",
+    "language": "Мова"
+  },
+  "languagePage": {
+    "title": "Мова"
+  },
+  "connectedAppsPage": {
+    "title": "Підключені додатки",
+    "notRequireAuth": "Сервіси, що не потребують авторизації",
+    "supportedTitle": "Підтримується",
+    "requireAuth": "Сервіси, що знаходяться в розробці",
+    "requireTitle": "В розробці"
+  },
+  "createPlaylist": {
+    "title": "Новий плейлист",
+    "labelText": "Новий плейлист",
+    "placeholder": "Назва плейлиста",
+    "discard": "Скасувати",
+    "submit": "Зберегти",
+    "success": "Плейлист створено"
+  },
+  "trackHistory": {
+    "title": "Історія Пошуку",
+    "clear": "Очистити історію"
+  },
+  "homePage": {
+    "title": "Слухайте треки з усіх платформ в одному місці",
+    "login": "Увійти"
+  },
+  "loginPage": {
+    "cancel": "Скасувати",
+    "title": "Увійдіть в акаунт",
+    "CTAQuestion": "Ще немає акаунта?",
+    "CTA": "Зареєструватися",
+    "emailLabel": "Введіть email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Введіть пароль",
+    "passwordPlaceholder": "Пароль",
+    "forgetPassword": "Забули пароль?",
+    "submit": "Продовжити"
+  },
+  "registrationPage": {
+    "cancel": "Скасувати",
+    "title": "Створіть акаунт",
+    "CTAQuestion": "Вже є акаунт?",
+    "CTA": "Увійти",
+    "emailLabel": "Введіть email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Введіть пароль",
+    "passwordPlaceholder": "Пароль",
+    "submit": "Продовжити"
+  },
+  "confirmationRegister": {
+    "cancel": "Скасувати",
+    "title": "Створіть акаунт",
+    "annotation": "Введіть код, надісланий на вказану пошту",
+    "repeat": "Надіслати код ще раз",
+    "submit": "Продовжити"
+  },
+  "resetPassword": {
+    "cancel": "Скасувати",
+    "title": "Відновлення пароля",
+    "CTAQuestion": "Ще немає акаунта?",
+    "CTA": "Зареєструватися",
+    "emailLabel": "Введіть email",
+    "emailPlaceholder": "Email",
+    "submit": "Продовжити"
+  },
+  "confirmationReset": {
+    "cancel": "Скасувати",
+    "title": "Відновлення пароля",
+    "annotation": "Введіть код, надісланий на вказану пошту",
+    "repeat": "Надіслати код ще раз",
+    "submit": "Продовжити"
+  },
+  "updateReset": {
+    "cancel": "Скасувати",
+    "title": "Придумайте новий пароль",
+    "newPasswordLabel": "Введіть новий пароль",
+    "newPassword": "Пароль",
+    "repeatPasswordLabel": "Повторіть пароль",
+    "repeatPassword": "Пароль",
+    "submit": "Продовжити"
+  },
+  "userPlaylists": {
+    "Сохраненные треки": "Збережені треки",
+    "Избранные треки": "Вибрані треки"
+  }
+}

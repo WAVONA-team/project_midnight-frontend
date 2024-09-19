@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -14,6 +15,17 @@ import arrowIcon from '../../../public/arrows/arrowIcon.svg';
 import Modal from '../../ui/Modal/Modal.tsx';
 
 export const SettingsPage: React.FC = React.memo(() => {
+  const { t, i18n } = useTranslation('translation', {
+    keyPrefix: 'settingsPage',
+  });
+
+  const locales = {
+    en: 'English',
+    pl: 'Polski',
+    ru: 'Русский',
+    uk: 'Українська',
+  };
+
   const { changePlayerState, changeCurrentTrack } = createPlayerSlice();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
@@ -71,13 +83,13 @@ export const SettingsPage: React.FC = React.memo(() => {
             sm:font-openSans
           "
           >
-            Настройки
+            {t('title')}
           </h1>
         </div>
 
         <div>
           <h3 className="font-rubik text-base font-normal">
-            Аккаунт:{' '}
+            {t('account')}{' '}
             <span className="text-secondary-satin-sheen-gold">
               {user?.email}
             </span>
@@ -102,11 +114,11 @@ export const SettingsPage: React.FC = React.memo(() => {
                 text-on-primary-anti-flash-white
                 hover:text-on-primary-anti-flash-white
                 whitespace-nowrap
-                sm:justify-between
+                justify-between
               "
               to="connected-apps"
             >
-              <span>Подключенные приложения</span>
+              <span>{t('connectedApps')}</span>
               <img
                 className="
                   px-1.5
@@ -116,6 +128,47 @@ export const SettingsPage: React.FC = React.memo(() => {
                 src={arrowIcon}
                 alt="Arrow Icon"
               />
+            </Link>
+          </div>
+
+          <div
+            className="
+              py-5
+              border-b
+              border-secondary-jet
+              border-solid
+            "
+          >
+            <Link
+              className="
+                flex
+                font-normal
+                text-sm
+                tracking-wide
+                text-on-primary-anti-flash-white
+                hover:text-on-primary-anti-flash-white
+                whitespace-nowrap
+                justify-between
+              "
+              to="language"
+            >
+              <span>{t('language')}</span>
+
+              <div className="flex items-center text-base text-secondary-cadet-gray">
+                <p>
+                  {locales[i18n.language as keyof typeof locales]}
+                </p>
+
+                <img
+                  className="
+                    px-1.5
+                    ml-2
+                    rotate-180
+                  "
+                  src={arrowIcon}
+                  alt="Arrow Icon"
+                />
+              </div>
             </Link>
           </div>
 
@@ -138,7 +191,7 @@ export const SettingsPage: React.FC = React.memo(() => {
               "
               onClick={enableModal}
             >
-              <span>Выйти</span>
+              <span>{t('logout')}</span>
             </button>
           </div>
         </div>

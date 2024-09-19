@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import crossIcon from '../../../../public/cross/cross.svg';
 
@@ -10,6 +11,8 @@ type Props = {
 
 const ExitModalContent: React.FC<Props> = React.memo(
   ({ exitHandler, disableModal, className = '' }) => {
+    const { t } = useTranslation('translation', { keyPrefix: 'settingsPage' });
+
     return (
       <div className={`${className} flex flex-col`}>
         <div
@@ -39,7 +42,7 @@ const ExitModalContent: React.FC<Props> = React.memo(
               text-center
             "
           >
-            Вы уверены, что хотите выйти?
+            {t('logoutTitle')}
           </h1>
         </div>
 
@@ -59,7 +62,9 @@ const ExitModalContent: React.FC<Props> = React.memo(
               focus:outline-none
             "
           >
-            <span className="text-secondary-satin-sheen-gold">Отменить</span>
+            <span className="text-secondary-satin-sheen-gold">
+              {t('logoutNo')}
+            </span>
           </button>
 
           <button
@@ -71,7 +76,7 @@ const ExitModalContent: React.FC<Props> = React.memo(
               focus:outline-none
             "
           >
-            Да, выйти
+            {t('logoutYes')}
           </button>
         </div>
       </div>

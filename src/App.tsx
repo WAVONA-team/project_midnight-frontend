@@ -19,6 +19,7 @@ const App: React.FC = React.memo(() => {
         <NotificationMessage message="Во время авторизации произошла ошибка, попробуйте еще раз" />
       ));
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isChecked ? <Outlet /> : <LoadingPage />;

@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -15,6 +16,8 @@ import alphaSortIcon from '../../../../../../../public/buttons/actionButtons/alp
 import dateSortIcon from '../../../../../../../public/buttons/actionButtons/dateSortIcon.svg';
 
 export const FilterDropdown: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'tracksFilter' });
+
   const {
     playlistSortType,
     setPlaylistIsFiltering,
@@ -63,14 +66,14 @@ export const FilterDropdown: React.FC = React.memo(() => {
   const sortControls = [
     {
       id: 1,
-      title: 'По дате загрузки',
+      title: t('date'),
       icon: dateSortIcon,
       handler: (title: string) =>
         setSortingInfo({ name: title, type: 'createdAt' }, 'desc'),
     },
     {
       id: 2,
-      title: 'По алфавиту',
+      title: t('alphabet'),
       icon: alphaSortIcon,
       handler: (title: string) =>
         setSortingInfo({ name: title, type: 'name' }, 'desc'),
@@ -127,7 +130,7 @@ export const FilterDropdown: React.FC = React.memo(() => {
       tabIndex={0}
     >
       <SortButton
-        title={playlistSortType.name}
+        title={t(playlistSortType.name)}
         isOpen={isOpen}
         disabled={!playlists.length}
         onMouseDown={handlerButtonFocus}
@@ -151,9 +154,7 @@ export const FilterDropdown: React.FC = React.memo(() => {
             <Menu.Item
               as={MenuButton}
               key={control.title}
-              handler={() =>
-                control.handler(control.title || 'По дате загрузки')
-              }
+              handler={() => control.handler(control.title || t('date'))}
               icon={control.icon}
               title={control.title}
               className="

@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import deleteIcon from '@/../public/buttons/actionButtons/deleteIcon.svg';
 import { useStore } from '@/store';
@@ -21,6 +22,10 @@ const TrackDeleteButton: React.FC<Props> = React.memo(
       { className, selectedTrack, closeModal = () => {} },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
+      const { t } = useTranslation('translation', {
+        keyPrefix: 'trackModalButtons.delete',
+      });
+
       const {
         deleteTrack,
         user,
@@ -51,11 +56,13 @@ const TrackDeleteButton: React.FC<Props> = React.memo(
             closeModal();
             setIsUserTracksLoading(true);
 
-            toast.custom(() => <NotificationMessage message="Трек удалён" />);
+            toast.custom(() => (
+              <NotificationMessage message={t('deleteSuccess')} />
+            ));
           })
           .catch(() =>
             toast.custom(() => (
-              <NotificationMessage message="При попытке удаления трека произошла ошибка" />
+              <NotificationMessage message={t('deleteError')} />
             )),
           );
       };
@@ -64,7 +71,7 @@ const TrackDeleteButton: React.FC<Props> = React.memo(
         <MenuButton
           ref={ref}
           className={className}
-          title="Удалить"
+          title={t('delete')}
           icon={deleteIcon}
           handler={handler}
         />

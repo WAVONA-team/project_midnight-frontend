@@ -35,6 +35,7 @@ export const RequireAuthPage: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     handleControlIsOpen();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTrack]);
 
   if (!user) {

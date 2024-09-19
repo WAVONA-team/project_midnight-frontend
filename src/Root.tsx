@@ -8,8 +8,10 @@ import {
   CreateNewPlaylistPage,
   CreateNewTrackPage,
   HomePage,
+  LanguagePage,
   LoginPage,
   PlaylistPage,
+  PlaylistSearchPage,
   PlaylistsPage,
   RegistrationPage,
   RequireAuthPage,
@@ -21,7 +23,6 @@ import {
   TrackSearchPage,
   TracksPage,
   UpdateResetPasswordPage,
-  PlaylistSearchPage,
 } from '@/pages';
 
 import App from './App';
@@ -72,6 +73,7 @@ export const Root: React.FC = React.memo(() => {
                 path="connected-apps"
                 element={<ConnectedAppsSettings />}
               />
+              <Route path="language" element={<LanguagePage />} />
             </Route>
 
             <Route path="test" element={<TestPage />} />

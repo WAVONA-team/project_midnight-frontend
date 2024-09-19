@@ -123,6 +123,7 @@ const TrackInfo: React.FC<Props> = React.memo(
       ) {
         setIsTrackFavourite(true);
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isUpdated]);
 
     if (isDesktop) {

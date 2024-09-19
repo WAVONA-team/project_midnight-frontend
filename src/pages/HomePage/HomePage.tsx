@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -8,6 +9,8 @@ import { Container } from '@/ui/Container';
 import { Logo } from '@/ui/Logo';
 
 export const HomePage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'homePage' });
+
   const { user } = useStore(({ user }) => ({
     user,
   }));
@@ -35,7 +38,11 @@ export const HomePage: React.FC = React.memo(() => {
     >
       <Container className="grid grid-rows-[auto] gap-y-10">
         <header className="row-start-2 lg:row-start-1 lg:flex lg:justify-end">
-          <MainButtonLink path="/login" title="Войти" className="lg:w-min" />
+          <MainButtonLink
+            path="/login"
+            title={t('login')}
+            className="lg:w-min"
+          />
         </header>
 
         <main
@@ -56,7 +63,7 @@ export const HomePage: React.FC = React.memo(() => {
           <Logo className="md:mt-10" directionPathname="/" />
 
           <h1 className="font-openSans text-on-primary-anti-flash-white text-4xl lg:text-6xl">
-            Слушайте треки со всех площадок в одном месте
+            {t('title')}
           </h1>
         </main>
       </Container>

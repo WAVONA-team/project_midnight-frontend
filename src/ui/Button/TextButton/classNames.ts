@@ -12,5 +12,6 @@ export const textButtonClassNames = {
     disabled:text-secondary-cadet-gray
     disabled:pointer-events-none
     text-sm
+    text-nowrap
   `,
 };

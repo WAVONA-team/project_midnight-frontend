@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 /* eslint-disable indent */
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import { Menu } from '@headlessui/react';
@@ -30,6 +33,10 @@ import { Spinner } from '@/ui/Spinner';
 const { ShareButton, FavoriteButton, SaveOnMainButton } = modalButtons;
 
 const TrackAddition: React.FC = memo(() => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'trackAdditionPage',
+  });
+
   const [isTrackFavourite, setIsTrackFavourite] = useState(false);
   const [isTrackSaved, setIsTrackSaved] = useState(false);
 
@@ -175,7 +182,7 @@ const TrackAddition: React.FC = memo(() => {
       })
       .catch(() => {
         toast.custom(() => (
-          <NotificationMessage message="Ошибка чтения буфера обмена" />
+          <NotificationMessage message={t('clipBoardError')} />
         ));
       });
   };
@@ -206,17 +213,17 @@ const TrackAddition: React.FC = memo(() => {
             lg:font-normal
           "
         >
-          Добавление трека
+          {t('title')}
         </h2>
         <p className="text-secondary-cadet-gray lg:hidden">
-          Вставьте ссылку на трек
+          {t('pasteLinkAnnotation')}
         </p>
         <Controller
           name="url"
           control={control}
           render={({ field: { value, onChange } }) => (
             <SearchInput
-              placeholder="Ссылка на трек"
+              placeholder={t('inputPlaceholder')}
               clearValue={clearValueHandler}
               error={errors.url?.message}
               className=" mb-4 max-w-sm lg:mb-7"
@@ -235,14 +242,13 @@ const TrackAddition: React.FC = memo(() => {
           )}
         />
         <TextButton
-          title="Вставить из буфера обмена"
+          title={t('pasteLinkCTA')}
           handler={getClipboardText}
           className=" text-sm focus:text-secondary-satin-sheen-gold !w-fit mb-8 lg:mb-12"
         />
         {!parsedTrack && !isParsedTrackLoading && (
           <p className=" text-secondary-cadet-gray mb-8 lg:mb-12">
-            Вставьте ссылку на трек из стримингового сервиса и добавьте его в
-            свою библиотеку!
+            {t('pasteLinkAnnotationDesktop')}
           </p>
         )}
       </Container>
@@ -343,7 +349,7 @@ const TrackAddition: React.FC = memo(() => {
         ref={newTrackRef}
         onError={() =>
           setError('url', {
-            message: 'Некорректный формат. Попробуйте снова',
+            message: t('inputError'),
           })
         }
         style={{

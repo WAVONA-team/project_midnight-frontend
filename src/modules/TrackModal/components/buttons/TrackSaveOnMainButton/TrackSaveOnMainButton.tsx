@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import saveIcon from '@/../public/buttons/actionButtons/saveIcon.svg';
 import saveIconChecked from '@/../public/buttons/actionButtons/saveIconChecked.svg';
@@ -30,6 +31,10 @@ const TrackSaveOnMainButton: React.FC<Props> = React.memo(
       },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
+      const { t } = useTranslation('translation', {
+        keyPrefix: 'trackModalButtons.main',
+      });
+
       const {
         updateIsSaved,
         user,
@@ -69,16 +74,12 @@ const TrackSaveOnMainButton: React.FC<Props> = React.memo(
 
             toast.custom(() => (
               <NotificationMessage
-                message={
-                  isSaved ? 'Сохранено на главную' : 'Удалено из главной'
-                }
+                message={isSaved ? t('addSuccess') : t('removeSuccess')}
               />
             ));
           })
           .catch(() =>
-            toast.custom(() => (
-              <NotificationMessage message="При попытке срхранения трека произошла ошибка" />
-            )),
+            toast.custom(() => <NotificationMessage message={t('addError')} />),
           );
       };
 
@@ -86,7 +87,7 @@ const TrackSaveOnMainButton: React.FC<Props> = React.memo(
         <MenuButton
           ref={ref}
           className={className}
-          title={trackIsSaved ? 'Удалить из главной' : 'Сохранить на главную'}
+          title={trackIsSaved ? t('remove') : t('add')}
           icon={trackIsSaved ? saveIconChecked : saveIcon}
           handler={handler}
         />

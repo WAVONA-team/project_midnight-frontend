@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import debounce from 'lodash.debounce';
@@ -10,6 +12,8 @@ import { Container } from '@/ui/Container';
 import { SearchInput } from '@/ui/Input';
 
 const TrackPageHeader: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'mainPage' });
+
   const {
     user,
     getTracksByUser,
@@ -74,7 +78,7 @@ const TrackPageHeader: React.FC = React.memo(() => {
           <SearchInput
             className={'lg:max-w-[398px] mr-3 col-span-3'}
             clearValue={clearValueHandler}
-            placeholder="Название, исполнитель..."
+            placeholder={t('searchInputPlaceholder')}
             disabled={!userPlaylist?.tracks?.length && !query.length}
             value={query}
             onChange={onChangeHandler}

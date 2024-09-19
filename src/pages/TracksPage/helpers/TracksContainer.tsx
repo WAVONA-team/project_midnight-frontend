@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 

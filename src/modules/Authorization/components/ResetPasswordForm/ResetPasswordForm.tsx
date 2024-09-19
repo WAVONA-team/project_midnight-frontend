@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useStore } from '@/store';
@@ -16,6 +17,10 @@ import { MainButton, TextButtonLink } from '@/ui/Button';
 import { DefaultInput } from '@/ui/Input';
 
 const ResetPasswordForm: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'confirmationRegister',
+  });
+
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const navigate = useNavigate();
   const { reset } = useStore(({ reset }) => ({
@@ -61,22 +66,25 @@ const ResetPasswordForm: React.FC = React.memo(() => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-background-hight lg:bg-[transparent]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-background-hight lg:bg-[transparent]"
+    >
       <FormContainer className="relative">
         <Link
           to="/"
           className="text-on-primary-anti-flash-white block hover:text-on-primary-anti-flash-white text-sm"
         >
-          Отменить
+          {t('cancel')}
         </Link>
 
-        <FormHeader title="Восстановление пароля" />
+        <FormHeader title={t('title')} />
 
         <FormCTA
-          text="Еще нет аккаунта?"
+          text={t('CTAQuestion')}
           action={
             <TextButtonLink
-              title="Зарегистрироваться"
+              title={t('CTA')}
               path="/register"
               className="w-min"
             />
@@ -93,11 +101,11 @@ const ResetPasswordForm: React.FC = React.memo(() => {
           render={({ field }) => (
             <DefaultInput
               className="mt-10"
-              labelText="Введите email"
-              placeholder="Email"
+              labelText={t('emailLabel')}
+              placeholder={t('emailPlaceholder')}
               value={field.value}
               onChange={(event) => field.onChange(event.target.value)}
-              error={errors.root?.email?.message}
+              error={errors.root?.email?.message || errors.root?.id.message}
             />
           )}
         />
@@ -105,7 +113,7 @@ const ResetPasswordForm: React.FC = React.memo(() => {
         <div className="mt-16 grid grid-cols-3">
           <MainButton
             type="submit"
-            title="Продолжить"
+            title={t('submit')}
             handler={() => {}}
             isLoading={isButtonLoading}
             className="col-start-1 col-end-4 lg:col-start-3"

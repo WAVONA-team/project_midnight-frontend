@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useStore } from '@/store';
 import debounce from 'lodash.debounce';
@@ -9,6 +11,8 @@ import { SearchInput } from '@/ui/Input';
 import { Logo } from '@/ui/Logo';
 
 export const Search: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'playlistsPage' });
+
   const {
     user,
     playlistSearchQuery,
@@ -75,7 +79,7 @@ export const Search: React.FC = React.memo(() => {
         value={playlistSearchQuery}
         onChange={onChangeHandler}
         clearValue={clearValueHandler}
-        placeholder="Название"
+        placeholder={t('searchPlaceholder')}
         className="!w-2/5 hidden md:block"
         disabled={!playlists.length && !playlistSearchQuery.length}
       />
