@@ -35,8 +35,8 @@ const NavBar: React.FC<Props> = React.memo(({ className = '' }) => {
     <aside
       className={`
         ${className}
-        z-0
         sticky
+        z-[1]
         bottom-0
         w-full
         py-3

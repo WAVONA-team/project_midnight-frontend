@@ -168,5 +168,8 @@
   "userPlaylists": {
     "Сохраненные треки": "Saved Tracks",
     "Избранные треки": "Favorite Tracks"
+  },
+  "loadingPage": {
+    "loading": "Please wait, loading"
   }
 }

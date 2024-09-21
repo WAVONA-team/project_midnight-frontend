@@ -37,7 +37,7 @@
     "searchPlaceholder": "Tytuł",
     "title": "Playlisty",
     "noPlaylistsByQuery": "Nie znaleziono playlisty. Spróbuj zmienić zapytanie",
-    "cancel":"Anuluj"
+    "cancel": "Anuluj"
   },
   "trackAdditionPage": {
     "clipBoardError": "Błąd odczytu schowka",
@@ -168,5 +168,8 @@
   "userPlaylists": {
     "Сохраненные треки": "Zapisane utwory",
     "Избранные треки": "Ulubione utwory"
+  },
+  "loadingPage": {
+    "loading": "Proszę czekać, trwa ładowanie"
   }
 }

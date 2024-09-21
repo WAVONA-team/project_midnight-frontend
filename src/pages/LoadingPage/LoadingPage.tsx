@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Spinner } from '@/ui/Spinner';
 
 export const LoadingPage: React.FC = React.memo(() => {
+  const { t } = useTranslation('translation', { keyPrefix: 'loadingPage' });
+
   return (
     <div
       className="
@@ -28,7 +31,7 @@ export const LoadingPage: React.FC = React.memo(() => {
         <Spinner className="mr-5" width="w-12" height="h-12" />
 
         <p className="font-rubik font-semibold text-on-primary-lavender-blush text-base">
-          Подождите, идет загрузка
+          {t('loading')}
         </p>
       </div>
     </div>
