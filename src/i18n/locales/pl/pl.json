@@ -171,5 +171,9 @@
   },
   "loadingPage": {
     "loading": "Proszę czekać, trwa ładowanie"
+  },
+  "playlistCard": {
+    "inProgress": "Strona playlisty jest w trakcie tworzenia",
+    "track": "Utwór"
   }
 }

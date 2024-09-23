@@ -171,5 +171,9 @@
   },
   "loadingPage": {
     "loading": "Please wait, loading"
+  },
+  "playlistCard": {
+    "inProgress": "The playlist page is under development",
+    "track": "Track"
   }
 }

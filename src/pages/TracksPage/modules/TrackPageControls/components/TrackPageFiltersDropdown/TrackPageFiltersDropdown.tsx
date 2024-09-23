@@ -102,6 +102,7 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
   };
 
   const modalOnBlurHandler = () => {
+    setChildElement(null);
     setIsOpen(false);
   };
 
@@ -141,7 +142,7 @@ export const TrackPageDropdown: React.FC = React.memo(() => {
           className="
             sm:right-0
             sm:top-8
-            sm:w-[254px]
+            sm:w-[300px]
             sm:absolute
             py-4
             sm:py-0

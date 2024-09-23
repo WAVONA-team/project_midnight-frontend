@@ -29,11 +29,12 @@ export const SettingsPage: React.FC = React.memo(() => {
   const { changePlayerState, changeCurrentTrack } = createPlayerSlice();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
-  const { logout, clearUserPlaylist, user } = useStore(
-    ({ logout, clearUserPlaylist, user }) => ({
+  const { logout, clearUserPlaylist, user, clearUserTracks } = useStore(
+    ({ logout, clearUserPlaylist, user, clearUserTracks }) => ({
       logout,
       clearUserPlaylist,
       user,
+      clearUserTracks,
     }),
   );
 
@@ -41,6 +42,7 @@ export const SettingsPage: React.FC = React.memo(() => {
     clearUserPlaylist();
     changePlayerState(false);
     changeCurrentTrack(null);
+    clearUserTracks();
     logout();
   };
 
@@ -155,9 +157,7 @@ export const SettingsPage: React.FC = React.memo(() => {
               <span>{t('language')}</span>
 
               <div className="flex items-center text-base text-secondary-cadet-gray">
-                <p>
-                  {locales[i18n.language as keyof typeof locales]}
-                </p>
+                <p>{locales[i18n.language as keyof typeof locales]}</p>
 
                 <img
                   className="

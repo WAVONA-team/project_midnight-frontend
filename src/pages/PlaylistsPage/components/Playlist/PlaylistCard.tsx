@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import { NotificationMessage } from '@/ui/NotificationMessage';
 
@@ -15,29 +16,55 @@ type Props = {
 
 export const PlaylistCard: React.FC<Props> = React.memo(
   ({ name, count, image }) => {
+    type SupportedLanguages = 'ru' | 'uk' | 'pl' | 'en';
+
+    const { t, i18n } = useTranslation('translation', {
+      keyPrefix: 'playlistCard',
+    });
+
     const getCorrectSuffix = (number: number) => {
-      const rules = new Intl.PluralRules('ru', {
+      const currentLanguage = i18n.language as SupportedLanguages;
+      const pluralRules = new Intl.PluralRules(currentLanguage, {
         type: 'cardinal',
       });
 
-      const suffixes = {
-        zero: 'ов',
-        one: '',
-        two: 'а',
-        few: 'а',
-        other: 'ов',
-        many: 'ов',
+      const suffixes: Record<SupportedLanguages, Record<string, string>> = {
+        ru: {
+          zero: 'ов',
+          one: '',
+          two: 'а',
+          few: 'а',
+          other: 'ов',
+          many: 'ов',
+        },
+        uk: {
+          zero: 'ів',
+          one: '',
+          two: 'и',
+          few: 'и',
+          other: 'ів',
+          many: 'ів',
+        },
+        pl: {
+          one: '',
+          few: 'y',
+          many: 'ów',
+          other: 'ów',
+        },
+        en: {
+          one: '',
+          other: 's',
+        },
       };
 
-      const suffix = suffixes[rules.select(number)];
+      const langSuffixes = suffixes[currentLanguage] || suffixes.en;
+      const suffix = langSuffixes[pluralRules.select(number)];
 
-      return `трек${suffix}`;
+      return `${t('track')}${suffix}`;
     };
 
     const devToast = () =>
-      toast.custom(() => (
-        <NotificationMessage message="Страница плейлиста находится в разработке" />
-      ));
+      toast.custom(() => <NotificationMessage message={t('inProgress')} />);
 
     return (
       <button
