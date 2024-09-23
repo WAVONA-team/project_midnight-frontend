@@ -12,6 +12,7 @@ const OTPInput: React.FC<Props> = React.memo(
   ({ length = 6, onChange, inputClassName = '', containerClassName = '' }) => {
     return (
       <AuthCode
+        allowedCharacters="numeric"
         length={length}
         onChange={onChange}
         autoFocus={false}
